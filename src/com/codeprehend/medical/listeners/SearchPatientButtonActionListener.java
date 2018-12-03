@@ -8,7 +8,7 @@ import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.PatientsDAO;
 
 
-public class SearchPatientButtonActionListener implements ActionListener{
+public class SearchPatientButtonActionListener implements ActionListener {
 	
 	private MedicalRecordGUI mainWindow;
 	
@@ -26,20 +26,6 @@ public class SearchPatientButtonActionListener implements ActionListener{
 	
 	// Verification if the wanted text fields are not empty TODO
 	public boolean verifyTextFields(){
-
-//		
-//		if(mainWindow.getTextFieldValue().getText().equals("") || mainWindow.getTextFieldValue().getText().substring(0, 1).equals(" ")){
-//			JOptionPane.showMessageDialog(mainWindow, "Introduceti valoarea!", "Error", JOptionPane.ERROR_MESSAGE);
-//			return false;
-//		}
-//		
-//		if(mainWindow.getTextFieldNoFact().getText().equals("") || mainWindow.getTextFieldNoFact().getText().substring(0, 1).equals(" ")){
-//			JOptionPane.showMessageDialog(mainWindow, "Introduceti numarul facturii!", "Error", JOptionPane.ERROR_MESSAGE);
-//			return false;
-//		}
-		
-
-		
 		return true;
 	}
 }

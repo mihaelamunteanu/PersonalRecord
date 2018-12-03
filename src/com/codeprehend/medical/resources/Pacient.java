@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Pacient {
 	
+	//TODO establish the form of Date
 	private String nume;
 	private String prenume;
 	private String cnp;

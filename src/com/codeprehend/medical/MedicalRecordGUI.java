@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.codeprehend.medical.panels.ListOfPatientsPanel;
 import com.codeprehend.medical.panels.SearchPatientPanel;
 import com.codeprehend.medical.resources.Pacient;
 
@@ -36,11 +37,12 @@ public class MedicalRecordGUI extends JFrame {
 	
 	private JPanel theMainPanel;	
 	private SearchPatientPanel searchPatientPanel;
-	private JPanel listOfPatientsPanel;
+	private ListOfPatientsPanel listOfPatientsPanel;
 	private JPanel historyOfPatientPanel;
 	private JPanel currentDianosisAndRecomandationsPanel;
 	
 	public MedicalRecordGUI(){
+		//initialize GUI
 		
 		this.setSize(1100, 400);
 		this.setLocationRelativeTo(null);
@@ -52,19 +54,23 @@ public class MedicalRecordGUI extends JFrame {
 		theMainPanel = new JPanel();
 		theMainPanel.setLayout(new GridBagLayout());
 		
-		searchPatientPanel = new SearchPatientPanel();
+		searchPatientPanel = new SearchPatientPanel(this);
 		
-		listOfPatientsPanel = new JPanel();
-		listOfPatientsPanel.setLayout(new GridBagLayout());
+		listOfPatientsPanel = new ListOfPatientsPanel(this);
 		
+		theMainPanel.add(searchPatientPanel);
+		theMainPanel.add(listOfPatientsPanel);
 		theMainPanel.setVisible(true);
 	    
 	    this.add(theMainPanel);
 	    this.setVisible(true);
 	}
 	
+	//TODO to put this in a controller outside this class?
 	public void showPanelListOfPatients(List<Pacient> listOfPatients) {
+		listOfPatientsPanel.setPatientsEntries(listOfPatients);
 		searchPatientPanel.setVisible(false);
+		listOfPatientsPanel.setVisible(true);
 	}
 
 	

@@ -9,6 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.codeprehend.medical.MedicalRecordGUI;
+import com.codeprehend.medical.listeners.SearchPatientButtonActionListener;
+
 /** 
  * Separate class for panel with search patient 
  * @author mihae
@@ -20,17 +23,17 @@ public class SearchPatientPanel extends JPanel {
 	 * Default serial version
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel searchPatientPanel;
+	
+	private MedicalRecordGUI parentPanel; 
+	
 	private JLabel labelSearchPatient = new JLabel("Cautare Pacient: ");;
 	private JTextField textFieldDate;
 	private JButton searchPatientButton = new JButton("Cauta Pacienta");
 	
-	public SearchPatientPanel () {
+	public SearchPatientPanel (MedicalRecordGUI parent) {
 		super();
-		
-		//search patient panel
-		searchPatientPanel = new JPanel();
-		searchPatientPanel.setLayout(new GridBagLayout());
+		this.setLayout(new GridBagLayout());
+		this.parentPanel = parent;
 		
 		//make a separate function
 		Date currentDate = new Date();
@@ -39,10 +42,12 @@ public class SearchPatientPanel extends JPanel {
 
 		textFieldDate = new JTextField(stringCurrentDate);
 		
-		searchPatientPanel.add(labelSearchPatient);
-		searchPatientPanel.add(textFieldDate);
-		searchPatientPanel.add(searchPatientButton); // Adds Button to content pane of frame
-		searchPatientPanel.setVisible(true);
+		searchPatientButton.addActionListener(new SearchPatientButtonActionListener(parentPanel));
+		
+		this.add(labelSearchPatient);
+		this.add(textFieldDate);
+		this.add(searchPatientButton); // Adds Button to content pane of frame
+		this.setVisible(true);
 	}
 	
 	//** Getters and setters//
