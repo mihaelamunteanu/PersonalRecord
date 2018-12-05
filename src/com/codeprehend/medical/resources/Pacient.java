@@ -5,23 +5,27 @@ import java.sql.Date;
 public class Pacient {
 	
 	//TODO establish the form of Date
+	private Integer id;
 	private String nume;
 	private String prenume;
 	private String cnp;
 	private Date dataNasterii;
 	private String adresa;
 	private Date primaConsultatie;
+	private String altele;
 	
 	public Pacient(){
 		
 	}
 	
-	public Pacient(String nume, String prenume, String cnp, 
-			Date dataNasterii, Date primaConsultaie, String adresa){
+	public Pacient(Integer id, String nume, String prenume, String cnp, 
+			Date dataNasterii, Date primaConsultatie, String adresa, String altele){
+		this.id = id;
 		this.nume = nume;
+		this.prenume = prenume;
 		this.cnp = cnp;
 		this.dataNasterii = dataNasterii;
-		this.primaConsultatie =primaConsultaie;
+		this.primaConsultatie =primaConsultatie;
 		this.adresa = adresa;
 	}
 	
@@ -39,6 +43,15 @@ public class Pacient {
 			return false;
 		
 		return true;
+	}
+	
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNume() {
@@ -89,6 +102,12 @@ public class Pacient {
 	public void setPrimaConsultatie(Date primaConsultatie) {
 		this.primaConsultatie = primaConsultatie;
 	}
-	
-	
+
+	public String getAltele() {
+		return altele;
+	}
+
+	public void setAltele(String altele) {
+		this.altele = altele;
+	}
 }

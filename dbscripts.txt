@@ -1,0 +1,108 @@
+x#PostgreS#PostgreS DB script
+
+CREATE USER admin WITH
+	LOGIN
+	SUPERUSER
+	CREATEDB
+	CREATEROLE
+	INHERIT
+	REPLICATION
+	CONNECTION LIMIT -1
+	PASSWORD 'xxxxxx';
+GRANT postgres TO admin WITH ADMIN OPTION;
+
+
+
+-- Role: admin_rugina
+-- DROP ROLE admin_rugina;
+
+CREATE ROLE admin_rugina WITH
+  NOLOGIN
+  NOSUPERUSER
+  INHERIT
+  NOCREATEDB
+  NOCREATEROLE
+  REPLICATION;
+
+COMMENT ON ROLE admin_rugina IS 'Main medical user - password 123456';
+
+CREATE DATABASE "CabinetRugina"
+    WITH 
+    OWNER = admin
+    ENCODING = 'UTF8'
+    CONNECTION LIMIT = -1;
+
+COMMENT ON DATABASE "CabinetRugina"
+    IS 'Baza de date cabinet Rugina Cosmin';
+	
+-- SEQUENCE: public.patient_sequence
+
+-- DROP SEQUENCE public.patient_sequence;
+
+CREATE SEQUENCE public.patient_sequence;
+
+ALTER SEQUENCE public.patient_sequence
+    OWNER TO admin;
+	
+-- SEQUENCE: public.dosare_sequence
+
+-- DROP SEQUENCE public.dosare_sequence;
+
+CREATE SEQUENCE public.dosare_sequence;
+
+ALTER SEQUENCE public.dosare_sequence
+    OWNER TO admin;
+	
+--------------------------------------------------------------------------------------------
+
+-- Table: public."Paciente"
+
+-- DROP TABLE public."Paciente";
+
+CREATE TABLE public."Paciente"
+(
+    id integer NOT NULL DEFAULT nextval('patient_sequence'::regclass),
+    nume character varying(70) COLLATE pg_catalog."default" NOT NULL,
+    prenume character varying(70) COLLATE pg_catalog."default" NOT NULL,
+    data_nasterii date NOT NULL,
+    cnp character varying(13) COLLATE pg_catalog."default",
+    altele character varying(3000) COLLATE pg_catalog."default",
+    data_inscriere date NOT NULL,
+    CONSTRAINT "Paciente_pkey" PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public."Paciente"
+    OWNER to admin;
+COMMENT ON TABLE public."Paciente"
+    IS 'Tabel Paciente';
+
+	
+--------------------------------------------------------------------------------------------	
+-- Table: public."Dosare"
+
+-- DROP TABLE public."Dosare";
+
+CREATE TABLE public."Dosare"
+(
+    id integer NOT NULL DEFAULT nextval('dosare_sequence'::regclass),
+    id_pacienta integer NOT NULL,
+    data_dosar date NOT NULL,
+    text character varying(3000) COLLATE pg_catalog."default" NOT NULL,
+    alte_observatii character varying COLLATE pg_catalog."default",
+	CONSTRAINT "Dosare_pkey" PRIMARY KEY (id),
+	CONSTRAINT id_pacienta_foreign_key FOREIGN KEY (id_pacienta)
+        REFERENCES public."Paciente" (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public."Dosare"
+    OWNER to admin;

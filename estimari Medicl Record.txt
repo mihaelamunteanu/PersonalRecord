@@ -1,0 +1,24 @@
+ecran cauta pacient - 10h 
+ecran pacient nou si antecedente - 8h
+ecran modificare date pacient si antecedente - 6h
+ecran lista pacienti - 6h
+ecran prima consultatie - 6h 
+ecran lista consultatii vechi + butoane modificare(atasamente, date personale, consultatie noua) - 8 ore
+
+generare pdf - 10h 
+salvare locala - 2h
+solutie backup db si export db - 4h 
+
+alte modificari dupa discutii: 60h + 60*20% = 
+--------------------------------------
+72h - etapa I functionalitati principale
+
+
+ecran prima consultatie - 20h(daca e cu antet)
+ecran atasamente - 12h (low priority)
+baza de date nemodificabila - 10h (low priority, dupa salvarea locala)
+salvare pdf in DB - 8h (o parte din functionalitate se ia din ecran atasamente) (low priority)
+-----------------------------------------------
+50h - etapa II
+
+

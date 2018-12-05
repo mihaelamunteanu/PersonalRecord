@@ -14,7 +14,7 @@ import com.codeprehend.medical.listeners.SearchPatientButtonActionListener;
 
 /** 
  * Separate class for panel with search patient 
- * @author mihae
+ * @author Mihaela Munteanu
  *
  */
 public class SearchPatientPanel extends JPanel {
@@ -29,6 +29,7 @@ public class SearchPatientPanel extends JPanel {
 	private JLabel labelSearchPatient = new JLabel("Cautare Pacient: ");;
 	private JTextField textFieldDate;
 	private JButton searchPatientButton = new JButton("Cauta Pacienta");
+	private JButton newPatientButton = new JButton("Pacienta noua");
 	
 	public SearchPatientPanel (MedicalRecordGUI parent) {
 		super();
@@ -47,6 +48,7 @@ public class SearchPatientPanel extends JPanel {
 		this.add(labelSearchPatient);
 		this.add(textFieldDate);
 		this.add(searchPatientButton); // Adds Button to content pane of frame
+		this.add(newPatientButton);
 		this.setVisible(true);
 	}
 	
