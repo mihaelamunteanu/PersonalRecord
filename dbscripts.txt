@@ -55,11 +55,11 @@ ALTER SEQUENCE public.dosare_sequence
 	
 --------------------------------------------------------------------------------------------
 
--- Table: public."Paciente"
+-- Table: public.paciente
 
--- DROP TABLE public."Paciente";
+-- DROP TABLE public.paciente;
 
-CREATE TABLE public."Paciente"
+CREATE TABLE public.paciente
 (
     id integer NOT NULL DEFAULT nextval('patient_sequence'::regclass),
     nume character varying(70) COLLATE pg_catalog."default" NOT NULL,
@@ -68,6 +68,10 @@ CREATE TABLE public."Paciente"
     cnp character varying(13) COLLATE pg_catalog."default",
     altele character varying(3000) COLLATE pg_catalog."default",
     data_inscriere date NOT NULL,
+    nasteri_naturale numeric,
+    cezariene numeric,
+    avorturi_cerere numeric,
+    avorturi_spontane numeric,
     CONSTRAINT "Paciente_pkey" PRIMARY KEY (id)
 )
 WITH (
@@ -75,27 +79,27 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public."Paciente"
+ALTER TABLE public.paciente
     OWNER to admin;
-COMMENT ON TABLE public."Paciente"
+COMMENT ON TABLE public.paciente
     IS 'Tabel Paciente';
 
 	
 --------------------------------------------------------------------------------------------	
--- Table: public."Dosare"
+-- Table: public.consultatii
 
--- DROP TABLE public."Dosare";
+-- DROP TABLE public.consultatii;
 
-CREATE TABLE public."Dosare"
+CREATE TABLE public.consultatii
 (
-    id integer NOT NULL DEFAULT nextval('dosare_sequence'::regclass),
-    id_pacienta integer NOT NULL,
-    data_dosar date NOT NULL,
-    text character varying(3000) COLLATE pg_catalog."default" NOT NULL,
+    id bigint NOT NULL DEFAULT nextval('consultatii_id_seq'::regclass),
+    id_pacienta bigint NOT NULL,
+    data_consultatie date NOT NULL,
+    consultatie character varying(5000) COLLATE pg_catalog."default",
     alte_observatii character varying COLLATE pg_catalog."default",
-	CONSTRAINT "Dosare_pkey" PRIMARY KEY (id),
-	CONSTRAINT id_pacienta_foreign_key FOREIGN KEY (id_pacienta)
-        REFERENCES public."Paciente" (id) MATCH SIMPLE
+    CONSTRAINT consultatie_primarykey PRIMARY KEY (id),
+    CONSTRAINT consultatie_pacient_foreignkey FOREIGN KEY (id_pacienta)
+        REFERENCES public.paciente (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
@@ -104,5 +108,5 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public."Dosare"
-    OWNER to admin;
+ALTER TABLE public.consultatii
+    OWNER to postgres;

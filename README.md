@@ -3,6 +3,9 @@
 
 # Installation of PostgreSQL: 
 https://www.labkey.org/Documentation/wiki-page.view?name=installPostgreSQLWindows
+*64 bits version for Windows
+*root/root sau 123456?
+
 StackBuilder Application to install other PostgreS related  apps
 
 pgAdmin4 - app 

@@ -1,6 +1,7 @@
 package com.codeprehend.medical.resources;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Patient {
 	
@@ -11,7 +12,7 @@ public class Patient {
 	private String cnp;
 	private Date dataNasterii;
 	private String adresa;
-	private Date primaConsultatie;
+	private LocalDate primaConsultatie;
 	private String numarTelefon;
 	private String altele;
 	private int nasteriNaturale;
@@ -24,7 +25,7 @@ public class Patient {
 	}
 	
 	public Patient(Integer id, String nume, String prenume, String cnp, 
-			Date dataNasterii, Date primaConsultatie, String adresa, String numarTelefon){
+			Date dataNasterii, LocalDate primaConsultatie, String adresa, String numarTelefon){
 		this.id = id;
 		this.nume = nume;
 		this.prenume = prenume;
@@ -96,11 +97,11 @@ public class Patient {
 		this.adresa = adresa;
 	}
 
-	public Date getPrimaConsultatie() {
+	public LocalDate getPrimaConsultatie() {
 		return primaConsultatie;
 	}
 
-	public void setPrimaConsultatie(Date primaConsultatie) {
+	public void setPrimaConsultatie(LocalDate primaConsultatie) {
 		this.primaConsultatie = primaConsultatie;
 	}
 

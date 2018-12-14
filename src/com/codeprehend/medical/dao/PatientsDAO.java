@@ -1,9 +1,11 @@
 package com.codeprehend.medical.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,12 +23,14 @@ public class PatientsDAO {
 		Integer generatedId = -1;
 		String SQL = "INSERT into paciente "
 				+ "(nume, prenume, data_nasterii, cnp, data_inscriere, "
-				+ "nasteri_naturale, cezariene, avorturiLaCerere, avorturiSpontane, altele) "
-				+ "values (" + patient.getNume() + "," + patient.getPrenume() + ", " 
-				+ patient.getDataNasterii() + ", " + patient.getCnp() + ", " 
-				+ patient.getPrimaConsultatie() + ", " + patient.getNasteriNaturale() + ", " 
+				+ "nasteri_naturale, cezariene, avorturi_cerere, avorturi_spontane, altele) "
+				+ "values ('" + patient.getNume() + "','" + patient.getPrenume() + "', '" 
+				+ patient.getDataNasterii() + "', '" + patient.getCnp() + "', '" 
+				+ Date.valueOf(patient.getPrimaConsultatie()) + "', " + patient.getNasteriNaturale() + ", " 
 				+ patient.getCezariene() + ", " + patient.getAvorturiLaCerere() + ", " 
-				+ patient.getAvorturiSpontane() + ", " + patient.getAltele() + ")";
+				+ patient.getAvorturiSpontane() + ", '" + patient.getAltele() + "');";
+		
+		System.out.println(" New patient: " + SQL);
 		
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();
 				Statement stmt = conn.createStatement();
@@ -54,7 +58,8 @@ public class PatientsDAO {
 			while(rs.next()) {
 				Patient pacient = new Patient(rs.getInt("id"), rs.getString("nume"),
 						rs.getString("prenume"), rs.getString("cnp"), rs.getDate("data_nasterii"), 
-						rs.getDate("data_inscriere"), rs.getString("altele"), null);
+						LocalDate.parse(rs.getString("data_inscriere")), rs.getString("altele"), null);
+				
 				patientsWithDate.add(pacient);	
 			}
 		} catch (SQLException ex) {
