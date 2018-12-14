@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.codeprehend.medical.MedicalRecordGUI;
-import com.codeprehend.medical.resources.Pacient;
+import com.codeprehend.medical.resources.Patient;
 
 /** 
  * Separate class for the panel with the detected list of Patients. 
@@ -26,7 +26,7 @@ public class ListOfPatientsPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private MedicalRecordGUI parentPanel;
-	private List<Pacient> patients;
+	private List<Patient> patients;
 
 	public ListOfPatientsPanel(MedicalRecordGUI parent) {
 		super();
@@ -41,9 +41,9 @@ public class ListOfPatientsPanel extends JPanel {
 	 * 
 	 * @param patients
 	 */
-	public void setPatientsEntries(List<Pacient> patients) {
+	public void setPatientsEntries(List<Patient> patients) {
 		
-		for (Pacient pacient: patients) { 
+		for (Patient pacient: patients) { 
 			JPanel patientEntry = new JPanel();
 			JLabel nameLabel = new JLabel(pacient.getNume());
 			JLabel firstNameLabel = new JLabel(pacient.getPrenume());

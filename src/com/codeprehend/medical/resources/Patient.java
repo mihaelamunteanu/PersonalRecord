@@ -2,7 +2,7 @@ package com.codeprehend.medical.resources;
 
 import java.sql.Date;
 
-public class Pacient {
+public class Patient {
 	
 	//TODO establish the form of Date
 	private Integer id;
@@ -12,24 +12,29 @@ public class Pacient {
 	private Date dataNasterii;
 	private String adresa;
 	private Date primaConsultatie;
+	private String numarTelefon;
 	private String altele;
+	private int nasteriNaturale;
+	private int cezariene; 
+	private int avorturiLaCerere;
+	private int avorturiSpontane;
 	
-	public Pacient(){
+	public Patient(){
 		
 	}
 	
-	public Pacient(Integer id, String nume, String prenume, String cnp, 
-			Date dataNasterii, Date primaConsultatie, String adresa, String altele){
+	public Patient(Integer id, String nume, String prenume, String cnp, 
+			Date dataNasterii, Date primaConsultatie, String adresa, String numarTelefon){
 		this.id = id;
 		this.nume = nume;
 		this.prenume = prenume;
 		this.cnp = cnp;
 		this.dataNasterii = dataNasterii;
-		this.primaConsultatie =primaConsultatie;
+		this.primaConsultatie = primaConsultatie;
 		this.adresa = adresa;
 	}
 	
-	public boolean equals(Pacient second){
+	public boolean equals(Patient second){
 		if(!this.getNume().equals(second.getNume()))
 			return false;
 		
@@ -48,10 +53,6 @@ public class Pacient {
 
 	public Integer getId() {
 		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getNume() {
@@ -110,4 +111,45 @@ public class Pacient {
 	public void setAltele(String altele) {
 		this.altele = altele;
 	}
-}
+
+	public String getNumarTelefon() {
+		return numarTelefon;
+	}
+
+	public void setNumarTelefon(String numarTelefon) {
+		this.numarTelefon = numarTelefon;
+	}
+
+	public int getNasteriNaturale() {
+		return nasteriNaturale;
+	}
+
+	public void setNasteriNaturale(int nasteriNaturale) {
+		this.nasteriNaturale = nasteriNaturale;
+	}
+
+	public int getCezariene() {
+		return cezariene;
+	}
+
+	public void setCezariene(int cezariene) {
+		this.cezariene = cezariene;
+	}
+
+	public int getAvorturiLaCerere() {
+		return avorturiLaCerere;
+	}
+
+	public void setAvorturiLaCerere(int avorturiLaCerere) {
+		this.avorturiLaCerere = avorturiLaCerere;
+	}
+
+	public int getAvorturiSpontane() {
+		return avorturiSpontane;
+	}
+
+	public void setAvorturiSpontane(int avorturiSpontane) {
+		this.avorturiSpontane = avorturiSpontane;
+	}
+	
+ }

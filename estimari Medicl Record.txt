@@ -9,7 +9,7 @@ generare pdf - 10h
 salvare locala - 2h
 solutie backup db si export db - 4h 
 
-alte modificari dupa discutii: 60h + 60*20% = 
+alte modificari dupa discutii: 60h + 60*20% = 72h
 --------------------------------------
 72h - etapa I functionalitati principale
 

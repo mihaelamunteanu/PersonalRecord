@@ -7,9 +7,11 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.codeprehend.medical.panels.CurrentDiagnosisPanel;
 import com.codeprehend.medical.panels.ListOfPatientsPanel;
+import com.codeprehend.medical.panels.NewPatientPanel;
 import com.codeprehend.medical.panels.SearchPatientPanel;
-import com.codeprehend.medical.resources.Pacient;
+import com.codeprehend.medical.resources.Patient;
 
 
 /**
@@ -37,9 +39,9 @@ public class MedicalRecordGUI extends JFrame {
 	
 	private JPanel theMainPanel;	
 	private SearchPatientPanel searchPatientPanel;
+	private NewPatientPanel newPatientPanel;
+	private CurrentDiagnosisPanel currentDiagnosisPanel;
 	private ListOfPatientsPanel listOfPatientsPanel;
-	private JPanel historyOfPatientPanel;
-	private JPanel currentDianosisAndRecomandationsPanel;
 	
 	public MedicalRecordGUI(){
 		//initialize GUI
@@ -55,11 +57,12 @@ public class MedicalRecordGUI extends JFrame {
 		theMainPanel.setLayout(new GridBagLayout());
 		
 		searchPatientPanel = new SearchPatientPanel(this);
-		
+		newPatientPanel = new NewPatientPanel(this);
 		listOfPatientsPanel = new ListOfPatientsPanel(this);
 		
 		theMainPanel.add(searchPatientPanel);
 		theMainPanel.add(listOfPatientsPanel);
+		theMainPanel.add(newPatientPanel);
 		theMainPanel.setVisible(true);
 	    
 	    this.add(theMainPanel);
@@ -67,13 +70,30 @@ public class MedicalRecordGUI extends JFrame {
 	}
 	
 	//TODO to put this in a controller outside this class?
-	public void showPanelListOfPatients(List<Pacient> listOfPatients) {
+	public void showPanelListOfPatients(List<Patient> listOfPatients) {
 		listOfPatientsPanel.setPatientsEntries(listOfPatients);
-		searchPatientPanel.setVisible(false);
 		listOfPatientsPanel.setVisible(true);
+		
+		searchPatientPanel.setVisible(false);
+		newPatientPanel.setVisible(false);
 	}
 
 	
+	//TODO to put this in a controller outside this class?
+	public void showNewPatientPanel() {
+		newPatientPanel.setVisible(true);
+		
+		searchPatientPanel.setVisible(false);
+		listOfPatientsPanel.setVisible(false);
+	}
+	
+	public void showCurrentDiagnosisPanel() {
+		currentDiagnosisPanel.setPreviousExaminationEntries(null);
+		
+		newPatientPanel.setVisible(false);
+		searchPatientPanel.setVisible(false);
+		listOfPatientsPanel.setVisible(false);
+	}
 	
 	//** Getters and setters //
 	
@@ -89,7 +109,16 @@ public class MedicalRecordGUI extends JFrame {
 		return searchPatientPanel;
 	}
 
-	public void setSearchPatientPanel(SearchPatientPanel searchPatientPanel) {
-		this.searchPatientPanel = searchPatientPanel;
+	public NewPatientPanel getNewPatientPanel() {
+		return newPatientPanel;
 	}
+
+	public CurrentDiagnosisPanel getCurrentDiagnosisPanel() {
+		return currentDiagnosisPanel;
+	}
+
+	public ListOfPatientsPanel getListOfPatientsPanel() {
+		return listOfPatientsPanel;
+	}
+	
 }

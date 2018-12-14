@@ -1,26 +1,27 @@
 package com.codeprehend.medical.listeners;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.PatientsDAO;
+import com.codeprehend.medical.resources.Patient;
 
-
-public class SearchPatientButtonActionListener implements ActionListener {
+public class SaveNewPatientButtonActionListener implements ActionListener {
 	
 	private MedicalRecordGUI mainWindow;
 	
-	public SearchPatientButtonActionListener(MedicalRecordGUI mainWindow){
+	public SaveNewPatientButtonActionListener(MedicalRecordGUI mainWindow){
 		this.mainWindow = mainWindow;
 	}
-
+	
 	public void actionPerformed(ActionEvent e){
 		//TODO validation of fields
-		mainWindow.showPanelListOfPatients(PatientsDAO.getPatientsByBirthDate(
-				mainWindow.getSearchPatientPanel().getTextFieldDate().getSelectedText()));
-		
+		//save the Patient
+		Patient newPatient = new Patient();
+		PatientsDAO.savePatient(newPatient);
+//		mainWindow.showCurrentDiagnosisPanel(mainWindow.getNewPatientPanel()    );
+		 
 	}
 	
 	
@@ -29,4 +30,5 @@ public class SearchPatientButtonActionListener implements ActionListener {
 	public boolean verifyTextFields(){
 		return true;
 	}
+
 }

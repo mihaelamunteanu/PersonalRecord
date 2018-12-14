@@ -1,6 +1,5 @@
 package com.codeprehend.medical.panels;
 
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.text.SimpleDateFormat;
@@ -14,12 +13,13 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import com.codeprehend.medical.MedicalRecordGUI;
+import com.codeprehend.medical.listeners.NewPatientButtonActionListener;
 import com.codeprehend.medical.listeners.SearchPatientButtonActionListener;
 
 /**
  * Separate class for panel with search patient
  * 
- * @author Mihaela Munteanu
+ * @author Gabriel Munteanu,  Mihaela Munteanu
  *
  */
 public class SearchPatientPanel extends JPanel {
@@ -28,10 +28,10 @@ public class SearchPatientPanel extends JPanel {
 	 * Default serial version
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final String CAUTA_PACIENT = "Cautare pacient";
 
 	private MedicalRecordGUI parentPanel;
 
-	private JLabel labelSearchPatient = new JLabel("Cautare Pacient: ");
 	private JLabel labelDate = new JLabel("Data nastere: ");
 	private JLabel labelName = new JLabel("Nume pacient: ");
 	private JLabel labelRegNumber = new JLabel("CNP: ");
@@ -63,8 +63,9 @@ public class SearchPatientPanel extends JPanel {
 		textFieldPhoneNumber = new JTextField(10);
 
 		searchPatientButton.addActionListener(new SearchPatientButtonActionListener(parentPanel));
+		newPatientButton.addActionListener(new NewPatientButtonActionListener(parentPanel));
 
-		Border operBorder = BorderFactory.createTitledBorder("Cauta pacienta:");
+		Border operBorder = BorderFactory.createTitledBorder(CAUTA_PACIENT);
 		this.setBorder(operBorder);
 		
 		this.setLayout(new GridBagLayout());
@@ -95,7 +96,11 @@ public class SearchPatientPanel extends JPanel {
 		gc.gridy = 2;
 		gc.gridheight = 100;
 		this.add(searchPatientButton, gc); // Adds Button to content pane of frame
-		//this.add(newPatientButton);
+		
+		//TODO Gabi aranjeaza interfata
+		gc.gridx = 2;
+		gc.gridy = 5;
+		this.add(newPatientButton, gc);
 		this.setVisible(true);
 	}
 
