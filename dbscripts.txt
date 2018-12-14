@@ -8,7 +8,7 @@ CREATE USER admin WITH
 	INHERIT
 	REPLICATION
 	CONNECTION LIMIT -1
-	PASSWORD 'xxxxxx';
+	PASSWORD 'root';
 GRANT postgres TO admin WITH ADMIN OPTION;
 
 
@@ -53,6 +53,14 @@ CREATE SEQUENCE public.dosare_sequence;
 ALTER SEQUENCE public.dosare_sequence
     OWNER TO admin;
 	
+-- SEQUENCE: public.consultatii_id_seq
+
+-- DROP SEQUENCE public.consultatii_id_seq;
+
+CREATE SEQUENCE public.consultatii_id_seq;
+
+ALTER SEQUENCE public.consultatii_id_seq
+    OWNER TO postgres;	
 --------------------------------------------------------------------------------------------
 
 -- Table: public.paciente

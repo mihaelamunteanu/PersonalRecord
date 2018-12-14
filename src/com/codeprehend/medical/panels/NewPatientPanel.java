@@ -51,6 +51,7 @@ public class NewPatientPanel extends JPanel {
 	
 	//it saves in DB and moves to screen CurrentDiagnosisPanel
 	private JButton saveNewPatientButton = new JButton("Salveaza Pacienta Noua");
+	private JButton cancelNewPatientButton = new JButton("Cancel");
 	
 	private GridBagConstraints gc = new GridBagConstraints();
 	
@@ -135,8 +136,12 @@ public class NewPatientPanel extends JPanel {
 		this.add(textFieldSpotaneousAbortionNumber, gc);
 		gc.gridheight = 100;
 		gc.gridy = 3;
-		gc.gridx = 8;
+		gc.gridx = 5;
 		this.add(saveNewPatientButton, gc); // Adds Button to content pane of frame
+		gc.gridx = 6;
+		gc.anchor = GridBagConstraints.CENTER;
+
+		this.add(cancelNewPatientButton, gc);
 		
 		this.setVisible(false);
 	}

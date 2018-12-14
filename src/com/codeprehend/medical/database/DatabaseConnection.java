@@ -11,7 +11,7 @@ import java.sql.SQLException;
  */
 public class DatabaseConnection {
     private static final String url = "jdbc:postgresql://localhost:5432/CabinetRugina";
-    private static final String user = "admin";
+    private static final String user = "postgres";
     private static final String password = "root";
     
 	private static Connection conn = null;
