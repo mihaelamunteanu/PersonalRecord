@@ -23,6 +23,7 @@ public class SaveNewPatientButtonActionListener implements ActionListener {
 		String firstName = mainWindow.getNewPatientPanel().getTextFieldFirstName().getText();
 		String birthDate = mainWindow.getNewPatientPanel().getTextFieldDate().getText();
 		String phoneNumber = mainWindow.getNewPatientPanel().getTextFieldPhoneNumber().getText();
+		String regNumber = mainWindow.getNewPatientPanel().getTextFieldRegNumber().getText();
 		int naturalBirths = Integer.valueOf(mainWindow.getNewPatientPanel().getTextFieldNaturalBirthsNumber().getText());
 		int csectionBirths = Integer.valueOf(mainWindow.getNewPatientPanel().getTextFieldcSectionBirthNumber().getText());
 		int requestedAborstions = Integer.valueOf(mainWindow.getNewPatientPanel().getTextFieldRequestedAbortionNumber().getText());
@@ -35,6 +36,7 @@ public class SaveNewPatientButtonActionListener implements ActionListener {
 		newPatient.setNume(name);
 		newPatient.setPrenume(firstName);
 		newPatient.setDataNasterii(new Date(100000000000L));
+		newPatient.setCnp(regNumber);
 		newPatient.setPrimaConsultatie(LocalDate.now());
 		newPatient.setAdresa(address);
 		newPatient.setNumarTelefon(phoneNumber);

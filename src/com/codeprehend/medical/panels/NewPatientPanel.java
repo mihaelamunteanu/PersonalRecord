@@ -1,5 +1,6 @@
 package com.codeprehend.medical.panels;
 
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.text.SimpleDateFormat;
@@ -16,6 +17,7 @@ import javax.swing.border.Border;
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.listeners.SaveNewPatientButtonActionListener;
 import com.codeprehend.medical.resources.Patient;
+import com.sun.xml.internal.ws.wsdl.writer.document.OpenAtts;
 
 public class NewPatientPanel extends JPanel {
 
@@ -50,7 +52,7 @@ public class NewPatientPanel extends JPanel {
 	private JTextArea  textAreaAntecedents;
 	
 	//it saves in DB and moves to screen CurrentDiagnosisPanel
-	private JButton saveNewPatientButton = new JButton("Salveaza Pacienta Noua");
+	private JButton saveNewPatientButton = new JButton("Salveaza");
 	private JButton cancelNewPatientButton = new JButton("Cancel");
 	
 	private GridBagConstraints gc = new GridBagConstraints();
@@ -65,23 +67,35 @@ public class NewPatientPanel extends JPanel {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 		String stringCurrentDate = format.format(currentDate);
 
-		textFieldDate = new JTextField(10);
+		textFieldDate = new JTextField(15);
 		textFieldDate.setText(stringCurrentDate);
-		textFieldName = new JTextField(10);
-		textFieldFirstName = new JTextField(10);
-		textFieldRegNumber = new JTextField(10); 
-		textFieldPhoneNumber = new JTextField(10);
+		textFieldName = new JTextField(15);
+		textFieldFirstName = new JTextField(15);
+		textFieldRegNumber = new JTextField(15); 
+		textFieldPhoneNumber = new JTextField(15);
 		
 		textFieldNaturalBirthsNumber =  new JTextField(2);
 		textFieldcSectionBirthNumber = new JTextField(2);
 		textFieldRequestedAbortionNumber = new JTextField(2);
 		textFieldSpotaneousAbortionNumber = new JTextField(2);
 		
+		Font font1 = new Font("TimesNewRoman", Font.BOLD, 15);
+		textFieldName.setFont(font1);
+		textFieldFirstName.setFont(font1);
+		textFieldDate.setFont(font1);
+		textFieldRegNumber.setFont(font1);
+		textFieldPhoneNumber.setFont(font1);
+		
+		textFieldNaturalBirthsNumber.setFont(font1);
+		textFieldcSectionBirthNumber.setFont(font1);
+		textFieldRequestedAbortionNumber.setFont(font1);
+		textFieldSpotaneousAbortionNumber.setFont(font1);
+		
 		textAreaAntecedents = new JTextArea();
 
 		saveNewPatientButton.addActionListener(new SaveNewPatientButtonActionListener(parentPanel));
 
-		Border operBorder = BorderFactory.createTitledBorder("Cauta pacienta:");
+		Border operBorder = BorderFactory.createTitledBorder("Pacienta noua:");
 		this.setBorder(operBorder);
 		
 		this.setLayout(new GridBagLayout());
@@ -100,23 +114,26 @@ public class NewPatientPanel extends JPanel {
 		gc.gridx = 4;
 		this.add(textFieldFirstName, gc);
 
-		gc.gridx = 5;
+		gc.gridy = 2;
+		gc.gridx = 1;
 		this.add(labelDate, gc);
-		gc.gridx = 6;
+		gc.gridx = 2;
 		this.add(textFieldDate, gc);
 		
-		gc.gridx = 7;
+		gc.gridy = 3;
+		gc.gridx = 1;
 		this.add(labelRegNumber, gc);
-		gc.gridx = 8;
+		gc.gridx = 2;
 		this.add(textFieldRegNumber, gc);
 
-		gc.gridx = 9;
+		gc.gridy = 4;
+		gc.gridx = 1;
 		this.add(labelPhoneNumber, gc);
-		gc.gridx = 10;
+		gc.gridx = 2;
 		this.add(textFieldPhoneNumber, gc);
 
 		
-		gc.gridy = 2;
+		gc.gridy = 5;
 		
 		gc.gridx = 1;
 		this.add(naturalBirthsNumber, gc);
@@ -126,19 +143,23 @@ public class NewPatientPanel extends JPanel {
 		this.add(cSectionBirthNumber, gc);
 		gc.gridx = 4;
 		this.add(textFieldcSectionBirthNumber, gc);
-		gc.gridx = 5;
+		
+		gc.gridy = 6;
+				
+		gc.gridx = 1;
 		this.add(requestedAbortionNumber, gc);
-		gc.gridx = 6;
+		gc.gridx = 2;
 		this.add(textFieldRequestedAbortionNumber, gc);
-		gc.gridx = 7;
+		gc.gridx = 3;
 		this.add(spotaneousAbortionNumber, gc);
-		gc.gridx = 8;
+		gc.gridx = 4;
 		this.add(textFieldSpotaneousAbortionNumber, gc);
-		gc.gridheight = 100;
-		gc.gridy = 3;
-		gc.gridx = 5;
+		gc.gridy = 7;
+		gc.gridx = 2;
+		gc.anchor = GridBagConstraints.CENTER;
 		this.add(saveNewPatientButton, gc); // Adds Button to content pane of frame
-		gc.gridx = 6;
+		gc.gridx = 4;
+		gc.gridy = 7;
 		gc.anchor = GridBagConstraints.CENTER;
 
 		this.add(cancelNewPatientButton, gc);

@@ -1,5 +1,6 @@
 package com.codeprehend.medical.panels;
 
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.List;
 
@@ -27,6 +28,8 @@ public class ListOfPatientsPanel extends JPanel {
 	
 	private MedicalRecordGUI parentPanel;
 	private List<Patient> patients;
+	
+	private GridBagConstraints gc = new GridBagConstraints();
 
 	public ListOfPatientsPanel(MedicalRecordGUI parent) {
 		super();
@@ -42,6 +45,10 @@ public class ListOfPatientsPanel extends JPanel {
 	 * @param patients
 	 */
 	public void setPatientsEntries(List<Patient> patients) {
+		int i = 1;
+		
+		this.setLayout(new GridBagLayout());
+		gc.anchor = GridBagConstraints.FIRST_LINE_START;
 		
 		for (Patient pacient: patients) { 
 			JPanel patientEntry = new JPanel();
@@ -56,10 +63,13 @@ public class ListOfPatientsPanel extends JPanel {
 			patientEntry.add(birthDate);
 			patientEntry.add(cnpLabel);
 			patientEntry.add(accessButton);
-			
+
 			patientEntry.setVisible(true);
-			
-			this.add(patientEntry);
+
+			gc.gridx = 1;
+			gc.gridy = i;
+			this.add(patientEntry, gc);
+			i++;
 		}
 	}
 }

@@ -38,12 +38,17 @@ public class SearchPatientPanel extends JPanel {
 	private JLabel labelSurname= new JLabel("Prenume: ");
 	private JLabel labelRegNumber = new JLabel("CNP: ");
 	private JLabel labelPhoneNumber = new JLabel("Tel: ");
+	private JLabel labelEmpty3 = new JLabel(" ");
+	private JLabel labelEmpty5 = new JLabel(" ");
+	private JLabel labelEmpty7 = new JLabel(" ");
+	private JLabel labelEmpty10 = new JLabel(" ");
+	private JLabel labelEmpty11 = new JLabel(" ");
 	private JTextField textFieldDate;
 	private JTextField textFieldName;
 	private JTextField textFieldSurname;
 	private JTextField textFieldRegNumber;
 	private JTextField textFieldPhoneNumber;
-	
+		
 	private JButton searchPatientButton = new JButton("Cauta Pacienta");
 	private JButton newPatientButton = new JButton("Pacienta noua");
 	
@@ -51,7 +56,6 @@ public class SearchPatientPanel extends JPanel {
 
 	public SearchPatientPanel(MedicalRecordGUI parent) {
 		super();
-		this.setLayout(new GridBagLayout());
 		this.parentPanel = parent;
 
 		// make a separate function
@@ -59,12 +63,12 @@ public class SearchPatientPanel extends JPanel {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 		String stringCurrentDate = format.format(currentDate);
 
-		textFieldDate = new JTextField(20);
+		textFieldDate = new JTextField(15);
 		textFieldDate.setText(stringCurrentDate);
-		textFieldName = new JTextField(20);
-		textFieldSurname = new JTextField(20);
-		textFieldRegNumber = new JTextField(20);
-		textFieldPhoneNumber = new JTextField(20);
+		textFieldName = new JTextField(15);
+		textFieldSurname = new JTextField(15);
+		textFieldRegNumber = new JTextField(15);
+		textFieldPhoneNumber = new JTextField(15);
 
 		searchPatientButton.addActionListener(new SearchPatientButtonActionListener(parentPanel));
 		newPatientButton.addActionListener(new NewPatientButtonActionListener(parentPanel));
@@ -90,10 +94,16 @@ public class SearchPatientPanel extends JPanel {
 		gc.gridy = 2;
 		this.add(labelSurname, gc);
 		gc.gridy = 3;
-		this.add(labelDate, gc);
+		this.add(labelEmpty3, gc);
 		gc.gridy = 4;
-		this.add(labelRegNumber, gc);
+		this.add(labelDate, gc);
 		gc.gridy = 5;
+		this.add(labelEmpty5, gc);
+		gc.gridy = 6;
+		this.add(labelRegNumber, gc);
+		gc.gridy = 7;
+		this.add(labelEmpty7, gc);
+		gc.gridy = 8;
 		this.add(labelPhoneNumber, gc);
 
 		gc.gridx = 2;
@@ -102,20 +112,30 @@ public class SearchPatientPanel extends JPanel {
 		gc.gridy = 2;
 		this.add(textFieldSurname, gc);
 		gc.gridy = 3;
-		this.add(textFieldDate, gc);
+		this.add(labelEmpty3, gc);
 		gc.gridy = 4;
-		this.add(textFieldRegNumber, gc);
+		this.add(textFieldDate, gc);
 		gc.gridy = 5;
+		this.add(labelEmpty5, gc);
+		gc.gridy = 6;
+		this.add(textFieldRegNumber, gc);
+		gc.gridy = 7;
+		this.add(labelEmpty7, gc);
+		gc.gridy = 8;
 		this.add(textFieldPhoneNumber, gc);
 		
 		gc.gridx = 2;
-		gc.gridy = 6;
+		gc.gridy = 9;
 		gc.anchor = GridBagConstraints.CENTER;
 		this.add(searchPatientButton, gc); // Adds Button to content pane of frame
 		
 		//TODO Gabi aranjeaza interfata
-		gc.gridx = 3;
-		gc.gridy = 5;
+		gc.gridy = 10;
+		this.add(labelEmpty10, gc);
+		gc.gridy = 11;
+		this.add(labelEmpty11, gc);
+		gc.gridx = 2;
+		gc.gridy = 12;
 		this.add(newPatientButton, gc);
 		this.setVisible(true);
 	}
