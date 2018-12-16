@@ -36,7 +36,7 @@ public class NewPatientPanel extends JPanel {
 	private JLabel naturalBirthsNumber = new JLabel("Nasteri naturale: ");
 	private JLabel cSectionBirthNumber = new JLabel("Cezariene: ");
 	private JLabel requestedAbortionNumber = new JLabel("Avorturi la cerere:");
-	private JLabel spotaneousAbortionNumber = new JLabel("Avorturi spontane:");
+	private JLabel spontaneousAbortionNumber = new JLabel("Avorturi spontane:");
 	private JLabel antecedents = new JLabel("Antecedente:");
 	private JLabel labelEmpty = new JLabel(" ");
 	
@@ -151,7 +151,7 @@ public class NewPatientPanel extends JPanel {
 		gc.gridx = 2;
 		this.add(textFieldRequestedAbortionNumber, gc);
 		gc.gridx = 3;
-		this.add(spotaneousAbortionNumber, gc);
+		this.add(spontaneousAbortionNumber, gc);
 		gc.gridx = 4;
 		this.add(textFieldSpotaneousAbortionNumber, gc);
 		
@@ -268,11 +268,11 @@ public class NewPatientPanel extends JPanel {
 	}
 
 	public JLabel getSpotaneousAbortionNumber() {
-		return spotaneousAbortionNumber;
+		return spontaneousAbortionNumber;
 	}
 
 	public void setSpotaneousAbortionNumber(JLabel spotaneousAbortionNumber) {
-		this.spotaneousAbortionNumber = spotaneousAbortionNumber;
+		this.spontaneousAbortionNumber = spotaneousAbortionNumber;
 	}
 
 	public JLabel getAntecedents() {

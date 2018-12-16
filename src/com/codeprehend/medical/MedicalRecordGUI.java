@@ -66,6 +66,7 @@ public class MedicalRecordGUI extends JFrame {
 		theMainPanel.add(searchPatientPanel);
 		theMainPanel.add(listOfPatientsPanel);
 		theMainPanel.add(newPatientPanel);
+		theMainPanel.add(examinationPatientPanel);
 		theMainPanel.setVisible(true);
 	    
 	    this.add(theMainPanel);
@@ -99,6 +100,9 @@ public class MedicalRecordGUI extends JFrame {
 	}
 	
 	public void showExaminationPatientPanel(Patient patient) {
+		
+		examinationPatientPanel.setPatientInformations(patient);
+		
 		//TODO here or later: load the list of previous examinations
 		examinationPatientPanel.setPreviousExaminationEntries(new ArrayList<Examination>());
 		examinationPatientPanel.setVisible(true);
