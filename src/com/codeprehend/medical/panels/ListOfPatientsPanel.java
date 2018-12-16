@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.codeprehend.medical.MedicalRecordGUI;
+import com.codeprehend.medical.listeners.BackFromListOfPatientsPanelButtonActionListener;
 import com.codeprehend.medical.resources.Patient;
 
 /** 
@@ -29,6 +30,8 @@ public class ListOfPatientsPanel extends JPanel {
 	private MedicalRecordGUI parentPanel;
 	private List<Patient> patients;
 	
+	private JButton backButton = new JButton("Inapoi");
+	
 	private GridBagConstraints gc = new GridBagConstraints();
 
 	public ListOfPatientsPanel(MedicalRecordGUI parent) {
@@ -45,7 +48,9 @@ public class ListOfPatientsPanel extends JPanel {
 	 * @param patients
 	 */
 	public void setPatientsEntries(List<Patient> patients) {
-		int i = 1;
+		backButton.addActionListener(new BackFromListOfPatientsPanelButtonActionListener(parentPanel));
+		
+		int i = 2;
 		
 		this.setLayout(new GridBagLayout());
 		gc.anchor = GridBagConstraints.FIRST_LINE_START;
@@ -71,5 +76,9 @@ public class ListOfPatientsPanel extends JPanel {
 			this.add(patientEntry, gc);
 			i++;
 		}
+		
+		gc.gridx = 2;
+		gc.gridy = 1;
+		this.add(backButton, gc);
 	}
 }

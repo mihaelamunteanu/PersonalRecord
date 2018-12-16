@@ -80,6 +80,14 @@ public class MedicalRecordGUI extends JFrame {
 
 	
 	//TODO to put this in a controller outside this class?
+	public void showSearchPatientPanel() {
+		searchPatientPanel.setVisible(true);
+		
+		newPatientPanel.setVisible(false);
+		listOfPatientsPanel.setVisible(false);
+	}
+	
+	
 	public void showNewPatientPanel() {
 		newPatientPanel.setVisible(true);
 		
