@@ -39,9 +39,13 @@ public class DatabaseConnection {
      * @return Connection - the connection instance to database
      */
     public static Connection getDatabaseConnection() {
-    	if (conn == null) {
-    		conn = DatabaseConnection.connect();
-    	}
+    	try {
+			if (conn == null || conn.isClosed()) {
+				conn = DatabaseConnection.connect();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     	
     	return conn;
     }

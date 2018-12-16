@@ -1,3 +1,9 @@
+---- git commands ---
+git pull 
+git add fisier
+git commit -m "mesaj"
+git push -u origin master
+
 # PersonalRecord
  Application that keeps a record history
 
@@ -5,6 +11,7 @@
 https://www.labkey.org/Documentation/wiki-page.view?name=installPostgreSQLWindows
 *64 bits version for Windows
 *root/root sau 123456?
+*stackBuilder install: pgJDBC
 
 StackBuilder Application to install other PostgreS related  apps
 
