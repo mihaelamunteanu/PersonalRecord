@@ -35,9 +35,10 @@ public class NewPatientPanel extends JPanel {
 	private JLabel labelPhoneNumber = new JLabel("Tel: ");
 	private JLabel naturalBirthsNumber = new JLabel("Nasteri naturale: ");
 	private JLabel cSectionBirthNumber = new JLabel("Cezariene: ");
-	private JLabel requestedAbortionNumber = new JLabel("Avorturi la cerere");
-	private JLabel spotaneousAbortionNumber = new JLabel("Avorturi spontane");
-	private JLabel antecedents = new JLabel("Antecedente");
+	private JLabel requestedAbortionNumber = new JLabel("Avorturi la cerere:");
+	private JLabel spotaneousAbortionNumber = new JLabel("Avorturi spontane:");
+	private JLabel antecedents = new JLabel("Antecedente:");
+	private JLabel labelEmpty = new JLabel(" ");
 	
 	private JTextField textFieldDate;
 	private JTextField textFieldName;
@@ -90,7 +91,7 @@ public class NewPatientPanel extends JPanel {
 		textFieldRequestedAbortionNumber.setFont(font1);
 		textFieldSpotaneousAbortionNumber.setFont(font1);
 		
-		textAreaAntecedents = new JTextArea();
+		textAreaAntecedents = new JTextArea(10, 20);
 
 		saveNewPatientButton.addActionListener(new SaveNewPatientButtonActionListener(parentPanel));
 
@@ -153,12 +154,24 @@ public class NewPatientPanel extends JPanel {
 		this.add(spotaneousAbortionNumber, gc);
 		gc.gridx = 4;
 		this.add(textFieldSpotaneousAbortionNumber, gc);
+		
 		gc.gridy = 7;
+		gc.gridx = 1;
+		this.add(labelEmpty, gc);
+		gc.gridy = 8;
+		this.add(antecedents, gc);
+		gc.gridy = 9;
+		gc.gridwidth = 4;
+		gc.fill = GridBagConstraints.HORIZONTAL;
+		this.add(textAreaAntecedents, gc);
+		
+		gc.gridwidth = 1;
+		gc.gridy = 10;
 		gc.gridx = 2;
 		gc.anchor = GridBagConstraints.CENTER;
 		this.add(saveNewPatientButton, gc); // Adds Button to content pane of frame
 		gc.gridx = 4;
-		gc.gridy = 7;
+		gc.gridy = 10;
 		gc.anchor = GridBagConstraints.CENTER;
 
 		this.add(cancelNewPatientButton, gc);
