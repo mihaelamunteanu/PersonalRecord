@@ -2,15 +2,17 @@ package com.codeprehend.medical;
 
 
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.codeprehend.medical.panels.CurrentDiagnosisPanel;
+import com.codeprehend.medical.panels.ExaminationPatientPanel;
 import com.codeprehend.medical.panels.ListOfPatientsPanel;
 import com.codeprehend.medical.panels.NewPatientPanel;
 import com.codeprehend.medical.panels.SearchPatientPanel;
+import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
 
 
@@ -40,7 +42,7 @@ public class MedicalRecordGUI extends JFrame {
 	private JPanel theMainPanel;	
 	private SearchPatientPanel searchPatientPanel;
 	private NewPatientPanel newPatientPanel;
-	private CurrentDiagnosisPanel currentDiagnosisPanel;
+	private ExaminationPatientPanel examinationPatientPanel;
 	private ListOfPatientsPanel listOfPatientsPanel;
 	
 	public MedicalRecordGUI(){
@@ -59,6 +61,7 @@ public class MedicalRecordGUI extends JFrame {
 		searchPatientPanel = new SearchPatientPanel(this);
 		newPatientPanel = new NewPatientPanel(this);
 		listOfPatientsPanel = new ListOfPatientsPanel(this);
+		examinationPatientPanel = new ExaminationPatientPanel(this);
 		
 		theMainPanel.add(searchPatientPanel);
 		theMainPanel.add(listOfPatientsPanel);
@@ -95,8 +98,10 @@ public class MedicalRecordGUI extends JFrame {
 		listOfPatientsPanel.setVisible(false);
 	}
 	
-	public void showCurrentDiagnosisPanel() {
-		currentDiagnosisPanel.setPreviousExaminationEntries(null);
+	public void showExaminationPatientPanel(Patient patient) {
+		//TODO here or later: load the list of previous examinations
+		examinationPatientPanel.setPreviousExaminationEntries(new ArrayList<Examination>());
+		examinationPatientPanel.setVisible(true);
 		
 		newPatientPanel.setVisible(false);
 		searchPatientPanel.setVisible(false);
@@ -121,8 +126,8 @@ public class MedicalRecordGUI extends JFrame {
 		return newPatientPanel;
 	}
 
-	public CurrentDiagnosisPanel getCurrentDiagnosisPanel() {
-		return currentDiagnosisPanel;
+	public ExaminationPatientPanel getCurrentDiagnosisPanel() {
+		return examinationPatientPanel;
 	}
 
 	public ListOfPatientsPanel getListOfPatientsPanel() {

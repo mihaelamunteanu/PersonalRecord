@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.codeprehend.medical.MedicalRecordGUI;
+import com.codeprehend.medical.listeners.AccessExamButtonActionListener;
 import com.codeprehend.medical.listeners.BackFromListOfPatientsPanelButtonActionListener;
 import com.codeprehend.medical.resources.Patient;
 
@@ -62,6 +63,7 @@ public class ListOfPatientsPanel extends JPanel {
 			JLabel birthDate = new JLabel(pacient.getDataNasterii().toString());
 			JLabel cnpLabel = new JLabel(pacient.getCnp());
 			JButton accessButton = new JButton(ACCESS_DOSAR);
+			accessButton.addActionListener(new AccessExamButtonActionListener(parentPanel, pacient));
 			
 			patientEntry.add(nameLabel);
 			patientEntry.add(firstNameLabel);

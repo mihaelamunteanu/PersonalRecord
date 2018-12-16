@@ -12,7 +12,7 @@ import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
 
-public class CurrentDiagnosisPanel extends JPanel {
+public class ExaminationPatientPanel extends JPanel {
 	/**
 	 * Default serial key. 
 	 */
@@ -30,7 +30,7 @@ public class CurrentDiagnosisPanel extends JPanel {
 	
 	private JButton saveExamination = new JButton("Salveaza Consultatia");
 	
-	public CurrentDiagnosisPanel(MedicalRecordGUI parent) {
+	public ExaminationPatientPanel(MedicalRecordGUI parent) {
 		super();
 		this.setLayout(new GridBagLayout());
 

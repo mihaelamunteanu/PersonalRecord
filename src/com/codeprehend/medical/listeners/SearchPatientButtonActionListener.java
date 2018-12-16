@@ -4,8 +4,11 @@ package com.codeprehend.medical.listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.PatientsDAO;
+import com.codeprehend.medical.database.InputValidation;
 
 
 public class SearchPatientButtonActionListener implements ActionListener {
@@ -16,15 +19,23 @@ public class SearchPatientButtonActionListener implements ActionListener {
 		this.mainWindow = mainWindow;
 	}
 
-	public void actionPerformed(ActionEvent e){
-		//TODO validation of fields
+	public void actionPerformed(ActionEvent event){
+		
 		String birthDateFiter = mainWindow.getSearchPatientPanel().getTextFieldDate().getText();
 		String cnpFilter = mainWindow.getSearchPatientPanel().getTextFieldRegNumber().getText();
 		String firstName = mainWindow.getSearchPatientPanel().getTextFieldFirstname().getText();
 		String name = mainWindow.getSearchPatientPanel().getTextFieldName().getText();
 		String phoneNo = mainWindow.getSearchPatientPanel().getTextFieldPhoneNumber().getText();
-		mainWindow.showPanelListOfPatients(PatientsDAO.getPatientsByFilter(name, firstName, cnpFilter, phoneNo, birthDateFiter));
 		
+		try {
+			InputValidation.validateTextField(name);
+		} catch (Exception exception) {
+			JOptionPane.showMessageDialog(mainWindow, exception.getMessage(), 
+					"Erore de Validare", JOptionPane.ERROR_MESSAGE);
+			exception.printStackTrace();
+			return;
+		}
+		mainWindow.showPanelListOfPatients(PatientsDAO.getPatientsByFilter(name, firstName, cnpFilter, phoneNo, birthDateFiter));
 	}
 	
 	

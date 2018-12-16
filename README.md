@@ -24,6 +24,7 @@ GABI: - add prenume in fields;
       - arrange search Panel: distance between fields on y axe and bigger size text field: maybe 25;
 	  - calendar in loc de String date (nu facem pana nu discutam, s-ar putea sa ii fie mai usor sa scrie de mana.
 
+- ask Cosmin about special characters (romanian)
 - if the connection with DB is down try t reset it in he singleton.
 - add fotos with the drawn screens;
 - add instructions for DB;
