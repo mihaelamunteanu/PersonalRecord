@@ -46,7 +46,7 @@ public class MedicalRecordGUI extends JFrame {
 	public MedicalRecordGUI(){
 		//initialize GUI
 		
-		this.setSize(1100, 400);
+		this.setSize(1100, 500);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(numeFereastraPrincipala);

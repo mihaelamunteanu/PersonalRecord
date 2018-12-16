@@ -134,8 +134,10 @@ public class SearchPatientPanel extends JPanel {
 		this.add(labelEmpty10, gc);
 		gc.gridy = 11;
 		this.add(labelEmpty11, gc);
-		gc.gridx = 2;
+		gc.gridx = 1;
 		gc.gridy = 12;
+		gc.gridwidth = 2;
+		gc.fill = GridBagConstraints.HORIZONTAL;
 		this.add(newPatientButton, gc);
 		this.setVisible(true);
 	}
