@@ -35,7 +35,7 @@ public class SearchPatientPanel extends JPanel {
 
 	private JLabel labelDate = new JLabel("Data nastere: ");
 	private JLabel labelName = new JLabel("Nume: ");
-	private JLabel labelSurname= new JLabel("Prenume: ");
+	private JLabel labelFirstName= new JLabel("Prenume: ");
 	private JLabel labelRegNumber = new JLabel("CNP: ");
 	private JLabel labelPhoneNumber = new JLabel("Tel: ");
 	private JLabel labelEmpty3 = new JLabel(" ");
@@ -45,7 +45,7 @@ public class SearchPatientPanel extends JPanel {
 	private JLabel labelEmpty11 = new JLabel(" ");
 	private JTextField textFieldDate;
 	private JTextField textFieldName;
-	private JTextField textFieldSurname;
+	private JTextField textFieldFirstname;
 	private JTextField textFieldRegNumber;
 	private JTextField textFieldPhoneNumber;
 		
@@ -66,7 +66,7 @@ public class SearchPatientPanel extends JPanel {
 		textFieldDate = new JTextField(15);
 		textFieldDate.setText(stringCurrentDate);
 		textFieldName = new JTextField(15);
-		textFieldSurname = new JTextField(15);
+		textFieldFirstname = new JTextField(15);
 		textFieldRegNumber = new JTextField(15);
 		textFieldPhoneNumber = new JTextField(15);
 
@@ -82,7 +82,7 @@ public class SearchPatientPanel extends JPanel {
 		//gc.gridheight = 10000;
 		Font font1 = new Font("TimesNewRoman", Font.BOLD, 15);
 		textFieldName.setFont(font1);
-		textFieldSurname.setFont(font1);
+		textFieldFirstname.setFont(font1);
 		textFieldDate.setFont(font1);
 		textFieldRegNumber.setFont(font1);
 		textFieldPhoneNumber.setFont(font1);
@@ -92,7 +92,7 @@ public class SearchPatientPanel extends JPanel {
 		gc.gridy = 1;
 		this.add(labelName, gc);
 		gc.gridy = 2;
-		this.add(labelSurname, gc);
+		this.add(labelFirstName, gc);
 		gc.gridy = 3;
 		this.add(labelEmpty3, gc);
 		gc.gridy = 4;
@@ -110,7 +110,7 @@ public class SearchPatientPanel extends JPanel {
 		gc.gridy = 1;
 		this.add(textFieldName, gc);
 		gc.gridy = 2;
-		this.add(textFieldSurname, gc);
+		this.add(textFieldFirstname, gc);
 		gc.gridy = 3;
 		this.add(labelEmpty3, gc);
 		gc.gridy = 4;
@@ -146,8 +146,19 @@ public class SearchPatientPanel extends JPanel {
 		return textFieldDate;
 	}
 
-	public void setTextFieldDate(JTextField textFieldDate) {
-		this.textFieldDate = textFieldDate;
+	public JTextField getTextFieldName() {
+		return textFieldName;
 	}
 
+	public JTextField getTextFieldFirstname() {
+		return textFieldFirstname;
+	}
+
+	public JTextField getTextFieldRegNumber() {
+		return textFieldRegNumber;
+	}
+
+	public JTextField getTextFieldPhoneNumber() {
+		return textFieldPhoneNumber;
+	}
 }

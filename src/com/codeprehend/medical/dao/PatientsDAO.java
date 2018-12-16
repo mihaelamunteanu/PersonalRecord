@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,11 +47,23 @@ public class PatientsDAO {
 	}
 
 	//TODO change to Date type instead String
-	public static List<Patient> getPatientsByBirthDate(String date) {
+	public static List<Patient> getPatientsByFilter(String name, String firstname, String cnp, String phoneNo, String birthDate) {
 		List<Patient> patientsWithDate =new ArrayList<Patient>();
+		StringBuilder filterBuilder = new StringBuilder();
+		
 
-		String SQL = "SELECT id, nume, prenume, data_nasterii, cnp, data_inscriere, altele FROM paciente";
-
+		boolean nextAndNeeded = addWhereClause("nume", name, filterBuilder, false);
+		nextAndNeeded = addWhereClause("prenume", firstname, filterBuilder, nextAndNeeded);
+		nextAndNeeded = addWhereClause("cnp", cnp, filterBuilder, nextAndNeeded);
+		nextAndNeeded = addWhereClause("telefon", phoneNo, filterBuilder, nextAndNeeded);
+		nextAndNeeded = addWhereClauseForDate("data_nasterii", birthDate, filterBuilder, nextAndNeeded);
+		filterBuilder.append(";");
+		
+		String SQL = "SELECT id, nume, prenume, data_nasterii, cnp, data_inscriere, altele FROM paciente " + filterBuilder.toString();
+//				+ "WHERE data_nasterii='" + 
+//				LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "';";
+		System.out.println(" Searching patient: " + SQL);
+		
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(SQL)) {
@@ -66,18 +79,46 @@ public class PatientsDAO {
 			System.out.println(ex.getMessage());
 		}
 
-//		//Make mocks with Spring? and remove when added call to DB
-//		pacient = new Pacient("Adam", "Luca", "2232323443411", 
-//				new Date(2352345436L), 
-//				new Date((new java.util.Date()).getTime()), "Museului  12, Galati");
-//		patientWithDate.add(pacient);
-		
-//		pacient = new Pacient("Ailenei", "Tara", "2232323443411", 
-//		new Date(2352345436L), 
-//		new Date((new java.util.Date()).getTime()), "Museului  12, Galati");
-//		patientWithDate.add(pacient);
-
 		return patientsWithDate;
 	}
+	
+	/**
+	 * Method to add filters to where
+	 * For example for ("name", "Astanei", empty, true) the return will be true 
+	 * which means an ' AND ' has to be added for the next filters and 
+	 * the StringBuilder object will have the value: " AND name='Astanei' "
+	 * 
+	 * @param filterName
+	 * @param filter
+	 * @param whereClauseBuilder
+	 * @param andNeeded
+	 * @return
+	 */
+	private static boolean addWhereClause(String filterName, String filter, StringBuilder whereClauseBuilder, boolean andNeeded) {
+		boolean nextAndNeeded = false;
+		if (filter !=  null && filter.length() > 0) {
+			if (andNeeded) whereClauseBuilder.append(" AND ");
+			else whereClauseBuilder.append(" WHERE ");
+			whereClauseBuilder.append(filterName + " = '" + filter + "'");
+			nextAndNeeded = true;
+		} else if (andNeeded) {
+			nextAndNeeded = true;
+		}
+		
+		return nextAndNeeded;
+	}
 
+	private static boolean addWhereClauseForDate(String filterName, String filter, StringBuilder whereClauseBuilder, boolean andNeeded) {
+		boolean nextAndNeeded = false;
+		if (filter !=  null && filter.length() > 0) {
+			if (andNeeded) whereClauseBuilder.append(" AND ");
+			else whereClauseBuilder.append(" WHERE ");
+			whereClauseBuilder.append(filterName + " = '" + LocalDate.parse(filter, DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "'");
+			nextAndNeeded = true;
+		} else if (andNeeded) {
+			nextAndNeeded = true;
+		}
+		
+		return nextAndNeeded;
+	}
 }

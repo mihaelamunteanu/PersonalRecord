@@ -17,7 +17,6 @@ import javax.swing.border.Border;
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.listeners.SaveNewPatientButtonActionListener;
 import com.codeprehend.medical.resources.Patient;
-import com.sun.xml.internal.ws.wsdl.writer.document.OpenAtts;
 
 public class NewPatientPanel extends JPanel {
 

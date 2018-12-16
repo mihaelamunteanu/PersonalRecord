@@ -118,3 +118,6 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.consultatii
     OWNER to postgres;
+	
+ALTER TABLE public.paciente
+    ADD COLUMN telefon character varying(15);

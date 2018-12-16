@@ -18,8 +18,12 @@ public class SearchPatientButtonActionListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent e){
 		//TODO validation of fields
-		mainWindow.showPanelListOfPatients(PatientsDAO.getPatientsByBirthDate(
-				mainWindow.getSearchPatientPanel().getTextFieldDate().getSelectedText()));
+		String birthDateFiter = mainWindow.getSearchPatientPanel().getTextFieldDate().getText();
+		String cnpFilter = mainWindow.getSearchPatientPanel().getTextFieldRegNumber().getText();
+		String firstName = mainWindow.getSearchPatientPanel().getTextFieldFirstname().getText();
+		String name = mainWindow.getSearchPatientPanel().getTextFieldName().getText();
+		String phoneNo = mainWindow.getSearchPatientPanel().getTextFieldPhoneNumber().getText();
+		mainWindow.showPanelListOfPatients(PatientsDAO.getPatientsByFilter(name, firstName, cnpFilter, phoneNo, birthDateFiter));
 		
 	}
 	
