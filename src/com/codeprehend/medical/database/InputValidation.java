@@ -7,7 +7,7 @@ public class InputValidation {
 
 	public static void validateTextField(String text) throws Exception {
 		if (text != null && text.length() > 0) {
-			Pattern pattern = Pattern.compile("([A-Z]{1}[a-z]*)[-| ]?[A-Z]{1}[a-z]*");
+			Pattern pattern = Pattern.compile("([A-Z]{1}[a-z]*)[-| ]?[A-Z]?[a-z]*");
 			Matcher matcher = pattern.matcher(text);
 			if (!matcher.matches()) {
 				throw new Exception("Textul '" + text + "' nu este corect. "

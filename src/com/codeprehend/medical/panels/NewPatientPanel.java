@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import com.codeprehend.medical.MedicalRecordGUI;
+import com.codeprehend.medical.listeners.BackFromListOfPatientsPanelButtonActionListener;
 import com.codeprehend.medical.listeners.SaveNewPatientButtonActionListener;
 import com.codeprehend.medical.resources.Patient;
 
@@ -37,8 +38,8 @@ public class NewPatientPanel extends JPanel {
 	private JLabel cSectionBirthNumber = new JLabel("Cezariene: ");
 	private JLabel requestedAbortionNumber = new JLabel("Avorturi la cerere:");
 	private JLabel spontaneousAbortionNumber = new JLabel("Avorturi spontane:");
-	private JLabel antecedents = new JLabel("Antecedente:");
-	private JLabel labelEmpty = new JLabel(" ");
+	private JLabel antecedents = new JLabel("Antecedente la data ");
+	private JLabel antecedentsDate = new JLabel();
 	
 	private JTextField textFieldDate;
 	private JTextField textFieldName;
@@ -53,7 +54,7 @@ public class NewPatientPanel extends JPanel {
 	
 	//it saves in DB and moves to screen CurrentDiagnosisPanel
 	private JButton saveNewPatientButton = new JButton("Salveaza");
-	private JButton cancelNewPatientButton = new JButton("Cancel");
+	private JButton cancelNewPatientButton = new JButton("Inapoi");
 	
 	private GridBagConstraints gc = new GridBagConstraints();
 	
@@ -61,11 +62,17 @@ public class NewPatientPanel extends JPanel {
 		super();
 		this.setLayout(new GridBagLayout());
 		this.parentPanel = parent;
+		
+		cancelNewPatientButton.addActionListener(new BackFromListOfPatientsPanelButtonActionListener(parentPanel));
 
 		// make a separate function
 		Date currentDate = new Date();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		String stringCurrentDate = format.format(currentDate);
+		
+		antecedentsDate.setText(stringCurrentDate);
+		Font fontDate = new Font("TimesNewRoman", Font.BOLD, 16);
+		antecedentsDate.setFont(fontDate);
 
 		textFieldDate = new JTextField(15);
 		textFieldDate.setText(stringCurrentDate);
@@ -79,7 +86,7 @@ public class NewPatientPanel extends JPanel {
 		textFieldRequestedAbortionNumber = new JTextField(2);
 		textFieldSpotaneousAbortionNumber = new JTextField(2);
 		
-		Font font1 = new Font("TimesNewRoman", Font.BOLD, 15);
+		Font font1 = new Font("TimesNewRoman", Font.BOLD, 14);
 		textFieldName.setFont(font1);
 		textFieldFirstName.setFont(font1);
 		textFieldDate.setFont(font1);
@@ -99,41 +106,62 @@ public class NewPatientPanel extends JPanel {
 		this.setBorder(operBorder);
 		
 		this.setLayout(new GridBagLayout());
-		gc.anchor = GridBagConstraints.FIRST_LINE_START;
+		gc.anchor = GridBagConstraints.FIRST_LINE_END;
 		
 		//Labels and textfields added on the search panel
 		gc.gridy = 1;
 		
 		gc.gridx = 1;
+		gc.anchor = GridBagConstraints.FIRST_LINE_END;
 		this.add(labelName, gc);
 		gc.gridx = 2;
+		gc.anchor = GridBagConstraints.FIRST_LINE_START;
 		this.add(textFieldName, gc);
 		
 		gc.gridx = 3;
+		gc.anchor = GridBagConstraints.FIRST_LINE_END;
 		this.add(labelFirstName, gc);
 		gc.gridx = 4;
+		gc.anchor = GridBagConstraints.FIRST_LINE_START;
 		this.add(textFieldFirstName, gc);
-
+		
 		gc.gridy = 2;
 		gc.gridx = 1;
+		this.add(new JLabel(" "), gc);
+
+		gc.gridy = 3;
+		gc.gridx = 1;
+		gc.anchor = GridBagConstraints.FIRST_LINE_END;
 		this.add(labelDate, gc);
 		gc.gridx = 2;
+		gc.anchor = GridBagConstraints.FIRST_LINE_START;
 		this.add(textFieldDate, gc);
 		
 		gc.gridy = 3;
-		gc.gridx = 1;
+		gc.gridx = 3;
+		gc.anchor = GridBagConstraints.FIRST_LINE_END;
 		this.add(labelRegNumber, gc);
-		gc.gridx = 2;
+		gc.gridx = 4;
+		gc.anchor = GridBagConstraints.FIRST_LINE_START;
 		this.add(textFieldRegNumber, gc);
 
 		gc.gridy = 4;
 		gc.gridx = 1;
-		this.add(labelPhoneNumber, gc);
-		gc.gridx = 2;
-		this.add(textFieldPhoneNumber, gc);
-
+		this.add(new JLabel(" "), gc);
 		
 		gc.gridy = 5;
+		gc.gridx = 1;
+		gc.anchor = GridBagConstraints.FIRST_LINE_END;
+		this.add(labelPhoneNumber, gc);
+		gc.gridx = 2;
+		gc.anchor = GridBagConstraints.FIRST_LINE_START;
+		this.add(textFieldPhoneNumber, gc);
+
+		gc.gridy = 6;
+		gc.gridx = 1;
+		this.add(new JLabel(" "), gc);
+		
+		gc.gridy = 7;
 		
 		gc.gridx = 1;
 		this.add(naturalBirthsNumber, gc);
@@ -144,7 +172,11 @@ public class NewPatientPanel extends JPanel {
 		gc.gridx = 4;
 		this.add(textFieldcSectionBirthNumber, gc);
 		
-		gc.gridy = 6;
+		gc.gridy = 8;
+		gc.gridx = 1;
+		this.add(new JLabel(" "), gc);
+		
+		gc.gridy = 9;
 				
 		gc.gridx = 1;
 		this.add(requestedAbortionNumber, gc);
@@ -155,26 +187,32 @@ public class NewPatientPanel extends JPanel {
 		gc.gridx = 4;
 		this.add(textFieldSpotaneousAbortionNumber, gc);
 		
-		gc.gridy = 7;
-		gc.gridx = 1;
-		this.add(labelEmpty, gc);
-		gc.gridy = 8;
-		this.add(antecedents, gc);
-		gc.gridy = 9;
-		gc.gridwidth = 4;
-		gc.fill = GridBagConstraints.HORIZONTAL;
-		this.add(textAreaAntecedents, gc);
-		
 		gc.gridwidth = 1;
 		gc.gridy = 10;
 		gc.gridx = 2;
 		gc.anchor = GridBagConstraints.CENTER;
 		this.add(saveNewPatientButton, gc); // Adds Button to content pane of frame
+		
 		gc.gridx = 4;
 		gc.gridy = 10;
-		gc.anchor = GridBagConstraints.CENTER;
-
 		this.add(cancelNewPatientButton, gc);
+		
+		gc.gridy = 11;
+		gc.gridx = 1;
+		this.add(new JLabel(" "), gc);
+		gc.gridy = 12;
+		gc.gridx = 1;
+		this.add(new JLabel(" "), gc);
+		gc.gridy = 13;
+		this.add(antecedents, gc);
+		gc.gridx = 2;
+		gc.anchor = GridBagConstraints.FIRST_LINE_START;
+		this.add(antecedentsDate, gc);
+		gc.gridx = 1;
+		gc.gridy = 14;
+		gc.gridwidth = 4;
+		gc.fill = GridBagConstraints.HORIZONTAL;
+		this.add(textAreaAntecedents, gc);
 		
 		this.setVisible(false);
 	}

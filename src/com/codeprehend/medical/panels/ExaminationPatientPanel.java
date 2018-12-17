@@ -35,7 +35,10 @@ public class ExaminationPatientPanel extends JPanel {
 	
 	private GridBagConstraints gcExaminationPatientPanel = new GridBagConstraints();
 	
-	private JButton saveExamination = new JButton("Salveaza Consultatia");
+	private JButton homeButton = new JButton("Ecran principal");
+	private JButton backFromExaminationPanel = new JButton("Inapoi");
+	private JButton modifyPatientInfoButton = new JButton("Modifica info");
+	private JButton saveExaminationButton = new JButton("Salveaza Consultatia");
 	
 	
 	public ExaminationPatientPanel(MedicalRecordGUI parent) {
@@ -73,9 +76,9 @@ public class ExaminationPatientPanel extends JPanel {
 		patientPersonalInfoText = patientPersonalInfoText.concat(pacient.getCnp());
 		patientPersonalInfoText = patientPersonalInfoText.concat("     Tel: ");
 		//patientPersonalInfoText.concat(pacient.getNumarTelefon());
+		
 		JLabel patientPersonalInfoLabel = new JLabel(patientPersonalInfoText);
 		patientPersonalInfoLabel.setFont(font1);
-
 		
 		String patientMedicalInfoText = new String("");
 		patientMedicalInfoText = patientMedicalInfoText.concat("Nasteri naturale: ");
@@ -97,10 +100,73 @@ public class ExaminationPatientPanel extends JPanel {
 		patientInformationsPanel.add(patientPersonalInfoLabel, gcPatientInfoPanel);
 		gcPatientInfoPanel.gridy = 2;
 		patientInformationsPanel.add(patientMedicalInfoLabel, gcPatientInfoPanel);
-		this.add(patientInformationsPanel);
+		
+		gcExaminationPatientPanel.anchor = GridBagConstraints.FIRST_LINE_START;
+		gcExaminationPatientPanel.gridx = 1;
+		gcExaminationPatientPanel.gridy = 1;
+		this.add(patientInformationsPanel, gcExaminationPatientPanel);
 	}
 	
 	
+	public void setAntecedents(){
+		
+		JPanel antecedentsPanel = new JPanel();
+		antecedentsPanel.setLayout(new GridBagLayout());
+		
+		Border operBorder = BorderFactory.createTitledBorder("");
+		antecedentsPanel.setBorder(operBorder);
+		
+		GridBagConstraints gcAntecedentsPanel = new GridBagConstraints();
+		
+		Font font1 = new Font("TimesNewRoman", Font.BOLD, 15);
+		Font font2 = new Font("TimesNewRoman", Font.BOLD, 13);
+		
+	    JLabel textAntecedents = new JLabel("Antecedente ");
+	    textAntecedents.setFont(font1);
+	    
+	    gcAntecedentsPanel.anchor = GridBagConstraints.FIRST_LINE_START;
+	    gcAntecedentsPanel.gridx = 1;
+	    gcAntecedentsPanel.gridy = 1;
+	    antecedentsPanel.add(textAntecedents, gcAntecedentsPanel);
+
+		gcExaminationPatientPanel.anchor = GridBagConstraints.FIRST_LINE_START;
+		
+		gcExaminationPatientPanel.gridx = 1;
+		gcExaminationPatientPanel.gridy = 2;
+		this.add(new JLabel(" "), gcExaminationPatientPanel);
+		
+		gcExaminationPatientPanel.gridy = 3;
+		this.add(antecedentsPanel, gcExaminationPatientPanel);
+	    
+	}
+		
+
+	
+	public void setButtons(){
+		JPanel patientButtonsPanel = new JPanel();
+		patientButtonsPanel.setLayout(new GridBagLayout());
+		
+		GridBagConstraints gcButtonsPanel = new GridBagConstraints();
+		
+		patientButtonsPanel.add(homeButton);
+		patientButtonsPanel.add(new JLabel("   "));
+		patientButtonsPanel.add(backFromExaminationPanel);
+		patientButtonsPanel.add(new JLabel("   "));
+		patientButtonsPanel.add(modifyPatientInfoButton);
+		
+		gcExaminationPatientPanel.anchor = GridBagConstraints.FIRST_LINE_START;
+		gcExaminationPatientPanel.gridx = 1;
+		gcExaminationPatientPanel.gridy = 4;
+		this.add(new JLabel(" "), 		gcExaminationPatientPanel);
+		gcExaminationPatientPanel.gridy = 5;
+		this.add(new JLabel(" "), 		gcExaminationPatientPanel);
+		
+		gcExaminationPatientPanel.anchor = GridBagConstraints.FIRST_LINE_END;
+		gcExaminationPatientPanel.gridx = 1;
+		gcExaminationPatientPanel.gridy = 6;
+		this.add(patientButtonsPanel, gcExaminationPatientPanel);
+		
+	}
 	
 	/**
 	 * Loads the list of history Examination objects into JPanel
@@ -119,8 +185,16 @@ public class ExaminationPatientPanel extends JPanel {
 			examinationEntry.add(textAreaExaminationFromHistory);
 			examinationEntry.setVisible(true);
 			
-			this.add(examinationEntry);
+			gcExaminationPatientPanel.anchor = GridBagConstraints.FIRST_LINE_START;
+			gcExaminationPatientPanel.gridx = 1;
+			gcExaminationPatientPanel.gridy = 2;
+			
+			this.add(examinationEntry, gcExaminationPatientPanel);
 		}
 	}
-
+	
 }
+	
+
+	
+	
