@@ -16,6 +16,7 @@ import javax.swing.border.Border;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.listeners.BackFromListOfPatientsPanelButtonActionListener;
+import com.codeprehend.medical.listeners.CancelNewPatientButtonActionListener;
 import com.codeprehend.medical.listeners.SaveNewPatientButtonActionListener;
 import com.codeprehend.medical.resources.Patient;
 
@@ -54,7 +55,7 @@ public class NewPatientPanel extends JPanel {
 	
 	//it saves in DB and moves to screen CurrentDiagnosisPanel
 	private JButton saveNewPatientButton = new JButton("Salveaza");
-	private JButton cancelNewPatientButton = new JButton("Inapoi");
+	private JButton cancelNewPatientButton = new JButton("Renunta");
 	
 	private GridBagConstraints gc = new GridBagConstraints();
 	
@@ -101,6 +102,7 @@ public class NewPatientPanel extends JPanel {
 		textAreaAntecedents = new JTextArea(10, 20);
 
 		saveNewPatientButton.addActionListener(new SaveNewPatientButtonActionListener(parentPanel));
+		cancelNewPatientButton.addActionListener(new CancelNewPatientButtonActionListener(parentPanel));
 
 		Border operBorder = BorderFactory.createTitledBorder("Pacienta noua:");
 		this.setBorder(operBorder);
@@ -108,7 +110,6 @@ public class NewPatientPanel extends JPanel {
 		this.setLayout(new GridBagLayout());
 		gc.anchor = GridBagConstraints.FIRST_LINE_END;
 		
-		//Labels and textfields added on the search panel
 		gc.gridy = 1;
 		
 		gc.gridx = 1;
@@ -395,18 +396,6 @@ public class NewPatientPanel extends JPanel {
 
 	public JTextArea getTextAreaAntecedents() {
 		return textAreaAntecedents;
-	}
-
-	public void setTextAreaAntecedents(JTextArea textAreaAntecedents) {
-		this.textAreaAntecedents = textAreaAntecedents;
-	}
-
-	public JButton getSaveNewPatientButton() {
-		return saveNewPatientButton;
-	}
-
-	public void setSaveNewPatientButton(JButton saveNewPatientButton) {
-		this.saveNewPatientButton = saveNewPatientButton;
 	}
 
 	public GridBagConstraints getGc() {

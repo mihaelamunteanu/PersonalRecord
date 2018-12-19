@@ -5,8 +5,13 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.time.LocalDate;
 
+import javax.swing.JOptionPane;
+
 import com.codeprehend.medical.MedicalRecordGUI;
+import com.codeprehend.medical.dao.AntecedentsDAO;
 import com.codeprehend.medical.dao.PatientsDAO;
+import com.codeprehend.medical.database.InputValidation;
+import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Patient;
 
 public class SaveNewPatientButtonActionListener implements ActionListener {
@@ -17,20 +22,24 @@ public class SaveNewPatientButtonActionListener implements ActionListener {
 		this.mainWindow = mainWindow;
 	}
 	
-	public void actionPerformed(ActionEvent e){
-		//TODO validation of fields
+	public void actionPerformed(ActionEvent e) {
 		String name = mainWindow.getNewPatientPanel().getTextFieldName().getText();
 		String firstName = mainWindow.getNewPatientPanel().getTextFieldFirstName().getText();
 		String birthDate = mainWindow.getNewPatientPanel().getTextFieldDate().getText();
 		String phoneNumber = mainWindow.getNewPatientPanel().getTextFieldPhoneNumber().getText();
 		String regNumber = mainWindow.getNewPatientPanel().getTextFieldRegNumber().getText();
-		int naturalBirths = Integer.valueOf(mainWindow.getNewPatientPanel().getTextFieldNaturalBirthsNumber().getText());
-		int csectionBirths = Integer.valueOf(mainWindow.getNewPatientPanel().getTextFieldcSectionBirthNumber().getText());
-		int requestedAborstions = Integer.valueOf(mainWindow.getNewPatientPanel().getTextFieldRequestedAbortionNumber().getText());
-		int spontaneusAbortions = Integer.valueOf(mainWindow.getNewPatientPanel().getTextFieldSpotaneousAbortionNumber().getText());
+		String naturalBirths = mainWindow.getNewPatientPanel().getTextFieldNaturalBirthsNumber().getText();
+		String csectionBirths = mainWindow.getNewPatientPanel().getTextFieldcSectionBirthNumber().getText();
+		String requestedAborstions = mainWindow.getNewPatientPanel().getTextFieldRequestedAbortionNumber().getText();
+		String spontaneusAbortions = mainWindow.getNewPatientPanel().getTextFieldSpotaneousAbortionNumber().getText();
 		
 		String altele = "Not used";
 		String address = "Not needed";
+		
+		String antecedents = mainWindow.getNewPatientPanel().getTextAreaAntecedents().getText();
+		
+		validateFields(naturalBirths, csectionBirths, requestedAborstions, spontaneusAbortions);
+		
 		//save the Patient
 		Patient newPatient = new Patient();
 		newPatient.setNume(name);
@@ -41,22 +50,47 @@ public class SaveNewPatientButtonActionListener implements ActionListener {
 		newPatient.setAdresa(address);
 		newPatient.setNumarTelefon(phoneNumber);
 		newPatient.setAltele(altele);
-		newPatient.setNasteriNaturale(naturalBirths);
-		newPatient.setCezariene(csectionBirths);
-		newPatient.setAvorturiLaCerere(requestedAborstions);
-		newPatient.setAvorturiSpontane(spontaneusAbortions);
+		newPatient.setNasteriNaturale(Integer.valueOf(naturalBirths));
+		newPatient.setCezariene(Integer.valueOf(csectionBirths));
+		newPatient.setAvorturiLaCerere(Integer.valueOf(requestedAborstions));
+		newPatient.setAvorturiSpontane(Integer.valueOf(spontaneusAbortions));
 
+		Long patientId = PatientsDAO.savePatient(newPatient);
 		
-		PatientsDAO.savePatient(newPatient);
-//		mainWindow.showCurrentDiagnosisPanel(mainWindow.getNewPatientPanel()    );
+		if (patientId <= 0) {
+			JOptionPane.showMessageDialog(mainWindow, "Pacientul " + name + " " + firstName + " nu a putut fi inregistrat ", 
+					"Erroare", JOptionPane.ERROR_MESSAGE);
+			mainWindow.showExaminationPatientPanel(newPatient);	
+		}
+		Antecedent antecedent = new Antecedent(patientId, antecedents, LocalDate.now());
+		Long antecedentId = AntecedentsDAO.saveAntecedente(antecedent);
+		
+		if (antecedentId > 0) {
+			JOptionPane.showMessageDialog(mainWindow, "Patient inregistrat " + name + " " + firstName + " cu succes", 
+					"Confirmare inregistrare", JOptionPane.INFORMATION_MESSAGE);
+			mainWindow.showExaminationPatientPanel(newPatient);
+		} else {
+			JOptionPane.showMessageDialog(mainWindow, "Antecedentele pacientului " + name + " " + firstName + " nu au fost inregistrate ", 
+					"Erroare", JOptionPane.ERROR_MESSAGE);
+			mainWindow.showExaminationPatientPanel(newPatient);	
+		}
+				
+		
 		 
 	}
 	
-	
-	// Verification if the wanted text fields are not empty and the format is correct: number date, telephone
-	//TODO
-	public boolean verifyTextFields(){
-		return true;
+	private void validateFields(String naturalBirths, String csectionBirths, 
+			String requestedAbortions, String spontaneusAbortions) {
+		try {
+			InputValidation.validateBirthsNumber(naturalBirths, false);
+			InputValidation.validateBirthsNumber(csectionBirths, false);
+			InputValidation.validateBirthsNumber(requestedAbortions, false);
+			InputValidation.validateBirthsNumber(spontaneusAbortions, false);
+		} catch (Exception exception) {
+			JOptionPane.showMessageDialog(mainWindow, exception.getMessage(), 
+					"Erore de Validare", JOptionPane.ERROR_MESSAGE);
+			exception.printStackTrace();
+			return;
+		}
 	}
-
 }

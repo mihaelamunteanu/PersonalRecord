@@ -6,7 +6,7 @@ import java.time.LocalDate;
 public class Patient {
 	
 	//TODO establish the form of Date
-	private Integer id;
+	private Long id;
 	private String nume;
 	private String prenume;
 	private String cnp;
@@ -24,7 +24,7 @@ public class Patient {
 		
 	}
 	
-	public Patient(Integer id, String nume, String prenume, String cnp, 
+	public Patient(Long id, String nume, String prenume, String cnp, 
 			Date dataNasterii, LocalDate primaConsultatie, String adresa, String numarTelefon){
 		this.id = id;
 		this.nume = nume;
@@ -52,7 +52,7 @@ public class Patient {
 	}
 	
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 

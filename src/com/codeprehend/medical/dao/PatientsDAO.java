@@ -2,6 +2,7 @@ package com.codeprehend.medical.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.codeprehend.medical.database.DatabaseConnection;
+import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Patient;
 
 public class PatientsDAO {
@@ -20,8 +22,8 @@ public class PatientsDAO {
 	 * @param patient
 	 * @return Integer - the id generated for the Patient
 	 */
-	public static Integer savePatient(Patient patient) {
-		Integer generatedId = -1;
+	public static Long savePatient(Patient patient) {
+		Long generatedId = -1L;
 		String SQL = "INSERT into paciente "
 				+ "(nume, prenume, data_nasterii, cnp, data_inscriere, "
 				+ "nasteri_naturale, cezariene, avorturi_cerere, avorturi_spontane, altele) "
@@ -34,12 +36,13 @@ public class PatientsDAO {
 		System.out.println(" New patient: " + SQL);
 		
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();
-				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery(SQL)) {
-			if (rs.next()) {
-				generatedId = rs.getInt("id");
+				Statement stmt = conn.createStatement();) {
+			stmt.executeUpdate(SQL, new String[] {"id"});
+			ResultSet rs = stmt.getGeneratedKeys();
+			if (rs != null && stmt.getGeneratedKeys().next()) {
+				generatedId = stmt.getGeneratedKeys().getLong(1);
 			}
-		} catch (SQLException ex) {
+ 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}
 		
@@ -69,7 +72,7 @@ public class PatientsDAO {
 				ResultSet rs = stmt.executeQuery(SQL)) {
 			// get the patient information
 			while(rs.next()) {
-				Patient pacient = new Patient(rs.getInt("id"), rs.getString("nume"),
+				Patient pacient = new Patient(rs.getLong("id"), rs.getString("nume"),
 						rs.getString("prenume"), rs.getString("cnp"), rs.getDate("data_nasterii"), 
 						LocalDate.parse(rs.getString("data_inscriere")), rs.getString("altele"), null);
 				
