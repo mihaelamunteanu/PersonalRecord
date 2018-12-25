@@ -4,9 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.codeprehend.medical.database.DatabaseConnection;
 import com.codeprehend.medical.resources.Antecedent;
+import com.codeprehend.medical.resources.Patient;
 
 public class AntecedentsDAO {
 	/**
@@ -39,6 +45,32 @@ public class AntecedentsDAO {
 		}
 		
 		return generatedId;	
+	}
+	
+	//TODO change to Date type instead String
+	public static List<Antecedent> getAntecedentsByPatientId(Long patientId) {
+		List<Antecedent> antecedentsForPatient =new ArrayList<Antecedent>();
+		String SQL = "SELECT id, data_inregistrare, antecedent from  antecedente "
+				+ "where pacient_id = ?; ";
+		
+		System.out.println(" Antecendents for pacient : " + SQL);
+		
+		try (Connection conn = DatabaseConnection.getDatabaseConnection();
+				PreparedStatement stmt = conn.prepareStatement(SQL)) {
+			stmt.setObject(1, patientId);
+			
+			
+			ResultSet rs = stmt.executeQuery();
+			while (rs != null && rs.next()) {
+				Antecedent antecedent = new Antecedent(patientId, rs.getString("antecedent"), 
+						LocalDate.parse(rs.getString("data_inregistrare"), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+				antecedentsForPatient.add(antecedent);
+			}
+ 		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}
+		
+		return antecedentsForPatient;	
 	}
 	
 }

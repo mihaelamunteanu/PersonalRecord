@@ -116,7 +116,7 @@ public class PatientsDAO {
 		if (filter !=  null && filter.length() > 0) {
 			if (andNeeded) whereClauseBuilder.append(" AND ");
 			else whereClauseBuilder.append(" WHERE ");
-			whereClauseBuilder.append(filterName + " = '" + LocalDate.parse(filter, DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "'");
+			whereClauseBuilder.append(filterName + " = '" + LocalDate.parse(filter, DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "'");
 			nextAndNeeded = true;
 		} else if (andNeeded) {
 			nextAndNeeded = true;

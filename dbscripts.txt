@@ -121,3 +121,27 @@ ALTER TABLE public.consultatii
 	
 ALTER TABLE public.paciente
     ADD COLUMN telefon character varying(15);
+	
+-- Table: public.antecedente
+
+-- DROP TABLE public.antecedente;
+
+CREATE TABLE public.antecedente
+(
+    id bigint NOT NULL DEFAULT nextval('antecedente_id_seq'::regclass),
+    pacient_id integer,
+    antecedent character varying(4000) COLLATE pg_catalog."default" NOT NULL,
+    data_inregistrare date NOT NULL,
+    CONSTRAINT antecedente_pkey PRIMARY KEY (id),
+    CONSTRAINT antecedent_pacient_primarykey FOREIGN KEY (pacient_id)
+        REFERENCES public.paciente (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.antecedente
+    OWNER to admin_rugina;

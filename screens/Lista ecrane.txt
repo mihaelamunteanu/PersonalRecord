@@ -1,0 +1,22 @@
+1. * Ecran initial: cautare pacient: cautare -> Lista Pacienti gasiti sau pacient nou -> Creaza Pacient Nou
+2. * Pacient nou: * Salvare -> Consultatie, 
+                  * Renunta (esti sigur ca vrei sa renunti?) -> Cautare
+3. * Lista Pacienti gasiti: * Consultatie noua -> Consultatie, 
+                            * Inapoi -> Cautare
+						    Istoric complet -> Istoric complet
+4. Consultatie: Modifica Pacient -> Modifica Pacient, 
+                Renunta (esti sigur ca vrei sa renunti?) -> Cautare, 
+				Atasamente -> Atasamente
+				Salveaza -> Consultatie ReadOnly, Deschide PDF Generat (printeaza) (Salvare in DB si pe calc pdf-ul)
+5. Modifica Pacient: Salvare -> Consultatie, 
+                     Renunta (esti sigur ca vrei sa renunti?) -> Consultatie
+6. Consultatie ReadOnly: Adauga Consultatie
+                         Modifica Pacient
+						 Done
+7. Atasamente: Acceseaza atasament -> Deschide atasament din DB sau de pe calc
+               Adauga atasament : se deschide browserul si cand se da Save se salveaza in DB
+			   Renunta -> Consulatie sau Istoric Complet(tine minte din ce ecran vine) 
+8. Istoric complet (read only): Mergi la consultatie
+                                Mergi la cautare 
+				                Adauga atasament
+								Adauga nota

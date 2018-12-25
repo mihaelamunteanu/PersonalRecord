@@ -1,12 +1,8 @@
 package com.codeprehend.medical.panels;
 
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.LayoutManager;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -17,6 +13,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.Border;
 
 import com.codeprehend.medical.MedicalRecordGUI;
+import com.codeprehend.medical.listeners.ModifyPatientButtonActionListener;
 import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
 
@@ -54,7 +51,12 @@ public class ExaminationPatientPanel extends JPanel {
 	 * @param patients
 	 */
 	public void setPatientInformations(Patient pacient){
+		this.currentPatient = pacient;
 		
+		loadExaminationGUIForPatient(currentPatient);
+	}
+	
+	private void loadExaminationGUIForPatient(Patient pacient) {
 		JPanel patientInformationsPanel = new JPanel();
 		patientInformationsPanel.setLayout(new GridBagLayout());
 		
@@ -105,6 +107,7 @@ public class ExaminationPatientPanel extends JPanel {
 		gcExaminationPatientPanel.gridx = 1;
 		gcExaminationPatientPanel.gridy = 1;
 		this.add(patientInformationsPanel, gcExaminationPatientPanel);
+
 	}
 	
 	
@@ -166,6 +169,7 @@ public class ExaminationPatientPanel extends JPanel {
 		gcExaminationPatientPanel.gridy = 6;
 		this.add(patientButtonsPanel, gcExaminationPatientPanel);
 		
+		modifyPatientInfoButton.addActionListener(new ModifyPatientButtonActionListener(this.parentPanel, currentPatient));
 	}
 	
 	/**
