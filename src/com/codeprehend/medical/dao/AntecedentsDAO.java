@@ -63,7 +63,7 @@ public class AntecedentsDAO {
 			ResultSet rs = stmt.executeQuery();
 			while (rs != null && rs.next()) {
 				Antecedent antecedent = new Antecedent(patientId, rs.getString("antecedent"), 
-						LocalDate.parse(rs.getString("data_inregistrare"), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+						LocalDate.parse(rs.getString("data_inregistrare"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				antecedentsForPatient.add(antecedent);
 			}
  		} catch (SQLException ex) {

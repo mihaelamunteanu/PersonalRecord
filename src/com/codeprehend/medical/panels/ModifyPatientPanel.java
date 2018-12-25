@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -227,10 +228,15 @@ public class ModifyPatientPanel extends JPanel {
 	 * @param antecedents
 	 */
 	public void setAntecedentEntries(List<Antecedent> antecedents) {
-		int i = 2;
+		JPanel antecedentsEntryPanel = new JPanel();
+		JScrollPane scrollPanelModifyPatient = new JScrollPane(antecedentsEntryPanel);
+		this.add(scrollPanelModifyPatient);
 		
-		this.setLayout(new GridBagLayout());
-		gc.anchor = GridBagConstraints.FIRST_LINE_START;
+		int i = 16;
+		GridBagLayout gcInner = new GridBagLayout();
+		
+		antecedentsEntryPanel.setLayout(gcInner);
+//		gc.anchor = GridBagConstraints.FIRST_LINE_START;
 		
 		for (Antecedent antecedent : antecedents) { 
 			JPanel antecedentEntry = new JPanel();
@@ -245,7 +251,7 @@ public class ModifyPatientPanel extends JPanel {
 
 			gc.gridx = 1;
 			gc.gridy = i;
-			this.add(antecedentEntry, gc);
+			antecedentsEntryPanel.add(antecedentEntry, gc);
 			i++;
 		}
 }
