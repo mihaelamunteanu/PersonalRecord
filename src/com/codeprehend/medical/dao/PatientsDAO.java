@@ -16,6 +16,10 @@ import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Patient;
 
 public class PatientsDAO {
+	public static Long updatePatient(Patient patient) {
+		return -1;
+	}
+	
 	/**
 	 * Data Access Method to save a Patient into Database.
 	 * 

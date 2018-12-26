@@ -50,12 +50,13 @@ public class MedicalRecordGUI extends JFrame {
 	
 	public MedicalRecordGUI(){
 		//initialize GUI
-		
+		this.setSize(1100, 500);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		this.setResizable(false);
 		
 //		this.setSize(1100, 500);
 		this.setLocationRelativeTo(null);
+		//TODO Ask "Are you sure you want to leave the application? Check if there is anything unsaved"
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(numeFereastraPrincipala);
 		
@@ -165,6 +166,10 @@ public class MedicalRecordGUI extends JFrame {
 
 	public ListOfPatientsPanel getListOfPatientsPanel() {
 		return listOfPatientsPanel;
+	}
+
+	public ModifyPatientPanel getModifyPatientPanel() {
+		return modifyPatientPanel;
 	}
 	
 }
