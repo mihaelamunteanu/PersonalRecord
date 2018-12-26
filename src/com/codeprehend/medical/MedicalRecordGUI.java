@@ -1,6 +1,7 @@
 package com.codeprehend.medical;
 
 
+import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,10 @@ public class MedicalRecordGUI extends JFrame {
 	public MedicalRecordGUI(){
 		//initialize GUI
 		
-		this.setSize(1100, 500);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		this.setResizable(false);
+		
+//		this.setSize(1100, 500);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(numeFereastraPrincipala);
@@ -60,7 +64,7 @@ public class MedicalRecordGUI extends JFrame {
 		   
 		theMainPanel = new JPanel();
 		theMainPanel.setLayout(new GridBagLayout());
-		
+
 		searchPatientPanel = new SearchPatientPanel(this);
 		newPatientPanel = new NewPatientPanel(this);
 		listOfPatientsPanel = new ListOfPatientsPanel(this);
