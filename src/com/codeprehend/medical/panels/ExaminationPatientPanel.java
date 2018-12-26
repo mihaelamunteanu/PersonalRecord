@@ -135,20 +135,32 @@ public class ExaminationPatientPanel extends JPanel {
 
 		gcExaminationPatientPanel.anchor = GridBagConstraints.FIRST_LINE_START;
 		
-		int i = 2;
+		gcExaminationPatientPanel.gridx = 1;
+		gcExaminationPatientPanel.gridy = 2;
+
+		this.add(new JLabel(" "), gcExaminationPatientPanel);
+		
+		int i = 3;
 		
 		for (Antecedent antecedent : antecedents) {
-			gcExaminationPatientPanel.gridx = 1;
-			gcExaminationPatientPanel.gridy = 2;
-			
+//			gcAntecedentsPanel.gridx = 1;
+			gcAntecedentsPanel.gridy = i;
 			JLabel labelAntecedentDate = new JLabel(antecedent.getRegistrationDate().toString());
+			antecedentsPanel.add(labelAntecedentDate, gcAntecedentsPanel);
+			
+			gcAntecedentsPanel.gridy = i + 1;
 			JLabel labelAntecedentText = new JLabel(antecedent.getAntecedentText());
-			antecedentsPanel.add(labelAntecedentDate);
-			antecedentsPanel.add(labelAntecedentText);
+			antecedentsPanel.add(labelAntecedentText, gcAntecedentsPanel);
+			
+			gcAntecedentsPanel.gridy = i + 2;
+			JLabel labelSpace = new JLabel("c");
+			antecedentsPanel.add(labelSpace, gcAntecedentsPanel);
+			i = i + 3;
 		}
 
 		gcExaminationPatientPanel.gridx = 1;
 		gcExaminationPatientPanel.gridy = i + 1;
+
 		this.add(new JLabel(" "), gcExaminationPatientPanel);
 		
 		this.add(antecedentsPanel, gcExaminationPatientPanel);

@@ -1,7 +1,6 @@
 package com.codeprehend.medical;
 
 
-import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +83,11 @@ public class MedicalRecordGUI extends JFrame {
 	
 	//TODO to put this in a controller outside this class?
 	public void showPanelListOfPatients(List<Patient> listOfPatients) {
+		//TODO see if there are time when this panel shouldnt be reset
+		theMainPanel.remove(listOfPatientsPanel);
+		listOfPatientsPanel = new ListOfPatientsPanel(this);
+		theMainPanel.add(listOfPatientsPanel);
+		
 		listOfPatientsPanel.setPatientsEntries(listOfPatients);
 		listOfPatientsPanel.setVisible(true);
 		
