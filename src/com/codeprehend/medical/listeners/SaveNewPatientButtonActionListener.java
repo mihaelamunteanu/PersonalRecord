@@ -13,6 +13,7 @@ import com.codeprehend.medical.dao.AntecedentsDAO;
 import com.codeprehend.medical.dao.PatientsDAO;
 import com.codeprehend.medical.database.InputValidation;
 import com.codeprehend.medical.resources.Antecedent;
+import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
 
 public class SaveNewPatientButtonActionListener implements ActionListener {
@@ -71,7 +72,8 @@ public class SaveNewPatientButtonActionListener implements ActionListener {
 					"Confirmare inregistrare", JOptionPane.INFORMATION_MESSAGE);
 			List<Antecedent> antecedentsList = new ArrayList<Antecedent>();
 			antecedentsList.add(antecedent);
-			mainWindow.showExaminationPatientPanel(newPatient, antecedentsList);
+			List<Examination> examinationsList = new ArrayList<Examination>();
+			mainWindow.showExaminationPatientPanel(newPatient, antecedentsList, examinationsList);
 		} else {
 			JOptionPane.showMessageDialog(mainWindow, "Antecedentele pacientului " + name + " " + firstName + " nu au fost inregistrate ", 
 					"Erroare", JOptionPane.ERROR_MESSAGE);

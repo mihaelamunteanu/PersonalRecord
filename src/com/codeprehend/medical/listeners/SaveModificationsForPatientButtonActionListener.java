@@ -3,16 +3,17 @@ package com.codeprehend.medical.listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.AntecedentsDAO;
+import com.codeprehend.medical.dao.ExaminationDAO;
 import com.codeprehend.medical.dao.PatientsDAO;
 import com.codeprehend.medical.database.InputValidation;
 import com.codeprehend.medical.resources.Antecedent;
+import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
 
 public class SaveModificationsForPatientButtonActionListener implements ActionListener {
@@ -82,7 +83,8 @@ public class SaveModificationsForPatientButtonActionListener implements ActionLi
 				"Confirmare modificare", JOptionPane.INFORMATION_MESSAGE);
 		
 		List<Antecedent> antecedentsList = AntecedentsDAO.getAntecedentsByPatientId(newPatient.getId());
-		mainWindow.showExaminationPatientPanel(newPatient, antecedentsList);
+		List <Examination> examinationsList = ExaminationDAO.getExaminationsByPatientId(newPatient.getId());
+		mainWindow.showExaminationPatientPanel(newPatient, antecedentsList, examinationsList);
 	}
 	
 	private void validateFields(String naturalBirths, String csectionBirths, 

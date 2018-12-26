@@ -1,9 +1,11 @@
 package com.codeprehend.medical.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,41 +18,53 @@ public class ExaminationDAO {
 	 * @param exam
 	 * @return generated id from sequence for consultatie table. if an error occurs returns -1.
 	 */
-	public static Integer saveExamination(Examination exam) {
-		Integer generatedId = -1;
-		String SQL = "INSERT into consultatie "
+	public static Long saveExamination(Examination exam) {
+		Long generatedId = -1L;
+		String SQL = "INSERT into consultatii "
 				+ "(id_pacienta, data_consultatie, consultatie, alte_observatii) "
-				+ "values (" + exam.getPatientId() + "," + exam.getConsultationDate() + ", "
-				+ exam.getText() + "," + exam.getOtherObservations() + ");";
+				+ "values (?, ?, ?, ?);";
+		
+		
+		System.out.println(" Insert exam for patient : " + SQL);
 		
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();
-				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery(SQL)) {
-			if (rs.next()) {
-				generatedId = rs.getInt("id");
+				PreparedStatement stmt = conn.prepareStatement(SQL,  PreparedStatement.RETURN_GENERATED_KEYS)) {
+			stmt.setObject(1, exam.getPatientId());
+			stmt.setObject(2, exam.getConsultationDate());
+			stmt.setObject(3, exam.getText());
+			stmt.setObject(4, exam.getOtherObservations());
+			
+			stmt.executeUpdate();
+			ResultSet rs = stmt.getGeneratedKeys();
+			if (rs != null && stmt.getGeneratedKeys().next()) {
+				generatedId = stmt.getGeneratedKeys().getLong(1);
 			}
-		} catch (SQLException ex) {
+ 		} catch (SQLException ex) {
+ 			ex.printStackTrace();
 			System.out.println(ex.getMessage());
 		}
 		
-		return generatedId;
+		return generatedId;	
 	}
 	
 	
 	//TODO change to Date type instead String
-	public static List<Examination> getExaminationsByPatientId(Integer id) {
+	public static List<Examination> getExaminationsByPatientId(Long id) {
 		List<Examination> examinationsForPatient =new ArrayList<Examination>();
 
-		String SQL = "SELECT id, consultatie, data_dosar FROM dosare";
-
+		String SQL = "SELECT * FROM consultatii WHERE id_pacienta = ?";
+		
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();
-				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery(SQL)) {
-			// get the patient information
-			while(rs.next()) {
-				Examination exam = new Examination(rs.getInt("id"), id, rs.getString("consultatie"), 
-						rs.getDate("data_consultatie"), rs.getString("alte_observatii"));
-				examinationsForPatient.add(exam);	
+				PreparedStatement stmt = conn.prepareStatement(SQL)) {
+			stmt.setObject(1, id);
+			
+			
+			ResultSet rs = stmt.executeQuery();
+			while (rs != null && rs.next()) {
+				Examination examination = new Examination(rs.getLong("id"), id, rs.getString("consultatie"), 
+						LocalDate.parse(rs.getString("data_consultatie"), DateTimeFormatter.ofPattern("yyyy-MM-dd")), 
+						rs.getString("alte_observatii"));
+				examinationsForPatient.add(examination);
 			}
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());

@@ -1,6 +1,6 @@
 package com.codeprehend.medical.resources;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  * Class to define a consulation (from chitanta)
@@ -11,17 +11,17 @@ import java.sql.Date;
  */
 public class Examination {
 	
-	private Integer id; 
+	private Long id; 
 	
 	/**
 	 * Consultation date
 	 */
-	private Date consultationDate;
+	private LocalDate consultationDate;
 	
 	/**
 	 * Client id that has the consultation.
 	 */
-	private Integer patientId;
+	private Long patientId;
 	
 	/**
 	 * Consultation's text
@@ -42,12 +42,22 @@ public class Examination {
 	public Examination(){
 		
 	}
+
+	/**
+	 * Constructor with parameters without id - needed before being saved to DB.
+	 */
+	public Examination(Long patientId, String text, 
+			LocalDate consultationDate){
+		this.patientId = patientId;
+		this.text = text;
+		this.consultationDate = consultationDate;
+	}
 	
 	/**
 	 * Constructor with parameters to set all the variables
 	 */
-	public Examination(int id, Integer patientId, String text, 
-			Date consultationDate, String otherObservations){
+	public Examination(Long id, Long patientId, String text, 
+			LocalDate consultationDate, String otherObservations){
 		this.id = id;
 		this.patientId = patientId;
 		this.text = text;
@@ -55,19 +65,19 @@ public class Examination {
 		this.otherObservations = otherObservations;
 	}
 
-	public Date getConsultationDate() {
+	public LocalDate getConsultationDate() {
 		return consultationDate;
 	}
 
-	public void setConsultationDate(Date consultationDate) {
+	public void setConsultationDate(LocalDate consultationDate) {
 		this.consultationDate = consultationDate;
 	}
 
-	public Integer getPatientId() {
+	public Long getPatientId() {
 		return patientId;
 	}
 
-	public void setPatientId(Integer patientId) {
+	public void setPatientId(Long  patientId) {
 		this.patientId = patientId;
 	}
 
@@ -87,8 +97,12 @@ public class Examination {
 		this.attachments = attachments;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getOtherObservations() {

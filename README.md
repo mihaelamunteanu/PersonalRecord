@@ -24,11 +24,19 @@ TODO:
 - scroll
 - in list of patients the buttons should be alligned in a table so that is clear which button is for which name
 - check another app to see an example (I am not sure that app has scrool?)
+- sa se poate selecta datele din consultatie: campuri readonly
 - update patient and insert new antecedent
 - add examination text area
+- add previous examinations
 - add atasamente
 - generate pdf
 - fix buttons navigation
+- clean code, add comments etc. : 
+- scot commit din cod, ca este autocommit pe DB
+- throw Exceptions and display a dialog Box, 
+- check flow of application inside code and see if it is ok
+- add minimal validation on screens
+- tests
 
 #14.12.2018
 TODO:

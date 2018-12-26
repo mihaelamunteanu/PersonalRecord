@@ -14,6 +14,7 @@ import javax.swing.border.Border;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.listeners.ModifyPatientButtonActionListener;
+import com.codeprehend.medical.listeners.SaveExaminationButtonActionListener;
 import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
@@ -55,6 +56,13 @@ public class ExaminationPatientPanel extends JPanel {
 		this.currentPatient = pacient;
 		
 		loadExaminationGUIForPatient(currentPatient);
+		
+		examinationDiagnosis = new JTextArea();
+		examinationDiagnosis.setSize(100, 100);
+		saveExaminationButton.addActionListener(new SaveExaminationButtonActionListener(parentPanel, currentPatient));
+		
+		this.add(examinationDiagnosis);
+		this.add(saveExaminationButton);
 	}
 	
 	private void loadExaminationGUIForPatient(Patient pacient) {
@@ -203,6 +211,7 @@ public class ExaminationPatientPanel extends JPanel {
 	 */
 	public void setPreviousExaminationEntries(List<Examination> examinations) {
 		
+		int i = 10;
 		for (Examination exam: examinations) { 
 			JPanel examinationEntry = new JPanel();
 			JLabel dateLabel = new JLabel(exam.getConsultationDate().toString());
@@ -215,12 +224,16 @@ public class ExaminationPatientPanel extends JPanel {
 			
 			gcExaminationPatientPanel.anchor = GridBagConstraints.FIRST_LINE_START;
 			gcExaminationPatientPanel.gridx = 1;
-			gcExaminationPatientPanel.gridy = 2;
+			gcExaminationPatientPanel.gridy = i;
+			i = i + 1;
 			
 			this.add(examinationEntry, gcExaminationPatientPanel);
 		}
 	}
 	
+	public JTextArea getExaminationDiagnosis() {
+		return examinationDiagnosis;
+	}
 }
 	
 

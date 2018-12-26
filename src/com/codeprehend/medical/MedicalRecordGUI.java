@@ -2,7 +2,6 @@ package com.codeprehend.medical;
 
 
 import java.awt.GridBagLayout;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -134,17 +133,16 @@ public class MedicalRecordGUI extends JFrame {
 		examinationPatientPanel.setVisible(false);
 	}
 	
-	public void showExaminationPatientPanel(Patient patient, List<Antecedent> antecedents) {
+	public void showExaminationPatientPanel(Patient patient, List<Antecedent> antecedents, List<Examination> examinations) {
 		theMainPanel.remove(examinationPatientPanel);
 		examinationPatientPanel = new ExaminationPatientPanel(this);
 		theMainPanel.add(examinationPatientPanel);
 		
 		examinationPatientPanel.setPatientInformations(patient);
 		examinationPatientPanel.setAntecedents(antecedents);
+		examinationPatientPanel.setPreviousExaminationEntries(examinations);
 		examinationPatientPanel.setButtons();
 		
-		//TODO here or later: load the list of previous examinations
-		examinationPatientPanel.setPreviousExaminationEntries(new ArrayList<Examination>());
 		examinationPatientPanel.setVisible(true);
 		
 		newPatientPanel.setVisible(false);
@@ -171,7 +169,7 @@ public class MedicalRecordGUI extends JFrame {
 		return newPatientPanel;
 	}
 
-	public ExaminationPatientPanel getCurrentDiagnosisPanel() {
+	public ExaminationPatientPanel getExaminationPatientPanel() {
 		return examinationPatientPanel;
 	}
 

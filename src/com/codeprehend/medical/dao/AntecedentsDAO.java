@@ -57,7 +57,6 @@ public class AntecedentsDAO {
 				PreparedStatement stmt = conn.prepareStatement(SQL)) {
 			stmt.setObject(1, patientId);
 			
-			
 			ResultSet rs = stmt.executeQuery();
 			while (rs != null && rs.next()) {
 				Antecedent antecedent = new Antecedent(patientId, rs.getString("antecedent"), 
