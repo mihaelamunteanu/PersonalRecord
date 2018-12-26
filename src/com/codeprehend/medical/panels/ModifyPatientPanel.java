@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +21,7 @@ import javax.swing.border.Border;
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.listeners.BackFromListOfPatientsPanelButtonActionListener;
 import com.codeprehend.medical.listeners.CancelNewPatientButtonActionListener;
-import com.codeprehend.medical.listeners.SaveNewPatientButtonActionListener;
+import com.codeprehend.medical.listeners.SaveModificationsForPatientButtonActionListener;
 import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Patient;
 
@@ -45,6 +46,16 @@ public class ModifyPatientPanel extends JPanel {
 	private JLabel spontaneousAbortionNumber = new JLabel("Avorturi spontane:");
 	private JLabel antecedents = new JLabel("Antecedente la data ");
 	private JLabel antecedentsDate = new JLabel();
+	
+//	private String numeAnterior;
+//	private String prenumeAnterior;
+//	private String cnpAnterior;
+//	private LocalDate dataNastereAnterioara;
+//	private String numarTelefonAnterior;
+//	private int nasteriNaturaleAnterioare;
+//	private int cezarieneAnterioare;
+//	private int avorturispontaneAnterioare;
+//	private int avorturiLaCerereAnterioare;
 	
 	private JTextField textFieldDate;
 	private JTextField textFieldName;
@@ -105,7 +116,6 @@ public class ModifyPatientPanel extends JPanel {
 		
 		textAreaAntecedents = new JTextArea(10, 20);
 
-		saveNewPatientButton.addActionListener(new SaveNewPatientButtonActionListener(parentPanel));
 		cancelNewPatientButton.addActionListener(new CancelNewPatientButtonActionListener(parentPanel));
 
 		Border operBorder = BorderFactory.createTitledBorder("Pacienta noua:");
@@ -254,7 +264,36 @@ public class ModifyPatientPanel extends JPanel {
 			antecedentsEntryPanel.add(antecedentEntry, gc);
 			i++;
 		}
-}
+	}
+	
+	/**
+	 * Loads the data for the Patient data into JPanels
+	 * 
+	 * @param antecedents
+	 */
+	public void setPatientEntry(Patient patient) {
+		this.pacient = patient;
+
+		textFieldDate.setText(patient.getDataNasterii().toString());
+		textFieldName.setText(patient.getNume());
+		textFieldFirstName.setText(patient.getPrenume());
+		textFieldRegNumber.setText(patient.getCnp()); 
+		textFieldPhoneNumber.setText(patient.getNumarTelefon());
+		
+		textFieldNaturalBirthsNumber.setText(String.valueOf(patient.getNasteriNaturale()));
+		textFieldcSectionBirthNumber.setText(String.valueOf(patient.getCezariene()));
+		textFieldRequestedAbortionNumber.setText(String.valueOf(patient.getAvorturiLaCerere()));
+		textFieldSpotaneousAbortionNumber.setText(String.valueOf(patient.getAvorturiSpontane()));
+		
+//		numeAnterior = patient.getNume();
+//		prenumeAnterior = patient.getPrenume();
+//		cnpAnterior = patient.getCnp();
+//		numarTelefonAnterior = patient.getNumarTelefon();
+//		dataNastereAnterioara = patient.getDataNasterii();
+		
+		saveNewPatientButton.addActionListener(
+				new SaveModificationsForPatientButtonActionListener(parentPanel, patient));
+	}
 
 
 	public MedicalRecordGUI getParentPanel() {

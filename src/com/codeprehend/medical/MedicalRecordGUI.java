@@ -109,6 +109,9 @@ public class MedicalRecordGUI extends JFrame {
 	
 	
 	public void showNewPatientPanel() {
+		theMainPanel.remove(newPatientPanel);
+		newPatientPanel = new NewPatientPanel(this);
+		theMainPanel.add(newPatientPanel);
 		newPatientPanel.setVisible(true);
 		
 		searchPatientPanel.setVisible(false);
@@ -116,7 +119,12 @@ public class MedicalRecordGUI extends JFrame {
 		modifyPatientPanel.setVisible(false);
 	}
 	
-	public void showModifyPatientPanel(List<Antecedent> antecedents) {
+	public void showModifyPatientPanel(Patient patient, List<Antecedent> antecedents) {
+		theMainPanel.remove(modifyPatientPanel);
+		modifyPatientPanel = new ModifyPatientPanel(this);
+		theMainPanel.add(modifyPatientPanel);
+		
+		modifyPatientPanel.setPatientEntry(patient);
 		modifyPatientPanel.setAntecedentEntries(antecedents);
 		modifyPatientPanel.setVisible(true);
 		
@@ -127,6 +135,9 @@ public class MedicalRecordGUI extends JFrame {
 	}
 	
 	public void showExaminationPatientPanel(Patient patient, List<Antecedent> antecedents) {
+		theMainPanel.remove(examinationPatientPanel);
+		examinationPatientPanel = new ExaminationPatientPanel(this);
+		theMainPanel.add(examinationPatientPanel);
 		
 		examinationPatientPanel.setPatientInformations(patient);
 		examinationPatientPanel.setAntecedents(antecedents);

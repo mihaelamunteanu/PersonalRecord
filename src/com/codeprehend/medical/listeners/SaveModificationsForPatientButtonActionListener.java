@@ -2,7 +2,6 @@ package com.codeprehend.medical.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +18,11 @@ import com.codeprehend.medical.resources.Patient;
 public class SaveModificationsForPatientButtonActionListener implements ActionListener {
 	
 	private MedicalRecordGUI mainWindow;
+	private Patient oldPatient;
 	
-	public SaveModificationsForPatientButtonActionListener(MedicalRecordGUI mainWindow){
+	public SaveModificationsForPatientButtonActionListener(MedicalRecordGUI mainWindow, Patient oldPatient){
 		this.mainWindow = mainWindow;
+		this.oldPatient = oldPatient;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -46,7 +47,7 @@ public class SaveModificationsForPatientButtonActionListener implements ActionLi
 		Patient newPatient = new Patient();
 		newPatient.setNume(name);
 		newPatient.setPrenume(firstName);
-		newPatient.setDataNasterii(new Date(100000000000L));
+		newPatient.setDataNasterii(LocalDate.parse(birthDate));
 		newPatient.setCnp(regNumber);
 		newPatient.setPrimaConsultatie(LocalDate.now());
 		newPatient.setAdresa(address);
@@ -56,31 +57,32 @@ public class SaveModificationsForPatientButtonActionListener implements ActionLi
 		newPatient.setCezariene(Integer.valueOf(csectionBirths));
 		newPatient.setAvorturiLaCerere(Integer.valueOf(requestedAborstions));
 		newPatient.setAvorturiSpontane(Integer.valueOf(spontaneusAbortions));
-
-		Long patientId = PatientsDAO.savePatient(newPatient);
-		
-		if (patientId <= 0) {
-			JOptionPane.showMessageDialog(mainWindow, "Pacientul " + name + " " + firstName + " nu a putut fi inregistrat ", 
+		newPatient.setId(oldPatient.getId());
+		try {
+			PatientsDAO.updatePatient(newPatient);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			JOptionPane.showMessageDialog(mainWindow, "Pacientul " + name + " " + firstName + " nu a putut fi modificat ", 
 					"Erroare", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		Antecedent antecedent = new Antecedent(patientId, antecedents, LocalDate.now());
-		Long antecedentId = AntecedentsDAO.saveAntecedente(antecedent);
 		
-		if (antecedentId > 0) {
-			JOptionPane.showMessageDialog(mainWindow, "Patient inregistrat " + name + " " + firstName + " cu succes", 
-					"Confirmare inregistrare", JOptionPane.INFORMATION_MESSAGE);
-			List<Antecedent> antecedentsList = new ArrayList<Antecedent>();
-			antecedentsList.add(antecedent);
-			mainWindow.showExaminationPatientPanel(newPatient, antecedentsList);
-		} else {
-			JOptionPane.showMessageDialog(mainWindow, "Antecedentele pacientului " + name + " " + firstName + " nu au fost inregistrate ", 
-					"Erroare", JOptionPane.ERROR_MESSAGE);
-			return;
+		if (mainWindow.getModifyPatientPanel().getTextAreaAntecedents().getText().length() > 0) {
+			Antecedent antecedent = new Antecedent(oldPatient.getId(), antecedents, LocalDate.now());
+			Long antecedentId = AntecedentsDAO.saveAntecedente(antecedent);
+			
+			if (antecedentId <= 0) {
+				JOptionPane.showMessageDialog(mainWindow, "Antecedentele pacientului " + name + " " + firstName + " nu au fost inregistrate ", 
+						"Erroare", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 		}
-				
 		
-		 
+		JOptionPane.showMessageDialog(mainWindow, "Patient modificat " + name + " " + firstName + " cu succes", 
+				"Confirmare modificare", JOptionPane.INFORMATION_MESSAGE);
+		
+		List<Antecedent> antecedentsList = AntecedentsDAO.getAntecedentsByPatientId(newPatient.getId());
+		mainWindow.showExaminationPatientPanel(newPatient, antecedentsList);
 	}
 	
 	private void validateFields(String naturalBirths, String csectionBirths, 

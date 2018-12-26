@@ -2,7 +2,6 @@ package com.codeprehend.medical.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +45,7 @@ public class SaveNewPatientButtonActionListener implements ActionListener {
 		Patient newPatient = new Patient();
 		newPatient.setNume(name);
 		newPatient.setPrenume(firstName);
-		newPatient.setDataNasterii(new Date(100000000000L));
+		newPatient.setDataNasterii(LocalDate.parse(birthDate));
 		newPatient.setCnp(regNumber);
 		newPatient.setPrimaConsultatie(LocalDate.now());
 		newPatient.setAdresa(address);

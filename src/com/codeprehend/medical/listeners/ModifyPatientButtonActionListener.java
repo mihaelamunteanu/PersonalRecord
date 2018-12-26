@@ -24,7 +24,7 @@ public class ModifyPatientButtonActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent event){
 		Long pacientId = patient.getId();
 		List<Antecedent> antecedents = AntecedentsDAO.getAntecedentsByPatientId(pacientId);
-		mainWindow.showModifyPatientPanel(antecedents);
+		mainWindow.showModifyPatientPanel(patient, antecedents);
 	}
 
 }

@@ -59,7 +59,7 @@ public class SearchPatientPanel extends JPanel {
 		String stringCurrentDate = format.format(currentDate);
 
 		textFieldDate = new JTextField(15);
-		textFieldDate.setText(stringCurrentDate);
+		textFieldDate.setText("");
 		textFieldName = new JTextField(15);
 		textFieldFirstname = new JTextField(15);
 		textFieldRegNumber = new JTextField(15);

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.AntecedentsDAO;
+import com.codeprehend.medical.dao.PatientsDAO;
 import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Patient;
 
@@ -20,9 +21,10 @@ public class AccessExamButtonActionListener implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e){
 		//TODO validation of fields
+		Patient newPatient = PatientsDAO.getPatientById(patient.getId());
 		List<Antecedent> antecedents = AntecedentsDAO.getAntecedentsByPatientId(patient.getId());
 		
-		mainWindow.showExaminationPatientPanel(patient, antecedents);
+		mainWindow.showExaminationPatientPanel(newPatient, antecedents);
 		
 	}
 

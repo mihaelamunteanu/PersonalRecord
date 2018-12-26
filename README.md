@@ -18,6 +18,18 @@ StackBuilder Application to install other PostgreS related  apps
 pgAdmin4 - app 
 pass root 
 
+#26.12.2018
+TODO:
+- arranged screens; 
+- scroll
+- in list of patients the buttons should be alligned in a table so that is clear which button is for which name
+- check another app to see an example (I am not sure that app has scrool?)
+- update patient and insert new antecedent
+- add examination text area
+- add atasamente
+- generate pdf
+- fix buttons navigation
+
 #14.12.2018
 TODO:
 GABI: - add prenume in fields; 

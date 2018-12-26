@@ -12,12 +12,66 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.codeprehend.medical.database.DatabaseConnection;
-import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Patient;
 
 public class PatientsDAO {
-	public static Long updatePatient(Patient patient) {
-		return -1;
+	
+	//TODO throws Exception for all and add Message Dialog Boxes to know what was wrong
+	public static Patient getPatientById(Long patientId) {
+		String SQL = "SELECT * FROM paciente WHERE id = ?";
+		
+		System.out.println(" Select Patient by patient id : " + SQL);
+		
+		try (Connection conn = DatabaseConnection.getDatabaseConnection();
+				PreparedStatement stmt = conn.prepareStatement(SQL)) {
+			stmt.setObject(1, patientId);
+			
+			
+			ResultSet rs = stmt.executeQuery();
+			while (rs != null && rs.next()) {
+				Patient pacient = new Patient(rs.getLong("id"), rs.getString("nume"),
+						rs.getString("prenume"), rs.getString("cnp"), LocalDate.parse(rs.getString("data_nasterii")), 
+						LocalDate.parse(rs.getString("data_inscriere")), rs.getString("altele"), null);
+//				pacient.setAdresa(rs.getString("adresa")); TODO Add address
+				pacient.setNumarTelefon(rs.getString("telefon"));
+				pacient.setNasteriNaturale(rs.getInt("nasteri_naturale"));
+				pacient.setCezariene(rs.getInt("cezariene"));
+				pacient.setAvorturiLaCerere(rs.getInt("avorturi_cerere"));
+				pacient.setAvorturiSpontane(rs.getInt("avorturi_spontane"));
+				return pacient;	
+			}
+ 		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}
+		
+		return null;
+	}
+	
+	public static Long updatePatient(Patient patient) throws Exception {
+		String SQL = "UPDATE paciente " + 
+				"SET nume = ?, prenume = ?, data_nasterii = ?, cnp = ?, telefon = ?, "
+				+ "nasteri_naturale = ?, cezariene = ?, avorturi_cerere = ?, avorturi_spontane = ? " + 
+				"WHERE id = ?;";
+		
+		System.out.println(" Update patient : " + SQL);
+		
+		try (Connection conn = DatabaseConnection.getDatabaseConnection();
+				PreparedStatement stmt = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);) {
+			stmt.setObject(1, patient.getNume());
+			stmt.setObject(2, patient.getPrenume());
+			stmt.setObject(3, patient.getDataNasterii());
+			stmt.setObject(4, patient.getCnp());
+			stmt.setObject(5, patient.getNumarTelefon());
+			stmt.setObject(6, patient.getNasteriNaturale());
+			stmt.setObject(7, patient.getCezariene());
+			stmt.setObject(8, patient.getAvorturiLaCerere());
+			stmt.setObject(9, patient.getAvorturiSpontane());
+			stmt.setObject(10, patient.getId());
+						
+			stmt.executeUpdate();
+ 		} 
+		
+		return patient.getId();
 	}
 	
 	/**
@@ -29,11 +83,12 @@ public class PatientsDAO {
 	public static Long savePatient(Patient patient) {
 		Long generatedId = -1L;
 		String SQL = "INSERT into paciente "
-				+ "(nume, prenume, data_nasterii, cnp, data_inscriere, "
+				+ "(nume, prenume, data_nasterii, cnp, data_inscriere, telefon, "
 				+ "nasteri_naturale, cezariene, avorturi_cerere, avorturi_spontane, altele) "
 				+ "values ('" + patient.getNume() + "','" + patient.getPrenume() + "', '" 
 				+ patient.getDataNasterii() + "', '" + patient.getCnp() + "', '" 
-				+ Date.valueOf(patient.getPrimaConsultatie()) + "', " + patient.getNasteriNaturale() + ", " 
+				+ Date.valueOf(patient.getPrimaConsultatie()) + "', " + patient.getNumarTelefon() + ", " + 
+				+ patient.getNasteriNaturale() + ", " 
 				+ patient.getCezariene() + ", " + patient.getAvorturiLaCerere() + ", " 
 				+ patient.getAvorturiSpontane() + ", '" + patient.getAltele() + "');";
 		
@@ -77,11 +132,12 @@ public class PatientsDAO {
 			// get the patient information
 			while(rs.next()) {
 				Patient pacient = new Patient(rs.getLong("id"), rs.getString("nume"),
-						rs.getString("prenume"), rs.getString("cnp"), rs.getDate("data_nasterii"), 
+						rs.getString("prenume"), rs.getString("cnp"), LocalDate.parse(rs.getString("data_nasterii")), 
 						LocalDate.parse(rs.getString("data_inscriere")), rs.getString("altele"), null);
 				
 				patientsWithDate.add(pacient);	
 			}
+			conn.commit();
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}

@@ -78,7 +78,7 @@ public class ExaminationPatientPanel extends JPanel {
 		patientPersonalInfoText = patientPersonalInfoText.concat("     CNP: ");
 		patientPersonalInfoText = patientPersonalInfoText.concat(pacient.getCnp());
 		patientPersonalInfoText = patientPersonalInfoText.concat("     Tel: ");
-		//patientPersonalInfoText.concat(pacient.getNumarTelefon());
+		patientPersonalInfoText.concat((pacient.getNumarTelefon() != null) ? pacient.getNumarTelefon() : "");
 		
 		JLabel patientPersonalInfoLabel = new JLabel(patientPersonalInfoText);
 		patientPersonalInfoLabel.setFont(font1);
