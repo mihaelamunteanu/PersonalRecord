@@ -117,10 +117,10 @@ public class MedicalRecordGUI extends JFrame {
 		examinationPatientPanel.setVisible(false);
 	}
 	
-	public void showExaminationPatientPanel(Patient patient) {
+	public void showExaminationPatientPanel(Patient patient, List<Antecedent> antecedents) {
 		
 		examinationPatientPanel.setPatientInformations(patient);
-		examinationPatientPanel.setAntecedents();
+		examinationPatientPanel.setAntecedents(antecedents);
 		examinationPatientPanel.setButtons();
 		
 		//TODO here or later: load the list of previous examinations

@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -60,7 +62,7 @@ public class SaveNewPatientButtonActionListener implements ActionListener {
 		if (patientId <= 0) {
 			JOptionPane.showMessageDialog(mainWindow, "Pacientul " + name + " " + firstName + " nu a putut fi inregistrat ", 
 					"Erroare", JOptionPane.ERROR_MESSAGE);
-			mainWindow.showExaminationPatientPanel(newPatient);	
+			return;
 		}
 		Antecedent antecedent = new Antecedent(patientId, antecedents, LocalDate.now());
 		Long antecedentId = AntecedentsDAO.saveAntecedente(antecedent);
@@ -68,11 +70,13 @@ public class SaveNewPatientButtonActionListener implements ActionListener {
 		if (antecedentId > 0) {
 			JOptionPane.showMessageDialog(mainWindow, "Patient inregistrat " + name + " " + firstName + " cu succes", 
 					"Confirmare inregistrare", JOptionPane.INFORMATION_MESSAGE);
-			mainWindow.showExaminationPatientPanel(newPatient);
+			List<Antecedent> antecedentsList = new ArrayList<Antecedent>();
+			antecedentsList.add(antecedent);
+			mainWindow.showExaminationPatientPanel(newPatient, antecedentsList);
 		} else {
 			JOptionPane.showMessageDialog(mainWindow, "Antecedentele pacientului " + name + " " + firstName + " nu au fost inregistrate ", 
 					"Erroare", JOptionPane.ERROR_MESSAGE);
-			mainWindow.showExaminationPatientPanel(newPatient);	
+			return;
 		}
 				
 		

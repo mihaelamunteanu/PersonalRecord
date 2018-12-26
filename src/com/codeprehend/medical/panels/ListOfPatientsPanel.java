@@ -49,8 +49,9 @@ public class ListOfPatientsPanel extends JPanel {
 	 * @param patients
 	 */
 	public void setPatientsEntries(List<Patient> patients) {
+		this.patients = patients;
 		backButton.addActionListener(new BackFromListOfPatientsPanelButtonActionListener(parentPanel));
-		
+
 		int i = 2;
 		
 		this.setLayout(new GridBagLayout());

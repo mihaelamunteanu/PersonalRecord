@@ -14,6 +14,7 @@ import javax.swing.border.Border;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.listeners.ModifyPatientButtonActionListener;
+import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
 
@@ -111,7 +112,7 @@ public class ExaminationPatientPanel extends JPanel {
 	}
 	
 	
-	public void setAntecedents(){
+	public void setAntecedents(List<Antecedent> antecedents) {
 		
 		JPanel antecedentsPanel = new JPanel();
 		antecedentsPanel.setLayout(new GridBagLayout());
@@ -134,11 +135,22 @@ public class ExaminationPatientPanel extends JPanel {
 
 		gcExaminationPatientPanel.anchor = GridBagConstraints.FIRST_LINE_START;
 		
+		int i = 2;
+		
+		for (Antecedent antecedent : antecedents) {
+			gcExaminationPatientPanel.gridx = 1;
+			gcExaminationPatientPanel.gridy = 2;
+			
+			JLabel labelAntecedentDate = new JLabel(antecedent.getRegistrationDate().toString());
+			JLabel labelAntecedentText = new JLabel(antecedent.getAntecedentText());
+			antecedentsPanel.add(labelAntecedentDate);
+			antecedentsPanel.add(labelAntecedentText);
+		}
+
 		gcExaminationPatientPanel.gridx = 1;
-		gcExaminationPatientPanel.gridy = 2;
+		gcExaminationPatientPanel.gridy = i + 1;
 		this.add(new JLabel(" "), gcExaminationPatientPanel);
 		
-		gcExaminationPatientPanel.gridy = 3;
 		this.add(antecedentsPanel, gcExaminationPatientPanel);
 	    
 	}
