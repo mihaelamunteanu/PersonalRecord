@@ -52,7 +52,7 @@ GABI: - add prenume in fields;
 - fix the screen display (buttons, text, labels etc.) according to the images;
 - fix the Date for Java and DB and swing throughout the app;
 - add BLOB attachments to Consultation;
-- generate PDF from a Consultation;
+- generate PDF from a Consultation: refine test and update class;
 - save PDFs and attachements also locally;
 - add validation on screens (first thing when pressing a button)
 - add Cancel buttons;

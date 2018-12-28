@@ -31,7 +31,7 @@ public class PDFFile {
 			preface.add(new Paragraph("    "));
 			
 			FontSelector selector = new FontSelector();
-			Font f1 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 24);
+			Font f1 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 22);
 			f1.setColor(Color.BLACK);
 			f1.setStyle("BOLD");
 			selector.addFont(f1);
@@ -42,15 +42,18 @@ public class PDFFile {
 			f2.setColor(Color.BLACK);
 			f2.setStyle("BOLD");
 			selector2.addFont(f2);
-			Phrase ph2 = selector2.process("                                   Str. Bd. 9Mai, nr. 1, Bl. A13, Ap.2");
+			
+			Phrase ph2 = selector2.process("                          Str. Bd. 9Mai, nr. 1, Bl. A13, Ap.2");
 			ph.add(ph2);
 			
 			preface.add(new Paragraph( ph));
 			
-			preface.add(new Paragraph(" "));
+			Phrase ph3 = selector2.process("                                                        Telefon: 0233-237969");
 			
-			preface.add(new Paragraph("   C.M. Dr. RUGINA                                       Str. Bd. 9Mai, nr. 1, Bl. A13, Ap.2"));
-			preface.add(new Paragraph("                                                                        Telefon: 0233-237969"));
+			preface.add(new Paragraph(ph3));
+			
+//			preface.add(new Paragraph("   C.M. Dr. RUGINA                                       Str. Bd. 9Mai, nr. 1, Bl. A13, Ap.2"));
+//			preface.add(new Paragraph("                                                                        Telefon: 0233-237969"));
 			preface.add(new Paragraph("____________________________________________________________________________________________"));
 			
 			preface.add(new Paragraph(" "));

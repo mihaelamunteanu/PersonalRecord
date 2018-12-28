@@ -2,14 +2,17 @@ package com.codeprehend.medical.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.ExaminationDAO;
+import com.codeprehend.medical.pdf.ExaminationToPdf;
 import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
+import com.itextpdf.text.DocumentException;
 
 public class SaveExaminationButtonActionListener implements ActionListener {
 	
@@ -25,7 +28,6 @@ public class SaveExaminationButtonActionListener implements ActionListener {
 		String textDiagnosis = mainWindow.getExaminationPatientPanel().getExaminationDiagnosis().getText();
 		
 		Long examinationId = ExaminationDAO.saveExamination(new Examination(patient.getId(), textDiagnosis, LocalDate.now()));
-		
 		if (examinationId <= 0) {
 			JOptionPane.showMessageDialog(mainWindow, "Consultatia pentru " + patient.getNume() + " " + 
 					patient.getPrenume() + " nu a putut fi inregistrata!", 
@@ -37,5 +39,15 @@ public class SaveExaminationButtonActionListener implements ActionListener {
 		} 
 		
 		mainWindow.getExaminationPatientPanel().getExaminationDiagnosis().setEditable(false);
+		try {
+			ExaminationToPdf.createAndOpenPdf(patient.getNume(), patient.getPrenume(), patient.getCnp(), patient.getNumarTelefon(), 
+				LocalDate.now().toString(), mainWindow.getExaminationPatientPanel().getExaminationDiagnosis().getText());
+		} catch (IOException e1) {
+			e1.printStackTrace();
+			JOptionPane.showMessageDialog(mainWindow, e1.getLocalizedMessage(), "Erroare", JOptionPane.ERROR_MESSAGE);
+		} catch (DocumentException e1) {
+			e1.printStackTrace();
+			JOptionPane.showMessageDialog(mainWindow, e1.getLocalizedMessage(), "Erroare", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }
