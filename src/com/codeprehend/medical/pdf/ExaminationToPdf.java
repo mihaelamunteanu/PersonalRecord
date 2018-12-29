@@ -3,9 +3,12 @@ package com.codeprehend.medical.pdf;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 
+import com.codeprehend.medical.resources.Attachement;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -31,8 +34,12 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class ExaminationToPdf {
 	    public static final String DEST = "pdf\\pdf_table.pdf";
 	    
-	    public static void createAndOpenPdf(String nume, String prenume, String cnp, String telefon, 
+	    public static Attachement createAndOpenPdf(Long id, String nume, String prenume, String cnp, String telefon, 
 	    		String examinationDate, String examinationText) throws IOException, DocumentException {
+	    	String fileName = nume + "_" + prenume + "_" + examinationDate;
+	    	String fileType = "pdf";
+	    	String DEST = "pdf\\" + fileName + "." + fileType;
+	    	
 	        File file = new File(DEST);
 	        file.getParentFile().mkdirs();
 	        ExaminationToPdf.createPdf(DEST, nume, prenume, cnp, telefon, examinationDate, examinationText);
@@ -44,6 +51,12 @@ public class ExaminationToPdf {
 	                // no application registered for PDFs
 	            }
 	        }
+	        
+	        
+	        FileInputStream fis = new FileInputStream(file);
+	        Attachement attachement = new Attachement(id, fileName, fileType, file.length(), fis, LocalDate.now());
+	       
+	        return attachement;
 	    }
 	    
 	    private static void createPdf(String dest, String nume, String prenume, String cnp, 

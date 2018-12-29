@@ -1,6 +1,5 @@
 package com.codeprehend.medical.resources;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 /**

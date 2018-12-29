@@ -61,6 +61,24 @@ CREATE SEQUENCE public.consultatii_id_seq;
 
 ALTER SEQUENCE public.consultatii_id_seq
     OWNER TO postgres;	
+	
+-- SEQUENCE: public.antecedente_id_seq
+
+-- DROP SEQUENCE public.antecedente_id_seq;
+
+CREATE SEQUENCE public.antecedente_id_seq;
+
+ALTER SEQUENCE public.antecedente_id_seq
+    OWNER TO admin_rugina;
+	
+-- SEQUENCE: public.atasamente_id_seq
+
+-- DROP SEQUENCE public.atasamente_id_seq;
+
+CREATE SEQUENCE public.atasamente_id_seq;
+
+ALTER SEQUENCE public.atasamente_id_seq
+    OWNER TO postgres;
 --------------------------------------------------------------------------------------------
 
 -- Table: public.paciente
@@ -145,3 +163,30 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.antecedente
     OWNER to admin_rugina;
+	
+	-- Table: public.atasamente
+
+-- DROP TABLE public.atasamente;
+
+CREATE TABLE public.atasamente
+(
+    id bigint NOT NULL DEFAULT nextval('atasamente_id_seq'::regclass),
+    pacient_id bigint NOT NULL,
+    nume_fisier character varying COLLATE pg_catalog."default" NOT NULL,
+    tip_fisier character varying COLLATE pg_catalog."default" NOT NULL,
+    atasament bytea NOT NULL,
+    data_salvare date,
+    lungime_fisier bigint,
+    CONSTRAINT atasamente_pkey PRIMARY KEY (id),
+    CONSTRAINT foreignkey_atasamente_pacient FOREIGN KEY (pacient_id)
+        REFERENCES public.paciente (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.atasamente
+    OWNER to postgres;

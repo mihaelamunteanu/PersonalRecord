@@ -18,6 +18,7 @@ public class PatientsDAO {
 	
 	//TODO throws Exception for all and add Message Dialog Boxes to know what was wrong
 	public static Patient getPatientById(Long patientId) {
+		Patient pacient = null;
 		String SQL = "SELECT * FROM paciente WHERE id = ?";
 		
 		System.out.println(" Select Patient by patient id : " + SQL);
@@ -29,7 +30,7 @@ public class PatientsDAO {
 			
 			ResultSet rs = stmt.executeQuery();
 			while (rs != null && rs.next()) {
-				Patient pacient = new Patient(rs.getLong("id"), rs.getString("nume"),
+				pacient = new Patient(rs.getLong("id"), rs.getString("nume"),
 						rs.getString("prenume"), rs.getString("cnp"), LocalDate.parse(rs.getString("data_nasterii")), 
 						LocalDate.parse(rs.getString("data_inscriere")), rs.getString("altele"), null);
 //				pacient.setAdresa(rs.getString("adresa")); TODO Add address
@@ -38,13 +39,13 @@ public class PatientsDAO {
 				pacient.setCezariene(rs.getInt("cezariene"));
 				pacient.setAvorturiLaCerere(rs.getInt("avorturi_cerere"));
 				pacient.setAvorturiSpontane(rs.getInt("avorturi_spontane"));
-				return pacient;	
+				rs.close();
 			}
  		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}
 		
-		return null;
+		return pacient;
 	}
 	
 	public static Long updatePatient(Patient patient) throws Exception {
@@ -101,6 +102,7 @@ public class PatientsDAO {
 			if (rs != null && stmt.getGeneratedKeys().next()) {
 				generatedId = stmt.getGeneratedKeys().getLong(1);
 			}
+			rs.close();
  		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}
@@ -137,7 +139,7 @@ public class PatientsDAO {
 				
 				patientsWithDate.add(pacient);	
 			}
-			conn.commit();
+			rs.close();
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}

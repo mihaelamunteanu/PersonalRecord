@@ -8,8 +8,10 @@ import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 import com.codeprehend.medical.MedicalRecordGUI;
+import com.codeprehend.medical.dao.AtachementsDAO;
 import com.codeprehend.medical.dao.ExaminationDAO;
 import com.codeprehend.medical.pdf.ExaminationToPdf;
+import com.codeprehend.medical.resources.Attachement;
 import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
 import com.itextpdf.text.DocumentException;
@@ -40,8 +42,10 @@ public class SaveExaminationButtonActionListener implements ActionListener {
 		
 		mainWindow.getExaminationPatientPanel().getExaminationDiagnosis().setEditable(false);
 		try {
-			ExaminationToPdf.createAndOpenPdf(patient.getNume(), patient.getPrenume(), patient.getCnp(), patient.getNumarTelefon(), 
-				LocalDate.now().toString(), mainWindow.getExaminationPatientPanel().getExaminationDiagnosis().getText());
+			Attachement attachment = ExaminationToPdf.createAndOpenPdf(patient.getId(), patient.getNume(), patient.getPrenume(), 
+					patient.getCnp(), patient.getNumarTelefon(), LocalDate.now().toString(), 
+					mainWindow.getExaminationPatientPanel().getExaminationDiagnosis().getText());
+			AtachementsDAO.saveAttachment(attachment);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 			JOptionPane.showMessageDialog(mainWindow, e1.getLocalizedMessage(), "Erroare", JOptionPane.ERROR_MESSAGE);

@@ -38,6 +38,7 @@ public class AntecedentsDAO {
 			if (rs != null && stmt.getGeneratedKeys().next()) {
 				generatedId = stmt.getGeneratedKeys().getLong(1);
 			}
+			rs.close();
  		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}
@@ -63,6 +64,7 @@ public class AntecedentsDAO {
 						LocalDate.parse(rs.getString("data_inregistrare"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				antecedentsForPatient.add(antecedent);
 			}
+			rs.close();
  		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}

@@ -39,6 +39,7 @@ public class ExaminationDAO {
 			if (rs != null && stmt.getGeneratedKeys().next()) {
 				generatedId = stmt.getGeneratedKeys().getLong(1);
 			}
+			rs.close();
  		} catch (SQLException ex) {
  			ex.printStackTrace();
 			System.out.println(ex.getMessage());
@@ -66,6 +67,7 @@ public class ExaminationDAO {
 						rs.getString("alte_observatii"));
 				examinationsForPatient.add(examination);
 			}
+			rs.close();
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}
