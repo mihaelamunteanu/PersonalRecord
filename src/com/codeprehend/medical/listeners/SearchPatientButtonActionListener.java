@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.PatientsDAO;
@@ -15,8 +16,8 @@ public class SearchPatientButtonActionListener implements ActionListener {
 	
 	private MedicalRecordGUI mainWindow;
 	
-	public SearchPatientButtonActionListener(MedicalRecordGUI mainWindow){
-		this.mainWindow = mainWindow;
+	public SearchPatientButtonActionListener(MedicalRecordGUI window){
+		this.mainWindow = window;
 	}
 
 	public void actionPerformed(ActionEvent event){

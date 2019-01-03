@@ -2,11 +2,17 @@ package com.codeprehend.medical.panels;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.TitledBorder;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.listeners.AccessExamButtonActionListener;
@@ -31,7 +37,11 @@ public class ListOfPatientsPanel extends JPanel {
 	private MedicalRecordGUI parentPanel;
 	private List<Patient> patients;
 	
+	private JList listOfPatients = new JList();
+	
 	private JButton backButton = new JButton("Inapoi");
+	private JButton folderAccesButton = new JButton("Acceseaza dosar");
+	private JButton filesAccesButton = new JButton("Acceseaza fisire");
 	
 	private GridBagConstraints gc = new GridBagConstraints();
 
@@ -50,38 +60,51 @@ public class ListOfPatientsPanel extends JPanel {
 	 */
 	public void setPatientsEntries(List<Patient> patients) {
 		this.patients = patients;
+		
 		backButton.addActionListener(new BackFromListOfPatientsPanelButtonActionListener(parentPanel));
 
-		int i = 2;
+		this.setBorder(new TitledBorder(null, "Lista paciente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		this.setLayout(null);
 		
-		this.setLayout(new GridBagLayout());
-		gc.anchor = GridBagConstraints.FIRST_LINE_START;
-		
-		for (Patient pacient: patients) { 
-			JPanel patientEntry = new JPanel();
-			JLabel nameLabel = new JLabel(pacient.getNume());
-			JLabel firstNameLabel = new JLabel(pacient.getPrenume());
-			JLabel birthDate = new JLabel(pacient.getDataNasterii().toString());
-			JLabel cnpLabel = new JLabel(pacient.getCnp());
-			JButton accessButton = new JButton(ACCESS_DOSAR);
-			accessButton.addActionListener(new AccessExamButtonActionListener(parentPanel, pacient));
+		DefaultListModel DLM = new DefaultListModel();
+		for (Patient pacient: patients) {
 			
-			patientEntry.add(nameLabel);
-			patientEntry.add(firstNameLabel);
-			patientEntry.add(birthDate);
-			patientEntry.add(cnpLabel);
-			patientEntry.add(accessButton);
+			String str = new String ("");
+			str = str.concat(pacient.getNume());
+			str = str.concat("  ");
+			str = str.concat(pacient.getPrenume());
+			str = str.concat("   ");
+			str = str.concat(pacient.getDataNasterii().toString());
+			str = str.concat("   CNP: ");
+			str = str.concat(pacient.getCnp());
+			str = str.concat("   tel: ");
+			//str = str.concat(pacient.getNumarTelefon());
 
-			patientEntry.setVisible(true);
-
-			gc.gridx = 1;
-			gc.gridy = i;
-			this.add(patientEntry, gc);
-			i++;
+			DLM.addElement(str);
+								
 		}
 		
-		gc.gridx = 2;
-		gc.gridy = 1;
-		this.add(backButton, gc);
+		listOfPatients.setModel(DLM);
+		
+		listOfPatients.setBounds(10, 23, 434, 300);
+		listOfPatients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		this.add(listOfPatients);
+		
+		filesAccesButton.setBounds(454, 160, 151, 39);
+		this.add(filesAccesButton);
+		
+		folderAccesButton.setBounds(454, 84, 151, 39);
+		this.add(folderAccesButton);
+		
+		backButton.setBounds(489, 311, 102, 23);
+		this.add(backButton);
+		
+		folderAccesButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("merge");
+				new AccessExamButtonActionListener(parentPanel, patients.get(listOfPatients.getSelectedIndex()));
+			}
+		});
+		
 	}
 }

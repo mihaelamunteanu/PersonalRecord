@@ -32,6 +32,7 @@ public class Patient {
 		this.dataNasterii = dataNasterii;
 		this.primaConsultatie = primaConsultatie;
 		this.adresa = adresa;
+		this.numarTelefon = numarTelefon;
 	}
 	
 	public boolean equals(Patient second){

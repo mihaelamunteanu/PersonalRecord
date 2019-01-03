@@ -1,21 +1,26 @@
 package com.codeprehend.medical.panels;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 
 import com.codeprehend.medical.MedicalRecordGUI;
+import com.codeprehend.medical.dao.PatientsDAO;
 import com.codeprehend.medical.listeners.NewPatientButtonActionListener;
 import com.codeprehend.medical.listeners.SearchPatientButtonActionListener;
+import com.codeprehend.medical.resources.Patient;
 
 /**
  * Separate class for panel with search patient
@@ -33,115 +38,104 @@ public class SearchPatientPanel extends JPanel {
 
 	private MedicalRecordGUI parentPanel;
 
-	private JLabel labelDate = new JLabel("Data nastere: ");
+	private JLabel labelDate = new JLabel("Data nastere (aaaa-ll-zz): ");
 	private JLabel labelName = new JLabel("Nume: ");
 	private JLabel labelFirstName= new JLabel("Prenume: ");
 	private JLabel labelRegNumber = new JLabel("CNP: ");
 	private JLabel labelPhoneNumber = new JLabel("Tel: ");
-	private JTextField textFieldDate;
-	private JTextField textFieldName;
-	private JTextField textFieldFirstname;
-	private JTextField textFieldRegNumber;
-	private JTextField textFieldPhoneNumber;
+	private JTextField textFieldDate = new JTextField();;
+	private JTextField textFieldName = new JTextField();;
+	private JTextField textFieldFirstname = new JTextField();;
+	private JTextField textFieldRegNumber = new JTextField();;
+	private JTextField textFieldPhoneNumber = new JTextField();;
 		
 	private JButton searchPatientButton = new JButton("Cauta Pacienta");
 	private JButton newPatientButton = new JButton("Pacienta noua");
 	
-	private GridBagConstraints gc = new GridBagConstraints();
-
 	public SearchPatientPanel(MedicalRecordGUI parent) {
 		super();
 		this.parentPanel = parent;
+		
+		this.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		this.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Cautare pacienta", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Cautare pacienta", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		
+		this.setLayout(null);
 
 		// make a separate function
 		Date currentDate = new Date();
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		String stringCurrentDate = format.format(currentDate);
 
-		textFieldDate = new JTextField(15);
-		textFieldDate.setText("");
-		textFieldName = new JTextField(15);
-		textFieldFirstname = new JTextField(15);
-		textFieldRegNumber = new JTextField(15);
-		textFieldPhoneNumber = new JTextField(15);
-
 		searchPatientButton.addActionListener(new SearchPatientButtonActionListener(parentPanel));
 		newPatientButton.addActionListener(new NewPatientButtonActionListener(parentPanel));
 
-		Border operBorder = BorderFactory.createTitledBorder(CAUTA_PACIENT);
-		this.setBorder(operBorder);
+		this.setFont(new Font("Times New Roman", Font.BOLD, 11));
+		this.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Cautare pacienta", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Cautare pacienta", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		
-		this.setLayout(new GridBagLayout());
-		gc.anchor = GridBagConstraints.FIRST_LINE_START;
+		this.setLayout(null);
 		
-		//gc.gridheight = 10000;
-		Font font1 = new Font("TimesNewRoman", Font.BOLD, 14);
-		textFieldName.setFont(font1);
-		textFieldFirstname.setFont(font1);
-		textFieldDate.setFont(font1);
-		textFieldRegNumber.setFont(font1);
-		textFieldPhoneNumber.setFont(font1);
+		//Labels and text fields added on the search panel
+		textFieldName.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		textFieldName.setBounds(148, 27, 200, 26);
+		this.add(textFieldName);
+		textFieldName.setColumns(10);
 		
-		//Labels and textfields added on the search panel
-		gc.gridx = 1;
-		gc.gridy = 1;
-		this.add(labelName, gc);
-		gc.gridy = 2;
-		this.add(new JLabel (" "), gc);
-		gc.gridy = 3;
-		this.add(labelFirstName, gc);
-		gc.gridy = 4;
-		this.add(new JLabel (" "), gc);
-		gc.gridy = 5;
-		this.add(labelDate, gc);
-		gc.gridy = 6;
-		this.add(new JLabel (" "), gc);
-		gc.gridy = 7;
-		this.add(labelRegNumber, gc);
-		gc.gridy = 8;
-		this.add(new JLabel (" "), gc);
-		gc.gridy = 9;
-		this.add(labelPhoneNumber, gc);
-
-		gc.gridx = 2;
-		gc.gridy = 1;
-		this.add(textFieldName, gc);
-		gc.gridy = 2;
-		this.add(new JLabel (" "), gc);
-		gc.gridy = 3;
-		this.add(textFieldFirstname, gc);
-		gc.gridy = 4;
-		this.add(new JLabel (" "), gc);
-		gc.gridy = 5;
-		this.add(textFieldDate, gc);
-		gc.gridy = 6;
-		this.add(new JLabel (" "), gc);
-		gc.gridy = 7;
-		this.add(textFieldRegNumber, gc);
-		gc.gridy = 8;
-		this.add(new JLabel (" "), gc);
-		gc.gridy = 9;
-		this.add(textFieldPhoneNumber, gc);
-		gc.gridy = 10;
-		this.add(new JLabel (" "), gc);
+		labelName.setFont(new Font("Times New Roman", Font.PLAIN, 13));
+		labelName.setBounds(10, 33, 46, 14);
+		this.add(labelName);
 		
-		gc.gridx = 2;
-		gc.gridy = 11;
-		gc.anchor = GridBagConstraints.CENTER;
-		this.add(searchPatientButton, gc); // Adds Button to content pane of frame
+		labelFirstName.setFont(new Font("Times New Roman", Font.PLAIN, 13));
+		labelFirstName.setBounds(10, 72, 65, 14);
+		this.add(labelFirstName);
 		
-		//TODO Gabi aranjeaza interfata
-		gc.gridy = 12;
-		this.add(new JLabel (" "), gc);
-		gc.gridy = 13;
-		this.add(new JLabel (" "), gc);
-		gc.gridy = 14;
-		this.add(new JLabel (" "), gc);
-		gc.gridx = 1;
-		gc.gridy = 15;
-		gc.gridwidth = 2;
-		gc.fill = GridBagConstraints.HORIZONTAL;
-		this.add(newPatientButton, gc);
+		textFieldFirstname.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		textFieldFirstname.setBounds(148, 66, 200, 26);
+		this.add(textFieldFirstname);
+		textFieldFirstname.setColumns(10);
+		
+		labelDate.setFont(new Font("Times New Roman", Font.PLAIN, 13));
+		labelDate.setBounds(10, 111, 141, 20);
+		this.add(labelDate);
+		
+		textFieldDate.setBounds(148, 105, 200, 26);
+		this.add(textFieldDate);
+		textFieldDate.setColumns(10);
+		
+		
+		labelRegNumber.setFont(new Font("Times New Roman", Font.PLAIN, 13));
+		labelRegNumber.setBounds(10, 154, 83, 14);
+		this.add(labelRegNumber);
+		
+		textFieldRegNumber = new JTextField();
+		textFieldRegNumber.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		textFieldRegNumber.setBounds(148, 148, 200, 26);
+		this.add(textFieldRegNumber);
+		textFieldRegNumber.setColumns(10);
+		
+		labelPhoneNumber.setFont(new Font("Times New Roman", Font.PLAIN, 13));
+		labelPhoneNumber.setBounds(10, 193, 83, 14);
+		this.add(labelPhoneNumber);
+		
+		textFieldPhoneNumber = new JTextField();
+		textFieldPhoneNumber.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		textFieldPhoneNumber.setColumns(10);
+		textFieldPhoneNumber.setBounds(148, 187, 200, 26);
+		this.add(textFieldPhoneNumber);
+		
+		
+		
+		//searchPatientButton.setBackground(new Color(230, 230, 250));
+		
+		searchPatientButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		searchPatientButton.setBounds(85, 236, 181, 23);
+		this.add(searchPatientButton);
+		
+		newPatientButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		newPatientButton.setBounds(30, 333, 260, 23);
+		this.add(newPatientButton);
+		
+		
+		
 		this.setVisible(true);
 	}
 

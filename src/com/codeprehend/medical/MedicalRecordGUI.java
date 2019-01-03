@@ -50,8 +50,8 @@ public class MedicalRecordGUI extends JFrame {
 	public MedicalRecordGUI(){
 		//initialize GUI
 		this.setSize(1100, 500);
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		this.setResizable(false);
+		//this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		this.setResizable(true);
 		
 //		this.setSize(1100, 500);
 		this.setLocationRelativeTo(null);
@@ -62,7 +62,7 @@ public class MedicalRecordGUI extends JFrame {
 		//Create main panel
 		   
 		theMainPanel = new JPanel();
-		theMainPanel.setLayout(new GridBagLayout());
+		theMainPanel.setLayout(null);
 
 		searchPatientPanel = new SearchPatientPanel(this);
 		newPatientPanel = new NewPatientPanel(this);
@@ -70,8 +70,12 @@ public class MedicalRecordGUI extends JFrame {
 		examinationPatientPanel = new ExaminationPatientPanel(this);
 		modifyPatientPanel = new ModifyPatientPanel(this);
 		
+		searchPatientPanel.setBounds(253, 22, 360, 367);
 		theMainPanel.add(searchPatientPanel);
+		
+		listOfPatientsPanel.setBounds(253, 22, 800, 367);
 		theMainPanel.add(listOfPatientsPanel);
+		
 		theMainPanel.add(newPatientPanel);
 		theMainPanel.add(examinationPatientPanel);
 		theMainPanel.add(modifyPatientPanel);
@@ -86,6 +90,7 @@ public class MedicalRecordGUI extends JFrame {
 		//TODO see if there are time when this panel shouldnt be reset
 		theMainPanel.remove(listOfPatientsPanel);
 		listOfPatientsPanel = new ListOfPatientsPanel(this);
+		listOfPatientsPanel.setBounds(253, 22, 800, 367);
 		theMainPanel.add(listOfPatientsPanel);
 		
 		listOfPatientsPanel.setPatientsEntries(listOfPatients);
