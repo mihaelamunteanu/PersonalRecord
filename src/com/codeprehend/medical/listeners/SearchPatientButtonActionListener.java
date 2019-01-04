@@ -30,6 +30,9 @@ public class SearchPatientButtonActionListener implements ActionListener {
 		
 		try {
 			InputValidation.validateTextField(name);
+			InputValidation.validateTextField(firstName);
+			InputValidation.validatePhoneNumber(phoneNo);
+			InputValidation.validateRegNumber(cnpFilter);
 		} catch (Exception exception) {
 			JOptionPane.showMessageDialog(mainWindow, exception.getMessage(), 
 					"Erore de Validare", JOptionPane.ERROR_MESSAGE);

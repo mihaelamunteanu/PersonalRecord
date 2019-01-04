@@ -1,13 +1,16 @@
 package com.codeprehend.medical;
 
 
+import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.codeprehend.medical.panels.ExaminationPatientPanel;
+import com.codeprehend.medical.panels.FilesPatientPanel;
 import com.codeprehend.medical.panels.ListOfPatientsPanel;
 import com.codeprehend.medical.panels.ModifyPatientPanel;
 import com.codeprehend.medical.panels.NewPatientPanel;
@@ -46,11 +49,11 @@ public class MedicalRecordGUI extends JFrame {
 	private ExaminationPatientPanel examinationPatientPanel;
 	private ListOfPatientsPanel listOfPatientsPanel;
 	private ModifyPatientPanel modifyPatientPanel;
+	private FilesPatientPanel filesPatientPanel;
 	
 	public MedicalRecordGUI(){
 		//initialize GUI
-		this.setSize(1100, 500);
-		//this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		this.setSize(1000, 700);
 		this.setResizable(true);
 		
 //		this.setSize(1100, 500);
@@ -69,16 +72,27 @@ public class MedicalRecordGUI extends JFrame {
 		listOfPatientsPanel = new ListOfPatientsPanel(this);
 		examinationPatientPanel = new ExaminationPatientPanel(this);
 		modifyPatientPanel = new ModifyPatientPanel(this);
+		filesPatientPanel = new FilesPatientPanel(this);
+		
 		
 		searchPatientPanel.setBounds(253, 22, 360, 367);
 		theMainPanel.add(searchPatientPanel);
 		
-		listOfPatientsPanel.setBounds(253, 22, 800, 367);
+		listOfPatientsPanel.setBounds(150, 22, 700, 367);
 		theMainPanel.add(listOfPatientsPanel);
 		
+		newPatientPanel.setBounds(40, 20, 882, 509);
 		theMainPanel.add(newPatientPanel);
+		
+		examinationPatientPanel.setBounds(253, 22, 800, 367);
 		theMainPanel.add(examinationPatientPanel);
+		
+		modifyPatientPanel.setBounds(40, 20, 882, 509);
 		theMainPanel.add(modifyPatientPanel);
+		
+		filesPatientPanel.setBounds(253, 22, 800, 367);
+		theMainPanel.add(filesPatientPanel);
+		
 		theMainPanel.setVisible(true);
 	    
 	    this.add(theMainPanel);
@@ -90,7 +104,7 @@ public class MedicalRecordGUI extends JFrame {
 		//TODO see if there are time when this panel shouldnt be reset
 		theMainPanel.remove(listOfPatientsPanel);
 		listOfPatientsPanel = new ListOfPatientsPanel(this);
-		listOfPatientsPanel.setBounds(253, 22, 800, 367);
+		listOfPatientsPanel.setBounds(150, 22, 700, 367);
 		theMainPanel.add(listOfPatientsPanel);
 		
 		listOfPatientsPanel.setPatientsEntries(listOfPatients);
@@ -99,6 +113,17 @@ public class MedicalRecordGUI extends JFrame {
 		searchPatientPanel.setVisible(false);
 		newPatientPanel.setVisible(false);
 		modifyPatientPanel.setVisible(false);
+		examinationPatientPanel.setVisible(false);
+		filesPatientPanel.setVisible(false);
+	}
+	
+	public void showPanelListOfPatients() {
+		listOfPatientsPanel.setVisible(true);
+		searchPatientPanel.setVisible(false);
+		newPatientPanel.setVisible(false);
+		modifyPatientPanel.setVisible(false);
+		examinationPatientPanel.setVisible(false);
+		filesPatientPanel.setVisible(false);
 	}
 
 	
@@ -106,9 +131,11 @@ public class MedicalRecordGUI extends JFrame {
 	public void showSearchPatientPanel() {
 		searchPatientPanel.setVisible(true);
 		
+		examinationPatientPanel.setVisible(false);
 		newPatientPanel.setVisible(false);
 		listOfPatientsPanel.setVisible(false);
 		modifyPatientPanel.setVisible(false);
+		filesPatientPanel.setVisible(false);
 	}
 	
 	
@@ -121,6 +148,8 @@ public class MedicalRecordGUI extends JFrame {
 		searchPatientPanel.setVisible(false);
 		listOfPatientsPanel.setVisible(false);
 		modifyPatientPanel.setVisible(false);
+		examinationPatientPanel.setVisible(false);
+		filesPatientPanel.setVisible(false);
 	}
 	
 	public void showModifyPatientPanel(Patient patient, List<Antecedent> antecedents) {
@@ -136,9 +165,15 @@ public class MedicalRecordGUI extends JFrame {
 		searchPatientPanel.setVisible(false);
 		listOfPatientsPanel.setVisible(false);
 		examinationPatientPanel.setVisible(false);
+		filesPatientPanel.setVisible(false);
 	}
 	
 	public void showExaminationPatientPanel(Patient patient, List<Antecedent> antecedents, List<Examination> examinations) {
+		/*Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		
+		this.setSize(1100, dim.getSize().height);
+		this.setLocation(dim.width/2-this.getSize().width/2, 0);
+		*/
 		theMainPanel.remove(examinationPatientPanel);
 		examinationPatientPanel = new ExaminationPatientPanel(this);
 		theMainPanel.add(examinationPatientPanel);
@@ -146,10 +181,30 @@ public class MedicalRecordGUI extends JFrame {
 		examinationPatientPanel.setPatientInformations(patient);
 		examinationPatientPanel.setAntecedents(antecedents);
 		examinationPatientPanel.setPreviousExaminationEntries(examinations);
-		examinationPatientPanel.setButtons();
+	//	examinationPatientPanel.setButtons();
 		
 		examinationPatientPanel.setVisible(true);
 		
+		newPatientPanel.setVisible(false);
+		searchPatientPanel.setVisible(false);
+		listOfPatientsPanel.setVisible(false);
+		modifyPatientPanel.setVisible(false);
+	}
+	
+	public void showFilesPatientPanel(Patient patient){
+		
+		theMainPanel.remove(filesPatientPanel);
+		filesPatientPanel = new FilesPatientPanel(this);
+		theMainPanel.add(filesPatientPanel);
+		
+	//	examinationPatientPanel.setPatientInformations(patient);
+	//	examinationPatientPanel.setAntecedents(antecedents);
+	//	examinationPatientPanel.setPreviousExaminationEntries(examinations);
+		
+		filesPatientPanel.setPatientFiles(patient);
+		filesPatientPanel.setVisible(true);
+		
+		examinationPatientPanel.setVisible(false);
 		newPatientPanel.setVisible(false);
 		searchPatientPanel.setVisible(false);
 		listOfPatientsPanel.setVisible(false);

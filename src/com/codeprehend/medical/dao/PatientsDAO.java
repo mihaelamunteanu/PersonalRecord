@@ -123,7 +123,7 @@ public class PatientsDAO {
 		nextAndNeeded = addWhereClauseForDate("data_nasterii", birthDate, filterBuilder, nextAndNeeded);
 		filterBuilder.append(";");
 		
-		String SQL = "SELECT id, nume, prenume, data_nasterii, cnp, data_inscriere, altele FROM paciente " + filterBuilder.toString();
+		String SQL = "SELECT id, nume, prenume, data_nasterii, cnp, data_inscriere, altele, telefon FROM paciente " + filterBuilder.toString();
 //				+ "WHERE data_nasterii='" + 
 //				LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "';";
 		System.out.println(" Searching patient: " + SQL);
@@ -135,8 +135,7 @@ public class PatientsDAO {
 			while(rs.next()) {
 				Patient pacient = new Patient(rs.getLong("id"), rs.getString("nume"),
 						rs.getString("prenume"), rs.getString("cnp"), LocalDate.parse(rs.getString("data_nasterii")), 
-						LocalDate.parse(rs.getString("data_inscriere")), rs.getString("altele"), null);
-				
+						LocalDate.parse(rs.getString("data_inscriere")), rs.getString("altele"), rs.getString("telefon"));
 				patientsWithDate.add(pacient);	
 			}
 			rs.close();

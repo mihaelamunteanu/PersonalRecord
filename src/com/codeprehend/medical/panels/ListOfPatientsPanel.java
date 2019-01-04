@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 
@@ -43,7 +44,8 @@ public class ListOfPatientsPanel extends JPanel {
 	private JButton folderAccesButton = new JButton("Acceseaza dosar");
 	private JButton filesAccesButton = new JButton("Acceseaza fisire");
 	
-	private GridBagConstraints gc = new GridBagConstraints();
+	private JScrollPane scrollPane = new JScrollPane();
+	
 
 	public ListOfPatientsPanel(MedicalRecordGUI parent) {
 		super();
@@ -78,7 +80,7 @@ public class ListOfPatientsPanel extends JPanel {
 			str = str.concat("   CNP: ");
 			str = str.concat(pacient.getCnp());
 			str = str.concat("   tel: ");
-			//str = str.concat(pacient.getNumarTelefon());
+			str = str.concat(pacient.getNumarTelefon());
 
 			DLM.addElement(str);
 								
@@ -86,9 +88,13 @@ public class ListOfPatientsPanel extends JPanel {
 		
 		listOfPatients.setModel(DLM);
 		
-		listOfPatients.setBounds(10, 23, 434, 300);
 		listOfPatients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		this.add(listOfPatients);
+		
+		scrollPane.setBounds(10, 23, 434, 330);
+		
+		scrollPane.setViewportView(listOfPatients);
+		
+		this.add(scrollPane);
 		
 		filesAccesButton.setBounds(454, 160, 151, 39);
 		this.add(filesAccesButton);
@@ -101,7 +107,6 @@ public class ListOfPatientsPanel extends JPanel {
 		
 		folderAccesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("merge");
 				new AccessExamButtonActionListener(parentPanel, patients.get(listOfPatients.getSelectedIndex()));
 			}
 		});

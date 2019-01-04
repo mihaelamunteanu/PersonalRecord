@@ -40,7 +40,7 @@ public class SaveNewPatientButtonActionListener implements ActionListener {
 		
 		String antecedents = mainWindow.getNewPatientPanel().getTextAreaAntecedents().getText();
 		
-		validateFields(naturalBirths, csectionBirths, requestedAborstions, spontaneusAbortions);
+		validateFields(name, firstName, phoneNumber, regNumber, naturalBirths, csectionBirths, requestedAborstions, spontaneusAbortions);
 		
 		//save the Patient
 		Patient newPatient = new Patient();
@@ -64,6 +64,7 @@ public class SaveNewPatientButtonActionListener implements ActionListener {
 					"Erroare", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+		newPatient.setId(patientId);
 		Antecedent antecedent = new Antecedent(patientId, antecedents, LocalDate.now());
 		Long antecedentId = AntecedentsDAO.saveAntecedente(antecedent);
 		
@@ -84,9 +85,13 @@ public class SaveNewPatientButtonActionListener implements ActionListener {
 		 
 	}
 	
-	private void validateFields(String naturalBirths, String csectionBirths, 
+	private void validateFields(String name, String firstName, String phoneNumber, String regNumber, String naturalBirths, String csectionBirths, 
 			String requestedAbortions, String spontaneusAbortions) {
 		try {
+			InputValidation.validateSaveTextField(name);
+			InputValidation.validateSaveTextField(firstName);
+			InputValidation.validateSavePhoneNumber(phoneNumber);
+			InputValidation.validateSaveRegNumber(regNumber);
 			InputValidation.validateBirthsNumber(naturalBirths, false);
 			InputValidation.validateBirthsNumber(csectionBirths, false);
 			InputValidation.validateBirthsNumber(requestedAbortions, false);
