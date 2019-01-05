@@ -60,7 +60,6 @@ public class AntecedentsDAO {
 			
 			ResultSet rs = stmt.executeQuery();
 			while (rs != null && rs.next()) {
-				System.out.println(rs.getLong("id"));
 				Antecedent antecedent = new Antecedent(patientId, rs.getString("antecedent"), 
 						LocalDate.parse(rs.getString("data_inregistrare"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				

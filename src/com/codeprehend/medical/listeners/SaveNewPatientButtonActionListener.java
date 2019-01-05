@@ -1,10 +1,14 @@
 package com.codeprehend.medical.listeners;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
 
@@ -40,10 +44,36 @@ public class SaveNewPatientButtonActionListener implements ActionListener {
 		
 		String antecedents = mainWindow.getNewPatientPanel().getTextAreaAntecedents().getText();
 		
-		validateFields(name, firstName, phoneNumber, regNumber, naturalBirths, csectionBirths, requestedAborstions, spontaneusAbortions);
+		Patient newPatient = new Patient();
+		
+		try {
+			InputValidation.validateSaveTextField(name);
+			InputValidation.validateSaveTextField(firstName);
+			InputValidation.validateSavePhoneNumber(phoneNumber);
+			InputValidation.validateSaveRegNumber(regNumber);
+			InputValidation.validateBirthsNumber(naturalBirths, false);
+			InputValidation.validateBirthsNumber(csectionBirths, false);
+			InputValidation.validateBirthsNumber(requestedAborstions, false);
+			InputValidation.validateBirthsNumber(spontaneusAbortions, false);
+		} catch (Exception exception) {
+			JOptionPane.showMessageDialog(mainWindow, exception.getMessage(), 
+					"Erore de Validare", JOptionPane.ERROR_MESSAGE);
+			exception.printStackTrace();
+			return;
+		}
+		
+		try {
+			newPatient.setDataNasterii(LocalDate.parse(birthDate));
+		} catch (Exception exception) {
+			JOptionPane.showMessageDialog(mainWindow, "Data nasterii nu este corecta", 
+					"Erore de Validare", JOptionPane.ERROR_MESSAGE);
+			exception.printStackTrace();
+			return;
+		}
+		
 		
 		//save the Patient
-		Patient newPatient = new Patient();
+		
 		newPatient.setNume(name);
 		newPatient.setPrenume(firstName);
 		newPatient.setDataNasterii(LocalDate.parse(birthDate));
@@ -74,6 +104,10 @@ public class SaveNewPatientButtonActionListener implements ActionListener {
 			List<Antecedent> antecedentsList = new ArrayList<Antecedent>();
 			antecedentsList.add(antecedent);
 			List<Examination> examinationsList = new ArrayList<Examination>();
+			
+			List <Patient> listOfPatients =  new ArrayList<Patient>();
+			listOfPatients.add(newPatient);
+			mainWindow.showPanelListOfPatients(listOfPatients);
 			mainWindow.showExaminationPatientPanel(newPatient, antecedentsList, examinationsList);
 		} else {
 			JOptionPane.showMessageDialog(mainWindow, "Antecedentele pacientului " + name + " " + firstName + " nu au fost inregistrate ", 
@@ -83,24 +117,5 @@ public class SaveNewPatientButtonActionListener implements ActionListener {
 				
 		
 		 
-	}
-	
-	private void validateFields(String name, String firstName, String phoneNumber, String regNumber, String naturalBirths, String csectionBirths, 
-			String requestedAbortions, String spontaneusAbortions) {
-		try {
-			InputValidation.validateSaveTextField(name);
-			InputValidation.validateSaveTextField(firstName);
-			InputValidation.validateSavePhoneNumber(phoneNumber);
-			InputValidation.validateSaveRegNumber(regNumber);
-			InputValidation.validateBirthsNumber(naturalBirths, false);
-			InputValidation.validateBirthsNumber(csectionBirths, false);
-			InputValidation.validateBirthsNumber(requestedAbortions, false);
-			InputValidation.validateBirthsNumber(spontaneusAbortions, false);
-		} catch (Exception exception) {
-			JOptionPane.showMessageDialog(mainWindow, exception.getMessage(), 
-					"Erore de Validare", JOptionPane.ERROR_MESSAGE);
-			exception.printStackTrace();
-			return;
-		}
 	}
 }

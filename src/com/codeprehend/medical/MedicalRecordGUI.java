@@ -119,6 +119,7 @@ public class MedicalRecordGUI extends JFrame {
 	
 	public void showPanelListOfPatients() {
 		listOfPatientsPanel.setVisible(true);
+		
 		searchPatientPanel.setVisible(false);
 		newPatientPanel.setVisible(false);
 		modifyPatientPanel.setVisible(false);
@@ -189,6 +190,7 @@ public class MedicalRecordGUI extends JFrame {
 		searchPatientPanel.setVisible(false);
 		listOfPatientsPanel.setVisible(false);
 		modifyPatientPanel.setVisible(false);
+		filesPatientPanel.setVisible(false);
 	}
 	
 	public void showFilesPatientPanel(Patient patient){

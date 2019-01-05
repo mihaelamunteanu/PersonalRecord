@@ -17,14 +17,18 @@ public class InputValidation {
 	}
 	
 	public static void validateSaveTextField(String text) throws Exception {
-		if (text != null) {
+		if (text != null && text.compareTo("") != 0) {
 			Pattern pattern = Pattern.compile("([A-Z]{1}[a-z]*)[-| ]?[A-Z]?[a-z]*");
 			Matcher matcher = pattern.matcher(text);
 			if (!matcher.matches()) {
 				throw new Exception("Textul '" + text + "' nu este corect. "
 						+ "Se asteapta doar litere latine separate prin spatiu sau -, cu prima litera majuscula.");
 			}
-		}
+		}	
+			else{
+				throw new Exception("Completati numele si prenumele!");
+			}
+					
 	}
 	
 	public static void validateBirthsNumber(String number, boolean emptyAllowed) throws Exception {
@@ -71,13 +75,18 @@ public class InputValidation {
 	}
 	
 	public static void validateSaveRegNumber(String regNumber) throws Exception {
-		if (regNumber != null) {
+		if (regNumber != null && regNumber.compareTo("") != 0) {
 			Pattern pattern = Pattern.compile("[2][1-9]{12}");
 			Matcher matcher = pattern.matcher(regNumber);
 			if (!matcher.matches()) {
 				throw new Exception("CNP-ul '" + regNumber + "' nu este corect.");
 			}
 		}
+		
+		else{
+			throw new Exception("Completati CNP-ul!");
+		}
 	}
+	
 	
 }

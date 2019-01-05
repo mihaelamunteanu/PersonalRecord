@@ -16,6 +16,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 
 import com.codeprehend.medical.MedicalRecordGUI;
+import com.codeprehend.medical.listeners.AccesFilesExaminationButtonActionListener;
 import com.codeprehend.medical.listeners.AccessExamButtonActionListener;
 import com.codeprehend.medical.listeners.BackFromListOfPatientsPanelButtonActionListener;
 import com.codeprehend.medical.resources.Patient;
@@ -108,6 +109,12 @@ public class ListOfPatientsPanel extends JPanel {
 		folderAccesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new AccessExamButtonActionListener(parentPanel, patients.get(listOfPatients.getSelectedIndex()));
+			}
+		});
+		
+		filesAccesButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new AccesFilesExaminationButtonActionListener(parentPanel, patients.get(listOfPatients.getSelectedIndex()));
 			}
 		});
 		

@@ -88,7 +88,7 @@ public class PatientsDAO {
 				+ "nasteri_naturale, cezariene, avorturi_cerere, avorturi_spontane, altele) "
 				+ "values ('" + patient.getNume() + "','" + patient.getPrenume() + "', '" 
 				+ patient.getDataNasterii() + "', '" + patient.getCnp() + "', '" 
-				+ Date.valueOf(patient.getPrimaConsultatie()) + "', " + patient.getNumarTelefon() + ", " + 
+				+ Date.valueOf(patient.getPrimaConsultatie()) + "', '" + patient.getNumarTelefon() + "', " + 
 				+ patient.getNasteriNaturale() + ", " 
 				+ patient.getCezariene() + ", " + patient.getAvorturiLaCerere() + ", " 
 				+ patient.getAvorturiSpontane() + ", '" + patient.getAltele() + "');";
@@ -120,12 +120,13 @@ public class PatientsDAO {
 		nextAndNeeded = addWhereClause("prenume", firstname, filterBuilder, nextAndNeeded);
 		nextAndNeeded = addWhereClause("cnp", cnp, filterBuilder, nextAndNeeded);
 		nextAndNeeded = addWhereClause("telefon", phoneNo, filterBuilder, nextAndNeeded);
-		nextAndNeeded = addWhereClauseForDate("data_nasterii", birthDate, filterBuilder, nextAndNeeded);
-		filterBuilder.append(";");
+		nextAndNeeded = addWhereClause("data_nasterii", LocalDate.parse(birthDate).toString(), filterBuilder, nextAndNeeded);
+		filterBuilder.append("ORDER BY nume, prenume;");
 		
 		String SQL = "SELECT id, nume, prenume, data_nasterii, cnp, data_inscriere, altele, telefon FROM paciente " + filterBuilder.toString();
 //				+ "WHERE data_nasterii='" + 
 //				LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "';";
+		
 		System.out.println(" Searching patient: " + SQL);
 		
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();

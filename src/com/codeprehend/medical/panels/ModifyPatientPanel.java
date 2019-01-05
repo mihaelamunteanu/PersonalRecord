@@ -84,7 +84,6 @@ public class ModifyPatientPanel extends JPanel {
 		this.setLayout(null);
 		this.parentPanel = parent;
 		
-		saveNewPatientButton.addActionListener(new SaveNewPatientButtonActionListener(parentPanel));
 		cancelNewPatientButton.addActionListener(new CancelNewPatientButtonActionListener(parentPanel));
 
 		// make a separate function
@@ -292,8 +291,7 @@ public class ModifyPatientPanel extends JPanel {
 //		numarTelefonAnterior = patient.getNumarTelefon();
 //		dataNastereAnterioara = patient.getDataNasterii();
 		
-		saveNewPatientButton.addActionListener(
-				new SaveModificationsForPatientButtonActionListener(parentPanel, patient));
+		saveNewPatientButton.addActionListener(new SaveModificationsForPatientButtonActionListener(parentPanel, pacient));
 	}
 
 

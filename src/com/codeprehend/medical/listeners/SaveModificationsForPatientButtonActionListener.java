@@ -42,10 +42,34 @@ public class SaveModificationsForPatientButtonActionListener implements ActionLi
 		
 		String antecedents = mainWindow.getModifyPatientPanel().getTextAreaAntecedents().getText();
 		
-		validateFields(naturalBirths, csectionBirths, requestedAborstions, spontaneusAbortions);
+		Patient newPatient = new Patient();
+		
+		try {
+			InputValidation.validateSaveTextField(name);
+			InputValidation.validateSaveTextField(firstName);
+			InputValidation.validateSavePhoneNumber(phoneNumber);
+			InputValidation.validateSaveRegNumber(regNumber);
+			InputValidation.validateBirthsNumber(naturalBirths, false);
+			InputValidation.validateBirthsNumber(csectionBirths, false);
+			InputValidation.validateBirthsNumber(requestedAborstions, false);
+			InputValidation.validateBirthsNumber(spontaneusAbortions, false);
+		} catch (Exception exception) {
+			JOptionPane.showMessageDialog(mainWindow, exception.getMessage(), 
+					"Erore de Validare", JOptionPane.ERROR_MESSAGE);
+			exception.printStackTrace();
+			return;
+		}
+		
+		try {
+			newPatient.setDataNasterii(LocalDate.parse(birthDate));
+		} catch (Exception exception) {
+			JOptionPane.showMessageDialog(mainWindow, "Data nasterii nu este corecta", 
+					"Erore de Validare", JOptionPane.ERROR_MESSAGE);
+			exception.printStackTrace();
+			return;
+		}
 		
 		//save the Patient
-		Patient newPatient = new Patient();
 		newPatient.setNume(name);
 		newPatient.setPrenume(firstName);
 		newPatient.setDataNasterii(LocalDate.parse(birthDate));
@@ -87,18 +111,4 @@ public class SaveModificationsForPatientButtonActionListener implements ActionLi
 		mainWindow.showExaminationPatientPanel(newPatient, antecedentsList, examinationsList);
 	}
 	
-	private void validateFields(String naturalBirths, String csectionBirths, 
-			String requestedAbortions, String spontaneusAbortions) {
-		try {
-			InputValidation.validateBirthsNumber(naturalBirths, false);
-			InputValidation.validateBirthsNumber(csectionBirths, false);
-			InputValidation.validateBirthsNumber(requestedAbortions, false);
-			InputValidation.validateBirthsNumber(spontaneusAbortions, false);
-		} catch (Exception exception) {
-			JOptionPane.showMessageDialog(mainWindow, exception.getMessage(), 
-					"Erore de Validare", JOptionPane.ERROR_MESSAGE);
-			exception.printStackTrace();
-			return;
-		}
-	}
 }

@@ -97,6 +97,7 @@ public class SearchPatientPanel extends JPanel {
 		labelDate.setBounds(10, 111, 141, 20);
 		this.add(labelDate);
 		
+		textFieldDate.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		textFieldDate.setBounds(148, 105, 200, 26);
 		this.add(textFieldDate);
 		textFieldDate.setColumns(10);

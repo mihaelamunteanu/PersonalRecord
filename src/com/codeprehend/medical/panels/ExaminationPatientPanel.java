@@ -56,7 +56,7 @@ public class ExaminationPatientPanel extends JPanel {
 	private List<JTextArea> previousExaminations;
 	
 	private JButton homeButton = new JButton("Ecran principal");
-	private JButton backFromExaminationPanel = new JButton("Inapoi");
+	private JButton backFromExaminationPanel = new JButton("Inapoi la lista");
 	private JButton modifyPatientInfoButton = new JButton("Modifica info");
 	private JButton saveExaminationButton = new JButton("Salveaza Consultatia");
 	private JButton fileExaminationButton = new JButton("Acceseaza fisiere");
