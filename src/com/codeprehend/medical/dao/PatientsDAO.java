@@ -120,7 +120,7 @@ public class PatientsDAO {
 		nextAndNeeded = addWhereClause("prenume", firstname, filterBuilder, nextAndNeeded);
 		nextAndNeeded = addWhereClause("cnp", cnp, filterBuilder, nextAndNeeded);
 		nextAndNeeded = addWhereClause("telefon", phoneNo, filterBuilder, nextAndNeeded);
-		nextAndNeeded = addWhereClause("data_nasterii", LocalDate.parse(birthDate).toString(), filterBuilder, nextAndNeeded);
+		nextAndNeeded = addWhereClauseForDate("data_nasterii", birthDate, filterBuilder, nextAndNeeded);
 		filterBuilder.append("ORDER BY nume, prenume;");
 		
 		String SQL = "SELECT id, nume, prenume, data_nasterii, cnp, data_inscriere, altele, telefon FROM paciente " + filterBuilder.toString();
@@ -178,7 +178,7 @@ public class PatientsDAO {
 		if (filter !=  null && filter.length() > 0) {
 			if (andNeeded) whereClauseBuilder.append(" AND ");
 			else whereClauseBuilder.append(" WHERE ");
-			whereClauseBuilder.append(filterName + " = '" + LocalDate.parse(filter, DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "'");
+			whereClauseBuilder.append(filterName + " = '" + LocalDate.parse(filter).toString() + "'");
 			nextAndNeeded = true;
 		} else if (andNeeded) {
 			nextAndNeeded = true;

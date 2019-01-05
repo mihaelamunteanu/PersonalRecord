@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.PatientsDAO;
@@ -43,14 +42,15 @@ public class SearchPatientButtonActionListener implements ActionListener {
 		}
 		
 		Patient newPatient = new Patient();
-		
-		try {
-			newPatient.setDataNasterii(LocalDate.parse(birthDateFiter));
-		} catch (Exception exception) {
-			JOptionPane.showMessageDialog(mainWindow, "Data nasterii nu este corecta", 
-					"Erore de Validare", JOptionPane.ERROR_MESSAGE);
-			exception.printStackTrace();
-			return;
+		if (birthDateFiter != null && birthDateFiter.length() > 0){
+			try {
+				newPatient.setDataNasterii(LocalDate.parse(birthDateFiter));
+			} catch (Exception exception) {
+				JOptionPane.showMessageDialog(mainWindow, "Data nasterii nu este corecta", 
+						"Erore de Validare", JOptionPane.ERROR_MESSAGE);
+				exception.printStackTrace();
+				return;
+			}
 		}
 		
 		mainWindow.showPanelListOfPatients(PatientsDAO.getPatientsByFilter(name, firstName, cnpFilter, phoneNo, birthDateFiter));
