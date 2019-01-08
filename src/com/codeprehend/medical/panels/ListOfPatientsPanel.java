@@ -81,7 +81,7 @@ public class ListOfPatientsPanel extends JPanel {
 			str = str.concat("   CNP: ");
 			str = str.concat(pacient.getCnp());
 			str = str.concat("   tel: ");
-			str = str.concat(pacient.getNumarTelefon());
+			str = str.concat(pacient.getNumarTelefon() != null ? pacient.getNumarTelefon() : "");
 
 			DLM.addElement(str);
 								

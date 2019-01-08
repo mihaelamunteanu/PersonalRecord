@@ -2,7 +2,6 @@
 package com.codeprehend.medical.dao;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,7 +36,7 @@ public class AtachementsDAO {
 			stmt.setObject(2, attachment.getFileName());
 			stmt.setObject(3, attachment.getFileType());
 			stmt.setObject(4, attachment.getFileLength());
-			stmt.setBinaryStream(5, attachment.getFileInputStream());
+			stmt.setBinaryStream(5, new ByteArrayInputStream(attachment.getFileStream()));
 			stmt.setObject(6, attachment.getRegistrationDate());
 			
 			stmt.executeUpdate();
@@ -46,11 +45,8 @@ public class AtachementsDAO {
 				generatedId = stmt.getGeneratedKeys().getLong(1);
 			}
 			
-			attachment.getFileInputStream().close();
 			rs.close();
- 		} catch (IOException ex) {
-			System.out.println(ex.getMessage());
-		} catch (SQLException ex) {
+ 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}
 		
@@ -114,7 +110,7 @@ ps.close();
 			while (rs != null && rs.next()) {
 				byte[] pdfAttachment = rs.getBytes("atasament");
 				attachmentById = new Attachement(rs.getLong("pacient_id"), rs.getString("nume_fisier"),
-						rs.getString("tip_fisier"), 0, new ByteArrayInputStream(pdfAttachment), 
+						rs.getString("tip_fisier"), 0, pdfAttachment, 
 						LocalDate.parse(rs.getString("data_salvare"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				attachmentById.setId(rs.getLong("id"));
 			}

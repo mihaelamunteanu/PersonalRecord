@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDate;
 
 import com.codeprehend.medical.resources.Attachement;
@@ -53,8 +54,7 @@ public class ExaminationToPdf {
 	        }
 	        
 	        
-	        FileInputStream fis = new FileInputStream(file);
-	        Attachement attachement = new Attachement(id, fileName, fileType, file.length(), fis, LocalDate.now());
+	        Attachement attachement = new Attachement(id, fileName, fileType, file.length(), Files.readAllBytes(file.toPath()), LocalDate.now());
 	       
 	        return attachement;
 	    }

@@ -1,13 +1,6 @@
 package com.codeprehend.medical.listeners;
 
-import java.util.List;
-
 import com.codeprehend.medical.MedicalRecordGUI;
-import com.codeprehend.medical.dao.AntecedentsDAO;
-import com.codeprehend.medical.dao.ExaminationDAO;
-import com.codeprehend.medical.dao.PatientsDAO;
-import com.codeprehend.medical.resources.Antecedent;
-import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
 
 public class AccesFilesExaminationButtonActionListener {
@@ -18,7 +11,7 @@ public class AccesFilesExaminationButtonActionListener {
 	public AccesFilesExaminationButtonActionListener(MedicalRecordGUI mainWindow, Patient patient){
 		this.mainWindow = mainWindow;
 		this.patient = patient;
-		this.actionPerformed();
+		this.actionPerformed(); //e vina mea, am facut praf ActionListenerul ala, aveai dreptate
 	}
 	
 	public void actionPerformed(){

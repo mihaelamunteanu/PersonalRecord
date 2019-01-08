@@ -2,18 +2,11 @@ package com.codeprehend.medical.panels;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -21,7 +14,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
@@ -32,10 +24,8 @@ import com.codeprehend.medical.dao.AtachementsDAO;
 import com.codeprehend.medical.listeners.AccesFilesExaminationButtonActionListener;
 import com.codeprehend.medical.listeners.AccessExamButtonActionListener;
 import com.codeprehend.medical.listeners.BackFromExaminationPatientPanelButtonActionListener;
-import com.codeprehend.medical.listeners.BackFromListOfPatientsPanelButtonActionListener;
 import com.codeprehend.medical.listeners.GoHomeFromExaminationPatientButtonListener;
-import com.codeprehend.medical.listeners.ModifyPatientButtonActionListener;
-import com.codeprehend.medical.listeners.SaveExaminationButtonActionListener;
+import com.codeprehend.medical.listeners.OpenFileButtonActionListener;
 import com.codeprehend.medical.resources.Attachement;
 import com.codeprehend.medical.resources.Patient;
 
@@ -55,7 +45,7 @@ public class FilesPatientPanel extends JPanel {
 	private JScrollPane scrollPane = new JScrollPane();
 	
 	private JButton homeButton = new JButton("Ecran principal");
-	private JButton backFromFilesPanel = new JButton("Inapoi la lista");
+	private JButton openFileButton = new JButton("Deschide fisierul");
 	private JButton modifyPatientInfoButton = new JButton("Modifica info");
 	private JButton saveFilesButton = new JButton("Salveaza fisier");
 	private JButton folderAccesButton = new JButton("Acceseaza dosarul");
@@ -135,8 +125,8 @@ public class FilesPatientPanel extends JPanel {
 		browseFileTextField.setBounds(27, 410, 573, 28);
 		this.add(browseFileTextField);
 		
-		backFromFilesPanel.setBounds(681, 459, 131, 39);
-		this.add(backFromFilesPanel);
+		openFileButton.setBounds(681, 459, 131, 39);
+		this.add(openFileButton);
 		
 		homeButton.setBounds(681, 409, 131, 39);
 		this.add(homeButton);
@@ -168,8 +158,7 @@ public class FilesPatientPanel extends JPanel {
 		patientMedicalInfoTextField.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		patientMedicalInfoTextField.setColumns(10);
 		
-		List<Attachement> attachements = new ArrayList<Attachement>();
-		attachements = AtachementsDAO.getAttachmentsByPatientId(pacient.getId());
+		final List<Attachement> attachements = AtachementsDAO.getAttachmentsByPatientId(pacient.getId());
 		
 		DefaultListModel DLM = new DefaultListModel();
 		for (Attachement attachement: attachements) {
@@ -203,16 +192,17 @@ public class FilesPatientPanel extends JPanel {
 		
 		//modifyPatientInfoButton.addActionListener(new ModifyPatientButtonActionListener(this.parentPanel, currentPatient));
 		
-		backFromFilesPanel.addActionListener(new BackFromExaminationPatientPanelButtonActionListener(this.parentPanel));
-		homeButton.addActionListener(new GoHomeFromExaminationPatientButtonListener(this.parentPanel));
-		
 		folderAccesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new AccessExamButtonActionListener(parentPanel, pacient);
 			}
 		});
 		
-		backFromFilesPanel.addActionListener(new BackFromExaminationPatientPanelButtonActionListener(this.parentPanel));
+		openFileButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new OpenFileButtonActionListener(parentPanel, attachements.get(listOfFiles.getSelectedIndex()));
+			}
+		});
 		homeButton.addActionListener(new GoHomeFromExaminationPatientButtonListener(this.parentPanel));
 		
 		browseFileButton.addActionListener(new ActionListener() {
@@ -227,9 +217,6 @@ public class FilesPatientPanel extends JPanel {
 		});
 		
 		//saveFilesButton.addActionListener(new SaveFilesButton());
-		
-
 	}
-	
-	
+
 }

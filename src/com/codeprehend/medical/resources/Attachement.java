@@ -16,7 +16,7 @@ public class Attachement {
 	String fileName; 
 	String fileType;
 	Long fileLength;
-	InputStream fileInputStream;
+	byte[] fileStream;
 	LocalDate registrationDate; //use LocalDate instead java.sql.Date
 	
 	public Attachement( ) {
@@ -24,12 +24,12 @@ public class Attachement {
 	}
 
 	public Attachement(Long pacientId, String fileName, String fileType, 
-			long fileLength, InputStream fileInputStream, LocalDate registrationDate) {
+			long fileLength, byte[] fileStream, LocalDate registrationDate) {
 		this.pacientId = pacientId;
 		this.fileName = fileName;
 		this.fileType = fileType;
 		this.fileLength = fileLength;
-		this.fileInputStream = fileInputStream;
+		this.fileStream = fileStream;
 		this.registrationDate = registrationDate;
 	}
 	
@@ -73,12 +73,12 @@ public class Attachement {
 		this.fileLength = fileLength;
 	}
 
-	public InputStream getFileInputStream() {
-		return fileInputStream;
+	public byte[] getFileStream() {
+		return fileStream;
 	}
 
-	public void setFileInputStream(InputStream fileInputStream) {
-		this.fileInputStream = fileInputStream;
+	public void setFileInputStream(byte[] fileStream) {
+		this.fileStream = fileStream;
 	}
 
 	public LocalDate getRegistrationDate() {
