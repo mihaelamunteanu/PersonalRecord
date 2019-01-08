@@ -7,26 +7,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.codeprehend.medical.database.DatabaseConnection;
 import com.codeprehend.medical.resources.Patient;
 
 public class PatientsDAO {
 	
+	private static final Logger LOGGER = Logger.getLogger(PatientsDAO.class.getName());
+	
 	//TODO throws Exception for all and add Message Dialog Boxes to know what was wrong
 	public static Patient getPatientById(Long patientId) {
 		Patient pacient = null;
 		String SQL = "SELECT * FROM paciente WHERE id = ?";
 		
-		System.out.println(" Select Patient by patient id : " + SQL);
-		
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();
 				PreparedStatement stmt = conn.prepareStatement(SQL)) {
 			stmt.setObject(1, patientId);
-			
+			LOGGER.log(Level.INFO, "Save patient: " + stmt.toString() + SQL + patientId);			
 			
 			ResultSet rs = stmt.executeQuery();
 			while (rs != null && rs.next()) {
@@ -42,7 +43,7 @@ public class PatientsDAO {
 				rs.close();
 			}
  		} catch (SQLException ex) {
-			System.out.println(ex.getMessage());
+ 			LOGGER.log(Level.SEVERE, ex.getMessage());
 		}
 		
 		return pacient;
@@ -53,8 +54,6 @@ public class PatientsDAO {
 				"SET nume = ?, prenume = ?, data_nasterii = ?, cnp = ?, telefon = ?, "
 				+ "nasteri_naturale = ?, cezariene = ?, avorturi_cerere = ?, avorturi_spontane = ? " + 
 				"WHERE id = ?;";
-		
-		System.out.println(" Update patient : " + SQL);
 		
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();
 				PreparedStatement stmt = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);) {
@@ -72,6 +71,7 @@ public class PatientsDAO {
 			stmt.executeUpdate();
  		} 
 		
+		LOGGER.log(Level.INFO, SQL + patient.getNume() + patient.getPrenume() + patient.getDataNasterii());	 
 		return patient.getId();
 	}
 	

@@ -18,21 +18,36 @@ StackBuilder Application to install other PostgreS related  apps
 pgAdmin4 - app 
 pass root 
 
+#08.01.2018
+- save pdf locally (ecran setari cu path unde sa se salveze fisierele, cu path default de unde sa incarce fisierele)
+- upload files - ok 
+- rearranged and reimplemented screens 
+- clean code, add comments
+- fix buttons navigation
+- validation and throw exception
+- logs
+- tests
+- icon to run app
+- DB test- Db back-up: backup users: http://www.postgresonline.com/journal/archives/81-Backing-up-Login-Roles-aka-Users-and-Group-Roles.html
+- document
+- automatic DB back-up
+- back-up reminder
+
 #26.12.2018
 TODO:
 - arranged screens; 
-- scroll
+- scroll - ok
 - in list of patients the buttons should be alligned in a table so that is clear which button is for which name
 - check another app to see an example (I am not sure that app has scrool?)
 - sa se poate selecta datele din consultatie: campuri readonly
 - update patient and insert new antecedent
-- add examination text area
-- add previous examinations
-- add atasamente
-- generate pdf
-- fix buttons navigation
+- add examination text area - ok 
+- add previous examinations - ok 
+- add atasamente - ok 
+- generate pdf - ok 
+- fix buttons navigation 
 - clean code, add comments etc. : 
-- scot commit din cod, ca este autocommit pe DB
+- scot commit din cod, ca este autocommit pe DB - ok 
 - throw Exceptions and display a dialog Box, 
 - check flow of application inside code and see if it is ok
 - add minimal validation on screens

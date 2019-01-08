@@ -239,5 +239,9 @@ public class MedicalRecordGUI extends JFrame {
 	public ModifyPatientPanel getModifyPatientPanel() {
 		return modifyPatientPanel;
 	}
+
+	public FilesPatientPanel getFilesPatientPanel() {
+		return filesPatientPanel;
+	}
 	
 }

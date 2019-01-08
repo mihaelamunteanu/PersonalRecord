@@ -5,8 +5,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -21,15 +21,15 @@ import javax.swing.border.TitledBorder;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.AtachementsDAO;
-import com.codeprehend.medical.listeners.AccesFilesExaminationButtonActionListener;
 import com.codeprehend.medical.listeners.AccessExamButtonActionListener;
-import com.codeprehend.medical.listeners.BackFromExaminationPatientPanelButtonActionListener;
 import com.codeprehend.medical.listeners.GoHomeFromExaminationPatientButtonListener;
 import com.codeprehend.medical.listeners.OpenFileButtonActionListener;
+import com.codeprehend.medical.listeners.SaveAttachmentActionPerformed;
 import com.codeprehend.medical.resources.Attachement;
 import com.codeprehend.medical.resources.Patient;
 
 public class FilesPatientPanel extends JPanel {
+	
 	/**
 	 * Default serial key. 
 	 */
@@ -58,7 +58,9 @@ public class FilesPatientPanel extends JPanel {
 	private JPanel panel_2 = new JPanel();
 	
 	private JList listOfFiles = new JList();
-	
+
+	private static final Logger LOGGER = Logger.getLogger(FilesPatientPanel.class.getName());
+
 	public FilesPatientPanel(MedicalRecordGUI parent) {
 		super();
 		this.setLayout(null);
@@ -92,7 +94,8 @@ public class FilesPatientPanel extends JPanel {
 		patientPersonalInfoText = patientPersonalInfoText.concat("     CNP: ");
 		patientPersonalInfoText = patientPersonalInfoText.concat(pacient.getCnp());
 		patientPersonalInfoText = patientPersonalInfoText.concat("     Tel: ");
-		patientPersonalInfoText = patientPersonalInfoText.concat(pacient.getNumarTelefon());
+		patientPersonalInfoText = patientPersonalInfoText.concat(
+				pacient.getNumarTelefon() != null ? pacient.getNumarTelefon() : "");
 		
 		String patientMedicalInfoText = new String("");
 		patientMedicalInfoText = patientMedicalInfoText.concat("Nasteri naturale: ");
@@ -216,7 +219,15 @@ public class FilesPatientPanel extends JPanel {
 			}
 		});
 		
-		//saveFilesButton.addActionListener(new SaveFilesButton());
+		saveFilesButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				SaveAttachmentActionPerformed.saveAttachmentActionPressed(parentPanel, currentPatient);
+			}
+		});
+	}
+
+	public JTextField getBrowseFileTextField() {
+		return browseFileTextField;
 	}
 
 }
