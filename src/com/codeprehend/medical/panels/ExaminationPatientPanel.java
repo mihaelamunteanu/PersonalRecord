@@ -1,20 +1,24 @@
 package com.codeprehend.medical.panels;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.border.TitledBorder;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.listeners.AccesFilesExaminationButtonActionListener;
@@ -34,20 +38,11 @@ public class ExaminationPatientPanel extends JPanel {
 	
 	private MedicalRecordGUI parentPanel;
 	private Patient currentPatient; 
-
-	private JTextField patientPersonalInfoTextField = new JTextField();
-	private JTextField patientMedicalInfoTextField = new JTextField();
 	
-	private JScrollPane scrollPane = new JScrollPane();
-	private JScrollPane scrollPane_1 = new JScrollPane();
-	private JScrollPane scrollPane_2 = new JScrollPane();
+	private List<Antecedent> antecedents = new ArrayList<Antecedent>();
+	private List<Examination> examinations = new ArrayList<Examination>();
 	
-	private JPanel panel_2 = new JPanel();
-	
-	private JTextArea antecedentsTextAreea = new JTextArea();
-	private JTextArea previousExamination = new JTextArea();
 	private JTextArea examinationDiagnosis = new JTextArea();
-	private List<JTextArea> previousExaminations;
 	
 	private JButton homeButton = new JButton("Ecran principal");
 	private JButton backFromExaminationPanel = new JButton("Inapoi la lista");
@@ -70,210 +65,13 @@ public class ExaminationPatientPanel extends JPanel {
 	 */
 	public void setPatientInformations(Patient pacient){
 		this.currentPatient = pacient;
-		
-		loadExaminationGUIForPatient(currentPatient);
-		
-		//examinationDiagnosis = new JTextArea();
-		//examinationDiagnosis.setSize(100, 100);
-		
-		//this.add(examinationDiagnosis);
-		//this.add(saveExaminationButton);
 	}
 	
-	private void loadExaminationGUIForPatient(Patient pacient) {
-		
-		String patientPersonalInfoText = new String("");
-		
-		patientPersonalInfoText = patientPersonalInfoText.concat(pacient.getNume());
-		patientPersonalInfoText = patientPersonalInfoText.concat(" ");
-		patientPersonalInfoText = patientPersonalInfoText.concat(pacient.getPrenume());
-		patientPersonalInfoText = patientPersonalInfoText.concat("    data nasterii: ");
-		patientPersonalInfoText = patientPersonalInfoText.concat(pacient.getDataNasterii().toString());
-		patientPersonalInfoText = patientPersonalInfoText.concat("     CNP: ");
-		patientPersonalInfoText = patientPersonalInfoText.concat(pacient.getCnp());
-		patientPersonalInfoText = patientPersonalInfoText.concat("     Tel: ");
-		patientPersonalInfoText = patientPersonalInfoText.concat(
-				pacient.getNumarTelefon() != null ? pacient.getNumarTelefon() : "");
-		
-		String patientMedicalInfoText = new String("");
-		patientMedicalInfoText = patientMedicalInfoText.concat("Nasteri naturale: ");
-		patientMedicalInfoText = patientMedicalInfoText.concat(Integer.toString(pacient.getNasteriNaturale()));
-		patientMedicalInfoText = patientMedicalInfoText.concat("   Cezariene: ");
-		patientMedicalInfoText = patientMedicalInfoText.concat(Integer.toString(pacient.getCezariene()));
-		patientMedicalInfoText = patientMedicalInfoText.concat("   Avorturi la cerere: ");
-		patientMedicalInfoText = patientMedicalInfoText.concat(Integer.toString(pacient.getAvorturiLaCerere()));
-		patientMedicalInfoText = patientMedicalInfoText.concat("    Avorturi spontane: ");
-		patientMedicalInfoText = patientMedicalInfoText.concat(Integer.toString(pacient.getAvorturiSpontane()));
 
-		this.setBounds(10, 11, 882, 532);
-		this.setLayout(null);
 		
-		saveExaminationButton.setBounds(656, 75, 156, 52);
-		this.add(saveExaminationButton);
-		
-		modifyPatientInfoButton.setBounds(656, 254, 156, 52);
-		this.add(modifyPatientInfoButton);
-		
-		backFromExaminationPanel.setBounds(681, 459, 131, 39);
-		this.add(backFromExaminationPanel);
-		
-		homeButton.setBounds(681, 409, 131, 39);
-		this.add(homeButton);
-		
-		fileExaminationButton.setBounds(656, 146, 156, 52);
-		this.add(fileExaminationButton);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.WHITE);
-		panel_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Date pacienta", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_1.setBounds(28, 23, 573, 77);
-		this.add(panel_1);
-		panel_1.setLayout(null);
-		
-		patientPersonalInfoTextField.setText(patientPersonalInfoText);
-		patientPersonalInfoTextField.setBackground(Color.WHITE);
-		patientPersonalInfoTextField.setBounds(6, 16, 561, 28);
-		panel_1.add(patientPersonalInfoTextField);
-		patientPersonalInfoTextField.setEditable(false);
-		patientPersonalInfoTextField.setFont(new Font("Times New Roman", Font.BOLD, 13));
-		patientPersonalInfoTextField.setColumns(10);
-		
-		patientMedicalInfoTextField.setText(patientMedicalInfoText);
-		patientMedicalInfoTextField.setBackground(Color.WHITE);
-		patientMedicalInfoTextField.setBounds(6, 42, 561, 28);
-		panel_1.add(patientMedicalInfoTextField);
-		patientMedicalInfoTextField.setEditable(false);
-		patientMedicalInfoTextField.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-		patientMedicalInfoTextField.setColumns(10);
-		
-		antecedentsTextAreea.setEditable(false);
-		antecedentsTextAreea.setBounds(33, 122, 561, 137);
-		this.add(antecedentsTextAreea);
-		
-		scrollPane_1.setBounds(33, 122, 561, 137);
-		this.add(scrollPane_1);
-		
-		scrollPane_1.setViewportView(antecedentsTextAreea);
-		antecedentsTextAreea.setEditable(false);
-		
-		Date currentDate = new Date();
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		String stringCurrentDate = format.format(currentDate);
-		
-		String str = new String ("Consultatie curenta - ");
-		str = str.concat(stringCurrentDate);
-		
-		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), str, TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_2.setBounds(27, 284, 573, 113);
-		this.add(panel_2);
-		panel_2.setLayout(null);
-		
-		scrollPane.setBounds(6, 16, 561, 92);
-		panel_2.add(scrollPane);
-		
-		scrollPane.setViewportView(examinationDiagnosis);
-		
-		scrollPane_2.setBounds(28, 409, 573, 112);
-		this.add(scrollPane_2);
-		
-		previousExamination = new JTextArea();
-		scrollPane_2.setViewportView(previousExamination);
-		previousExamination.setEditable(false);
-		previousExamination.setBackground(new Color(220, 220, 220));
-		
-		
-		
-		//Action Listeners
-		
-		backFromExaminationPanel.addActionListener(new BackFromExaminationPatientPanelButtonActionListener(this.parentPanel));
-		homeButton.addActionListener(new GoHomeFromExaminationPatientButtonListener(this.parentPanel));
-		modifyPatientInfoButton.addActionListener(new ModifyPatientButtonActionListener(this.parentPanel, currentPatient));
-		saveExaminationButton.addActionListener(new SaveExaminationButtonActionListener(parentPanel, currentPatient));
-		
-		fileExaminationButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				new AccesFilesExaminationButtonActionListener(parentPanel, currentPatient);
-			}
-		});
-	}
-	
-	
 	public void setAntecedents(List<Antecedent> antecedents) {
-		
-		/*JPanel antecedentsPanel = new JPanel();
-		antecedentsPanel.setLayout(new GridBagLayout());
-		
-		Border operBorder = BorderFactory.createTitledBorder("");
-		antecedentsPanel.setBorder(operBorder);
-		
-		GridBagConstraints gcAntecedentsPanel = new GridBagConstraints();
-		
-		Font font1 = new Font("TimesNewRoman", Font.BOLD, 15);
-		Font font2 = new Font("TimesNewRoman", Font.BOLD, 13);
-		
-	    JLabel textAntecedents = new JLabel("Antecedente ");
-	    textAntecedents.setFont(font1);
-	    
-	    gcAntecedentsPanel.anchor = GridBagConstraints.FIRST_LINE_START;
-	    gcAntecedentsPanel.gridx = 1;
-	    gcAntecedentsPanel.gridy = 1;
-	    antecedentsPanel.add(textAntecedents, gcAntecedentsPanel);
-
-		gcExaminationPatientPanel.anchor = GridBagConstraints.FIRST_LINE_START;
-		
-		gcExaminationPatientPanel.gridx = 1;
-		gcExaminationPatientPanel.gridy = 2;
-
-		this.add(new JLabel(" "), gcExaminationPatientPanel);
-		*/
-		
-		String str = new String("");
-		
-		for (Antecedent antecedent : antecedents) {
-			str = str.concat("Antecedente la data ");
-			str = str.concat(antecedent.getRegistrationDate().toString());
-			str = str.concat("\n");
-			str = str.concat(antecedent.getAntecedentText());
-			str = str.concat("\n\n");
-			
+		this.antecedents = antecedents;
 		}
-		antecedentsTextAreea.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-		antecedentsTextAreea.setText(str);
-		
-
-	}
-		
-
-	
-	/*public void setButtons(){
-		JPanel patientButtonsPanel = new JPanel();
-		patientButtonsPanel.setLayout(new GridBagLayout());
-		
-		GridBagConstraints gcButtonsPanel = new GridBagConstraints();
-		
-		examinationDiagnosis.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-		
-		patientButtonsPanel.add(homeButton);
-		patientButtonsPanel.add(new JLabel("   "));
-		patientButtonsPanel.add(backFromExaminationPanel);
-		patientButtonsPanel.add(new JLabel("   "));
-		patientButtonsPanel.add(modifyPatientInfoButton);
-		
-		gcExaminationPatientPanel.anchor = GridBagConstraints.FIRST_LINE_START;
-		gcExaminationPatientPanel.gridx = 1;
-		gcExaminationPatientPanel.gridy = 4;
-		this.add(new JLabel(" "), 		gcExaminationPatientPanel);
-		gcExaminationPatientPanel.gridy = 5;
-		this.add(new JLabel(" "), 		gcExaminationPatientPanel);
-		
-		gcExaminationPatientPanel.anchor = GridBagConstraints.FIRST_LINE_END;
-		gcExaminationPatientPanel.gridx = 1;
-		gcExaminationPatientPanel.gridy = 6;
-		this.add(patientButtonsPanel, gcExaminationPatientPanel);
-		
-		modifyPatientInfoButton.addActionListener(new ModifyPatientButtonActionListener(this.parentPanel, currentPatient));
-	}*/
 	
 	/**
 	 * Loads the list of history Examination objects into JPanel
@@ -281,26 +79,290 @@ public class ExaminationPatientPanel extends JPanel {
 	 * @param patients
 	 */
 	public void setPreviousExaminationEntries(List<Examination> examinations) {
-		
-		String str = new String("");
-		
-		for (Examination exam: examinations) { 
-			str = str.concat("Consultatie la data ");
-			str = str.concat(exam.getConsultationDate().toString());
-			str = str.concat("\n");
-			str = str.concat(exam.getText());
-			str = str.concat("\n\n");
-			
-			
-		}
-		
-		previousExamination.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-		previousExamination.setText(str);
+		this.examinations = examinations;
 	}
 	
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	public void  loadExaminationGUIForPatient(Patient pacient) {
+//		JPanel GridBagLayoutPanel = new JPanel();
+		this.setBorder(new LineBorder(new Color(0, 0, 0)));
+		parentPanel.add(this, BorderLayout.CENTER);
+		GridBagLayout gbl_GridBagLayoutPanel = new GridBagLayout();
+		gbl_GridBagLayoutPanel.columnWidths = new int[] {0};
+		gbl_GridBagLayoutPanel.rowHeights = new int[] {0, 0, 0};
+		gbl_GridBagLayoutPanel.columnWeights = new double[]{1.0};
+		gbl_GridBagLayoutPanel.rowWeights = new double[]{0.05, 0.9, 0.05};
+		this.setLayout(gbl_GridBagLayoutPanel);
+		
+		JPanel InformationGridBagLayoutPanel =  new JPanel();
+		GridBagConstraints gbc_InformationGridBagLayoutPanel = new GridBagConstraints();
+		gbc_InformationGridBagLayoutPanel.insets = new Insets(5, 45, 0, 45);
+		gbc_InformationGridBagLayoutPanel.weightx = 1.0;
+		gbc_InformationGridBagLayoutPanel.fill = GridBagConstraints.BOTH;
+		gbc_InformationGridBagLayoutPanel.gridx = 0;
+		gbc_InformationGridBagLayoutPanel.gridy = 0;
+		this.add(InformationGridBagLayoutPanel, gbc_InformationGridBagLayoutPanel);
+		GridBagLayout gbl_InformationGridBagLayoutPanel = new GridBagLayout();
+		gbl_InformationGridBagLayoutPanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
+		gbl_InformationGridBagLayoutPanel.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_InformationGridBagLayoutPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_InformationGridBagLayoutPanel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		InformationGridBagLayoutPanel.setLayout(gbl_InformationGridBagLayoutPanel);
+		
+		JLabel lblAntet = new JLabel("      ");
+		GridBagConstraints gbc_lblAntet = new GridBagConstraints();
+		gbc_lblAntet.insets = new Insets(0, 0, 5, 5);
+		gbc_lblAntet.gridx = 0;
+		gbc_lblAntet.gridy = 0;
+		InformationGridBagLayoutPanel.add(lblAntet, gbc_lblAntet);
+		
+		JLabel NameLabel = new JLabel(pacient.getNume());
+		GridBagConstraints gbc_NameLabel = new GridBagConstraints();
+		gbc_NameLabel.anchor = GridBagConstraints.WEST;
+		gbc_NameLabel.weightx = 1.0;
+		gbc_NameLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_NameLabel.gridx = 0;
+		gbc_NameLabel.gridy = 1;
+		InformationGridBagLayoutPanel.add(NameLabel, gbc_NameLabel);
+		
+		JLabel PrenumeLabel = new JLabel(pacient.getPrenume());
+		GridBagConstraints gbc_PrenumeLabel = new GridBagConstraints();
+		gbc_PrenumeLabel.anchor = GridBagConstraints.WEST;
+		gbc_PrenumeLabel.weightx = 1.0;
+		gbc_PrenumeLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_PrenumeLabel.gridx = 1;
+		gbc_PrenumeLabel.gridy = 1;
+		InformationGridBagLayoutPanel.add(PrenumeLabel, gbc_PrenumeLabel);
+		
+		JLabel DataNastereLabel = new JLabel("Data nasterii: " + pacient.getDataNasterii());
+		GridBagConstraints gbc_DataNastereLabel = new GridBagConstraints();
+		gbc_DataNastereLabel.weightx = 1.0;
+		gbc_DataNastereLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_DataNastereLabel.anchor = GridBagConstraints.WEST;
+		gbc_DataNastereLabel.gridx = 2;
+		gbc_DataNastereLabel.gridy = 1;
+		InformationGridBagLayoutPanel.add(DataNastereLabel, gbc_DataNastereLabel);
+		
+		JLabel CNPLabel = new JLabel("CNP: " +  pacient.getCnp());
+		GridBagConstraints gbc_CNPLabel = new GridBagConstraints();
+		gbc_CNPLabel.anchor = GridBagConstraints.WEST;
+		gbc_CNPLabel.weightx = 1.0;
+		gbc_CNPLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_CNPLabel.gridx = 3;
+		gbc_CNPLabel.gridy = 1;
+		InformationGridBagLayoutPanel.add(CNPLabel, gbc_CNPLabel);
+		
+		JLabel TelefonLabel = new JLabel("Telefon: " + pacient.getNumarTelefon());
+		GridBagConstraints gbc_TelefonLabel = new GridBagConstraints();
+		gbc_TelefonLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_TelefonLabel.anchor = GridBagConstraints.WEST;
+		gbc_TelefonLabel.weightx = 1.0;
+		gbc_TelefonLabel.gridx = 4;
+		gbc_TelefonLabel.gridy = 1;
+		InformationGridBagLayoutPanel.add(TelefonLabel, gbc_TelefonLabel);
+		
+		JLabel lblNasteriNaturale = new JLabel("Nasteri naturale: " + pacient.getNasteriNaturale());
+		GridBagConstraints gbc_lblNasteriNaturale = new GridBagConstraints();
+		gbc_lblNasteriNaturale.anchor = GridBagConstraints.WEST;
+		gbc_lblNasteriNaturale.insets = new Insets(0, 0, 0, 5);
+		gbc_lblNasteriNaturale.gridx = 0;
+		gbc_lblNasteriNaturale.gridy = 2;
+		InformationGridBagLayoutPanel.add(lblNasteriNaturale, gbc_lblNasteriNaturale);
+		
+		JLabel lblCezariene = new JLabel("Cezariene: " + pacient.getCezariene());
+		GridBagConstraints gbc_lblCezariene = new GridBagConstraints();
+		gbc_lblCezariene.anchor = GridBagConstraints.WEST;
+		gbc_lblCezariene.insets = new Insets(0, 0, 0, 5);
+		gbc_lblCezariene.gridx = 1;
+		gbc_lblCezariene.gridy = 2;
+		InformationGridBagLayoutPanel.add(lblCezariene, gbc_lblCezariene);
+		
+		JLabel lblAvorturiLaCerere = new JLabel("Avorturi la cerere: " + pacient.getAvorturiLaCerere());
+		GridBagConstraints gbc_lblAvorturiLaCerere = new GridBagConstraints();
+		gbc_lblAvorturiLaCerere.anchor = GridBagConstraints.WEST;
+		gbc_lblAvorturiLaCerere.insets = new Insets(0, 0, 0, 5);
+		gbc_lblAvorturiLaCerere.gridx = 2;
+		gbc_lblAvorturiLaCerere.gridy = 2;
+		InformationGridBagLayoutPanel.add(lblAvorturiLaCerere, gbc_lblAvorturiLaCerere);
+		
+		JLabel lblAvorturiSpontane = new JLabel("Avorturi spontane: " + pacient.getAvorturiSpontane());
+		GridBagConstraints gbc_lblAvorturiSpontane = new GridBagConstraints();
+		gbc_lblAvorturiSpontane.anchor = GridBagConstraints.WEST;
+		gbc_lblAvorturiSpontane.insets = new Insets(0, 0, 0, 5);
+		gbc_lblAvorturiSpontane.gridx = 3;
+		gbc_lblAvorturiSpontane.gridy = 2;
+		InformationGridBagLayoutPanel.add(lblAvorturiSpontane, gbc_lblAvorturiSpontane);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.insets = new Insets(0, 45, 5, 45);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 1;
+		this.add(scrollPane, gbc_scrollPane);
+		
+		JPanel panel = new JPanel();
+		scrollPane.setColumnHeaderView(panel);
+		
+		JPanel panel_1 = new JPanel();
+		scrollPane.setRowHeaderView(panel_1);
+		
+		JPanel medicalInfoPanel = new JPanel();
+		scrollPane.setViewportView(medicalInfoPanel);
+		GridBagLayout gbl_medicalInfoPanel = new GridBagLayout();
+		gbl_medicalInfoPanel.columnWidths = new int[]{0};
+//		gbl_medicalInfoPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_medicalInfoPanel.columnWeights = new double[]{1.0};
+//		gbl_medicalInfoPanel.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 
+//				100.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
+		medicalInfoPanel.setLayout(gbl_medicalInfoPanel);
+		
+		int ycoordinate = 2;
+		//for antecedente
+		for (Antecedent antecedent : antecedents) {
+			
+			JLabel lblAntecedente = new JLabel("Antecedente " +  antecedent.getRegistrationDate());
+			lblAntecedente.setFont(new Font("Tahoma", Font.BOLD, 11));
+			lblAntecedente.setHorizontalAlignment(SwingConstants.LEFT);
+			GridBagConstraints gbc_lblAntecedente = new GridBagConstraints();
+			gbc_lblAntecedente.anchor = GridBagConstraints.WEST;
+			gbc_lblAntecedente.insets = new Insets(0, 0, 5, 5);
+			gbc_lblAntecedente.gridx = 0;
+			gbc_lblAntecedente.gridy = ycoordinate+1;;
+			medicalInfoPanel.add(lblAntecedente, gbc_lblAntecedente);
+			
+			JLabel lblAntcedenteNumarulDoi = new JLabel(antecedent.getAntecedentText());
+			lblAntcedenteNumarulDoi.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			GridBagConstraints gbc_lblAntcedenteNumarulDoi = new GridBagConstraints();
+			gbc_lblAntcedenteNumarulDoi.gridwidth = 1;
+			gbc_lblAntcedenteNumarulDoi.anchor = GridBagConstraints.WEST;
+			gbc_lblAntcedenteNumarulDoi.insets = new Insets(0, 0, 5, 0);
+			gbc_lblAntcedenteNumarulDoi.gridx = 0;
+			gbc_lblAntcedenteNumarulDoi.gridy = ycoordinate+2;
+			medicalInfoPanel.add(lblAntcedenteNumarulDoi, gbc_lblAntcedenteNumarulDoi);
+			
+			ycoordinate = ycoordinate + 2;
+		}
+		
+		JLabel label = new JLabel("     ");
+		GridBagConstraints gbc_label = new GridBagConstraints();
+		gbc_label.insets = new Insets(0, 0, 5, 5);
+		gbc_label.gridx = 0;
+		gbc_label.gridy = ycoordinate + 1;
+		medicalInfoPanel.add(label, gbc_label);
+		
+		examinationDiagnosis = new JTextArea();
+		examinationDiagnosis.setFont(new Font("Monospaced", Font.ITALIC, 13));
+		GridBagConstraints gbc_textArea = new GridBagConstraints();
+		gbc_textArea.gridwidth = 1;
+		gbc_textArea.gridheight = 6;
+		gbc_textArea.insets = new Insets(3, 0, 10, 10);
+		gbc_textArea.fill = GridBagConstraints.BOTH;
+		gbc_textArea.gridx = 0;
+		gbc_textArea.gridy = ycoordinate + 2;
+		medicalInfoPanel.add(examinationDiagnosis, gbc_textArea);
+		
+		ycoordinate = ycoordinate + 8;
+//		for examinations
+		for (Examination examination : examinations) {
+			JLabel lblConsultatie = new JLabel("Consultatie " + examination.getConsultationDate());
+			lblConsultatie.setFont(new Font("Tahoma", Font.BOLD, 11));
+			GridBagConstraints gbc_lblConsultatie = new GridBagConstraints();
+			gbc_lblConsultatie.anchor = GridBagConstraints.WEST;
+			gbc_lblConsultatie.insets = new Insets(0, 0, 10, 5);
+			gbc_lblConsultatie.gridx = 0;
+			gbc_lblConsultatie.gridy = ycoordinate + 1;
+			medicalInfoPanel.add(lblConsultatie, gbc_lblConsultatie);
+			
+			JLabel lblConsultatie_1 = new JLabel(examination.getText());
+			lblConsultatie_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			GridBagConstraints gbc_lblConsultatie_1 = new GridBagConstraints();
+			gbc_lblConsultatie_1.anchor = GridBagConstraints.WEST;
+			gbc_lblConsultatie_1.insets = new Insets(0, 0, 12, 5);
+			gbc_lblConsultatie_1.gridx = 0;
+			gbc_lblConsultatie_1.gridy = ycoordinate + 2;
+			medicalInfoPanel.add(lblConsultatie_1, gbc_lblConsultatie_1);
+			
+			ycoordinate = ycoordinate + 2;
+		}
+	
+		
+		JPanel buttonPanel = new JPanel();
+		GridBagConstraints gbc_buttonPanel = new GridBagConstraints();
+		gbc_buttonPanel.insets = new Insets(8, 25, 35, 15);
+		gbc_buttonPanel.fill = GridBagConstraints.BOTH;
+		gbc_buttonPanel.gridx = 0;
+		gbc_buttonPanel.gridy = 2;
+		this.add(buttonPanel, gbc_buttonPanel);
+		GridBagLayout gbl_buttonPanel = new GridBagLayout();
+		gbl_buttonPanel.columnWidths = new int[]{0};
+		gbl_buttonPanel.rowHeights = new int[]{0, 0};
+		gbl_buttonPanel.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
+		gbl_buttonPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		buttonPanel.setLayout(gbl_buttonPanel);
+		
+		JButton btnNewButton_7 = new JButton("Inapoi");
+		GridBagConstraints gbc_btnNewButton_7 = new GridBagConstraints();
+		gbc_btnNewButton_7.anchor = GridBagConstraints.EAST;
+		gbc_btnNewButton_7.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton_7.gridx = 1;
+		gbc_btnNewButton_7.gridy = 0;
+		buttonPanel.add(btnNewButton_7, gbc_btnNewButton_7);
+		
+		JButton btnNewButton_6 = new JButton("Ecran principal");
+		GridBagConstraints gbc_btnNewButton_6 = new GridBagConstraints();
+		gbc_btnNewButton_6.anchor = GridBagConstraints.EAST;
+		gbc_btnNewButton_6.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton_6.gridx = 2;
+		gbc_btnNewButton_6.gridy = 0;
+		buttonPanel.add(btnNewButton_6, gbc_btnNewButton_6);
+		
+		JButton btnNewButton_5 = new JButton("Modifica Pacient");
+		GridBagConstraints gbc_btnNewButton_5 = new GridBagConstraints();
+		gbc_btnNewButton_5.anchor = GridBagConstraints.EAST;
+		gbc_btnNewButton_5.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton_5.gridx = 3;
+		gbc_btnNewButton_5.gridy = 0;
+		buttonPanel.add(btnNewButton_5, gbc_btnNewButton_5);
+		
+		JButton btnNewButton_4 = new JButton("Atasamente");
+		GridBagConstraints gbc_btnNewButton_4 = new GridBagConstraints();
+		gbc_btnNewButton_4.anchor = GridBagConstraints.NORTHEAST;
+		gbc_btnNewButton_4.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton_4.gridx = 4;
+		gbc_btnNewButton_4.gridy = 0;
+		buttonPanel.add(btnNewButton_4, gbc_btnNewButton_4);
+		
+		JButton btnSalveaza = new JButton("SALVEAZA CONSULTATIE");
+		btnSalveaza.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnSalveaza.setFont(new Font("Tahoma", Font.BOLD, 13));
+		GridBagConstraints gbc_btnSalveaza = new GridBagConstraints();
+		gbc_btnSalveaza.anchor = GridBagConstraints.EAST;
+		gbc_btnSalveaza.gridheight = 2;
+		gbc_btnSalveaza.gridx = 5;
+		gbc_btnSalveaza.gridy = 0;
+		buttonPanel.add(btnSalveaza, gbc_btnSalveaza);
+		
+		//Action Listeners
+		
+		btnNewButton_7.addActionListener(new BackFromExaminationPatientPanelButtonActionListener(this.parentPanel));
+		btnNewButton_6.addActionListener(new GoHomeFromExaminationPatientButtonListener(this.parentPanel));
+		btnNewButton_5.addActionListener(new ModifyPatientButtonActionListener(this.parentPanel, currentPatient));
+		btnSalveaza.addActionListener(new SaveExaminationButtonActionListener(parentPanel, currentPatient));
+		
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new AccesFilesExaminationButtonActionListener(parentPanel, currentPatient);
+			}
+		});
+	}
 	public JTextArea getExaminationDiagnosis() {
 		return examinationDiagnosis;
 	}
+	
 }
 	
 

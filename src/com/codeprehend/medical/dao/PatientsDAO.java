@@ -40,7 +40,7 @@ public class PatientsDAO {
 				pacient.setCezariene(rs.getInt("cezariene"));
 				pacient.setAvorturiLaCerere(rs.getInt("avorturi_cerere"));
 				pacient.setAvorturiSpontane(rs.getInt("avorturi_spontane"));
-				rs.close();
+//				rs.close();
 			}
  		} catch (SQLException ex) {
  			LOGGER.log(Level.SEVERE, ex.getMessage());

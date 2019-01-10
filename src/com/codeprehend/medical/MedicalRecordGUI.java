@@ -1,10 +1,10 @@
 package com.codeprehend.medical;
 
 
+import java.awt.BorderLayout;
 import java.util.List;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import com.codeprehend.medical.panels.ExaminationPatientPanel;
 import com.codeprehend.medical.panels.FilesPatientPanel;
@@ -40,7 +40,6 @@ public class MedicalRecordGUI extends JFrame {
 	
 //	private JFrame framePrincipal;
 	
-	private JPanel theMainPanel;	
 	private SearchPatientPanel searchPatientPanel;
 	private NewPatientPanel newPatientPanel;
 	private ExaminationPatientPanel examinationPatientPanel;
@@ -49,20 +48,15 @@ public class MedicalRecordGUI extends JFrame {
 	private FilesPatientPanel filesPatientPanel;
 	
 	public MedicalRecordGUI(){
+		super();
 		//initialize GUI
-		this.setSize(1000, 700);
-		this.setResizable(true);
 		
-//		this.setSize(1100, 500);
-		this.setLocationRelativeTo(null);
-		//TODO Ask "Are you sure you want to leave the application? Check if there is anything unsaved"
+		this.setBounds(100, 100, 813, 516);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//TODO Ask "Are you sure you want to leave the application? Check if there is anything unsaved"
 		this.setTitle(numeFereastraPrincipala);
 		
 		//Create main panel
-		   
-		theMainPanel = new JPanel();
-		theMainPanel.setLayout(null);
 
 		searchPatientPanel = new SearchPatientPanel(this);
 		newPatientPanel = new NewPatientPanel(this);
@@ -73,36 +67,30 @@ public class MedicalRecordGUI extends JFrame {
 		
 		
 		searchPatientPanel.setBounds(253, 22, 360, 367);
-		theMainPanel.add(searchPatientPanel);
+		this.getContentPane().add(searchPatientPanel, BorderLayout.CENTER);
 		
 		listOfPatientsPanel.setBounds(150, 22, 700, 367);
-		theMainPanel.add(listOfPatientsPanel);
+		this.getContentPane().add(listOfPatientsPanel, BorderLayout.CENTER);
 		
 		newPatientPanel.setBounds(40, 20, 882, 509);
-		theMainPanel.add(newPatientPanel);
-		
-		examinationPatientPanel.setBounds(253, 22, 800, 367);
-		theMainPanel.add(examinationPatientPanel);
+		this.getContentPane().add(newPatientPanel, BorderLayout.CENTER);
 		
 		modifyPatientPanel.setBounds(40, 20, 882, 509);
-		theMainPanel.add(modifyPatientPanel);
+		this.getContentPane().add(modifyPatientPanel, BorderLayout.CENTER);
 		
 		filesPatientPanel.setBounds(253, 22, 800, 367);
-		theMainPanel.add(filesPatientPanel);
+		this.getContentPane().add(filesPatientPanel, BorderLayout.CENTER);
 		
-		theMainPanel.setVisible(true);
-	    
-	    this.add(theMainPanel);
 	    this.setVisible(true);
 	}
 	
 	//TODO to put this in a controller outside this class?
 	public void showPanelListOfPatients(List<Patient> listOfPatients) {
 		//TODO see if there are time when this panel shouldnt be reset
-		theMainPanel.remove(listOfPatientsPanel);
+		this.remove(listOfPatientsPanel);
 		listOfPatientsPanel = new ListOfPatientsPanel(this);
 		listOfPatientsPanel.setBounds(150, 22, 700, 367);
-		theMainPanel.add(listOfPatientsPanel);
+		this.add(listOfPatientsPanel);
 		
 		listOfPatientsPanel.setPatientsEntries(listOfPatients);
 		listOfPatientsPanel.setVisible(true);
@@ -138,9 +126,9 @@ public class MedicalRecordGUI extends JFrame {
 	
 	
 	public void showNewPatientPanel() {
-		theMainPanel.remove(newPatientPanel);
+		this.remove(newPatientPanel);
 		newPatientPanel = new NewPatientPanel(this);
-		theMainPanel.add(newPatientPanel);
+		this.add(newPatientPanel);
 		newPatientPanel.setVisible(true);
 		
 		searchPatientPanel.setVisible(false);
@@ -151,9 +139,9 @@ public class MedicalRecordGUI extends JFrame {
 	}
 	
 	public void showModifyPatientPanel(Patient patient, List<Antecedent> antecedents) {
-		theMainPanel.remove(modifyPatientPanel);
+		this.remove(modifyPatientPanel);
 		modifyPatientPanel = new ModifyPatientPanel(this);
-		theMainPanel.add(modifyPatientPanel);
+		this.add(modifyPatientPanel);
 		
 		modifyPatientPanel.setPatientEntry(patient);
 		modifyPatientPanel.setAntecedentEntries(antecedents);
@@ -172,13 +160,14 @@ public class MedicalRecordGUI extends JFrame {
 		this.setSize(1100, dim.getSize().height);
 		this.setLocation(dim.width/2-this.getSize().width/2, 0);
 		*/
-		theMainPanel.remove(examinationPatientPanel);
+		this.remove(examinationPatientPanel);
 		examinationPatientPanel = new ExaminationPatientPanel(this);
-		theMainPanel.add(examinationPatientPanel);
+		this.add(examinationPatientPanel);
 		
 		examinationPatientPanel.setPatientInformations(patient);
 		examinationPatientPanel.setAntecedents(antecedents);
 		examinationPatientPanel.setPreviousExaminationEntries(examinations);
+		examinationPatientPanel.loadExaminationGUIForPatient(patient);
 	//	examinationPatientPanel.setButtons();
 		
 		examinationPatientPanel.setVisible(true);
@@ -192,9 +181,9 @@ public class MedicalRecordGUI extends JFrame {
 	
 	public void showFilesPatientPanel(Patient patient){
 		
-		theMainPanel.remove(filesPatientPanel);
+		this.remove(filesPatientPanel);
 		filesPatientPanel = new FilesPatientPanel(this);
-		theMainPanel.add(filesPatientPanel);
+		this.add(filesPatientPanel);
 		
 	//	examinationPatientPanel.setPatientInformations(patient);
 	//	examinationPatientPanel.setAntecedents(antecedents);
