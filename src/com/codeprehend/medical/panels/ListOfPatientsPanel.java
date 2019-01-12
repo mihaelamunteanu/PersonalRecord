@@ -108,7 +108,7 @@ public class ListOfPatientsPanel extends JPanel {
 		
 		folderAccesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new AccessExamButtonActionListener(parentPanel, patients.get(listOfPatients.getSelectedIndex()));
+				AccessExamButtonActionListener.actionPerformed(parentPanel, patients.get(listOfPatients.getSelectedIndex()));
 			}
 		});
 		

@@ -19,19 +19,25 @@ pgAdmin4 - app
 pass root 
 
 #08.01.2018
-- save pdf locally (ecran setari cu path unde sa se salveze fisierele, cu path default de unde sa incarce fisierele)
+- vorbit cu Cosmin  in ce format vrea data, ce vrea la antet, daca sunt ok etichetele
+- save pdf locally - 2 h
+- (ecran setari cu path unde sa se salveze fisierele, cu path default de unde sa incarce fisierele) - 2h
 - upload files - ok 
-- rearranged and reimplemented screens 
-- clean code, add comments
-- fix buttons navigation
-- validation and throw exception
-- logs
-- tests
-- icon to run app
-- DB test- Db back-up: backup users: http://www.postgresonline.com/journal/archives/81-Backing-up-Login-Roles-aka-Users-and-Group-Roles.html
-- document
-- automatic DB back-up
-- back-up reminder
+- rearranged and reimplemented screens x 7 - 14h
+- clean code, add comments - 3h
+- fix buttons navigation  - 2h 
+- validation and throw exception -4h
+- logs - 4h 
+- tests - 5h 
+- icon to run app - 3h 
+- DB test- Db back-up: backup users: http://www.postgresonline.com/journal/archives/81-Backing-up-Login-Roles-aka-Users-and-Group-Roles.html - 4h 
+- document - 4h 
+- automatic DB back-up - 10h
+- back-up reminder - 5h
+- log in DB?
+- versiune DB intr-un tabel nou
+-------------------------------------------------------
+TOTAL : 63 h
 
 #26.12.2018
 TODO:

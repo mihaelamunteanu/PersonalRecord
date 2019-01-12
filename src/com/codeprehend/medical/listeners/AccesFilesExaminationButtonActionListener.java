@@ -15,12 +15,6 @@ public class AccesFilesExaminationButtonActionListener {
 	}
 	
 	public void actionPerformed(){
-		//TODO to get Attachements
-		/*Patient newPatient = PatientsDAO.getPatientById(patient.getId());
-		List<Antecedent> antecedents = AntecedentsDAO.getAntecedentsByPatientId(patient.getId());
-		List<Examination> examinations = ExaminationDAO.getExaminationsByPatientId(patient.getId());*/
-		
 		mainWindow.showFilesPatientPanel(patient);
-		
 	}
 }

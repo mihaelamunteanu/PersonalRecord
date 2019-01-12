@@ -1,7 +1,5 @@
 package com.codeprehend.medical.listeners;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import com.codeprehend.medical.MedicalRecordGUI;
@@ -13,16 +11,8 @@ import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
 
 public class AccessExamButtonActionListener  {
-	private MedicalRecordGUI mainWindow;
-	private Patient patient; 
 	
-	public AccessExamButtonActionListener(MedicalRecordGUI mainWindow, Patient patient){
-		this.mainWindow = mainWindow;
-		this.patient = patient;
-		this.actionPerformed();
-	}
-	
-	public void actionPerformed(){
+	public static void actionPerformed(MedicalRecordGUI mainWindow, Patient patient){
 		//TODO validation of fields
 		Patient newPatient = PatientsDAO.getPatientById(patient.getId());
 		List<Antecedent> antecedents = AntecedentsDAO.getAntecedentsByPatientId(patient.getId());

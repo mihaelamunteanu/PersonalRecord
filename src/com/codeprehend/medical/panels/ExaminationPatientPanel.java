@@ -220,52 +220,81 @@ public class ExaminationPatientPanel extends JPanel {
 //				100.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
 		medicalInfoPanel.setLayout(gbl_medicalInfoPanel);
 		
-		int ycoordinate = 2;
-		//for antecedente
+		
+		JLabel label = new JLabel("     ");
+		GridBagConstraints gbc_label = new GridBagConstraints();
+		gbc_label.insets = new Insets(0, 0, 0, 0);
+		gbc_label.gridx = 0;
+		gbc_label.gridy = 1;
+		gbc_label.gridwidth = 1;
+		medicalInfoPanel.add(label, gbc_label);
+		
+		int ycoordinate = 1;
+
+//for antecedente
 		for (Antecedent antecedent : antecedents) {
 			
 			JLabel lblAntecedente = new JLabel("Antecedente " +  antecedent.getRegistrationDate());
 			lblAntecedente.setFont(new Font("Tahoma", Font.BOLD, 11));
 			lblAntecedente.setHorizontalAlignment(SwingConstants.LEFT);
 			GridBagConstraints gbc_lblAntecedente = new GridBagConstraints();
-			gbc_lblAntecedente.anchor = GridBagConstraints.WEST;
-			gbc_lblAntecedente.insets = new Insets(0, 0, 5, 5);
+			gbc_lblAntecedente.anchor = GridBagConstraints.WEST; 
+			gbc_lblAntecedente.insets = new Insets(0, 0, 10, 5);
 			gbc_lblAntecedente.gridx = 0;
-			gbc_lblAntecedente.gridy = ycoordinate+1;;
+			gbc_lblAntecedente.gridy = ycoordinate;
 			medicalInfoPanel.add(lblAntecedente, gbc_lblAntecedente);
 			
-			JLabel lblAntcedenteNumarulDoi = new JLabel(antecedent.getAntecedentText());
+			String antecedentText = antecedent.getAntecedentText();
+//					String antecedentTextProcessed = "<html>" + antecedentText + "</html>";
+			
+			JTextArea lblAntcedenteNumarulDoi = new JTextArea(antecedentText, 1, 1);
 			lblAntcedenteNumarulDoi.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			GridBagConstraints gbc_lblAntcedenteNumarulDoi = new GridBagConstraints();
-			gbc_lblAntcedenteNumarulDoi.gridwidth = 1;
+//					gbc_lblAntcedenteNumarulDoi.gridwidth = 1;
 			gbc_lblAntcedenteNumarulDoi.anchor = GridBagConstraints.WEST;
-			gbc_lblAntcedenteNumarulDoi.insets = new Insets(0, 0, 5, 0);
+			gbc_lblAntcedenteNumarulDoi.insets = new Insets(0, 0, 6, 5);
 			gbc_lblAntcedenteNumarulDoi.gridx = 0;
-			gbc_lblAntcedenteNumarulDoi.gridy = ycoordinate+2;
+			gbc_lblAntcedenteNumarulDoi.gridy = ycoordinate+1;
+			gbc_lblAntcedenteNumarulDoi.weighty = 1.0;
+//			lblAntcedenteNumarulDoi.setColumns(3);
 			medicalInfoPanel.add(lblAntcedenteNumarulDoi, gbc_lblAntcedenteNumarulDoi);
+
+			lblAntcedenteNumarulDoi.setEditable(false);  
+			lblAntcedenteNumarulDoi.setCursor(null);  
+			lblAntcedenteNumarulDoi.setOpaque(false);  
+			lblAntcedenteNumarulDoi.setFocusable(false);
+//			lblAntcedenteNumarulDoi.setLineWrap(true);
+//			lblAntcedenteNumarulDoi.setWrapStyleWord(true);
+			
+//					JLabel lblAntcedenteNumarulDoi = new JLabel(antecedentTextProcessed);
+//					lblAntcedenteNumarulDoi.setFont(new Font("Tahoma", Font.PLAIN, 11));
+//					GridBagConstraints gbc_lblAntcedenteNumarulDoi = new GridBagConstraints();
+//					gbc_lblAntcedenteNumarulDoi.gridwidth = 1;
+//					gbc_lblAntcedenteNumarulDoi.anchor = GridBagConstraints.WEST;
+//					gbc_lblAntcedenteNumarulDoi.insets = new Insets(0, 0, 5, 0);
+//					gbc_lblAntcedenteNumarulDoi.gridx = 0;
+//					gbc_lblAntcedenteNumarulDoi.gridy = ycoordinate+1;
+//					medicalInfoPanel.add(lblAntcedenteNumarulDoi, gbc_lblAntcedenteNumarulDoi);
 			
 			ycoordinate = ycoordinate + 2;
 		}
-		
-		JLabel label = new JLabel("     ");
-		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.insets = new Insets(0, 0, 5, 5);
-		gbc_label.gridx = 0;
-		gbc_label.gridy = ycoordinate + 1;
-		medicalInfoPanel.add(label, gbc_label);
-		
-		examinationDiagnosis = new JTextArea();
+				
+		examinationDiagnosis = new JTextArea(1,6);
 		examinationDiagnosis.setFont(new Font("Monospaced", Font.ITALIC, 13));
+		examinationDiagnosis.setRows(6);
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
+		examinationDiagnosis.setText("\n\n\n\n\n\n\n\n");
 		gbc_textArea.gridwidth = 1;
-		gbc_textArea.gridheight = 6;
-		gbc_textArea.insets = new Insets(3, 0, 10, 10);
+		gbc_textArea.insets = new Insets(3, 0, 3, 10);
 		gbc_textArea.fill = GridBagConstraints.BOTH;
 		gbc_textArea.gridx = 0;
-		gbc_textArea.gridy = ycoordinate + 2;
+		gbc_textArea.gridy = ycoordinate;
 		medicalInfoPanel.add(examinationDiagnosis, gbc_textArea);
+		examinationDiagnosis.setText("tralallala");
+		examinationDiagnosis.setFocusable(true);
 		
-		ycoordinate = ycoordinate + 8;
+		ycoordinate = ycoordinate + 1;
+		
 //		for examinations
 		for (Examination examination : examinations) {
 			JLabel lblConsultatie = new JLabel("Consultatie " + examination.getConsultationDate());
@@ -277,14 +306,19 @@ public class ExaminationPatientPanel extends JPanel {
 			gbc_lblConsultatie.gridy = ycoordinate + 1;
 			medicalInfoPanel.add(lblConsultatie, gbc_lblConsultatie);
 			
-			JLabel lblConsultatie_1 = new JLabel(examination.getText());
-			lblConsultatie_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			JTextArea textAreaConsultatie = new JTextArea(examination.getText(), 1, 1);
+			textAreaConsultatie.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			GridBagConstraints gbc_lblConsultatie_1 = new GridBagConstraints();
 			gbc_lblConsultatie_1.anchor = GridBagConstraints.WEST;
 			gbc_lblConsultatie_1.insets = new Insets(0, 0, 12, 5);
 			gbc_lblConsultatie_1.gridx = 0;
 			gbc_lblConsultatie_1.gridy = ycoordinate + 2;
-			medicalInfoPanel.add(lblConsultatie_1, gbc_lblConsultatie_1);
+			medicalInfoPanel.add(textAreaConsultatie, gbc_lblConsultatie_1);
+			
+			textAreaConsultatie.setEditable(false);  
+			textAreaConsultatie.setCursor(null);  
+			textAreaConsultatie.setOpaque(false);  
+			textAreaConsultatie.setFocusable(false);
 			
 			ycoordinate = ycoordinate + 2;
 		}

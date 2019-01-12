@@ -197,7 +197,7 @@ public class FilesPatientPanel extends JPanel {
 		
 		folderAccesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new AccessExamButtonActionListener(parentPanel, pacient);
+				AccessExamButtonActionListener.actionPerformed(parentPanel, pacient);
 			}
 		});
 		

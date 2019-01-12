@@ -46,6 +46,7 @@ public class SaveExaminationButtonActionListener implements ActionListener {
 					patient.getCnp(), patient.getNumarTelefon(), LocalDate.now().toString(), 
 					mainWindow.getExaminationPatientPanel().getExaminationDiagnosis().getText());
 			AtachementsDAO.saveAttachment(attachment);
+			AccessExamButtonActionListener.actionPerformed(mainWindow, patient);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 			JOptionPane.showMessageDialog(mainWindow, e1.getLocalizedMessage(), "Erroare", JOptionPane.ERROR_MESSAGE);
