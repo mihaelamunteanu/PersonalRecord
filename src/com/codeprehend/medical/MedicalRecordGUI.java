@@ -143,8 +143,9 @@ public class MedicalRecordGUI extends JFrame {
 		modifyPatientPanel = new ModifyPatientPanel(this);
 		this.add(modifyPatientPanel);
 		
-		modifyPatientPanel.setPatientEntry(patient);
-		modifyPatientPanel.setAntecedentEntries(antecedents);
+		modifyPatientPanel.setPacient(patient);
+		modifyPatientPanel.setAntecedents(antecedents);
+		modifyPatientPanel.loadModifyGUIPanelForPatient(patient);
 		modifyPatientPanel.setVisible(true);
 		
 		newPatientPanel.setVisible(false);

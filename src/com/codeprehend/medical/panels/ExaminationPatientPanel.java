@@ -44,13 +44,6 @@ public class ExaminationPatientPanel extends JPanel {
 	
 	private JTextArea examinationDiagnosis = new JTextArea();
 	
-	private JButton homeButton = new JButton("Ecran principal");
-	private JButton backFromExaminationPanel = new JButton("Inapoi la lista");
-	private JButton modifyPatientInfoButton = new JButton("Modifica info");
-	private JButton saveExaminationButton = new JButton("Salveaza Consultatia");
-	private JButton fileExaminationButton = new JButton("Acceseaza fisiere");
-	
-	
 	public ExaminationPatientPanel(MedicalRecordGUI parent) {
 		super();
 		this.setLayout(null);
@@ -58,6 +51,7 @@ public class ExaminationPatientPanel extends JPanel {
 		this.parentPanel = parent;
 		this.setVisible(false);
 	}
+	
 	/**
 	 * Loads the patient into JPanel
 	 * 
@@ -71,7 +65,7 @@ public class ExaminationPatientPanel extends JPanel {
 		
 	public void setAntecedents(List<Antecedent> antecedents) {
 		this.antecedents = antecedents;
-		}
+	}
 	
 	/**
 	 * Loads the list of history Examination objects into JPanel
