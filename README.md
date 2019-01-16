@@ -18,6 +18,13 @@ StackBuilder Application to install other PostgreS related  apps
 pgAdmin4 - app 
 pass root 
 
+# 16.01.2019
+- logs
+- validare
+- format data preferat
+- etichete
+
+
 #08.01.2018
 - vorbit cu Cosmin  in ce format vrea data, ce vrea la antet, daca sunt ok etichetele
 - save pdf locally - 2 h
