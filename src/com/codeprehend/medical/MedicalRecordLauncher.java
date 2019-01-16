@@ -10,7 +10,8 @@ public class MedicalRecordLauncher {
 
 	public static void main(String[] args) {
 		
-		new MedicalRecordGUI();
+		MedicalRecordGUI medicalRecordGUI = new MedicalRecordGUI();
+		medicalRecordGUI.showSearchPatientPanel();
 
 	}
 

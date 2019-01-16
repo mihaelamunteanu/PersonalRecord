@@ -65,22 +65,6 @@ public class MedicalRecordGUI extends JFrame {
 		modifyPatientPanel = new ModifyPatientPanel(this);
 		filesPatientPanel = new FilesPatientPanel(this);
 		
-		
-		searchPatientPanel.setBounds(253, 22, 360, 367);
-		this.getContentPane().add(searchPatientPanel, BorderLayout.CENTER);
-		
-		listOfPatientsPanel.setBounds(150, 22, 700, 367);
-		this.getContentPane().add(listOfPatientsPanel, BorderLayout.CENTER);
-		
-		newPatientPanel.setBounds(40, 20, 882, 509);
-		this.getContentPane().add(newPatientPanel, BorderLayout.CENTER);
-		
-		modifyPatientPanel.setBounds(40, 20, 882, 509);
-		this.getContentPane().add(modifyPatientPanel, BorderLayout.CENTER);
-		
-		filesPatientPanel.setBounds(253, 22, 800, 367);
-		this.getContentPane().add(filesPatientPanel, BorderLayout.CENTER);
-		
 	    this.setVisible(true);
 	}
 	
@@ -116,7 +100,13 @@ public class MedicalRecordGUI extends JFrame {
 	
 	//TODO to put this in a controller outside this class?
 	public void showSearchPatientPanel() {
+		this.remove(searchPatientPanel);
+		searchPatientPanel = new SearchPatientPanel(this);
+//		this.add(searchPatientPanel);
+		searchPatientPanel.loadSearchPatientGUIPanel();
 		searchPatientPanel.setVisible(true);
+
+		this.validate();
 		
 		examinationPatientPanel.setVisible(false);
 		newPatientPanel.setVisible(false);
