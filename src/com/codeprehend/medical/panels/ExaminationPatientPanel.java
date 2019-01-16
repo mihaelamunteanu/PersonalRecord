@@ -383,7 +383,7 @@ public class ExaminationPatientPanel extends JPanel {
 		
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new AccesFilesExaminationButtonActionListener(parentPanel, currentPatient);
+				AccesFilesExaminationButtonActionListener.actionPerformed(parentPanel, currentPatient);
 			}
 		});
 	}

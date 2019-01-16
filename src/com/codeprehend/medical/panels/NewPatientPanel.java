@@ -1,10 +1,12 @@
 package com.codeprehend.medical.panels;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -12,14 +14,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.border.TitledBorder;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 import com.codeprehend.medical.MedicalRecordGUI;
-import com.codeprehend.medical.database.InputValidation;
 import com.codeprehend.medical.listeners.CancelNewPatientButtonActionListener;
 import com.codeprehend.medical.listeners.SaveNewPatientButtonActionListener;
-import com.codeprehend.medical.resources.Patient;
 
 public class NewPatientPanel extends JPanel {
 
@@ -28,280 +29,319 @@ public class NewPatientPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private MedicalRecordGUI parentPanel;
-	private Patient pacient;
 
-	private JLabel labelSearchPatient = new JLabel("Inregistrare Pacient: ");
-	private JLabel labelDate = new JLabel("Data nastere: ");
-	private JLabel labelDateFormat = new JLabel("(aaaa-ll-zz)");
-	private JLabel labelName = new JLabel("Nume: ");
-	private JLabel labelFirstName = new JLabel("Prenume: ");
-	private JLabel labelRegNumber = new JLabel("CNP: ");
-	private JLabel labelPhoneNumber = new JLabel("Tel: ");
-	private JLabel naturalBirthsNumber = new JLabel("Nasteri naturale: ");
-	private JLabel cSectionBirthNumber = new JLabel("Cezariene: ");
-	private JLabel requestedAbortionNumber = new JLabel("Avorturi la cerere:");
-	private JLabel spontaneousAbortionNumber = new JLabel("Avorturi spontane:");
-	private JLabel antecedents = new JLabel();
-	private JLabel antecedentsDate = new JLabel();
-	
-	private JTextField textFieldDate;
-	private JTextField textFieldName;
-	private JTextField textFieldFirstName;
-	private JTextField textFieldRegNumber;
-	private JTextField textFieldPhoneNumber;
-	private JTextField textFieldNaturalBirthsNumber;
-	private JTextField textFieldcSectionBirthNumber;
-	private JTextField textFieldRequestedAbortionNumber;
-	private JTextField textFieldSpotaneousAbortionNumber;
-	private JTextArea  textAreaAntecedents;
-	
-	private JScrollPane scrollPane_1 = new JScrollPane();
-	
-	//it saves in DB and moves to screen CurrentDiagnosisPanel
-	private JButton saveNewPatientButton = new JButton("Salveaza");
-	private JButton cancelNewPatientButton = new JButton("Renunta");
-	
-	private GridBagConstraints gc = new GridBagConstraints();
+	private JTextField textFieldDate = new JTextField();
+	private JTextField textFieldName = new JTextField();
+	private JTextField textFieldFirstName = new JTextField();
+	private JTextField textFieldRegNumber = new JTextField();
+	private JTextField textFieldPhoneNumber = new JTextField();
+	private JTextField textFieldNaturalBirthsNumber = new JTextField();
+	private JTextField textFieldcSectionBirthNumber = new JTextField();
+	private JTextField textFieldRequestedAbortionNumber = new JTextField();
+	private JTextField textFieldSpotaneousAbortionNumber = new JTextField();
+	private JTextArea  textAreaAntecedents = new JTextArea();
 	
 	public NewPatientPanel(MedicalRecordGUI parent) {
 		super();
 		this.setLayout(null);
+
 		this.parentPanel = parent;
-		
-		saveNewPatientButton.addActionListener(new SaveNewPatientButtonActionListener(parentPanel));
-		cancelNewPatientButton.addActionListener(new CancelNewPatientButtonActionListener(parentPanel));
-
-		// make a separate function
-		Date currentDate = new Date();
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		String stringCurrentDate = format.format(currentDate);
-		
-		this.setBounds(40, 20, 882, 509);
-		this.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Pacienta noua:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		this.setLayout(null);
-		
-		labelName.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		labelName.setBounds(107, 26, 46, 14);
-		this.add(labelName);
-		
-		textFieldName = new JTextField();
-		textFieldName.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		textFieldName.setBounds(148, 20, 219, 26);
-		this.add(textFieldName);
-		textFieldName.setColumns(10);
-		
-		textFieldFirstName = new JTextField();
-		textFieldFirstName.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		textFieldFirstName.setColumns(10);
-		textFieldFirstName.setBounds(485, 23, 219, 26);
-		this.add(textFieldFirstName);
-		
-		labelFirstName.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		labelFirstName.setBounds(424, 26, 58, 14);
-		this.add(labelFirstName);
-		
-		labelDate.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		labelDate.setBounds(65, 72, 77, 14);
-		this.add(labelDate);
-		
-		textFieldDate = new JTextField();
-		textFieldDate.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		textFieldDate.setColumns(10);
-		textFieldDate.setBounds(148, 66, 219, 26);
-		this.add(textFieldDate);
-		
-		labelDateFormat.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		labelDateFormat.setBounds(76, 86, 63, 14);
-		this.add(labelDateFormat);
-		
-		labelRegNumber.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		labelRegNumber.setBounds(452, 72, 38, 14);
-		this.add(labelRegNumber);
-		
-		textFieldRegNumber = new JTextField();
-		textFieldRegNumber.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		textFieldRegNumber.setColumns(10);
-		textFieldRegNumber.setBounds(485, 66, 219, 26);
-		this.add(textFieldRegNumber);
-		
-		labelPhoneNumber.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		labelPhoneNumber.setBounds(97, 114, 58, 14);
-		this.add(labelPhoneNumber);
-		
-		textFieldPhoneNumber = new JTextField();
-		textFieldPhoneNumber.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		textFieldPhoneNumber.setColumns(10);
-		textFieldPhoneNumber.setBounds(148, 111, 219, 26);
-		this.add(textFieldPhoneNumber);
-		
-		naturalBirthsNumber.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		naturalBirthsNumber.setBounds(34, 163, 94, 14);
-		this.add(naturalBirthsNumber);
-		
-		textFieldNaturalBirthsNumber = new JTextField();
-		textFieldNaturalBirthsNumber.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		textFieldNaturalBirthsNumber.setColumns(10);
-		textFieldNaturalBirthsNumber.setBounds(129, 157, 38, 26);
-		this.add(textFieldNaturalBirthsNumber);
-		
-		textFieldcSectionBirthNumber = new JTextField();
-		textFieldcSectionBirthNumber.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		textFieldcSectionBirthNumber.setColumns(10);
-		textFieldcSectionBirthNumber.setBounds(263, 157, 38, 26);
-		this.add(textFieldcSectionBirthNumber);
-		
-		cSectionBirthNumber.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		cSectionBirthNumber.setBounds(195, 163, 68, 14);
-		this.add(cSectionBirthNumber);
-		
-		requestedAbortionNumber.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		requestedAbortionNumber.setBounds(350, 163, 103, 14);
-		this.add(requestedAbortionNumber);
-		
-		textFieldRequestedAbortionNumber = new JTextField();
-		textFieldRequestedAbortionNumber.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		textFieldRequestedAbortionNumber.setColumns(10);
-		textFieldRequestedAbortionNumber.setBounds(454, 157, 38, 26);
-		this.add(textFieldRequestedAbortionNumber);
-		
-		spontaneousAbortionNumber.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-		spontaneousAbortionNumber.setBounds(559, 163, 117, 14);
-		this.add(spontaneousAbortionNumber);
-		
-		textFieldSpotaneousAbortionNumber = new JTextField();
-		textFieldSpotaneousAbortionNumber.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		textFieldSpotaneousAbortionNumber.setColumns(10);
-		textFieldSpotaneousAbortionNumber.setBounds(666, 157, 38, 26);
-		this.add(textFieldSpotaneousAbortionNumber);
-		
-		saveNewPatientButton.setBounds(195, 207, 106, 37);
-		this.add(saveNewPatientButton);
-
-		cancelNewPatientButton.setBounds(585, 214, 106, 37);
-		this.add(cancelNewPatientButton);
-		
-		String str = new String("Antecedente la data ");
-		
-		antecedents = new JLabel(str.concat(stringCurrentDate));
-		antecedents.setFont(new Font("Tahoma", Font.BOLD, 11));
-		antecedents.setBounds(34, 259, 229, 26);
-		this.add(antecedents);
-		
-		scrollPane_1.setBounds(34, 283, 670, 215);
-		this.add(scrollPane_1);
-		
-		textAreaAntecedents = new JTextArea();
-		scrollPane_1.setViewportView(textAreaAntecedents);
-		
-		antecedentsDate.setText(stringCurrentDate);
-		Font fontDate = new Font("TimesNewRoman", Font.BOLD, 16);
-		antecedentsDate.setFont(fontDate);
-
 		this.setVisible(false);
 	}
-
+	
+	public void loadNewPatientGUIPanel() {
+		this.setBorder(new LineBorder(new Color(0, 0, 0)));
+		parentPanel.add(this, BorderLayout.CENTER);
+		GridBagLayout gbl_GridBagLayoutPanel = new GridBagLayout();
+		gbl_GridBagLayoutPanel.columnWidths = new int[] {0};
+		gbl_GridBagLayoutPanel.rowHeights = new int[] {0, 0, 0, 0};
+		gbl_GridBagLayoutPanel.columnWeights = new double[]{1.0};
+		gbl_GridBagLayoutPanel.rowWeights = new double[]{0.03, 0.02, 0.9, 0.05};
+		this.setLayout(gbl_GridBagLayoutPanel);
+		
+		JPanel InformationGridBagLayoutPanel =  new JPanel();
+		GridBagConstraints gbc_InformationGridBagLayoutPanel = new GridBagConstraints();
+		gbc_InformationGridBagLayoutPanel.anchor = GridBagConstraints.NORTH;
+		gbc_InformationGridBagLayoutPanel.insets = new Insets(5, 45, 0, 45);
+		gbc_InformationGridBagLayoutPanel.weightx = 1.0;
+		gbc_InformationGridBagLayoutPanel.fill = GridBagConstraints.BOTH;
+		gbc_InformationGridBagLayoutPanel.gridx = 0;
+		gbc_InformationGridBagLayoutPanel.gridy = 0;
+		this.add(InformationGridBagLayoutPanel, gbc_InformationGridBagLayoutPanel);
+		GridBagLayout gbl_InformationGridBagLayoutPanel = new GridBagLayout();
+		gbl_InformationGridBagLayoutPanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
+		gbl_InformationGridBagLayoutPanel.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_InformationGridBagLayoutPanel.columnWeights = new double[]{0.0, 1.0, 0.0, 1, 0.0, 1, Double.MIN_VALUE};
+		gbl_InformationGridBagLayoutPanel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		InformationGridBagLayoutPanel.setLayout(gbl_InformationGridBagLayoutPanel);
+		
+		JLabel lblAntet = new JLabel("   ");
+		GridBagConstraints gbc_lblAntet = new GridBagConstraints();
+		gbc_lblAntet.anchor = GridBagConstraints.WEST;
+		gbc_lblAntet.insets = new Insets(0, 0, 5, 5);
+		gbc_lblAntet.gridx = 0;
+		gbc_lblAntet.gridy = 0;
+		InformationGridBagLayoutPanel.add(lblAntet, gbc_lblAntet);
+		
+		JLabel NameLabel = new JLabel("Nume");
+		GridBagConstraints gbc_NameLabel = new GridBagConstraints();
+		gbc_NameLabel.anchor = GridBagConstraints.EAST;
+		gbc_NameLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_NameLabel.gridx = 0;
+		gbc_NameLabel.gridy = 1;
+		InformationGridBagLayoutPanel.add(NameLabel, gbc_NameLabel);
+		
+//		textFieldName.setText();
+		GridBagConstraints gbc_txtMunteanu = new GridBagConstraints();
+		gbc_txtMunteanu.insets = new Insets(0, 0, 5, 5);
+		gbc_txtMunteanu.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtMunteanu.gridx = 1;
+		gbc_txtMunteanu.gridy = 1;
+		InformationGridBagLayoutPanel.add(textFieldName, gbc_txtMunteanu);
+		textFieldName.setColumns(20);
+		
+		JLabel PrenumeLabel = new JLabel("Prenume");
+		GridBagConstraints gbc_PrenumeLabel = new GridBagConstraints();
+		gbc_PrenumeLabel.anchor = GridBagConstraints.EAST;
+		gbc_PrenumeLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_PrenumeLabel.gridx = 2;
+		gbc_PrenumeLabel.gridy = 1;
+		InformationGridBagLayoutPanel.add(PrenumeLabel, gbc_PrenumeLabel);
+		
+//		textFieldFirstName.setText(pacient.getPrenume());
+		GridBagConstraints gbc_txtMihaela = new GridBagConstraints();
+		gbc_txtMihaela.insets = new Insets(0, 0, 5, 5);
+		gbc_txtMihaela.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtMihaela.gridx = 3;
+		gbc_txtMihaela.gridy = 1;
+		InformationGridBagLayoutPanel.add(textFieldFirstName, gbc_txtMihaela);
+		textFieldFirstName.setColumns(20);
+		
+		JLabel lblTelefon = new JLabel("Telefon");
+		GridBagConstraints gbc_lblTelefon = new GridBagConstraints();
+		gbc_lblTelefon.anchor = GridBagConstraints.EAST;
+		gbc_lblTelefon.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTelefon.gridx = 4;
+		gbc_lblTelefon.gridy = 1;
+		InformationGridBagLayoutPanel.add(lblTelefon, gbc_lblTelefon);
+		
+		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
+		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_2.gridx = 5;
+		gbc_textField_2.gridy = 1;
+		InformationGridBagLayoutPanel.add(textFieldPhoneNumber, gbc_textField_2);
+		textFieldPhoneNumber.setColumns(20);
+		
+		JLabel DataNastereLabel = new JLabel("Data nasterii");
+		GridBagConstraints gbc_DataNastereLabel = new GridBagConstraints();
+		gbc_DataNastereLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_DataNastereLabel.anchor = GridBagConstraints.EAST;
+		gbc_DataNastereLabel.gridx = 0;
+		gbc_DataNastereLabel.gridy = 2;
+		InformationGridBagLayoutPanel.add(DataNastereLabel, gbc_DataNastereLabel);
+		
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.insets = new Insets(0, 0, 5, 5);
+		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField.gridx = 1;
+		gbc_textField.gridy = 2;
+		InformationGridBagLayoutPanel.add(textFieldDate, gbc_textField);
+		textFieldDate.setColumns(20);
+		
+		JLabel CNPLabel = new JLabel("CNP");
+		GridBagConstraints gbc_CNPLabel = new GridBagConstraints();
+		gbc_CNPLabel.anchor = GridBagConstraints.EAST;
+		gbc_CNPLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_CNPLabel.gridx = 2;
+		gbc_CNPLabel.gridy = 2;
+		InformationGridBagLayoutPanel.add(CNPLabel, gbc_CNPLabel);
+		
+		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
+		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_1.gridx = 3;
+		gbc_textField_1.gridy = 2;
+		InformationGridBagLayoutPanel.add(textFieldRegNumber, gbc_textField_1);
+		textFieldRegNumber.setColumns(20);
+		
+		JPanel pregnaciesGridBagLayoutPanel =  new JPanel();
+		GridBagConstraints gbc_PregnanciesGridBagLayoutPanel = new GridBagConstraints();
+		gbc_PregnanciesGridBagLayoutPanel.insets = new Insets(0, 45, 6, 45);
+		gbc_PregnanciesGridBagLayoutPanel.weightx = 1.0;
+		gbc_PregnanciesGridBagLayoutPanel.fill = GridBagConstraints.BOTH;
+		gbc_PregnanciesGridBagLayoutPanel.gridx = 0;
+		gbc_PregnanciesGridBagLayoutPanel.gridy = 1;
+		this.add(pregnaciesGridBagLayoutPanel, gbc_PregnanciesGridBagLayoutPanel);
+		GridBagLayout gbl_PregnanciesGridBagLayoutPanel = new GridBagLayout();
+		gbl_PregnanciesGridBagLayoutPanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_PregnanciesGridBagLayoutPanel.rowHeights = new int[]{0};
+		gbl_PregnanciesGridBagLayoutPanel.columnWeights = new double[]{0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, Double.MIN_VALUE};
+		gbl_PregnanciesGridBagLayoutPanel.rowWeights = new double[]{0.0};
+		pregnaciesGridBagLayoutPanel.setLayout(gbl_PregnanciesGridBagLayoutPanel);
+		
+		JLabel lblNasteriNaturale = new JLabel("Nasteri naturale");
+		GridBagConstraints gbc_lblNasteriNaturale = new GridBagConstraints();
+		gbc_lblNasteriNaturale.anchor = GridBagConstraints.EAST;
+		gbc_lblNasteriNaturale.insets = new Insets(0, 0, 0, 5);
+		gbc_lblNasteriNaturale.gridx = 0;
+		gbc_lblNasteriNaturale.gridy = 0;
+		pregnaciesGridBagLayoutPanel.add(lblNasteriNaturale, gbc_lblNasteriNaturale);
+		
+		textFieldNaturalBirthsNumber.setHorizontalAlignment(SwingConstants.CENTER);
+        Dimension noSize = textFieldNaturalBirthsNumber.getPreferredSize();
+        noSize.width = 2;
+		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
+		gbc_textField_3.insets = new Insets(0, 0, 0, 5);
+		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_3.gridx = 1;
+		gbc_textField_3.gridy = 0;
+		pregnaciesGridBagLayoutPanel.add(textFieldNaturalBirthsNumber, gbc_textField_3);
+		
+		JLabel lblCezariene = new JLabel("Cezariene");
+		GridBagConstraints gbc_lblCezariene = new GridBagConstraints();
+		gbc_lblCezariene.anchor = GridBagConstraints.EAST;
+		gbc_lblCezariene.insets = new Insets(0, 0, 0, 5);
+		gbc_lblCezariene.gridx = 2;
+		gbc_lblCezariene.gridy = 0;
+		pregnaciesGridBagLayoutPanel.add(lblCezariene, gbc_lblCezariene);
+		
+		textFieldcSectionBirthNumber.setHorizontalAlignment(SwingConstants.CENTER);
+		GridBagConstraints gbc_textField_4 = new GridBagConstraints();
+		gbc_textField_4.insets = new Insets(0, 0, 0, 5);
+		gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_4.gridx = 3;
+		gbc_textField_4.gridy = 0;
+		pregnaciesGridBagLayoutPanel.add(textFieldcSectionBirthNumber, gbc_textField_4);
+		textFieldcSectionBirthNumber.setColumns(1);
+		
+		JLabel lblAvorturiLaCerere = new JLabel("Avorturi la cerere");
+		GridBagConstraints gbc_lblAvorturiLaCerere = new GridBagConstraints();
+		gbc_lblAvorturiLaCerere.anchor = GridBagConstraints.EAST;
+		gbc_lblAvorturiLaCerere.insets = new Insets(0, 0, 0, 5);
+		gbc_lblAvorturiLaCerere.gridx = 4;
+		gbc_lblAvorturiLaCerere.gridy = 0;
+		pregnaciesGridBagLayoutPanel.add(lblAvorturiLaCerere, gbc_lblAvorturiLaCerere);
+		
+		textFieldRequestedAbortionNumber.setHorizontalAlignment(SwingConstants.CENTER);
+		GridBagConstraints gbc_textField_5 = new GridBagConstraints();
+		gbc_textField_5.insets = new Insets(0, 0, 0, 5);
+		gbc_textField_5.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_5.gridx = 5;
+		gbc_textField_5.gridy = 0;
+		pregnaciesGridBagLayoutPanel.add(textFieldRequestedAbortionNumber, gbc_textField_5);
+		textFieldRequestedAbortionNumber.setColumns(1);
+		
+		JLabel lblAvorturiSpontane = new JLabel("Avorturi spontane");
+		GridBagConstraints gbc_lblAvorturiSpontane = new GridBagConstraints();
+		gbc_lblAvorturiSpontane.anchor = GridBagConstraints.EAST;
+		gbc_lblAvorturiSpontane.insets = new Insets(0, 0, 0, 5);
+		gbc_lblAvorturiSpontane.gridx = 6;
+		gbc_lblAvorturiSpontane.gridy = 0;
+		pregnaciesGridBagLayoutPanel.add(lblAvorturiSpontane, gbc_lblAvorturiSpontane);
+		
+		textFieldSpotaneousAbortionNumber.setHorizontalAlignment(SwingConstants.CENTER);
+		GridBagConstraints gbc_textField_6 = new GridBagConstraints();
+		gbc_textField_6.insets = new Insets(0, 0, 0, 5);
+		gbc_textField_6.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_6.gridx = 7;
+		gbc_textField_6.gridy = 0;
+		pregnaciesGridBagLayoutPanel.add(textFieldSpotaneousAbortionNumber, gbc_textField_6);
+		textFieldSpotaneousAbortionNumber.setColumns(1);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.insets = new Insets(0, 45, 5, 45);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 2;
+		this.add(scrollPane, gbc_scrollPane);
+		
+		JPanel panel = new JPanel();
+		scrollPane.setColumnHeaderView(panel);
+		
+		JPanel panel_1 = new JPanel();
+		scrollPane.setRowHeaderView(panel_1);
+		
+		JPanel medicalInfoPanel = new JPanel();
+		scrollPane.setViewportView(medicalInfoPanel);
+		GridBagLayout gbl_medicalInfoPanel = new GridBagLayout();
+		gbl_medicalInfoPanel.columnWidths = new int[]{0};
+		gbl_medicalInfoPanel.rowHeights = new int[]{0, 0, 0, 0, 0,0};
+		gbl_medicalInfoPanel.columnWeights = new double[]{1.0};
+		gbl_medicalInfoPanel.rowWeights = new double[]{1.0, 100.0};
+		medicalInfoPanel.setLayout(gbl_medicalInfoPanel);
+		
+		JLabel lblAntecedente_1 = new JLabel("Antecedente");
+		GridBagConstraints gbc_lblAntecedente_1 = new GridBagConstraints();
+		gbc_lblAntecedente_1.anchor = GridBagConstraints.WEST;
+		gbc_lblAntecedente_1.insets = new Insets(0, 0, 5, 0);
+		gbc_lblAntecedente_1.gridx = 0;
+		gbc_lblAntecedente_1.gridy = 0;
+		medicalInfoPanel.add(lblAntecedente_1, gbc_lblAntecedente_1);
+		
+		textAreaAntecedents.setFont(new Font("Monospaced", Font.ITALIC, 13));
+		GridBagConstraints gbc_textArea = new GridBagConstraints();
+		gbc_textArea.gridwidth = 1;
+		gbc_textArea.gridheight = 6;
+		gbc_textArea.insets = new Insets(3, 0, 10, 10);
+		gbc_textArea.fill = GridBagConstraints.BOTH;
+		gbc_textArea.gridx = 0;
+		gbc_textArea.gridy = 1;
+		medicalInfoPanel.add(textAreaAntecedents, gbc_textArea);
+		textAreaAntecedents.setRows(6);
+		
+		JLabel label = new JLabel("     ");
+		GridBagConstraints gbc_label = new GridBagConstraints();
+		gbc_label.insets = new Insets(0, 0, 5, 0);
+		gbc_label.gridx = 0;
+		gbc_label.gridy = 7;
+		medicalInfoPanel.add(label, gbc_label);
+		
+		JPanel buttonPanel = new JPanel();
+		GridBagConstraints gbc_buttonPanel = new GridBagConstraints();
+		gbc_buttonPanel.insets = new Insets(8, 25, 35, 15);
+		gbc_buttonPanel.fill = GridBagConstraints.BOTH;
+		gbc_buttonPanel.gridx = 0;
+		gbc_buttonPanel.gridy = 3;
+		this.add(buttonPanel, gbc_buttonPanel);
+		GridBagLayout gbl_buttonPanel = new GridBagLayout();
+		gbl_buttonPanel.columnWidths = new int[]{0};
+		gbl_buttonPanel.rowHeights = new int[]{0, 0};
+		gbl_buttonPanel.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
+		gbl_buttonPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		buttonPanel.setLayout(gbl_buttonPanel);
+		
+		JButton btnNewButton_7 = new JButton("Inapoi");
+		GridBagConstraints gbc_btnNewButton_7 = new GridBagConstraints();
+		gbc_btnNewButton_7.anchor = GridBagConstraints.WEST;
+		gbc_btnNewButton_7.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton_7.gridx = 1;
+		gbc_btnNewButton_7.gridy = 0;
+		buttonPanel.add(btnNewButton_7, gbc_btnNewButton_7);
+		
+		btnNewButton_7.addActionListener(new CancelNewPatientButtonActionListener(parentPanel));
+		
+		
+		JButton btnSalveaza = new JButton("SALVEAZA CONSULTATIE");
+		btnSalveaza.setVerticalAlignment(SwingConstants.TOP);
+		btnSalveaza.setFont(new Font("Tahoma", Font.BOLD, 13));
+		GridBagConstraints gbc_btnSalveaza = new GridBagConstraints();
+		gbc_btnSalveaza.anchor = GridBagConstraints.NORTH;
+		gbc_btnSalveaza.gridheight = 2;
+		gbc_btnSalveaza.gridx = 5;
+		gbc_btnSalveaza.gridy = 0;
+		buttonPanel.add(btnSalveaza, gbc_btnSalveaza);
+		btnSalveaza.addActionListener(new SaveNewPatientButtonActionListener(parentPanel));
+	}
+	
 	public MedicalRecordGUI getParentPanel() {
 		return parentPanel;
 	}
 
 	public void setParentPanel(MedicalRecordGUI parentPanel) {
 		this.parentPanel = parentPanel;
-	}
-
-	public Patient getPacient() {
-		return pacient;
-	}
-
-	public void setPacient(Patient pacient) {
-		this.pacient = pacient;
-	}
-
-	public JLabel getLabelSearchPatient() {
-		return labelSearchPatient;
-	}
-
-	public void setLabelSearchPatient(JLabel labelSearchPatient) {
-		this.labelSearchPatient = labelSearchPatient;
-	}
-
-	public JLabel getLabelDate() {
-		return labelDate;
-	}
-
-	public void setLabelDate(JLabel labelDate) {
-		this.labelDate = labelDate;
-	}
-
-	public JLabel getLabelName() {
-		return labelName;
-	}
-
-	public void setLabelName(JLabel labelName) {
-		this.labelName = labelName;
-	}
-
-	public JLabel getLabelFirstName() {
-		return labelFirstName;
-	}
-
-	public void setLabelFirstName(JLabel labelFirstName) {
-		this.labelFirstName = labelFirstName;
-	}
-
-	public JLabel getLabelRegNumber() {
-		return labelRegNumber;
-	}
-
-	public void setLabelRegNumber(JLabel labelRegNumber) {
-		this.labelRegNumber = labelRegNumber;
-	}
-
-	public JLabel getLabelPhoneNumber() {
-		return labelPhoneNumber;
-	}
-
-	public void setLabelPhoneNumber(JLabel labelPhoneNumber) {
-		this.labelPhoneNumber = labelPhoneNumber;
-	}
-
-	public JLabel getNaturalBirthsNumber() {
-		return naturalBirthsNumber;
-	}
-
-	public void setNaturalBirthsNumber(JLabel naturalBirthsNumber) {
-		this.naturalBirthsNumber = naturalBirthsNumber;
-	}
-
-	public JLabel getcSectionBirthNumber() {
-		return cSectionBirthNumber;
-	}
-
-	public void setcSectionBirthNumber(JLabel cSectionBirthNumber) {
-		this.cSectionBirthNumber = cSectionBirthNumber;
-	}
-
-	public JLabel getRequestedAbortionNumber() {
-		return requestedAbortionNumber;
-	}
-
-	public void setRequestedAbortionNumber(JLabel requestedAbortionNumber) {
-		this.requestedAbortionNumber = requestedAbortionNumber;
-	}
-
-	public JLabel getSpotaneousAbortionNumber() {
-		return spontaneousAbortionNumber;
-	}
-
-	public void setSpotaneousAbortionNumber(JLabel spotaneousAbortionNumber) {
-		this.spontaneousAbortionNumber = spotaneousAbortionNumber;
-	}
-
-	public JLabel getAntecedents() {
-		return antecedents;
-	}
-
-	public void setAntecedents(JLabel antecedents) {
-		this.antecedents = antecedents;
 	}
 
 	public JTextField getTextFieldDate() {
@@ -380,12 +420,6 @@ public class NewPatientPanel extends JPanel {
 		return textAreaAntecedents;
 	}
 
-	public GridBagConstraints getGc() {
-		return gc;
-	}
 
-	public void setGc(GridBagConstraints gc) {
-		this.gc = gc;
-	}
 
 }

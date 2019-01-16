@@ -86,13 +86,14 @@ public class MedicalRecordGUI extends JFrame {
 	
 	//TODO to put this in a controller outside this class?
 	public void showPanelListOfPatients(List<Patient> listOfPatients) {
+		
 		//TODO see if there are time when this panel shouldnt be reset
 		this.remove(listOfPatientsPanel);
 		listOfPatientsPanel = new ListOfPatientsPanel(this);
 		listOfPatientsPanel.setBounds(150, 22, 700, 367);
 		this.add(listOfPatientsPanel);
 		
-		listOfPatientsPanel.setPatientsEntries(listOfPatients);
+		listOfPatientsPanel.loadListOfPatientsGUIPanel(listOfPatients);
 		listOfPatientsPanel.setVisible(true);
 		
 		searchPatientPanel.setVisible(false);
@@ -129,6 +130,8 @@ public class MedicalRecordGUI extends JFrame {
 		this.remove(newPatientPanel);
 		newPatientPanel = new NewPatientPanel(this);
 		this.add(newPatientPanel);
+		
+		newPatientPanel.loadNewPatientGUIPanel();
 		newPatientPanel.setVisible(true);
 		
 		searchPatientPanel.setVisible(false);
