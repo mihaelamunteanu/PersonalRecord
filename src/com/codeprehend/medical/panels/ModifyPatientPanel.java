@@ -24,10 +24,7 @@ import javax.swing.border.LineBorder;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.ExaminationDAO;
-import com.codeprehend.medical.listeners.AccesFilesExaminationButtonActionListener;
-import com.codeprehend.medical.listeners.BackFromExaminationPatientPanelButtonActionListener;
 import com.codeprehend.medical.listeners.BackFromModifyPatientPanelButtonActionListener;
-import com.codeprehend.medical.listeners.CancelNewPatientButtonActionListener;
 import com.codeprehend.medical.listeners.SaveModificationsForPatientButtonActionListener;
 import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Patient;

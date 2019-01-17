@@ -45,10 +45,10 @@ public class SaveModificationsForPatientButtonActionListener implements ActionLi
 		Patient newPatient = new Patient();
 		
 		try {
-			InputValidation.validateSaveTextField(name);
-			InputValidation.validateSaveTextField(firstName);
-			InputValidation.validateSavePhoneNumber(phoneNumber);
-			InputValidation.validateSaveRegNumber(regNumber);
+			InputValidation.validateTextField(name);
+			InputValidation.validateTextField(firstName);
+			InputValidation.validatePhoneNumber(phoneNumber);
+			InputValidation.validateRegNumber(regNumber);
 			InputValidation.validateBirthsNumber(naturalBirths, false);
 			InputValidation.validateBirthsNumber(csectionBirths, false);
 			InputValidation.validateBirthsNumber(requestedAborstions, false);

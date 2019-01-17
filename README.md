@@ -23,6 +23,18 @@ pass root
 - validare
 - format data preferat
 - etichete
+- clean code
+- comments
+- button navigation
+- bat for app
+- DB tests
+- DB backup procedure
+- versiune DB in tabel nou
+- DB installation procedure
+- doc
+- testsicon to run app
+- organize folders for Db
+- sav and open files naming convention and folder
 
 
 #08.01.2018

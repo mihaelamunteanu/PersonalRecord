@@ -1,26 +1,24 @@
 package com.codeprehend.medical.tests;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import javax.swing.JLabel;
-import java.awt.Insets;
-import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
-import java.awt.Font;
-import javax.swing.JList;
+import javax.swing.border.LineBorder;
 
 public class FilesPatientPanel {
 
@@ -65,7 +63,7 @@ public class FilesPatientPanel {
 		gbl_GridBagLayoutPanel.columnWidths = new int[] {0};
 		gbl_GridBagLayoutPanel.rowHeights = new int[] {0, 0, 0, 0, 0};
 		gbl_GridBagLayoutPanel.columnWeights = new double[]{1.0};
-		gbl_GridBagLayoutPanel.rowWeights = new double[]{0.05, 1.0, 1.0, 1.0, 1.0};
+		gbl_GridBagLayoutPanel.rowWeights = new double[]{0.05, 1.0, 0.1, 0.1, 0.1};
 		GridBagLayoutPanel.setLayout(gbl_GridBagLayoutPanel);
 		
 		JPanel InformationGridBagLayoutPanel =  new JPanel();
@@ -167,13 +165,30 @@ public class FilesPatientPanel {
 		gbc_lblAvorturiSpontane.gridy = 2;
 		InformationGridBagLayoutPanel.add(lblAvorturiSpontane, gbc_lblAvorturiSpontane);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.insets = new Insets(0, 45, 5, 45);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 1;
+		GridBagLayoutPanel.add(scrollPane, gbc_scrollPane);
+		
+		JPanel panel = new JPanel();
+		scrollPane.setColumnHeaderView(panel);
+		
+		JPanel panel_1 = new JPanel();
+		scrollPane.setRowHeaderView(panel_1);
+
 		JPanel fileListPanel = new JPanel();
+		scrollPane.setViewportView(fileListPanel);
+		
 		GridBagConstraints gbc_fileListPanel = new GridBagConstraints();
 		gbc_fileListPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_fileListPanel.fill = GridBagConstraints.BOTH;
 		gbc_fileListPanel.gridx = 0;
-		gbc_fileListPanel.gridy = 1;
-		GridBagLayoutPanel.add(fileListPanel, gbc_fileListPanel);
+		gbc_fileListPanel.gridy = 0;
+		scrollPane.add(fileListPanel, gbc_fileListPanel);
 		GridBagLayout gbl_fileListPanel = new GridBagLayout();
 		gbl_fileListPanel.columnWidths = new int[]{0, 0, 0};
 		gbl_fileListPanel.rowHeights = new int[]{0, 0};
@@ -242,18 +257,18 @@ public class FilesPatientPanel {
 		GridBagLayoutPanel.add(browseFilesPanel, gbc_browseFilesPanel);
 		GridBagLayout gbl_browseFilesPanel = new GridBagLayout();
 		gbl_browseFilesPanel.columnWidths = new int[]{0, 0, 0};
-		gbl_browseFilesPanel.rowHeights = new int[]{0, 0};
+		gbl_browseFilesPanel.rowHeights = new int[]{0};
 		gbl_browseFilesPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_browseFilesPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_browseFilesPanel.rowWeights = new double[]{0.0};
 		browseFilesPanel.setLayout(gbl_browseFilesPanel);
 		
 		browseField = new JTextField();
 		GridBagConstraints gbc_browseField = new GridBagConstraints();
-		gbc_browseField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_browseField.gridx = 1;
 		gbc_browseField.gridy = 0;
+		browseField.setColumns(80);
+		
 		browseFilesPanel.add(browseField, gbc_browseField);
-		browseField.setColumns(10);
 		
 		JPanel browseButtonPanel = new JPanel();
 		GridBagConstraints gbc_browseButtonPanel = new GridBagConstraints();
@@ -263,25 +278,23 @@ public class FilesPatientPanel {
 		gbc_browseButtonPanel.gridy = 4;
 		GridBagLayoutPanel.add(browseButtonPanel, gbc_browseButtonPanel);
 		GridBagLayout gbl_browseButtonPanel = new GridBagLayout();
-		gbl_browseButtonPanel.columnWidths = new int[]{0};
+		gbl_browseButtonPanel.columnWidths = new int[]{0, 0};
 		gbl_browseButtonPanel.rowHeights = new int[]{0};
-		gbl_browseButtonPanel.columnWeights = new double[]{1.0};
+		gbl_browseButtonPanel.columnWeights = new double[]{1.0, 10.0};
 		gbl_browseButtonPanel.rowWeights = new double[]{0.0};
 		browseButtonPanel.setLayout(gbl_browseButtonPanel);
 		
 		JButton searchFile = new JButton("Cauta Fisier");
 		GridBagConstraints gbc_searchFile = new GridBagConstraints();
-		gbc_searchFile.anchor = GridBagConstraints.EAST;
 		gbc_searchFile.insets = new Insets(0, 0, 0, 5);
-		gbc_searchFile.gridx = 1;
+		gbc_searchFile.gridx = 0;
 		gbc_searchFile.gridy = 0;
 		browseButtonPanel.add(searchFile, gbc_searchFile);
 		
 		JButton btnSalveaza = new JButton("SALVEAZA FISIER");
-		btnSalveaza.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnSalveaza.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_btnSalveaza = new GridBagConstraints();
-		gbc_btnSalveaza.gridheight = 2;
-		gbc_btnSalveaza.gridx = 5;
+		gbc_btnSalveaza.gridx = 1;
 		gbc_btnSalveaza.gridy = 0;
 		browseButtonPanel.add(btnSalveaza, gbc_btnSalveaza);
 	}

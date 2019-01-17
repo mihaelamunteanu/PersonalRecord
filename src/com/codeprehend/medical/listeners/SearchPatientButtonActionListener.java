@@ -30,10 +30,10 @@ public class SearchPatientButtonActionListener implements ActionListener {
 		String phoneNo = mainWindow.getSearchPatientPanel().getTextFieldPhoneNumber().getText();
 		
 		try {
-			InputValidation.validateTextField(name);
-			InputValidation.validateTextField(firstName);
-			InputValidation.validatePhoneNumber(phoneNo);
-			InputValidation.validateRegNumber(cnpFilter);
+			if (name != null && !name.isEmpty()) InputValidation.validateTextField(name);
+			if (firstName != null && !firstName.isEmpty()) InputValidation.validateTextField(firstName);
+			if (phoneNo != null && !phoneNo.isEmpty()) InputValidation.validatePhoneNumber(phoneNo);
+			if (cnpFilter != null && !cnpFilter.isEmpty()) InputValidation.validateRegNumber(cnpFilter);
 		} catch (Exception exception) {
 			JOptionPane.showMessageDialog(mainWindow, exception.getMessage(), 
 					"Erore de Validare", JOptionPane.ERROR_MESSAGE);

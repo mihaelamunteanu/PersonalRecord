@@ -26,9 +26,9 @@ public class OpenFileButtonActionListener {
 		Attachement attachment = AtachementsDAO.getAttachmentsById(attachement.getId());
 		
     	String fileName = attachment.getFileName() + "_" +  
-    			"_" + attachment.getRegistrationDate();
+    			attachment.getRegistrationDate();
     	String fileType = attachment.getFileType() ;
-    	String DEST = "pdf\\temp" + fileName + "." + fileType;
+    	String DEST = "pdf\\temp\\" + fileName + "." + fileType;
 		
 	    InputStream fileStream = new ByteArrayInputStream (attachment.getFileStream());
 	    byte[] buffer;

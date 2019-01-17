@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
@@ -236,6 +237,7 @@ public class ExaminationPatientPanel extends JPanel {
 			gbc_lblAntecedente.insets = new Insets(0, 0, 10, 5);
 			gbc_lblAntecedente.gridx = 0;
 			gbc_lblAntecedente.gridy = ycoordinate;
+			gbc_lblAntecedente.weightx = Double.MIN_VALUE;
 			medicalInfoPanel.add(lblAntecedente, gbc_lblAntecedente);
 			
 			String antecedentText = antecedent.getAntecedentText();
@@ -249,6 +251,7 @@ public class ExaminationPatientPanel extends JPanel {
 			gbc_lblAntcedenteNumarulDoi.insets = new Insets(0, 0, 6, 5);
 			gbc_lblAntcedenteNumarulDoi.gridx = 0;
 			gbc_lblAntcedenteNumarulDoi.gridy = ycoordinate+1;
+			gbc_lblAntcedenteNumarulDoi.weightx = Double.MIN_VALUE;
 			gbc_lblAntcedenteNumarulDoi.weighty = 1.0;
 //			lblAntcedenteNumarulDoi.setColumns(3);
 			medicalInfoPanel.add(lblAntcedenteNumarulDoi, gbc_lblAntcedenteNumarulDoi);
@@ -284,8 +287,8 @@ public class ExaminationPatientPanel extends JPanel {
 		gbc_textArea.gridx = 0;
 		gbc_textArea.gridy = ycoordinate;
 		medicalInfoPanel.add(examinationDiagnosis, gbc_textArea);
-		examinationDiagnosis.setText("tralallala");
-		examinationDiagnosis.setFocusable(true);
+		examinationDiagnosis.setText("");
+//		examinationDiagnosis.setFocusable(true);
 		
 		ycoordinate = ycoordinate + 1;
 		
@@ -317,6 +320,9 @@ public class ExaminationPatientPanel extends JPanel {
 			ycoordinate = ycoordinate + 2;
 		}
 	
+		scrollPane.revalidate();
+		JScrollBar vertical = scrollPane.getVerticalScrollBar();
+		vertical.setValue( vertical.getMinimum() );
 		
 		JPanel buttonPanel = new JPanel();
 		GridBagConstraints gbc_buttonPanel = new GridBagConstraints();

@@ -13,6 +13,7 @@ import com.codeprehend.medical.panels.ModifyPatientPanel;
 import com.codeprehend.medical.panels.NewPatientPanel;
 import com.codeprehend.medical.panels.SearchPatientPanel;
 import com.codeprehend.medical.resources.Antecedent;
+import com.codeprehend.medical.resources.Attachement;
 import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
 
@@ -173,7 +174,7 @@ public class MedicalRecordGUI extends JFrame {
 		filesPatientPanel.setVisible(false);
 	}
 	
-	public void showFilesPatientPanel(Patient patient){
+	public void showFilesPatientPanel(Patient patient, List<Attachement> attachements){
 		
 		this.remove(filesPatientPanel);
 		filesPatientPanel = new FilesPatientPanel(this);
@@ -183,7 +184,7 @@ public class MedicalRecordGUI extends JFrame {
 	//	examinationPatientPanel.setAntecedents(antecedents);
 	//	examinationPatientPanel.setPreviousExaminationEntries(examinations);
 		
-		filesPatientPanel.setPatientFiles(patient);
+		filesPatientPanel.loadFilesForPatientGUIPanel(patient, attachements);
 		filesPatientPanel.setVisible(true);
 		
 		examinationPatientPanel.setVisible(false);
