@@ -237,7 +237,7 @@ public class ExaminationPatientPanel extends JPanel {
 			gbc_lblAntecedente.insets = new Insets(0, 0, 10, 5);
 			gbc_lblAntecedente.gridx = 0;
 			gbc_lblAntecedente.gridy = ycoordinate;
-			gbc_lblAntecedente.weightx = Double.MIN_VALUE;
+			gbc_lblAntecedente.weighty = Double.MIN_VALUE;
 			medicalInfoPanel.add(lblAntecedente, gbc_lblAntecedente);
 			
 			String antecedentText = antecedent.getAntecedentText();
@@ -251,27 +251,14 @@ public class ExaminationPatientPanel extends JPanel {
 			gbc_lblAntcedenteNumarulDoi.insets = new Insets(0, 0, 6, 5);
 			gbc_lblAntcedenteNumarulDoi.gridx = 0;
 			gbc_lblAntcedenteNumarulDoi.gridy = ycoordinate+1;
-			gbc_lblAntcedenteNumarulDoi.weightx = Double.MIN_VALUE;
-			gbc_lblAntcedenteNumarulDoi.weighty = 1.0;
-//			lblAntcedenteNumarulDoi.setColumns(3);
+			gbc_lblAntcedenteNumarulDoi.weighty = Double.MIN_VALUE;
+			gbc_lblAntcedenteNumarulDoi.weightx = 1.0;
 			medicalInfoPanel.add(lblAntcedenteNumarulDoi, gbc_lblAntcedenteNumarulDoi);
-
+			
 			lblAntcedenteNumarulDoi.setEditable(false);  
 			lblAntcedenteNumarulDoi.setCursor(null);  
 			lblAntcedenteNumarulDoi.setOpaque(false);  
 			lblAntcedenteNumarulDoi.setFocusable(false);
-//			lblAntcedenteNumarulDoi.setLineWrap(true);
-//			lblAntcedenteNumarulDoi.setWrapStyleWord(true);
-			
-//					JLabel lblAntcedenteNumarulDoi = new JLabel(antecedentTextProcessed);
-//					lblAntcedenteNumarulDoi.setFont(new Font("Tahoma", Font.PLAIN, 11));
-//					GridBagConstraints gbc_lblAntcedenteNumarulDoi = new GridBagConstraints();
-//					gbc_lblAntcedenteNumarulDoi.gridwidth = 1;
-//					gbc_lblAntcedenteNumarulDoi.anchor = GridBagConstraints.WEST;
-//					gbc_lblAntcedenteNumarulDoi.insets = new Insets(0, 0, 5, 0);
-//					gbc_lblAntcedenteNumarulDoi.gridx = 0;
-//					gbc_lblAntcedenteNumarulDoi.gridy = ycoordinate+1;
-//					medicalInfoPanel.add(lblAntcedenteNumarulDoi, gbc_lblAntcedenteNumarulDoi);
 			
 			ycoordinate = ycoordinate + 2;
 		}
@@ -286,6 +273,8 @@ public class ExaminationPatientPanel extends JPanel {
 		gbc_textArea.fill = GridBagConstraints.BOTH;
 		gbc_textArea.gridx = 0;
 		gbc_textArea.gridy = ycoordinate;
+		gbc_textArea.weighty = 1.0;
+		
 		medicalInfoPanel.add(examinationDiagnosis, gbc_textArea);
 		examinationDiagnosis.setText("");
 //		examinationDiagnosis.setFocusable(true);
@@ -319,10 +308,13 @@ public class ExaminationPatientPanel extends JPanel {
 			
 			ycoordinate = ycoordinate + 2;
 		}
-	
-		scrollPane.revalidate();
-		JScrollBar vertical = scrollPane.getVerticalScrollBar();
-		vertical.setValue( vertical.getMinimum() );
+		
+		JLabel lblSpaceFill = new JLabel("      ");
+		GridBagConstraints gbc_lblSpaceFill = new GridBagConstraints();
+		gbc_lblSpaceFill.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSpaceFill.gridx = 0;
+		gbc_lblSpaceFill.gridy = ycoordinate - 1;
+		medicalInfoPanel.add(lblSpaceFill, gbc_lblSpaceFill);
 		
 		JPanel buttonPanel = new JPanel();
 		GridBagConstraints gbc_buttonPanel = new GridBagConstraints();

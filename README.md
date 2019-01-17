@@ -18,9 +18,18 @@ StackBuilder Application to install other PostgreS related  apps
 pgAdmin4 - app 
 pass root 
 
+# DB
+//under /POSTGRES/ 
+C:\Program Files\PostgreSQL\10\bin\pg_dump.exe --file "C:\\Mihaela\\OTHERP~1\\GITHUB~1\\backup\\PERSON~1\\BackupTest.sql" --host "localhost" --port "5432" --username "postgres" --no-password --verbose --role "postgres" --format=p --create --clean --section=pre-data --section=data --section=post-data --inserts --column-inserts "CabinetRugina"
+//under POSTGRES/version/bin/ eun for psql for reinstalling the 
+psql -f "C:\\Mihaela\\OTHERP~1\\GITHUB~1\\backup\\PERSON~1\\filebck4.sql" --username postgres --port 5434
+pg_ctl start 
+SET PGDATA=C:\Program Files\PostgreSQL\11\data
+
 # 16.01.2019
 - logs
 - validare
+- select first row from lists
 - format data preferat
 - etichete
 - clean code
@@ -32,9 +41,10 @@ pass root
 - versiune DB in tabel nou
 - DB installation procedure
 - doc
-- testsicon to run app
+- test icon to run app
 - organize folders for Db
 - sav and open files naming convention and folder
+- order by
 
 
 #08.01.2018
@@ -45,7 +55,7 @@ pass root
 - rearranged and reimplemented screens x 7 - 14h
 - clean code, add comments - 3h
 - fix buttons navigation  - 2h 
-- validation and throw exception -4h
+- validation and throw exception -4h 
 - logs - 4h 
 - tests - 5h 
 - icon to run app - 3h 

@@ -8,6 +8,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.codeprehend.medical.resources.Attachement;
 import com.itextpdf.text.Document;
@@ -37,7 +39,10 @@ public class ExaminationToPdf {
 	    
 	    public static Attachement createAndOpenPdf(Long id, String nume, String prenume, String cnp, String telefon, 
 	    		String examinationDate, String examinationText) throws IOException, DocumentException {
-	    	String fileName = nume + "_" + prenume + "_" + examinationDate;
+	    	
+	    	String addTimeToExaminationDate = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+	    	addTimeToExaminationDate = addTimeToExaminationDate.substring(0, addTimeToExaminationDate.lastIndexOf('.')).replaceAll(":", "_");
+	    	String fileName = nume + "_" + prenume + "_" + addTimeToExaminationDate;
 	    	String fileType = "pdf";
 	    	String DEST = "pdf\\" + fileName + "." + fileType;
 	    	
