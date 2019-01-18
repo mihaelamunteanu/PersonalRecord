@@ -33,16 +33,16 @@ SET PGDATA=C:\Program Files\PostgreSQL\11\data
 # 16.01.2019
 - logs
 - validare
-- select first row from lists
-- format data preferat
-- etichete
-- clean code
-- comments
-- button navigation
+- select first row from lists - talk to Cosmin
+- format data preferat - talk to Cosmin
+- etichete - talk to Cosmin
+- clean code - Ok
+- comments - ok (ne descurcam cu ce avem)
+- button navigation - ok, daca face Cosmin observatii ne adaptam
 - bat for app
 - DB tests
-- DB backup procedure
-- versiune DB in tabel nou
+- DB backup procedure - de completat
+- versiune DB in tabel nou - ok 
 - DB installation procedure
 - doc
 - test icon to run app

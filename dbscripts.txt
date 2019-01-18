@@ -190,3 +190,27 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.atasamente
     OWNER to postgres;
+	
+-- Table: public.dbversion
+
+-- DROP TABLE public.dbversion;
+
+CREATE TABLE public.dbversion
+(
+    id bigint NOT NULL DEFAULT nextval('dbversion_id_seq'::regclass),
+    versiune character varying COLLATE pg_catalog."default" NOT NULL,
+    data_rulare date NOT NULL,
+    observatii character varying COLLATE pg_catalog."default",
+    CONSTRAINT dbversion_pkey PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.dbversion
+    OWNER to postgres;
+	
+INSERT INTO public.dbversion(
+	versiune, data_rulare, observatii)
+	VALUES ('1.0', NOW(), 'Script initial pentru structura bazei de date');
