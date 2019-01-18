@@ -3,7 +3,6 @@ package com.codeprehend.medical.pdf;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;

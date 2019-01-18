@@ -13,11 +13,11 @@ import com.codeprehend.medical.dao.AtachementsDAO;
 import com.codeprehend.medical.resources.Attachement;
 
 public class OpenFileButtonActionListener {
-	private MedicalRecordGUI mainWindow;
+//	private MedicalRecordGUI mainWindow;
 	private Attachement attachement;
 	
 	public OpenFileButtonActionListener(MedicalRecordGUI mainWindow, Attachement attachement){
-		this.mainWindow = mainWindow;
+//		this.mainWindow = mainWindow;
 		this.attachement = attachement;
 		this.actionPerformed();
 	}

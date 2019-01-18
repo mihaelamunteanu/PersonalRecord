@@ -44,7 +44,7 @@ public class ListOfPatientsPanel extends JPanel {
 	
 	private MedicalRecordGUI parentPanel;
 	
-	private JList listOfPatients = new JList();
+	private JList<String> listOfPatients = new JList<String>();
 
 	public ListOfPatientsPanel(MedicalRecordGUI parent) {
 		super();
@@ -117,7 +117,7 @@ public class ListOfPatientsPanel extends JPanel {
 		gbc_list.gridy = 0;
 		medicalInfoPanel.add(listOfPatients, gbc_list);
 		
-		DefaultListModel DLM = new DefaultListModel();
+		DefaultListModel<String> DLM = new DefaultListModel<String>();
 		for (Patient pacient: patients) {
 			String str = new String ("");
 			str = str.concat(pacient.getNume());
