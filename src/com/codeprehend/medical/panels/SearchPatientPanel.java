@@ -217,6 +217,7 @@ public class SearchPatientPanel extends JPanel {
 		btnNewPatient.addActionListener(new NewPatientButtonActionListener(parentPanel));
 
 	}
+	
 	// ** Getters and setters//
 
 	public JTextField getTextFieldDate() {

@@ -8,9 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -44,11 +42,7 @@ public class FilesPatientPanel extends JPanel {
 
 	private JTextField browseFileTextField = new JTextField();
 	
-	private JFileChooser selectFile = new JFileChooser();
-	
-	private File file;
-	
-	private static final Logger LOGGER = Logger.getLogger(FilesPatientPanel.class.getName());
+//	private static final Logger LOGGER = Logger.getLogger(FilesPatientPanel.class.getName());
 
 	public FilesPatientPanel(MedicalRecordGUI parent) {
 		super();
@@ -192,7 +186,7 @@ public class FilesPatientPanel extends JPanel {
 		gbl_fileListPanel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		fileListPanel.setLayout(gbl_fileListPanel);
 		
-		JList fileList = new JList();
+		JList<String> fileList = new JList<String>();
 		GridBagConstraints gbc_fileList = new GridBagConstraints();
 		gbc_fileList.fill = GridBagConstraints.BOTH;
 		gbc_fileList.gridx = 1;
@@ -201,7 +195,7 @@ public class FilesPatientPanel extends JPanel {
 		
 //		final List<Attachement> attachements = AtachementsDAO.getAttachmentsByPatientId(patient.getId());
 		
-		DefaultListModel DLM = new DefaultListModel();
+		DefaultListModel<String> DLM = new DefaultListModel<String>();
 		for (Attachement attachement: attachements) {
 			
 			String str = new String ("");
@@ -351,7 +345,6 @@ public class FilesPatientPanel extends JPanel {
 				
 				selectFile.showOpenDialog(parentPanel);
 				
-				file = selectFile.getSelectedFile();
 				//TODO add not null or empty validation for files
 				browseFileTextField.setText(selectFile.getSelectedFile().toString());
 			}

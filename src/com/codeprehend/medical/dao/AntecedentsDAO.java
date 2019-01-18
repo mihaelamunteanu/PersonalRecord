@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.codeprehend.medical.database.DatabaseConnection;
+import com.codeprehend.medical.util.DatabaseConnection;
 import com.codeprehend.medical.resources.Antecedent;
 
 public class AntecedentsDAO {
@@ -46,7 +46,6 @@ public class AntecedentsDAO {
 		return generatedId;	
 	}
 	
-	//TODO change to Date type instead String
 	public static List<Antecedent> getAntecedentsByPatientId(Long patientId) {
 		List<Antecedent> antecedentsForPatient =new ArrayList<Antecedent>();
 		String SQL = "SELECT id, data_inregistrare, antecedent from  antecedente "

@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.codeprehend.medical.database.DatabaseConnection;
+import com.codeprehend.medical.util.DatabaseConnection;
 import com.codeprehend.medical.resources.Examination;;
 
 public class ExaminationDAO {
@@ -48,8 +48,6 @@ public class ExaminationDAO {
 		return generatedId;	
 	}
 	
-	
-	//TODO change to Date type instead String
 	public static List<Examination> getExaminationsByPatientId(Long id) {
 		List<Examination> examinationsForPatient =new ArrayList<Examination>();
 
@@ -74,5 +72,4 @@ public class ExaminationDAO {
 
 		return examinationsForPatient;
 	}
-
 }

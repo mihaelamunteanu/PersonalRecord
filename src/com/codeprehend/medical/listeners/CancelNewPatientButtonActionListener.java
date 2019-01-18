@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import com.codeprehend.medical.MedicalRecordGUI;
 
 public class CancelNewPatientButtonActionListener implements ActionListener {
+	
 	private MedicalRecordGUI mainWindow;
 	
 	public CancelNewPatientButtonActionListener(MedicalRecordGUI mainWindow){

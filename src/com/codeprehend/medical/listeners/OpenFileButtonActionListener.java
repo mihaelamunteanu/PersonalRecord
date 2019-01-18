@@ -59,10 +59,4 @@ public class OpenFileButtonActionListener {
         }
         
 	}
-	
-	// Verification if the wanted text fields are not empty and the format is correct: number date, telephone
-	//TODO
-	public boolean verifyTextFields(){
-		return true;
-	}
 }

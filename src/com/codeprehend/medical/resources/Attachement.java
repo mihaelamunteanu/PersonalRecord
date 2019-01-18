@@ -1,6 +1,5 @@
 package com.codeprehend.medical.resources;
 
-import java.io.InputStream;
 import java.time.LocalDate;
 
 /**
@@ -11,13 +10,13 @@ import java.time.LocalDate;
  *
  */
 public class Attachement {
-	Long id;
-	Long pacientId; 
-	String fileName; 
-	String fileType;
-	Long fileLength;
-	byte[] fileStream;
-	LocalDate registrationDate; //use LocalDate instead java.sql.Date
+	private Long id;
+	private Long pacientId; 
+	private String fileName; 
+	private String fileType;
+	private Long fileLength;
+	private byte[] fileStream;
+	private LocalDate registrationDate; //use LocalDate instead java.sql.Date
 	
 	public Attachement( ) {
 		

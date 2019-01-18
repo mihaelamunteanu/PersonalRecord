@@ -10,10 +10,10 @@ import java.time.LocalDate;
  *
  */
 public class Antecedent {
-	Long id;
-	Long pacientId; 
-	String antecedentText; 
-	LocalDate registrationDate; //use LocalDate instead java.sql.Date
+	private Long id;
+	private Long pacientId; 
+	private String antecedentText; 
+	private LocalDate registrationDate; //use LocalDate instead java.sql.Date
 	
 	public Antecedent( ) {
 		

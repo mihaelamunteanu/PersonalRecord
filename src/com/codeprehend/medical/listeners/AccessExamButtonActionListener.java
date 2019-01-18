@@ -13,7 +13,6 @@ import com.codeprehend.medical.resources.Patient;
 public class AccessExamButtonActionListener  {
 	
 	public static void actionPerformed(MedicalRecordGUI mainWindow, Patient patient){
-		//TODO validation of fields
 		Patient newPatient = PatientsDAO.getPatientById(patient.getId());
 		List<Antecedent> antecedents = AntecedentsDAO.getAntecedentsByPatientId(patient.getId());
 		List<Examination> examinations = ExaminationDAO.getExaminationsByPatientId(patient.getId());

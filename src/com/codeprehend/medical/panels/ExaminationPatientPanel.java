@@ -8,13 +8,11 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
@@ -38,10 +36,6 @@ public class ExaminationPatientPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private MedicalRecordGUI parentPanel;
-	private Patient currentPatient; 
-	
-	private List<Antecedent> antecedents = new ArrayList<Antecedent>();
-	private List<Examination> examinations = new ArrayList<Examination>();
 	
 	private JTextArea examinationDiagnosis = new JTextArea();
 	
@@ -54,33 +48,9 @@ public class ExaminationPatientPanel extends JPanel {
 	}
 	
 	/**
-	 * Loads the patient into JPanel
-	 * 
-	 * @param patients
-	 */
-	public void setPatientInformations(Patient pacient){
-		this.currentPatient = pacient;
-	}
-	
-
-		
-	public void setAntecedents(List<Antecedent> antecedents) {
-		this.antecedents = antecedents;
-	}
-	
-	/**
-	 * Loads the list of history Examination objects into JPanel
-	 * 
-	 * @param patients
-	 */
-	public void setPreviousExaminationEntries(List<Examination> examinations) {
-		this.examinations = examinations;
-	}
-	
-	/**
 	 * Initialize the contents of the frame.
 	 */
-	public void  loadExaminationGUIForPatient(Patient pacient) {
+	public void  loadExaminationGUIForPatient(Patient patient, List<Antecedent> antecedents, List<Examination> examinations) {
 //		JPanel GridBagLayoutPanel = new JPanel();
 		this.setBorder(new LineBorder(new Color(0, 0, 0)));
 		parentPanel.add(this, BorderLayout.CENTER);
@@ -113,7 +83,7 @@ public class ExaminationPatientPanel extends JPanel {
 		gbc_lblAntet.gridy = 0;
 		InformationGridBagLayoutPanel.add(lblAntet, gbc_lblAntet);
 		
-		JLabel NameLabel = new JLabel(pacient.getNume());
+		JLabel NameLabel = new JLabel(patient.getNume());
 		GridBagConstraints gbc_NameLabel = new GridBagConstraints();
 		gbc_NameLabel.anchor = GridBagConstraints.WEST;
 		gbc_NameLabel.weightx = 1.0;
@@ -122,7 +92,7 @@ public class ExaminationPatientPanel extends JPanel {
 		gbc_NameLabel.gridy = 1;
 		InformationGridBagLayoutPanel.add(NameLabel, gbc_NameLabel);
 		
-		JLabel PrenumeLabel = new JLabel(pacient.getPrenume());
+		JLabel PrenumeLabel = new JLabel(patient.getPrenume());
 		GridBagConstraints gbc_PrenumeLabel = new GridBagConstraints();
 		gbc_PrenumeLabel.anchor = GridBagConstraints.WEST;
 		gbc_PrenumeLabel.weightx = 1.0;
@@ -131,7 +101,7 @@ public class ExaminationPatientPanel extends JPanel {
 		gbc_PrenumeLabel.gridy = 1;
 		InformationGridBagLayoutPanel.add(PrenumeLabel, gbc_PrenumeLabel);
 		
-		JLabel DataNastereLabel = new JLabel("Data nasterii: " + pacient.getDataNasterii());
+		JLabel DataNastereLabel = new JLabel("Data nasterii: " + patient.getDataNasterii());
 		GridBagConstraints gbc_DataNastereLabel = new GridBagConstraints();
 		gbc_DataNastereLabel.weightx = 1.0;
 		gbc_DataNastereLabel.insets = new Insets(0, 0, 5, 5);
@@ -140,7 +110,7 @@ public class ExaminationPatientPanel extends JPanel {
 		gbc_DataNastereLabel.gridy = 1;
 		InformationGridBagLayoutPanel.add(DataNastereLabel, gbc_DataNastereLabel);
 		
-		JLabel CNPLabel = new JLabel("CNP: " +  pacient.getCnp());
+		JLabel CNPLabel = new JLabel("CNP: " +  patient.getCnp());
 		GridBagConstraints gbc_CNPLabel = new GridBagConstraints();
 		gbc_CNPLabel.anchor = GridBagConstraints.WEST;
 		gbc_CNPLabel.weightx = 1.0;
@@ -149,7 +119,7 @@ public class ExaminationPatientPanel extends JPanel {
 		gbc_CNPLabel.gridy = 1;
 		InformationGridBagLayoutPanel.add(CNPLabel, gbc_CNPLabel);
 		
-		JLabel TelefonLabel = new JLabel("Telefon: " + pacient.getNumarTelefon());
+		JLabel TelefonLabel = new JLabel("Telefon: " + patient.getNumarTelefon());
 		GridBagConstraints gbc_TelefonLabel = new GridBagConstraints();
 		gbc_TelefonLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_TelefonLabel.anchor = GridBagConstraints.WEST;
@@ -158,7 +128,7 @@ public class ExaminationPatientPanel extends JPanel {
 		gbc_TelefonLabel.gridy = 1;
 		InformationGridBagLayoutPanel.add(TelefonLabel, gbc_TelefonLabel);
 		
-		JLabel lblNasteriNaturale = new JLabel("Nasteri naturale: " + pacient.getNasteriNaturale());
+		JLabel lblNasteriNaturale = new JLabel("Nasteri naturale: " + patient.getNasteriNaturale());
 		GridBagConstraints gbc_lblNasteriNaturale = new GridBagConstraints();
 		gbc_lblNasteriNaturale.anchor = GridBagConstraints.WEST;
 		gbc_lblNasteriNaturale.insets = new Insets(0, 0, 0, 5);
@@ -166,7 +136,7 @@ public class ExaminationPatientPanel extends JPanel {
 		gbc_lblNasteriNaturale.gridy = 2;
 		InformationGridBagLayoutPanel.add(lblNasteriNaturale, gbc_lblNasteriNaturale);
 		
-		JLabel lblCezariene = new JLabel("Cezariene: " + pacient.getCezariene());
+		JLabel lblCezariene = new JLabel("Cezariene: " + patient.getCezariene());
 		GridBagConstraints gbc_lblCezariene = new GridBagConstraints();
 		gbc_lblCezariene.anchor = GridBagConstraints.WEST;
 		gbc_lblCezariene.insets = new Insets(0, 0, 0, 5);
@@ -174,7 +144,7 @@ public class ExaminationPatientPanel extends JPanel {
 		gbc_lblCezariene.gridy = 2;
 		InformationGridBagLayoutPanel.add(lblCezariene, gbc_lblCezariene);
 		
-		JLabel lblAvorturiLaCerere = new JLabel("Avorturi la cerere: " + pacient.getAvorturiLaCerere());
+		JLabel lblAvorturiLaCerere = new JLabel("Avorturi la cerere: " + patient.getAvorturiLaCerere());
 		GridBagConstraints gbc_lblAvorturiLaCerere = new GridBagConstraints();
 		gbc_lblAvorturiLaCerere.anchor = GridBagConstraints.WEST;
 		gbc_lblAvorturiLaCerere.insets = new Insets(0, 0, 0, 5);
@@ -182,7 +152,7 @@ public class ExaminationPatientPanel extends JPanel {
 		gbc_lblAvorturiLaCerere.gridy = 2;
 		InformationGridBagLayoutPanel.add(lblAvorturiLaCerere, gbc_lblAvorturiLaCerere);
 		
-		JLabel lblAvorturiSpontane = new JLabel("Avorturi spontane: " + pacient.getAvorturiSpontane());
+		JLabel lblAvorturiSpontane = new JLabel("Avorturi spontane: " + patient.getAvorturiSpontane());
 		GridBagConstraints gbc_lblAvorturiSpontane = new GridBagConstraints();
 		gbc_lblAvorturiSpontane.anchor = GridBagConstraints.WEST;
 		gbc_lblAvorturiSpontane.insets = new Insets(0, 0, 0, 5);
@@ -281,7 +251,7 @@ public class ExaminationPatientPanel extends JPanel {
 		
 		ycoordinate = ycoordinate + 1;
 		
-//		for examinations
+		//examinations entries
 		for (Examination examination : examinations) {
 			JLabel lblConsultatie = new JLabel("Consultatie " + examination.getConsultationDate());
 			lblConsultatie.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -373,15 +343,14 @@ public class ExaminationPatientPanel extends JPanel {
 		buttonPanel.add(btnSalveaza, gbc_btnSalveaza);
 		
 		//Action Listeners
-		
 		btnNewButton_7.addActionListener(new BackFromExaminationPatientPanelButtonActionListener(this.parentPanel));
 		btnNewButton_6.addActionListener(new GoHomeFromExaminationPatientButtonListener(this.parentPanel));
-		btnNewButton_5.addActionListener(new ModifyPatientButtonActionListener(this.parentPanel, currentPatient));
-		btnSalveaza.addActionListener(new SaveExaminationButtonActionListener(parentPanel, currentPatient));
+		btnNewButton_5.addActionListener(new ModifyPatientButtonActionListener(this.parentPanel, patient));
+		btnSalveaza.addActionListener(new SaveExaminationButtonActionListener(parentPanel, patient));
 		
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				AccesFilesExaminationButtonActionListener.actionPerformed(parentPanel, currentPatient);
+				AccesFilesExaminationButtonActionListener.actionPerformed(parentPanel, patient);
 			}
 		});
 	}

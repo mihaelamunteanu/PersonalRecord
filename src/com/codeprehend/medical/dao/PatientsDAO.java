@@ -12,14 +12,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.codeprehend.medical.database.DatabaseConnection;
+import com.codeprehend.medical.util.DatabaseConnection;
 import com.codeprehend.medical.resources.Patient;
 
 public class PatientsDAO {
 	
 	private static final Logger LOGGER = Logger.getLogger(PatientsDAO.class.getName());
 	
-	//TODO throws Exception for all and add Message Dialog Boxes to know what was wrong
 	public static Patient getPatientById(Long patientId) {
 		Patient pacient = null;
 		String SQL = "SELECT * FROM paciente WHERE id = ?";
@@ -34,13 +33,11 @@ public class PatientsDAO {
 				pacient = new Patient(rs.getLong("id"), rs.getString("nume"),
 						rs.getString("prenume"), rs.getString("cnp"), LocalDate.parse(rs.getString("data_nasterii")), 
 						LocalDate.parse(rs.getString("data_inscriere")), rs.getString("altele"), null);
-//				pacient.setAdresa(rs.getString("adresa")); TODO Add address
 				pacient.setNumarTelefon(rs.getString("telefon"));
 				pacient.setNasteriNaturale(rs.getInt("nasteri_naturale"));
 				pacient.setCezariene(rs.getInt("cezariene"));
 				pacient.setAvorturiLaCerere(rs.getInt("avorturi_cerere"));
 				pacient.setAvorturiSpontane(rs.getInt("avorturi_spontane"));
-//				rs.close();
 			}
  		} catch (SQLException ex) {
  			LOGGER.log(Level.SEVERE, ex.getMessage());
@@ -110,7 +107,6 @@ public class PatientsDAO {
 		return generatedId;
 	}
 
-	//TODO change to Date type instead String
 	public static List<Patient> getPatientsByFilter(String name, String firstname, String cnp, String phoneNo, String birthDate) {
 		List<Patient> patientsWithDate =new ArrayList<Patient>();
 		StringBuilder filterBuilder = new StringBuilder();
@@ -124,8 +120,6 @@ public class PatientsDAO {
 		filterBuilder.append("ORDER BY nume, prenume;");
 		
 		String SQL = "SELECT id, nume, prenume, data_nasterii, cnp, data_inscriere, altele, telefon FROM paciente " + filterBuilder.toString();
-//				+ "WHERE data_nasterii='" + 
-//				LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd")) + "';";
 		
 		System.out.println(" Searching patient: " + SQL);
 		

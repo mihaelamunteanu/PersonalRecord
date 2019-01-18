@@ -332,13 +332,11 @@ public class ModifyPatientPanel extends JPanel {
 			JTextArea lblAntcedenteNumarulDoi = new JTextArea(antecedent.getAntecedentText(), 1, 1);
 			lblAntcedenteNumarulDoi.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			GridBagConstraints gbc_lblAntcedenteNumarulDoi = new GridBagConstraints();
-//					gbc_lblAntcedenteNumarulDoi.gridwidth = 1;
 			gbc_lblAntcedenteNumarulDoi.anchor = GridBagConstraints.WEST;
 			gbc_lblAntcedenteNumarulDoi.insets = new Insets(0, 0, 6, 5);
 			gbc_lblAntcedenteNumarulDoi.gridx = 0;
 			gbc_lblAntcedenteNumarulDoi.gridy = ycoordinate+1;
 			gbc_lblAntcedenteNumarulDoi.weighty = 1.0;
-//			lblAntcedenteNumarulDoi.setColumns(3);
 			medicalInfoPanel.add(lblAntcedenteNumarulDoi, gbc_lblAntcedenteNumarulDoi);
 
 			lblAntcedenteNumarulDoi.setEditable(false);  

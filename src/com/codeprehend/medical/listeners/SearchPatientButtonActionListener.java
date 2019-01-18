@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.PatientsDAO;
-import com.codeprehend.medical.database.InputValidation;
+import com.codeprehend.medical.util.InputValidation;
 import com.codeprehend.medical.resources.Patient;
 
 
@@ -54,12 +54,5 @@ public class SearchPatientButtonActionListener implements ActionListener {
 		}
 		
 		mainWindow.showPanelListOfPatients(PatientsDAO.getPatientsByFilter(name, firstName, cnpFilter, phoneNo, birthDateFiter));
-	}
-	
-	
-	// Verification if the wanted text fields are not empty and the format is correct: number date, telephone
-	//TODO
-	public boolean verifyTextFields(){
-		return true;
 	}
 }

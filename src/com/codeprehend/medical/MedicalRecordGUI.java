@@ -1,7 +1,6 @@
 package com.codeprehend.medical;
 
 
-import java.awt.BorderLayout;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -37,8 +36,6 @@ public class MedicalRecordGUI extends JFrame {
 
 	public static String searchPacient = "Cautati Pacienta dupa data nasterii";
 	
-	private MedicalRecordSnapshot snaphotRecord = new MedicalRecordSnapshot();
-	
 //	private JFrame framePrincipal;
 	
 	private SearchPatientPanel searchPatientPanel;
@@ -54,11 +51,10 @@ public class MedicalRecordGUI extends JFrame {
 		
 		this.setBounds(100, 100, 813, 516);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//TODO Ask "Are you sure you want to leave the application? Check if there is anything unsaved"
+		//Possible extension: to Ask "Are you sure you want to leave the application? Check if there is anything unsaved"
 		this.setTitle(numeFereastraPrincipala);
 		
 		//Create main panel
-
 		searchPatientPanel = new SearchPatientPanel(this);
 		newPatientPanel = new NewPatientPanel(this);
 		listOfPatientsPanel = new ListOfPatientsPanel(this);
@@ -69,10 +65,8 @@ public class MedicalRecordGUI extends JFrame {
 	    this.setVisible(true);
 	}
 	
-	//TODO to put this in a controller outside this class?
 	public void showPanelListOfPatients(List<Patient> listOfPatients) {
 		
-		//TODO see if there are time when this panel shouldnt be reset
 		this.remove(listOfPatientsPanel);
 		listOfPatientsPanel = new ListOfPatientsPanel(this);
 		listOfPatientsPanel.setBounds(150, 22, 700, 367);
@@ -99,11 +93,10 @@ public class MedicalRecordGUI extends JFrame {
 	}
 
 	
-	//TODO to put this in a controller outside this class?
 	public void showSearchPatientPanel() {
 		this.remove(searchPatientPanel);
 		searchPatientPanel = new SearchPatientPanel(this);
-//		this.add(searchPatientPanel);
+		this.add(searchPatientPanel);
 		searchPatientPanel.loadSearchPatientGUIPanel();
 		searchPatientPanel.setVisible(true);
 
@@ -158,12 +151,8 @@ public class MedicalRecordGUI extends JFrame {
 		this.remove(examinationPatientPanel);
 		examinationPatientPanel = new ExaminationPatientPanel(this);
 		this.add(examinationPatientPanel);
-		
-		examinationPatientPanel.setPatientInformations(patient);
-		examinationPatientPanel.setAntecedents(antecedents);
-		examinationPatientPanel.setPreviousExaminationEntries(examinations);
-		examinationPatientPanel.loadExaminationGUIForPatient(patient);
-	//	examinationPatientPanel.setButtons();
+
+		examinationPatientPanel.loadExaminationGUIForPatient(patient, antecedents, examinations);
 		
 		examinationPatientPanel.setVisible(true);
 		
@@ -180,10 +169,6 @@ public class MedicalRecordGUI extends JFrame {
 		filesPatientPanel = new FilesPatientPanel(this);
 		this.add(filesPatientPanel);
 		
-	//	examinationPatientPanel.setPatientInformations(patient);
-	//	examinationPatientPanel.setAntecedents(antecedents);
-	//	examinationPatientPanel.setPreviousExaminationEntries(examinations);
-		
 		filesPatientPanel.loadFilesForPatientGUIPanel(patient, attachements);
 		filesPatientPanel.setVisible(true);
 		
@@ -195,14 +180,6 @@ public class MedicalRecordGUI extends JFrame {
 	}
 	
 	//** Getters and setters //
-	
-	public MedicalRecordSnapshot getSnaphotRecord() {
-		return snaphotRecord;
-	}
-
-	public void setSnaphotRecord(MedicalRecordSnapshot snaphotRecord) {
-		this.snaphotRecord = snaphotRecord;
-	}
 
 	public SearchPatientPanel getSearchPatientPanel() {
 		return searchPatientPanel;

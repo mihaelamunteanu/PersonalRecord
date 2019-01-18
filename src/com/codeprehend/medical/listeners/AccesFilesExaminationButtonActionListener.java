@@ -9,12 +9,6 @@ import com.codeprehend.medical.resources.Patient;
 
 public class AccesFilesExaminationButtonActionListener {
 	
-	public AccesFilesExaminationButtonActionListener(){
-//		this.mainWindow = mainWindow;
-//		this.patient = patient;
-//		this.actionPerformed(); //e vina mea, am facut praf ActionListenerul ala, aveai dreptate
-	}
-	
 	public static void actionPerformed(MedicalRecordGUI mainWindow, Patient patient){
 		List<Attachement> attachements = AtachementsDAO.getAttachmentsByPatientId(patient.getId());
 		mainWindow.showFilesPatientPanel(patient, attachements);

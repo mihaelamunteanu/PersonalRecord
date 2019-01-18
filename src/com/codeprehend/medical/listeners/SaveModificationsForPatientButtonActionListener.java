@@ -11,7 +11,7 @@ import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.AntecedentsDAO;
 import com.codeprehend.medical.dao.ExaminationDAO;
 import com.codeprehend.medical.dao.PatientsDAO;
-import com.codeprehend.medical.database.InputValidation;
+import com.codeprehend.medical.util.InputValidation;
 import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;

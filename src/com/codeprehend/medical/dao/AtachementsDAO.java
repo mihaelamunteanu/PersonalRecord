@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.codeprehend.medical.database.DatabaseConnection;
+import com.codeprehend.medical.util.DatabaseConnection;
 import com.codeprehend.medical.resources.Attachement;
 
 public class AtachementsDAO {
@@ -78,18 +78,6 @@ public class AtachementsDAO {
 			System.out.println(ex.getMessage());
 			ex.printStackTrace();
 		}
-		
-		/*
-		 * PreparedStatement ps = conn.prepareStatement("SELECT img FROM images WHERE imgname = ?");
-ps.setString(1, "myimage.gif");
-ResultSet rs = ps.executeQuery();
-while (rs.next()) {
-    byte[] imgBytes = rs.getBytes(1);
-    // use the data in some way here
-}
-rs.close();
-ps.close();
-		 */
 		
 		return attachmentsForPatient;	
 	}

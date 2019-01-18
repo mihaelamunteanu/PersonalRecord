@@ -6,21 +6,15 @@ import java.awt.event.ActionListener;
 import com.codeprehend.medical.MedicalRecordGUI;
 
 public class GoHomeFromExaminationPatientButtonListener implements ActionListener{
-private MedicalRecordGUI mainWindow;
+	
+	private MedicalRecordGUI mainWindow;
 	
 	public GoHomeFromExaminationPatientButtonListener(MedicalRecordGUI mainWindow){
 		this.mainWindow = mainWindow;
 	}
 	
 	public void actionPerformed(ActionEvent e){
-		//TODO validation of fields
 		mainWindow.showSearchPatientPanel();
 		
-	}
-	
-	// Verification if the wanted text fields are not empty and the format is correct: number date, telephone
-	//TODO
-	public boolean verifyTextFields(){
-		return true;
 	}
 }

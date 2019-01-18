@@ -1,4 +1,4 @@
-package com.codeprehend.medical.database;
+package com.codeprehend.medical.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
