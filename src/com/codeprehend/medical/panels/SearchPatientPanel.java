@@ -196,7 +196,7 @@ public class SearchPatientPanel extends JPanel {
 		buttonPanel.setLayout(gbl_buttonPanel);
 		
 		JButton btnNewPatient = new JButton("Pacienta noua");
-		btnNewPatient.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewPatient.setFont(new Font("Tahoma", Font.BOLD, 13));
 		GridBagConstraints gbc_btnAcceseazaFisiere = new GridBagConstraints();
 		gbc_btnAcceseazaFisiere.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAcceseazaFisiere.gridx = 0;

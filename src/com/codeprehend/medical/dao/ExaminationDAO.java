@@ -51,7 +51,7 @@ public class ExaminationDAO {
 	public static List<Examination> getExaminationsByPatientId(Long id) {
 		List<Examination> examinationsForPatient =new ArrayList<Examination>();
 
-		String SQL = "SELECT * FROM consultatii WHERE id_pacienta = ?";
+		String SQL = "SELECT * FROM consultatii WHERE id_pacienta = ? ORDER BY data_consultatie DESC;";
 		
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();
 				PreparedStatement stmt = conn.prepareStatement(SQL)) {

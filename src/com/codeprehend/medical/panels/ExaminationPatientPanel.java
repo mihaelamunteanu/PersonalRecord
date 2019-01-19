@@ -28,6 +28,7 @@ import com.codeprehend.medical.listeners.SaveExaminationButtonActionListener;
 import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
+import com.codeprehend.medical.util.Constants;
 
 public class ExaminationPatientPanel extends JPanel {
 	/**
@@ -51,7 +52,7 @@ public class ExaminationPatientPanel extends JPanel {
 	 * Initialize the contents of the frame.
 	 */
 	public void  loadExaminationGUIForPatient(Patient patient, List<Antecedent> antecedents, List<Examination> examinations) {
-//		JPanel GridBagLayoutPanel = new JPanel();
+		//JPanel GridBagLayoutPanel = new JPanel();
 		this.setBorder(new LineBorder(new Color(0, 0, 0)));
 		parentPanel.add(this, BorderLayout.CENTER);
 		GridBagLayout gbl_GridBagLayoutPanel = new GridBagLayout();
@@ -211,12 +212,12 @@ public class ExaminationPatientPanel extends JPanel {
 			medicalInfoPanel.add(lblAntecedente, gbc_lblAntecedente);
 			
 			String antecedentText = antecedent.getAntecedentText();
-//					String antecedentTextProcessed = "<html>" + antecedentText + "</html>";
+			//String antecedentTextProcessed = "<html>" + antecedentText + "</html>";
 			
 			JTextArea lblAntcedenteNumarulDoi = new JTextArea(antecedentText, 1, 1);
 			lblAntcedenteNumarulDoi.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			GridBagConstraints gbc_lblAntcedenteNumarulDoi = new GridBagConstraints();
-//					gbc_lblAntcedenteNumarulDoi.gridwidth = 1;
+			//gbc_lblAntcedenteNumarulDoi.gridwidth = 1;
 			gbc_lblAntcedenteNumarulDoi.anchor = GridBagConstraints.WEST;
 			gbc_lblAntcedenteNumarulDoi.insets = new Insets(0, 0, 6, 5);
 			gbc_lblAntcedenteNumarulDoi.gridx = 0;
@@ -345,8 +346,8 @@ public class ExaminationPatientPanel extends JPanel {
 		//Action Listeners
 		btnNewButton_7.addActionListener(new BackFromExaminationPatientPanelButtonActionListener(this.parentPanel));
 		btnNewButton_6.addActionListener(new GoHomeFromExaminationPatientButtonListener(this.parentPanel));
-		btnNewButton_5.addActionListener(new ModifyPatientButtonActionListener(this.parentPanel, patient));
-		btnSalveaza.addActionListener(new SaveExaminationButtonActionListener(parentPanel, patient));
+		btnNewButton_5.addActionListener(new ModifyPatientButtonActionListener(this.parentPanel, patient, Constants.FROM_EXAMINATION_PANEL));
+		btnSalveaza.addActionListener(new SaveExaminationButtonActionListener(parentPanel, patient, antecedents, examinations));
 		
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

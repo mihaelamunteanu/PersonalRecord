@@ -30,6 +30,7 @@ import com.codeprehend.medical.listeners.OpenFileButtonActionListener;
 import com.codeprehend.medical.listeners.SaveAttachmentActionPerformed;
 import com.codeprehend.medical.resources.Attachement;
 import com.codeprehend.medical.resources.Patient;
+import com.codeprehend.medical.util.Constants;
 
 public class FilesPatientPanel extends JPanel {
 	
@@ -314,7 +315,6 @@ public class FilesPatientPanel extends JPanel {
 		browseButtonPanel.add(browseFileButton, gbc_searchFile);
 		
 		JButton saveFilesButton = new JButton("Upload fisier");
-		saveFilesButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		GridBagConstraints gbc_btnSalveaza = new GridBagConstraints();
 		gbc_btnSalveaza.gridx = 1;
 		gbc_btnSalveaza.gridy = 0;
@@ -322,7 +322,7 @@ public class FilesPatientPanel extends JPanel {
 		
 		//Action Listeners
 		
-		modifyPatientButton.addActionListener(new ModifyPatientButtonActionListener(this.parentPanel, patient));
+		modifyPatientButton.addActionListener(new ModifyPatientButtonActionListener(this.parentPanel, patient, Constants.FROM_FILES_PANEL));
 		
 		folderAccesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

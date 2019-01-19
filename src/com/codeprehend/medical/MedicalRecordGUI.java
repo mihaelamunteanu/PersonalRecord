@@ -1,9 +1,12 @@
 package com.codeprehend.medical;
 
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import com.codeprehend.medical.panels.ExaminationPatientPanel;
 import com.codeprehend.medical.panels.FilesPatientPanel;
@@ -50,8 +53,7 @@ public class MedicalRecordGUI extends JFrame {
 		//initialize GUI
 		
 		this.setBounds(100, 100, 813, 516);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//Possible extension: to Ask "Are you sure you want to leave the application? Check if there is anything unsaved"
+		this.setExitBehaviour();
 		this.setTitle(numeFereastraPrincipala);
 		
 		//Create main panel
@@ -63,6 +65,24 @@ public class MedicalRecordGUI extends JFrame {
 		filesPatientPanel = new FilesPatientPanel(this);
 		
 	    this.setVisible(true);
+	}
+	
+	private void setExitBehaviour() {
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+		    @Override
+		    public void windowClosing(WindowEvent we)
+		    { 
+		        String ObjButtons[] = {"Da","Nu"};
+		        int PromptResult = JOptionPane.showOptionDialog(null,"Sigur doriti sa parasiti aplicatia?","Confirmare EXIT",
+		        		JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, ObjButtons,ObjButtons[2]);
+		        if(PromptResult==JOptionPane.YES_OPTION)
+		        {
+		            System.exit(0);
+		        }
+		    }
+		});
+
 	}
 	
 	public void showPanelListOfPatients(List<Patient> listOfPatients) {
@@ -125,14 +145,14 @@ public class MedicalRecordGUI extends JFrame {
 		filesPatientPanel.setVisible(false);
 	}
 	
-	public void showModifyPatientPanel(Patient patient, List<Antecedent> antecedents) {
+	public void showModifyPatientPanel(Patient patient, List<Antecedent> antecedents, String fromPanel) {
 		this.remove(modifyPatientPanel);
 		modifyPatientPanel = new ModifyPatientPanel(this);
 		this.add(modifyPatientPanel);
 		
 		modifyPatientPanel.setPacient(patient);
 		modifyPatientPanel.setAntecedents(antecedents);
-		modifyPatientPanel.loadModifyGUIPanelForPatient(patient);
+		modifyPatientPanel.loadModifyGUIPanelForPatient(patient, fromPanel);
 		modifyPatientPanel.setVisible(true);
 		
 		newPatientPanel.setVisible(false);

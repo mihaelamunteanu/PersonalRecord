@@ -15,16 +15,18 @@ public class ModifyPatientButtonActionListener implements ActionListener {
 	
 	private MedicalRecordGUI mainWindow;
 	private Patient patient;
+	private String fromPanel;
 	
-	public ModifyPatientButtonActionListener(MedicalRecordGUI mainWindow, Patient patient){
+	public ModifyPatientButtonActionListener(MedicalRecordGUI mainWindow, Patient patient, String fromPanel){
 		this.mainWindow = mainWindow;
 		this.patient = patient;
+		this.fromPanel = fromPanel;
 	}
 
 	public void actionPerformed(ActionEvent event){
 		Long pacientId = patient.getId();
 		List<Antecedent> antecedents = AntecedentsDAO.getAntecedentsByPatientId(pacientId);
-		mainWindow.showModifyPatientPanel(patient, antecedents);
+		mainWindow.showModifyPatientPanel(patient, antecedents, fromPanel);
 	}
 
 }

@@ -187,13 +187,15 @@ public class ListOfPatientsPanel extends JPanel {
 		
 		filesAccesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				AccesFilesExaminationButtonActionListener.actionPerformed(parentPanel, patients.get(listOfPatients.getSelectedIndex()));
+				if (listOfPatients.getSelectedIndex() >= 0) 
+					AccesFilesExaminationButtonActionListener.actionPerformed(parentPanel, patients.get(listOfPatients.getSelectedIndex()));
 			}
 		});
 		
 		folderAccessButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				AccessExamButtonActionListener.actionPerformed(parentPanel, patients.get(listOfPatients.getSelectedIndex()));
+				if (listOfPatients.getSelectedIndex() >= 0) 
+					AccessExamButtonActionListener.actionPerformed(parentPanel, patients.get(listOfPatients.getSelectedIndex()));
 			}
 		});
 	}

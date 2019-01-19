@@ -24,10 +24,12 @@ import javax.swing.border.LineBorder;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.ExaminationDAO;
+import com.codeprehend.medical.listeners.AccesFilesExaminationButtonActionListener;
 import com.codeprehend.medical.listeners.BackFromModifyPatientPanelButtonActionListener;
 import com.codeprehend.medical.listeners.SaveModificationsForPatientButtonActionListener;
 import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Patient;
+import com.codeprehend.medical.util.Constants;
 
 public class ModifyPatientPanel extends JPanel {
 
@@ -59,7 +61,7 @@ public class ModifyPatientPanel extends JPanel {
 		this.setVisible(false);
 	}
 	
-	public void loadModifyGUIPanelForPatient(Patient pacient) {
+	public void loadModifyGUIPanelForPatient(Patient pacient, String fromPanel) {
 		this.pacient = pacient;
 		this.setBorder(new LineBorder(new Color(0, 0, 0)));
 		parentPanel.add(this, BorderLayout.CENTER);
@@ -371,9 +373,12 @@ public class ModifyPatientPanel extends JPanel {
 		
 		btnNewButton_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				BackFromModifyPatientPanelButtonActionListener.backButtonPressed(
-						parentPanel, pacient, antecedents, 
-						ExaminationDAO.getExaminationsByPatientId(pacient.getId()));
+				if (Constants.FROM_EXAMINATION_PANEL.equals(fromPanel)) {
+					BackFromModifyPatientPanelButtonActionListener.backButtonPressed(
+							parentPanel, pacient, antecedents);
+				} else {
+					AccesFilesExaminationButtonActionListener.actionPerformed(parentPanel, pacient);
+				}
 			}
 		});
 		

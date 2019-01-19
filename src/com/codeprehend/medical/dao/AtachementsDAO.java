@@ -57,7 +57,7 @@ public class AtachementsDAO {
 	public static List<Attachement> getAttachmentsByPatientId(Long patientId) {
 		List<Attachement> attachmentsForPatient = new ArrayList<Attachement>();
 		String SQL = "SELECT * from  atasamente "
-				+ "where pacient_id = ?; ";
+				+ "where pacient_id = ? ORDER BY data_salvare DESC; ";
 		
 		System.out.println(" Attachments for pacient : " + SQL);
 		

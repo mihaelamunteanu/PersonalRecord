@@ -30,7 +30,22 @@ psql -f "C:\\Mihaela\\OTHERP~1\\GITHUB~1\\backup\\PERSON~1\\filebck4.sql" --user
 pg_ctl start 
 SET PGDATA=C:\Program Files\PostgreSQL\11\data
 
+# 18.01.2019
+- properties files to save data to (the pdfs) and to read data from... 
+- logs
+- validare - check what there is still to do
+- bat for app
+- DB backup procedure - de completat
+- DB installation procedure
+- doc (Java installation, Postgres Installation, DB installation, DB back-up installation (choose folders), 
+Application Installation, Task Scheduler, usage)
+- test icon to run app
+- organize folders for Db
+- establish need for users
+- schimbari dupa discutia cu Cosmin
+
 # 16.01.2019
+- properties files to save data to (the pdfs) and to read data from... 
 - logs
 - validare
 - select first row from lists - talk to Cosmin
@@ -44,11 +59,11 @@ SET PGDATA=C:\Program Files\PostgreSQL\11\data
 - DB backup procedure - de completat
 - versiune DB in tabel nou - ok 
 - DB installation procedure
-- doc
+- doc (Java installation, Postgres Installation, DB installation, DB back-up installation (choose folders), Aplication Installation)
 - test icon to run app
 - organize folders for Db
-- sav and open files naming convention and folder
-- order by
+- sav and open files naming convention and folder - talk to Cosmin
+- order by - talk to Cosmin
 
 
 #08.01.2018

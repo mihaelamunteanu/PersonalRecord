@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -11,6 +12,7 @@ import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.AtachementsDAO;
 import com.codeprehend.medical.dao.ExaminationDAO;
 import com.codeprehend.medical.pdf.ExaminationToPdf;
+import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Attachement;
 import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
@@ -20,14 +22,26 @@ public class SaveExaminationButtonActionListener implements ActionListener {
 	
 	private MedicalRecordGUI mainWindow;
 	private Patient patient;
+	private List<Antecedent> antecedents;
+	private List<Examination> examinations;
 	
-	public SaveExaminationButtonActionListener(MedicalRecordGUI mainWindow, Patient patient){
+	public SaveExaminationButtonActionListener(MedicalRecordGUI mainWindow, Patient patient, 
+			List<Antecedent> antecedents, List<Examination> examinations){
 		this.mainWindow = mainWindow;
 		this.patient = patient;
+		this.antecedents = antecedents;
+		this.examinations = examinations;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		String textDiagnosis = mainWindow.getExaminationPatientPanel().getExaminationDiagnosis().getText();
+		
+		if (textDiagnosis == null || textDiagnosis.trim().isEmpty()) {
+			JOptionPane.showMessageDialog(mainWindow, "Textul pentru consultatie este necompletat", 
+			"Avertizare", JOptionPane.WARNING_MESSAGE);
+			mainWindow.showExaminationPatientPanel(patient, antecedents, examinations);
+			return;
+		}
 		
 		Long examinationId = ExaminationDAO.saveExamination(new Examination(patient.getId(), textDiagnosis, LocalDate.now()));
 		if (examinationId <= 0) {

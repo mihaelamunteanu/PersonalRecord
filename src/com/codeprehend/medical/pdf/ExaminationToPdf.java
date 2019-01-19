@@ -81,7 +81,7 @@ public class ExaminationToPdf {
 	        PdfPCell cell = new PdfPCell(new Phrase(" "));
 	        cell.setBorder(PdfPCell.NO_BORDER);
 	        cell.setBackgroundColor(Color.WHITE);
-	        cell.setFixedHeight(30);
+	        cell.setFixedHeight(50);
 	        cell.setColspan(2);
 	        table.addCell(cell);
 	        
@@ -160,7 +160,7 @@ public class ExaminationToPdf {
 			Font f4 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 14);
 			f4.setColor(Color.BLACK);
 			selector4.addFont(f4);
-			Phrase ph4 = selector4.process("  Patient: " + nume + " " + prenume + " ");
+			Phrase ph4 = selector4.process("  Pacient: " + nume + " " + prenume + " ");
 	        cell = new PdfPCell(ph4);
 	        cell.setHorizontalAlignment(PdfPCell.ALIGN_LEFT);
 	        cell.setBorder(PdfPCell.NO_BORDER);
@@ -222,7 +222,7 @@ public class ExaminationToPdf {
 //	        cell.setBorder(PdfPCell.NO_BORDER);
 	        cell.setBackgroundColor(Color.WHITE);
 	        cell.setColspan(2);
-	        cell.setFixedHeight(280);
+	        cell.setFixedHeight(420);
 	        table.addCell(cell);
 	        
 	        // row - empty
@@ -238,7 +238,7 @@ public class ExaminationToPdf {
 			Font f8 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 18);
 			f8.setColor(Color.BLACK);
 			selector8.addFont(f8);
-			Phrase ph8 = selector8.process("  Semnatura");
+			Phrase ph8 = selector8.process("  Semnatura si parafa");
 	        cell = new PdfPCell(ph8);
 	        cell.setHorizontalAlignment(PdfPCell.ALIGN_LEFT);
 	        cell.setBorder(PdfPCell.NO_BORDER);
@@ -251,10 +251,57 @@ public class ExaminationToPdf {
 			selector9.addFont(f9);
 			Phrase ph9 = selector9.process("Data");
 	        cell = new PdfPCell(ph9);
+	        cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
+	        cell.setBorder(PdfPCell.NO_BORDER);
+	        cell.setBackgroundColor(Color.WHITE);
+	        table.addCell(cell);
+	        
+			FontSelector selectorEmptyRowCol1 = new FontSelector();
+			Font fontEmptyRowCol1 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 18);
+			fontEmptyRowCol1.setColor(Color.WHITE);
+			selectorEmptyRowCol1.addFont(fontEmptyRowCol1);
+			Phrase phEmptyRowCol1 = selectorEmptyRowCol1.process("");
+	        cell = new PdfPCell(phEmptyRowCol1);
+	        cell.setHorizontalAlignment(PdfPCell.ALIGN_LEFT);
+	        cell.setBorder(PdfPCell.NO_BORDER);
+	        cell.setBackgroundColor(Color.WHITE);
+	        cell.setColspan(2);
+	        table.addCell(cell);
+	        
+			FontSelector selectorEmptyRowCol2 = new FontSelector();
+			Font fontEmptyRowCol2 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 18);
+			fontEmptyRowCol2.setColor(Color.WHITE);
+			selectorEmptyRowCol2.addFont(fontEmptyRowCol1);
+			Phrase phEmptyRowCol2 = selectorEmptyRowCol1.process("");
+	        cell = new PdfPCell(phEmptyRowCol2);
+	        cell.setHorizontalAlignment(PdfPCell.ALIGN_LEFT);
+	        cell.setBorder(PdfPCell.NO_BORDER);
+	        cell.setBackgroundColor(Color.WHITE);
+	        cell.setColspan(2);
+	        table.addCell(cell);
+	        
+			FontSelector selector10 = new FontSelector();
+			Font f10 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 18);
+			f10.setColor(Color.BLACK);
+			selector10.addFont(f10);
+			Phrase ph10 = selector10.process("");
+	        cell = new PdfPCell(ph10);
 	        cell.setHorizontalAlignment(PdfPCell.ALIGN_LEFT);
 	        cell.setBorder(PdfPCell.NO_BORDER);
 	        cell.setBackgroundColor(Color.WHITE);
 	        table.addCell(cell);
+	        
+			FontSelector selector11 = new FontSelector();
+			Font f11 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 18);
+			f11.setColor(Color.BLACK);
+			selector11.addFont(f11);
+			Phrase ph11 = selector11.process(LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+	        cell = new PdfPCell(ph11);
+	        cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
+	        cell.setBorder(PdfPCell.NO_BORDER);
+	        cell.setBackgroundColor(Color.WHITE);
+	        table.addCell(cell);
+
 
 	        // row - empty
 	        cell = new PdfPCell(new Phrase(" "));
