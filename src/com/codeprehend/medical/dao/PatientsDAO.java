@@ -12,13 +12,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.codeprehend.medical.util.Constants;
 import com.codeprehend.medical.util.DatabaseConnection;
 import com.codeprehend.medical.util.Utils;
 import com.codeprehend.medical.resources.Patient;
 
 public class PatientsDAO {
 	
-	private static final Logger LOGGER = Logger.getLogger(PatientsDAO.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Constants.LOGGER_NAME);
 	
 	public static Patient getPatientById(Long patientId) {
 		Patient pacient = null;

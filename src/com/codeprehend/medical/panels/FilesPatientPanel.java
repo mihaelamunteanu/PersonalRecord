@@ -8,6 +8,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -43,8 +44,7 @@ public class FilesPatientPanel extends JPanel {
 
 	private JTextField browseFileTextField = new JTextField();
 	
-//	private static final Logger LOGGER = Logger.getLogger(FilesPatientPanel.class.getName());
-
+	//	private static final Logger LOGGER = Logger.getLogger(Constants.LOGGER_NAME);
 	public FilesPatientPanel(MedicalRecordGUI parent) {
 		super();
 		this.setLayout(null);

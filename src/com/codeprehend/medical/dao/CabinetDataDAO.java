@@ -8,10 +8,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.codeprehend.medical.resources.CabinetData;
+import com.codeprehend.medical.util.Constants;
 import com.codeprehend.medical.util.DatabaseConnection;
 
 public class CabinetDataDAO {
-	private static final Logger LOGGER = Logger.getLogger(CabinetDataDAO.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Constants.LOGGER_NAME);
 	
 	public static CabinetData getCabinetData() {
 		CabinetData cabinetData = null;

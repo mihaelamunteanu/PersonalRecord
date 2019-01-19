@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -11,7 +12,7 @@ import java.util.logging.Logger;
 
 public class Utils {
 	
-	private static final Logger LOGGER = Logger.getLogger(Utils.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Constants.LOGGER_NAME);
 	
 	public static Properties prop = new Properties();
 	
@@ -44,7 +45,16 @@ public class Utils {
 			
 			DatabaseConnection.loadDatabaseProperties(prop.getProperty("dbserver"), 
 					prop.getProperty("dbport"), prop.getProperty("dbuser"), prop.getProperty("dbpass"));
-	
+			
+			String loggerLocation = prop.getProperty("log_location");
+			String dateTime = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME);
+			String logFileName = "log" + dateTime.substring(0, 
+					dateTime.lastIndexOf(".")).replaceAll(":", "_") + "." + "log";
+			if (loggerLocation != null && !loggerLocation.isEmpty()) {
+				LoggerSettings.setLoggerSetting(loggerLocation + "\\" + logFileName);
+			} else {
+				LoggerSettings.setLoggerSetting("." + "\\" + logFileName);
+			}
 		} catch (IOException ex) {
 			LOGGER.log(Level.SEVERE, "Error reading config.properties file", ex);
 			ex.printStackTrace();
@@ -59,5 +69,8 @@ public class Utils {
 		}
 	}
 
+	public static void loadLoggingProperties( ) {
+		
+	}
 
 }

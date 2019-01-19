@@ -11,12 +11,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.codeprehend.medical.util.Constants;
 import com.codeprehend.medical.util.DatabaseConnection;
 import com.codeprehend.medical.resources.Antecedent;
 
 public class AntecedentsDAO {
 	
-	private static final Logger LOGGER = Logger.getLogger(AntecedentsDAO.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Constants.LOGGER_NAME);
 	
 	/**
 	 * Method to save antecedent into DB.
