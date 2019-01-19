@@ -35,7 +35,7 @@ pg_ctl start
 SET PGDATA=C:\Program Files\PostgreSQL\11\data
 
 # 18.01.2019
-- properties files to save data to (the pdfs) and to read data from... - le citim din DB
+- properties files to save data to (the pdfs) and to read data from... - le citim din DB, si properties pt DB - ok 
 - logs
 - validare - check what there is still to do - ok 
 - bat for app
