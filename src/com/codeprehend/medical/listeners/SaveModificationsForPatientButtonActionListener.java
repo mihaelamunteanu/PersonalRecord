@@ -3,7 +3,6 @@ package com.codeprehend.medical.listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -12,12 +11,11 @@ import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.AntecedentsDAO;
 import com.codeprehend.medical.dao.ExaminationDAO;
 import com.codeprehend.medical.dao.PatientsDAO;
-import com.codeprehend.medical.util.Constants;
-import com.codeprehend.medical.util.InputValidation;
-import com.codeprehend.medical.util.Utils;
 import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
+import com.codeprehend.medical.util.InputValidation;
+import com.codeprehend.medical.util.Utils;
 
 public class SaveModificationsForPatientButtonActionListener implements ActionListener {
 	

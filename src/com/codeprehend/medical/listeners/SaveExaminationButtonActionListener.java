@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -19,7 +18,6 @@ import com.codeprehend.medical.resources.Attachement;
 import com.codeprehend.medical.resources.CabinetData;
 import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
-import com.codeprehend.medical.util.Constants;
 import com.codeprehend.medical.util.Utils;
 import com.itextpdf.text.DocumentException;
 

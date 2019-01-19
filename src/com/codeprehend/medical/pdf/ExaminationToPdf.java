@@ -12,7 +12,6 @@ import java.time.format.DateTimeFormatter;
 
 import com.codeprehend.medical.resources.Attachement;
 import com.codeprehend.medical.resources.CabinetData;
-import com.codeprehend.medical.util.Constants;
 import com.codeprehend.medical.util.Utils;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -69,14 +68,14 @@ public class ExaminationToPdf {
 	    		String telefon, String examinationDate, String examinationText) throws IOException, DocumentException {
 //	        Rectangle small = new Rectangle(540,220);
 	        Rectangle pdfRectangle = new Rectangle(PageSize.A4.getWidth() - 20, PageSize.A4.getHeight() - 20);
-	        Font smallfont = new Font(Font.HELVETICA, 10);
+//	        Font smallfont = new Font(Font.HELVETICA, 10);
 	        Document document = new Document(pdfRectangle, 5, 5, 5, 5);
 	        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(dest));
 	        document.open();
 	        PdfPTable table = new PdfPTable(2);
 	        table.setTotalWidth(new float[]{ 220, 285 });
 	        table.setLockedWidth(true);
-	        PdfContentByte cb = writer.getDirectContent();
+//	        PdfContentByte cb = writer.getDirectContent();
 	        
 	        
 	        // first row - empty
