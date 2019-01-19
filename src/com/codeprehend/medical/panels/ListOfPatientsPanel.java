@@ -26,6 +26,7 @@ import com.codeprehend.medical.listeners.AccesFilesExaminationButtonActionListen
 import com.codeprehend.medical.listeners.AccessExamButtonActionListener;
 import com.codeprehend.medical.listeners.BackFromListOfPatientsPanelButtonActionListener;
 import com.codeprehend.medical.resources.Patient;
+import com.codeprehend.medical.util.Utils;
 
 /** 
  * Separate class for the panel with the detected list of Patients. 
@@ -124,7 +125,7 @@ public class ListOfPatientsPanel extends JPanel {
 			str = str.concat("  ");
 			str = str.concat(pacient.getPrenume());
 			str = str.concat("   ");
-			str = str.concat(pacient.getDataNasterii().toString());
+			str = str.concat(Utils.fromDateToString(pacient.getDataNasterii()));
 			str = str.concat("   CNP: ");
 			str = str.concat(pacient.getCnp());
 			str = str.concat("   tel: ");

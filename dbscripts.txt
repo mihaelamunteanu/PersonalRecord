@@ -214,3 +214,28 @@ ALTER TABLE public.dbversion
 INSERT INTO public.dbversion(
 	versiune, data_rulare, observatii)
 	VALUES ('1.0', NOW(), 'Script initial pentru structura bazei de date');
+	
+-- Table: public.cabinet
+
+-- DROP TABLE public.cabinet;
+
+CREATE TABLE public.cabinet
+(
+    id bigint NOT NULL DEFAULT nextval('cabinet_id_seq'::regclass),
+    nume character varying COLLATE pg_catalog."default" NOT NULL,
+    adresa character varying COLLATE pg_catalog."default" NOT NULL,
+    telefon character varying COLLATE pg_catalog."default" NOT NULL,
+    data_modificare date NOT NULL,
+    CONSTRAINT cabinet_pkey PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.cabinet
+    OWNER to postgres;
+
+INSERT INTO public.cabinet(
+	nume, adresa, telefon, data_modificare)
+	VALUES ('C.M. Dr. RUGINA', 'Str. Bd. 9Mai, nr. 1, Bl. A13, Ap.2', '0233-237969', NOW());

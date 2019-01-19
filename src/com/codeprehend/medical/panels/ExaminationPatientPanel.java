@@ -29,6 +29,7 @@ import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
 import com.codeprehend.medical.util.Constants;
+import com.codeprehend.medical.util.Utils;
 
 public class ExaminationPatientPanel extends JPanel {
 	/**
@@ -102,7 +103,7 @@ public class ExaminationPatientPanel extends JPanel {
 		gbc_PrenumeLabel.gridy = 1;
 		InformationGridBagLayoutPanel.add(PrenumeLabel, gbc_PrenumeLabel);
 		
-		JLabel DataNastereLabel = new JLabel("Data nasterii: " + patient.getDataNasterii());
+		JLabel DataNastereLabel = new JLabel("Data nasterii: " + Utils.fromDateToString(patient.getDataNasterii()));
 		GridBagConstraints gbc_DataNastereLabel = new GridBagConstraints();
 		gbc_DataNastereLabel.weightx = 1.0;
 		gbc_DataNastereLabel.insets = new Insets(0, 0, 5, 5);
@@ -186,21 +187,18 @@ public class ExaminationPatientPanel extends JPanel {
 //				100.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
 		medicalInfoPanel.setLayout(gbl_medicalInfoPanel);
 		
+//		JLabel label = new JLabel("     ");
+//		GridBagConstraints gbc_label = new GridBagConstraints();
+//		gbc_label.insets = new Insets(0, 0, 0, 0);
+//		gbc_label.gridx = 0;
+//		gbc_label.gridy = 0;
+//		gbc_label.gridwidth = 1;
+//		medicalInfoPanel.add(label, gbc_label);
 		
-		JLabel label = new JLabel("     ");
-		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.insets = new Insets(0, 0, 0, 0);
-		gbc_label.gridx = 0;
-		gbc_label.gridy = 1;
-		gbc_label.gridwidth = 1;
-		medicalInfoPanel.add(label, gbc_label);
+		int ycoordinate = 0;
 		
-		int ycoordinate = 1;
-
-//for antecedente
-		for (Antecedent antecedent : antecedents) {
-			
-			JLabel lblAntecedente = new JLabel("Antecedente " +  antecedent.getRegistrationDate());
+		if (antecedents != null && antecedents.size() > 0) {
+			JLabel lblAntecedente = new JLabel("Antecedente ");
 			lblAntecedente.setFont(new Font("Tahoma", Font.BOLD, 11));
 			lblAntecedente.setHorizontalAlignment(SwingConstants.LEFT);
 			GridBagConstraints gbc_lblAntecedente = new GridBagConstraints();
@@ -210,6 +208,12 @@ public class ExaminationPatientPanel extends JPanel {
 			gbc_lblAntecedente.gridy = ycoordinate;
 			gbc_lblAntecedente.weighty = Double.MIN_VALUE;
 			medicalInfoPanel.add(lblAntecedente, gbc_lblAntecedente);
+			ycoordinate = ycoordinate + 1;
+		}
+
+		
+		//for antecedente
+		for (Antecedent antecedent : antecedents) {
 			
 			String antecedentText = antecedent.getAntecedentText();
 			//String antecedentTextProcessed = "<html>" + antecedentText + "</html>";
@@ -221,7 +225,7 @@ public class ExaminationPatientPanel extends JPanel {
 			gbc_lblAntcedenteNumarulDoi.anchor = GridBagConstraints.WEST;
 			gbc_lblAntcedenteNumarulDoi.insets = new Insets(0, 0, 6, 5);
 			gbc_lblAntcedenteNumarulDoi.gridx = 0;
-			gbc_lblAntcedenteNumarulDoi.gridy = ycoordinate+1;
+			gbc_lblAntcedenteNumarulDoi.gridy = ycoordinate;
 			gbc_lblAntcedenteNumarulDoi.weighty = Double.MIN_VALUE;
 			gbc_lblAntcedenteNumarulDoi.weightx = 1.0;
 			medicalInfoPanel.add(lblAntcedenteNumarulDoi, gbc_lblAntcedenteNumarulDoi);
@@ -231,7 +235,7 @@ public class ExaminationPatientPanel extends JPanel {
 			lblAntcedenteNumarulDoi.setOpaque(false);  
 			lblAntcedenteNumarulDoi.setFocusable(false);
 			
-			ycoordinate = ycoordinate + 2;
+			ycoordinate = ycoordinate + 1;
 		}
 				
 		examinationDiagnosis = new JTextArea(1,6);
@@ -254,7 +258,8 @@ public class ExaminationPatientPanel extends JPanel {
 		
 		//examinations entries
 		for (Examination examination : examinations) {
-			JLabel lblConsultatie = new JLabel("Consultatie " + examination.getConsultationDate());
+			JLabel lblConsultatie = new JLabel("Consultatie din data de " + 
+					Utils.fromDateToString(examination.getConsultationDate()));
 			lblConsultatie.setFont(new Font("Tahoma", Font.BOLD, 11));
 			GridBagConstraints gbc_lblConsultatie = new GridBagConstraints();
 			gbc_lblConsultatie.anchor = GridBagConstraints.WEST;

@@ -4,18 +4,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.AtachementsDAO;
+import com.codeprehend.medical.dao.CabinetDataDAO;
 import com.codeprehend.medical.dao.ExaminationDAO;
 import com.codeprehend.medical.pdf.ExaminationToPdf;
 import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Attachement;
+import com.codeprehend.medical.resources.CabinetData;
 import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
+import com.codeprehend.medical.util.Constants;
+import com.codeprehend.medical.util.Utils;
 import com.itextpdf.text.DocumentException;
 
 public class SaveExaminationButtonActionListener implements ActionListener {
@@ -56,8 +61,9 @@ public class SaveExaminationButtonActionListener implements ActionListener {
 		
 		mainWindow.getExaminationPatientPanel().getExaminationDiagnosis().setEditable(false);
 		try {
-			Attachement attachment = ExaminationToPdf.createAndOpenPdf(patient.getId(), patient.getNume(), patient.getPrenume(), 
-					patient.getCnp(), patient.getNumarTelefon(), LocalDate.now().toString(), 
+			CabinetData cabinetData = CabinetDataDAO.getCabinetData();
+			Attachement attachment = ExaminationToPdf.createAndOpenPdf(cabinetData, patient.getId(), patient.getNume(), patient.getPrenume(), 
+					patient.getCnp(), patient.getNumarTelefon(), Utils.fromDateToString(LocalDate.now()), 
 					mainWindow.getExaminationPatientPanel().getExaminationDiagnosis().getText());
 			AtachementsDAO.saveAttachment(attachment);
 			AccessExamButtonActionListener.actionPerformed(mainWindow, patient);

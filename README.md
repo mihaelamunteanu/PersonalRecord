@@ -31,9 +31,9 @@ pg_ctl start
 SET PGDATA=C:\Program Files\PostgreSQL\11\data
 
 # 18.01.2019
-- properties files to save data to (the pdfs) and to read data from... 
+- properties files to save data to (the pdfs) and to read data from... - le citim din DB
 - logs
-- validare - check what there is still to do
+- validare - check what there is still to do - ok 
 - bat for app
 - DB backup procedure - de completat
 - DB installation procedure
@@ -41,8 +41,8 @@ SET PGDATA=C:\Program Files\PostgreSQL\11\data
 Application Installation, Task Scheduler, usage)
 - test icon to run app
 - organize folders for Db
-- establish need for users
-- schimbari dupa discutia cu Cosmin
+- establish need for users - continuam cu user overall
+- schimbari dupa discutia cu Cosmin - ok 
 
 # 16.01.2019
 - properties files to save data to (the pdfs) and to read data from... 

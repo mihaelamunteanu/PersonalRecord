@@ -23,13 +23,13 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import com.codeprehend.medical.MedicalRecordGUI;
-import com.codeprehend.medical.dao.ExaminationDAO;
 import com.codeprehend.medical.listeners.AccesFilesExaminationButtonActionListener;
 import com.codeprehend.medical.listeners.BackFromModifyPatientPanelButtonActionListener;
 import com.codeprehend.medical.listeners.SaveModificationsForPatientButtonActionListener;
 import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Patient;
 import com.codeprehend.medical.util.Constants;
+import com.codeprehend.medical.util.Utils;
 
 public class ModifyPatientPanel extends JPanel {
 
@@ -155,7 +155,8 @@ public class ModifyPatientPanel extends JPanel {
 		gbc_DataNastereLabel.gridy = 2;
 		InformationGridBagLayoutPanel.add(DataNastereLabel, gbc_DataNastereLabel);
 		
-		textFieldDate.setText(pacient.getDataNasterii() != null ? pacient.getDataNasterii().toString() : " ");
+		
+		textFieldDate.setText(pacient.getDataNasterii() != null ? Utils.fromDateToString(pacient.getDataNasterii()).toString() : "");
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.insets = new Insets(0, 0, 5, 5);
 		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
@@ -312,24 +313,24 @@ public class ModifyPatientPanel extends JPanel {
 		medicalInfoPanel.add(textAreaAntecedents, gbc_textArea);
 		textAreaAntecedents.setRows(6);
 		
-		JLabel label = new JLabel("     ");
-		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.insets = new Insets(0, 0, 5, 0);
-		gbc_label.gridx = 0;
-		gbc_label.gridy = 7;
-		medicalInfoPanel.add(label, gbc_label);
+//		JLabel label = new JLabel("     ");
+//		GridBagConstraints gbc_label = new GridBagConstraints();
+//		gbc_label.insets = new Insets(0, 0, 5, 0);
+//		gbc_label.gridx = 0;
+//		gbc_label.gridy = 7;
+//		medicalInfoPanel.add(label, gbc_label);
 		
-		int ycoordinate = 8;
+		int ycoordinate = 7;
 		for (Antecedent antecedent : antecedents) {
-			JLabel lblAntecedente = new JLabel("Antecedente " + antecedent.getRegistrationDate());
-			lblAntecedente.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblAntecedente.setHorizontalAlignment(SwingConstants.LEFT);
-			GridBagConstraints gbc_lblAntecedente = new GridBagConstraints();
-			gbc_lblAntecedente.anchor = GridBagConstraints.WEST;
-			gbc_lblAntecedente.insets = new Insets(0, 0, 5, 0);
-			gbc_lblAntecedente.gridx = 0;
-			gbc_lblAntecedente.gridy = ycoordinate;
-			medicalInfoPanel.add(lblAntecedente, gbc_lblAntecedente);
+//			JLabel lblAntecedente = new JLabel("Antecedente " + antecedent.getRegistrationDate());
+//			lblAntecedente.setFont(new Font("Tahoma", Font.BOLD, 11));
+//			lblAntecedente.setHorizontalAlignment(SwingConstants.LEFT);
+//			GridBagConstraints gbc_lblAntecedente = new GridBagConstraints();
+//			gbc_lblAntecedente.anchor = GridBagConstraints.WEST;
+//			gbc_lblAntecedente.insets = new Insets(0, 0, 5, 0);
+//			gbc_lblAntecedente.gridx = 0;
+//			gbc_lblAntecedente.gridy = ycoordinate;
+//			medicalInfoPanel.add(lblAntecedente, gbc_lblAntecedente);
 			
 			JTextArea lblAntcedenteNumarulDoi = new JTextArea(antecedent.getAntecedentText(), 1, 1);
 			lblAntcedenteNumarulDoi.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -346,7 +347,7 @@ public class ModifyPatientPanel extends JPanel {
 			lblAntcedenteNumarulDoi.setOpaque(false);  
 			lblAntcedenteNumarulDoi.setFocusable(false);
 			
-			ycoordinate = ycoordinate + 2;
+			ycoordinate = ycoordinate + 1;
 		}
 		
 		JPanel buttonPanel = new JPanel();

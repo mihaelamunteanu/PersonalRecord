@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.codeprehend.medical.util.DatabaseConnection;
+import com.codeprehend.medical.util.Utils;
 import com.codeprehend.medical.resources.Patient;
 
 public class PatientsDAO {
@@ -172,7 +173,7 @@ public class PatientsDAO {
 		if (filter !=  null && filter.length() > 0) {
 			if (andNeeded) whereClauseBuilder.append(" AND ");
 			else whereClauseBuilder.append(" WHERE ");
-			whereClauseBuilder.append(filterName + " = '" + LocalDate.parse(filter).toString() + "'");
+			whereClauseBuilder.append(filterName + " = '" + Utils.parseLocalDate(filter).toString() + "'");
 			nextAndNeeded = true;
 		} else if (andNeeded) {
 			nextAndNeeded = true;

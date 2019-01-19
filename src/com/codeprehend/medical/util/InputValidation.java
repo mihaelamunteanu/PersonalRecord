@@ -35,7 +35,7 @@ public class InputValidation {
 	//TODO check correct phone number
 	public static void validatePhoneNumber(String phoneNumber) throws Exception {
 		if (phoneNumber != null && phoneNumber.length() > 0) {
-			Pattern pattern = Pattern.compile("[-]|([+][0-9]?)|([0][0-9]{9})");
+			Pattern pattern = Pattern.compile("[-]|([+][0-9]?)|([00][0-9]?)|([0][0-9]{9})");
 			Matcher matcher = pattern.matcher(phoneNumber);
 			if (!matcher.matches()) {
 				throw new Exception("Numarul de telefon '" + phoneNumber + "' nu este corect.");

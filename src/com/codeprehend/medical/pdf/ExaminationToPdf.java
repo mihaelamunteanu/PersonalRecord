@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import com.codeprehend.medical.resources.Attachement;
+import com.codeprehend.medical.resources.CabinetData;
+import com.codeprehend.medical.util.Constants;
+import com.codeprehend.medical.util.Utils;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -36,7 +39,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class ExaminationToPdf {
 	    public static final String DEST = "pdf\\pdf_table.pdf";
 	    
-	    public static Attachement createAndOpenPdf(Long id, String nume, String prenume, String cnp, String telefon, 
+	    public static Attachement createAndOpenPdf(CabinetData cabinetData, Long id, String nume, String prenume, String cnp, String telefon, 
 	    		String examinationDate, String examinationText) throws IOException, DocumentException {
 	    	
 	    	String addTimeToExaminationDate = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
@@ -47,7 +50,7 @@ public class ExaminationToPdf {
 	    	
 	        File file = new File(DEST);
 	        file.getParentFile().mkdirs();
-	        ExaminationToPdf.createPdf(DEST, nume, prenume, cnp, telefon, examinationDate, examinationText);
+	        ExaminationToPdf.createPdf(cabinetData, DEST, nume, prenume, cnp, telefon, examinationDate, examinationText);
 	        if (Desktop.isDesktopSupported()) {
 	            try {
 	                File myFile = new File(DEST);
@@ -63,7 +66,7 @@ public class ExaminationToPdf {
 	        return attachement;
 	    }
 	    
-	    private static void createPdf(String dest, String nume, String prenume, String cnp, 
+	    private static void createPdf(CabinetData cabinetData, String dest, String nume, String prenume, String cnp, 
 	    		String telefon, String examinationDate, String examinationText) throws IOException, DocumentException {
 //	        Rectangle small = new Rectangle(540,220);
 	        Rectangle pdfRectangle = new Rectangle(PageSize.A4.getWidth() - 20, PageSize.A4.getHeight() - 20);
@@ -100,7 +103,7 @@ public class ExaminationToPdf {
 			f1.setColor(Color.BLACK);
 			f1.setStyle("BOLD");
 			selector.addFont(f1);
-			Phrase ph = selector.process("  C.M. Dr. RUGINA");
+			Phrase ph = selector.process("  " + cabinetData.getCabinetName());
 	        cell = new PdfPCell(ph);
 	        cell.setHorizontalAlignment(PdfPCell.ALIGN_LEFT);
 	        cell.setBorder(PdfPCell.NO_BORDER);
@@ -115,7 +118,7 @@ public class ExaminationToPdf {
 			f2.setColor(Color.BLACK);
 			f2.setStyle("BOLD");
 			selector2.addFont(f2);
-			Phrase ph2 = selector2.process(" Str. Bd. 9Mai, nr. 1, Bl. A13, Ap.2");
+			Phrase ph2 = selector2.process(" " + cabinetData.getCabinetAddress());
 	        cell = new PdfPCell(ph2);
 	        cell.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
 	        cell.setVerticalAlignment(PdfPCell.ALIGN_BOTTOM);
@@ -129,7 +132,7 @@ public class ExaminationToPdf {
 			f3.setColor(Color.BLACK);
 			f3.setStyle("BOLD");
 			selector3.addFont(f3);
-			Phrase ph3 = selector3.process(" Telefon: 0233-237969");
+			Phrase ph3 = selector3.process(" Telefon: " + cabinetData.getCabinetTelNumber());
 	        cell = new PdfPCell(ph3);
 	        cell.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
 	        cell.setVerticalAlignment(PdfPCell.ALIGN_BOTTOM);
@@ -295,7 +298,7 @@ public class ExaminationToPdf {
 			Font f11 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 18);
 			f11.setColor(Color.BLACK);
 			selector11.addFont(f11);
-			Phrase ph11 = selector11.process(LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+			Phrase ph11 = selector11.process(Utils.fromDateToString(LocalDate.now()));
 	        cell = new PdfPCell(ph11);
 	        cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 	        cell.setBorder(PdfPCell.NO_BORDER);

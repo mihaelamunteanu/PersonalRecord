@@ -31,6 +31,7 @@ import com.codeprehend.medical.listeners.SaveAttachmentActionPerformed;
 import com.codeprehend.medical.resources.Attachement;
 import com.codeprehend.medical.resources.Patient;
 import com.codeprehend.medical.util.Constants;
+import com.codeprehend.medical.util.Utils;
 
 public class FilesPatientPanel extends JPanel {
 	
@@ -103,7 +104,8 @@ public class FilesPatientPanel extends JPanel {
 		gbc_PrenumeLabel.gridy = 1;
 		InformationGridBagLayoutPanel.add(PrenumeLabel, gbc_PrenumeLabel);
 		
-		JLabel DataNastereLabel = new JLabel("Data nasterii: " + (patient.getDataNasterii() != null ? patient.getDataNasterii().toString() : ""));
+		JLabel DataNastereLabel = new JLabel("Data nasterii: " + 
+				(patient.getDataNasterii() != null ? Utils.fromDateToString(patient.getDataNasterii()) : ""));
 		GridBagConstraints gbc_DataNastereLabel = new GridBagConstraints();
 		gbc_DataNastereLabel.weightx = 1.0;
 		gbc_DataNastereLabel.insets = new Insets(0, 0, 5, 5);

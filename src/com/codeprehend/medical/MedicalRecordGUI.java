@@ -75,7 +75,7 @@ public class MedicalRecordGUI extends JFrame {
 		    { 
 		        String ObjButtons[] = {"Da","Nu"};
 		        int PromptResult = JOptionPane.showOptionDialog(null,"Sigur doriti sa parasiti aplicatia?","Confirmare EXIT",
-		        		JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, ObjButtons,ObjButtons[2]);
+		        		JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, ObjButtons,ObjButtons[0]);
 		        if(PromptResult==JOptionPane.YES_OPTION)
 		        {
 		            System.exit(0);
