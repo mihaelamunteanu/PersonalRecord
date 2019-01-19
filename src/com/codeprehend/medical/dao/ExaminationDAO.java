@@ -8,11 +8,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.codeprehend.medical.util.DatabaseConnection;
 import com.codeprehend.medical.resources.Examination;;
 
 public class ExaminationDAO {
+	
+	private static final Logger LOGGER = Logger.getLogger(ExaminationDAO.class.getName());
+	
 	/**
 	 * Return the generated id from sequence. 
 	 * @param exam
@@ -24,11 +29,10 @@ public class ExaminationDAO {
 				+ "(id_pacienta, data_consultatie, consultatie, alte_observatii) "
 				+ "values (?, ?, ?, ?);";
 		
-		
-		System.out.println(" Insert exam for patient : " + SQL);
-		
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();
 				PreparedStatement stmt = conn.prepareStatement(SQL,  PreparedStatement.RETURN_GENERATED_KEYS)) {
+			LOGGER.log(Level.INFO, "Save examination: " + stmt.toString());	
+
 			stmt.setObject(1, exam.getPatientId());
 			stmt.setObject(2, exam.getConsultationDate());
 			stmt.setObject(3, exam.getText());
@@ -57,6 +61,7 @@ public class ExaminationDAO {
 				PreparedStatement stmt = conn.prepareStatement(SQL)) {
 			stmt.setObject(1, id);
 			
+			LOGGER.log(Level.INFO, "Retrieve examination: " + stmt.toString());	
 			
 			ResultSet rs = stmt.executeQuery();
 			while (rs != null && rs.next()) {

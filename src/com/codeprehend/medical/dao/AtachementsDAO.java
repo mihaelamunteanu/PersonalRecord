@@ -10,11 +10,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.codeprehend.medical.util.DatabaseConnection;
 import com.codeprehend.medical.resources.Attachement;
 
 public class AtachementsDAO {
+	
+	private static final Logger LOGGER = Logger.getLogger(AtachementsDAO.class.getName());
 	
 	/**
 	 * Method to save attachment into DB.
@@ -28,8 +32,6 @@ public class AtachementsDAO {
 				+ "(pacient_id, nume_fisier, tip_fisier, lungime_fisier, "
 				+ "atasament, data_salvare) values (?,?,?,?,?,?);";
 		
-		System.out.println(" Attachment for pacient : " + SQL);
-		
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();
 				PreparedStatement stmt = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);) {
 			stmt.setObject(1, attachment.getPacientId());
@@ -38,6 +40,8 @@ public class AtachementsDAO {
 			stmt.setObject(4, attachment.getFileLength());
 			stmt.setBinaryStream(5, new ByteArrayInputStream(attachment.getFileStream()));
 			stmt.setObject(6, attachment.getRegistrationDate());
+			
+			LOGGER.log(Level.INFO, "Save attachments: " + stmt.toString());	
 			
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();
@@ -59,11 +63,11 @@ public class AtachementsDAO {
 		String SQL = "SELECT * from  atasamente "
 				+ "where pacient_id = ? ORDER BY data_salvare DESC; ";
 		
-		System.out.println(" Attachments for pacient : " + SQL);
-		
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();
 				PreparedStatement stmt = conn.prepareStatement(SQL)) {
 			stmt.setObject(1, patientId);
+			
+			LOGGER.log(Level.INFO, "Retrieve attachments: " + stmt.toString());	
 			
 			ResultSet rs = stmt.executeQuery();
 			while (rs != null && rs.next()) {
@@ -85,14 +89,14 @@ public class AtachementsDAO {
 	//TODO change to Date type instead String
 	public static Attachement getAttachmentsById(Long attachmentId) {
 		Attachement attachmentById = null;
-		String SQL = "SELECT * from  atasamente "
-				+ "where id = ?; ";
+		String SQL = "SELECT * from  atasamente WHERE id = ?; ";
 		
-		System.out.println(" Attachments for id : " + SQL);
 		
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();
 				PreparedStatement stmt = conn.prepareStatement(SQL)) {
 			stmt.setObject(1, attachmentId);
+			
+			LOGGER.log(Level.INFO, "Retreieve attachments: " + stmt.toString());	
 			
 			ResultSet rs = stmt.executeQuery();
 			while (rs != null && rs.next()) {

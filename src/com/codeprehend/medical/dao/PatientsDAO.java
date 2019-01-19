@@ -27,7 +27,7 @@ public class PatientsDAO {
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();
 				PreparedStatement stmt = conn.prepareStatement(SQL)) {
 			stmt.setObject(1, patientId);
-			LOGGER.log(Level.INFO, "Save patient: " + stmt.toString() + SQL + patientId);			
+			LOGGER.log(Level.INFO, "Retrieve patient: " + stmt.toString());			
 			
 			ResultSet rs = stmt.executeQuery();
 			while (rs != null && rs.next()) {
@@ -91,10 +91,12 @@ public class PatientsDAO {
 				+ patient.getCezariene() + ", " + patient.getAvorturiLaCerere() + ", " 
 				+ patient.getAvorturiSpontane() + ", '" + patient.getAltele() + "');";
 		
-		System.out.println(" New patient: " + SQL);
+		LOGGER.log(Level.INFO, "Update patient: " + SQL);	
 		
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();
 				Statement stmt = conn.createStatement();) {
+			LOGGER.log(Level.INFO, "Save patient: " + stmt.toString());	
+
 			stmt.executeUpdate(SQL, new String[] {"id"});
 			ResultSet rs = stmt.getGeneratedKeys();
 			if (rs != null && stmt.getGeneratedKeys().next()) {
@@ -122,11 +124,10 @@ public class PatientsDAO {
 		
 		String SQL = "SELECT id, nume, prenume, data_nasterii, cnp, data_inscriere, altele, telefon FROM paciente " + filterBuilder.toString();
 		
-		System.out.println(" Searching patient: " + SQL);
-		
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(SQL)) {
+			LOGGER.log(Level.INFO, "Retrieve patients: " + SQL);	
 			// get the patient information
 			while(rs.next()) {
 				Patient pacient = new Patient(rs.getLong("id"), rs.getString("nume"),

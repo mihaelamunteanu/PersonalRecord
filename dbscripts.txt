@@ -217,6 +217,8 @@ INSERT INTO public.dbversion(
 	
 -- Table: public.cabinet
 
+-- Table: public.cabinet
+
 -- DROP TABLE public.cabinet;
 
 CREATE TABLE public.cabinet
@@ -226,6 +228,11 @@ CREATE TABLE public.cabinet
     adresa character varying COLLATE pg_catalog."default" NOT NULL,
     telefon character varying COLLATE pg_catalog."default" NOT NULL,
     data_modificare date NOT NULL,
+    folder_salvare character varying COLLATE pg_catalog."default" DEFAULT 'C:\\DosareMedicale\\'::character varying,
+    server character varying COLLATE pg_catalog."default",
+    portdb character varying COLLATE pg_catalog."default",
+    userdb character varying COLLATE pg_catalog."default",
+    paroladb character varying COLLATE pg_catalog."default",
     CONSTRAINT cabinet_pkey PRIMARY KEY (id)
 )
 WITH (
@@ -237,5 +244,6 @@ ALTER TABLE public.cabinet
     OWNER to postgres;
 
 INSERT INTO public.cabinet(
-	nume, adresa, telefon, data_modificare)
-	VALUES ('C.M. Dr. RUGINA', 'Str. Bd. 9Mai, nr. 1, Bl. A13, Ap.2', '0233-237969', NOW());
+	nume, adresa, telefon, data_modificare, folder_salvare, server, portdb, userdb, paroladb)
+	VALUES ('C.M. Dr. RUGINA', 'Str. Bd. 9Mai, nr. 1, Bl. A13, Ap.2', '0233-237969', NOW(), 
+			'C:\\DosareMedicale\\', 'localhost', '5434', 'postgres', 'root');

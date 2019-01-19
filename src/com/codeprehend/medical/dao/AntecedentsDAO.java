@@ -8,11 +8,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.codeprehend.medical.util.DatabaseConnection;
 import com.codeprehend.medical.resources.Antecedent;
 
 public class AntecedentsDAO {
+	
+	private static final Logger LOGGER = Logger.getLogger(AntecedentsDAO.class.getName());
+	
 	/**
 	 * Method to save antecedent into DB.
 	 * 
@@ -25,13 +30,13 @@ public class AntecedentsDAO {
 				+ "(pacient_id, antecedent, data_inregistrare) "
 				+ "values (?,?,?);";
 		
-		System.out.println(" Antecendent for pacient : " + SQL);
-		
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();
 				PreparedStatement stmt = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);) {
 			stmt.setObject(1, antecedent.getPacientId());
 			stmt.setObject(2, antecedent.getAntecedentText());
 			stmt.setObject(3, antecedent.getRegistrationDate());
+			
+			LOGGER.log(Level.INFO, "Save antecedents: " + stmt.toString());	
 			
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();
@@ -51,11 +56,11 @@ public class AntecedentsDAO {
 		String SQL = "SELECT id, data_inregistrare, antecedent from  antecedente "
 				+ "where pacient_id = ?; ";
 		
-		System.out.println(" Antecendents for pacient : " + SQL);
-		
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();
 				PreparedStatement stmt = conn.prepareStatement(SQL)) {
 			stmt.setObject(1, patientId);
+			
+			LOGGER.log(Level.INFO, "Retrieve antecedents: " + stmt.toString());	
 			
 			ResultSet rs = stmt.executeQuery();
 			while (rs != null && rs.next()) {

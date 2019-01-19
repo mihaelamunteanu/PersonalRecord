@@ -23,6 +23,10 @@ Choose location of db installation and location of backupfiles
 add a taskScheduler cu Bat file
 e doar un back-up local, ele trebuie copiate pe un hard extern
 
+//run app
+java -classpath MedicalRecord.jar;postgresql-42.2.5.jar;itext-4.2.0-com.itextpdf.jar com.codeprehend.medical.MedicalRecordLauncher
+(totul in acelasi lib folder) 
+
 //under /POSTGRES/ 
 C:\Program Files\PostgreSQL\10\bin\pg_dump.exe --file "C:\\Mihaela\\OTHERP~1\\GITHUB~1\\backup\\PERSON~1\\BackupTest.sql" --host "localhost" --port "5432" --username "postgres" --no-password --verbose --role "postgres" --format=p --create --clean --section=pre-data --section=data --section=post-data --inserts --column-inserts "CabinetRugina"
 //under POSTGRES/version/bin/ eun for psql for reinstalling the 

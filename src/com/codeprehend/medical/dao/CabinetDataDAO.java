@@ -19,6 +19,8 @@ public class CabinetDataDAO {
 		
 		try (Connection conn = DatabaseConnection.getDatabaseConnection();
 				PreparedStatement stmt = conn.prepareStatement(SQL)) {
+			LOGGER.log(Level.INFO, "Retrieve Cabinet Data: " + stmt.toString());	
+			
 			ResultSet rs = stmt.executeQuery();
 			while (rs != null && rs.next()) {
 				cabinetData = new CabinetData(rs.getString("nume"), rs.getString("adresa"), 
