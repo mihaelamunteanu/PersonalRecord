@@ -10,7 +10,9 @@ import java.io.OutputStream;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.AtachementsDAO;
+import com.codeprehend.medical.dao.CabinetDataDAO;
 import com.codeprehend.medical.resources.Attachement;
+import com.codeprehend.medical.resources.CabinetData;
 
 public class OpenFileButtonActionListener {
 //	private MedicalRecordGUI mainWindow;
@@ -24,11 +26,12 @@ public class OpenFileButtonActionListener {
 	
 	public void actionPerformed(){
 		Attachement attachment = AtachementsDAO.getAttachmentsById(attachement.getId());
+		CabinetData cabinetData = CabinetDataDAO.getCabinetData();
 		
     	String fileName = attachment.getFileName() + "_" +  
     			attachment.getRegistrationDate();
     	String fileType = attachment.getFileType() ;
-    	String DEST = "pdf\\temp\\" + fileName + "." + fileType;
+    	String DEST = cabinetData.getFolderLocation() + "\\downloads\\" + fileName + "." + fileType;
 		
 	    InputStream fileStream = new ByteArrayInputStream (attachment.getFileStream());
 	    byte[] buffer;

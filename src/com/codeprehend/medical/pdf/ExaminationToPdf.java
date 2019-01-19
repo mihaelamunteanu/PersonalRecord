@@ -37,7 +37,6 @@ import com.itextpdf.text.pdf.PdfWriter;
  */
 
 public class ExaminationToPdf {
-	    public static final String DEST = "pdf\\pdf_table.pdf";
 	    
 	    public static Attachement createAndOpenPdf(CabinetData cabinetData, Long id, String nume, String prenume, String cnp, String telefon, 
 	    		String examinationDate, String examinationText) throws IOException, DocumentException {
@@ -46,7 +45,7 @@ public class ExaminationToPdf {
 	    	addTimeToExaminationDate = addTimeToExaminationDate.substring(0, addTimeToExaminationDate.lastIndexOf('.')).replaceAll(":", "_");
 	    	String fileName = nume + "_" + prenume + "_" + addTimeToExaminationDate;
 	    	String fileType = "pdf";
-	    	String DEST = "pdf\\" + fileName + "." + fileType;
+	    	String DEST = cabinetData.getFolderLocation() + "\\" + fileName + "." + fileType;
 	    	
 	        File file = new File(DEST);
 	        file.getParentFile().mkdirs();

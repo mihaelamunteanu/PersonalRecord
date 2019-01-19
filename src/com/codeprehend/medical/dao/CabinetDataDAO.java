@@ -22,7 +22,7 @@ public class CabinetDataDAO {
 			ResultSet rs = stmt.executeQuery();
 			while (rs != null && rs.next()) {
 				cabinetData = new CabinetData(rs.getString("nume"), rs.getString("adresa"), 
-						rs.getString("telefon"));
+						rs.getString("telefon"), rs.getString("folder_salvare"));
 			}
 			rs.close();
 		} catch (SQLException ex) {
