@@ -20,7 +20,7 @@ public class SaveAttachmentActionPerformed {
 		//TODO refresh the list of files
 		try {
 			String fullName = mainPanel.getFilesPatientPanel().getBrowseFileTextField().getText();
-			String fileName = fullName.substring(fullName.lastIndexOf('\\') + 1, fullName.lastIndexOf('.') - 1);
+			String fileName = fullName.substring(fullName.lastIndexOf('\\') + 1, fullName.lastIndexOf('.'));
 			String fileType = fullName.substring(fullName.lastIndexOf('.') + 1, fullName.length());
 	        File file = new File(fullName);
 	        file.getParentFile().mkdirs();

@@ -28,8 +28,7 @@ public class OpenFileButtonActionListener {
 		Attachement attachment = AtachementsDAO.getAttachmentsById(attachement.getId());
 		CabinetData cabinetData = CabinetDataDAO.getCabinetData();
 		
-    	String fileName = attachment.getFileName() + "_" +  
-    			attachment.getRegistrationDate();
+    	String fileName = attachment.getFileName();
     	String fileType = attachment.getFileType() ;
     	String DEST = cabinetData.getFolderLocation() + "\\downloads\\" + fileName + "." + fileType;
 		

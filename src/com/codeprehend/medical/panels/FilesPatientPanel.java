@@ -204,6 +204,7 @@ public class FilesPatientPanel extends JPanel {
 			str = str.concat(attachement.getFileName());
 			str = str.concat(".");
 			str = str.concat(attachement.getFileType());
+			str = str.concat("  din " + Utils.fromDateToString(attachement.getRegistrationDate()));
 
 			DLM.addElement(str);
 		}

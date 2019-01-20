@@ -1,4 +1,4 @@
-x#PostgreS#PostgreS DB script
+-- x#PostgreS#PostgreS DB script
 
 --CREATE USER admin WITH
 --	LOGIN
