@@ -111,9 +111,17 @@ public class SaveNewPatientButtonActionListener implements ActionListener {
 						"Erroare", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
+		} else {
+			JOptionPane.showMessageDialog(mainWindow, "Patient inregistrat " + name + " " + firstName + " cu succes", 
+					"Confirmare inregistrare", JOptionPane.INFORMATION_MESSAGE);
+			List<Antecedent> antecedentsList = new ArrayList<Antecedent>();
+			List<Examination> examinationsList = new ArrayList<Examination>();
+			
+			List <Patient> listOfPatients =  new ArrayList<Patient>();
+			listOfPatients.add(newPatient);
+			mainWindow.showPanelListOfPatients(listOfPatients);
+			mainWindow.showExaminationPatientPanel(newPatient, antecedentsList, examinationsList);
 		}
 		
-		JOptionPane.showMessageDialog(mainWindow, "Patient inregistrat " + name + " " + firstName + " cu succes", 
-				"Confirmare inregistrare", JOptionPane.INFORMATION_MESSAGE);
 	}
 }

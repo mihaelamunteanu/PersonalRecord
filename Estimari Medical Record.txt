@@ -1,15 +1,27 @@
-Am facut timpul de lucru in doua moduri, am reestimat actiunile si in paralele am verificat logurile de lucru pe server (56 commits - salvari pe server cu medie de 5 ore de lucru) + conversatiile skype cu Gabi (12h in total x 2)
-Lucru pana la 20.01.2019: 
+Estimare dupa commits: Am facut timpul de lucru in doua moduri, am reestimat actiunile si in paralele am verificat logurile de lucru pe server (60 commits - salvari pe server cu medie de 3.5 ore de lucru) + conversatiile skype cu Gabi (14h in total x 2) = 60*3.5 + 28 = 210 + 28 = 238
 
-Investigare alegere baza de date, s-au atins ambele etape
-Proiect GitHub
-Dezvoltare cadru aplicatie: structura aplicatie, interactiuni (DAO, Db, Swing, jdbc)
+Estimari dupa tracking (acolo unde am tinut)
+Ex: 20.01.2019 + 19.01.2019 - Gabi test, rezolvare probleme postgres: 8h
+    17.01.2019 + 18.01.2019 - Mihaela documentatie, bat, fixes - 16h
+	21.01.2019 - Miha + Gabi Tesatare si fixing comun Skype: 2h
+	
+	17.01.2019 - mers la Cosmin 1h, lucru acasa 2h
+	---------
+	29h pe 3 zile -> 48/3 = 16/3= 5,3 * 29 = 153
+	                 48/2 = 24/3= 8   * 29 = 232
+					 Medie de 192.5
+					 
+Estimari dupa ecrane: Lucru pana la 21.01.2019: 
+
+Investigare alegere baza de date, s-au atins ambele etape din estimarile initiale - 6h
+Proiect GitHub - 2h
+Dezvoltare cadru aplicatie: structura aplicatie, interactiuni (DAO, Db, Swing, jdbc) - 20h
 
 Ecran cautare x 3 versiuni (cea progamabila absoluta, apoi cea absoluta cu Windows Builder si apoi cea relativa la size) - 3h x 3= 9h
 Ecran Pacient Nou x 3 - 5h x 3 = 15h
 Ecran Lista paciente x 3 versiuni = 2h x 3 = 6h
 Ecran Consultatie x 3 = 4h x 3 = 12h (fara generare de pdf)
-Ecran Atasamente x 2 (fara cea initiala programabila)
+Ecran Atasamente x 2 = 5 x 2 = 10h(fara cea initiala programabila) 
 Ecran Modificare Pacient x 2 1h x 3 = 3h (pentru ca este similar cu Pacient nou)
 Ecran Fisiere x 2 versiuni 4h x 2= 12h (fara upload si deschidere fisier)
 
@@ -36,31 +48,32 @@ consultatii - 2h x 2 = 2
 antecedente - 2h x 2 = 4
 cabinet - 2h
 dbversion - 1h
-Investigare Instalare Java (schimbari drastice dupa versiunea 1.8) - 
-Remigrare la versiunea anterioara de java
-Dependinte jar
-Pachet de livrare
-Investgare schimbari platforme 
+Investigare Instalare Java (schimbari drastice dupa versiunea 1.8) - 4h
+Remigrare la versiunea anterioara de java - 2h
+Dependinte jar - 1h
+Pachet de livrare - 3h
+Investgare schimbari platforme si OSs - 1h
 
-Colaborare Skype si Git cu Gabi pe proiect 12h x 2 persoane = 24h
+Colaborare Skype si Git cu Gabi pe proiect 14h x 2 persoane = 28h
 
-Db Back-up command
-Automatic DB Backup Task
+Db Back-up command - 2h
+Automatic DB Backup Task - 5h
 
-Minor changes
-icon 
-altele(estimari, discutii)
+Minor changes - 3h
+icon - 1h
+altele(estimari, discutii) - 5h
 
-Pasi Instalare completa
-Testare instalare
-instalare finala
+Pasi Instalare completa - 6h
+Testare instalare - 16h
+instalare finala - 
 
-branches
+branches - 2h
 
 Analiza initiala schiimbare sistem de operare: raspuns se poate, nu s-au facut investigari de timp, trebuie reluat- 2h
 
 
-
+-----------
+242 ore fara instalarea finala si fara testare si instalare pe Mac (minim 30h)
 
 Estimari initiale dupa discutia cu Cosmin din 04.12.2018
 ---------------------------------------------------------

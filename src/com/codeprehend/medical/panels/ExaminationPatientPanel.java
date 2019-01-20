@@ -194,20 +194,39 @@ public class ExaminationPatientPanel extends JPanel {
 //		gbc_label.gridy = 0;
 //		gbc_label.gridwidth = 1;
 //		medicalInfoPanel.add(label, gbc_label);
+
+		JLabel lblAntecedente = new JLabel("Antecedente ");
+		lblAntecedente.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblAntecedente.setHorizontalAlignment(SwingConstants.LEFT);
+		GridBagConstraints gbc_lblAntecedente = new GridBagConstraints();
+		gbc_lblAntecedente.anchor = GridBagConstraints.WEST; 
+		gbc_lblAntecedente.insets = new Insets(0, 0, 10, 5);
+		gbc_lblAntecedente.gridx = 0;
+		gbc_lblAntecedente.gridy = 0;
+		gbc_lblAntecedente.weighty = Double.MIN_VALUE;
+		medicalInfoPanel.add(lblAntecedente, gbc_lblAntecedente);
+
+		int ycoordinate = 1;
 		
-		int ycoordinate = 0;
-		
-		if (antecedents != null && antecedents.size() > 0) {
-			JLabel lblAntecedente = new JLabel("Antecedente ");
-			lblAntecedente.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblAntecedente.setHorizontalAlignment(SwingConstants.LEFT);
-			GridBagConstraints gbc_lblAntecedente = new GridBagConstraints();
-			gbc_lblAntecedente.anchor = GridBagConstraints.WEST; 
-			gbc_lblAntecedente.insets = new Insets(0, 0, 10, 5);
-			gbc_lblAntecedente.gridx = 0;
-			gbc_lblAntecedente.gridy = ycoordinate;
-			gbc_lblAntecedente.weighty = Double.MIN_VALUE;
-			medicalInfoPanel.add(lblAntecedente, gbc_lblAntecedente);
+		if (antecedents != null && antecedents.size() <= 0) {
+			String antecedentText = "Nu s-au salvat antecedente pentru acest pacient";
+			
+			JTextArea lblAntcedenteNumarulDoi = new JTextArea(antecedentText, 1, 1);
+			lblAntcedenteNumarulDoi.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			GridBagConstraints gbc_lblAntcedenteNumarulDoi = new GridBagConstraints();
+			gbc_lblAntcedenteNumarulDoi.anchor = GridBagConstraints.WEST;
+			gbc_lblAntcedenteNumarulDoi.insets = new Insets(0, 0, 6, 5);
+			gbc_lblAntcedenteNumarulDoi.gridx = 0;
+			gbc_lblAntcedenteNumarulDoi.gridy = ycoordinate;
+			gbc_lblAntcedenteNumarulDoi.weighty = Double.MIN_VALUE;
+			gbc_lblAntcedenteNumarulDoi.weightx = 1.0;
+			medicalInfoPanel.add(lblAntcedenteNumarulDoi, gbc_lblAntcedenteNumarulDoi);
+			
+			lblAntcedenteNumarulDoi.setEditable(false);  
+			lblAntcedenteNumarulDoi.setCursor(null);  
+			lblAntcedenteNumarulDoi.setOpaque(false);  
+			lblAntcedenteNumarulDoi.setFocusable(false);
+			
 			ycoordinate = ycoordinate + 1;
 		}
 
