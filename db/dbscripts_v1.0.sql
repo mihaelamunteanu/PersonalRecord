@@ -16,15 +16,15 @@ x#PostgreS#PostgreS DB script
 -- Role: admin_rugina
 -- DROP ROLE admin_rugina;
 
-CREATE ROLE admin_rugina WITH
-  NOLOGIN
-  NOSUPERUSER
-  INHERIT
-  NOCREATEDB
-  NOCREATEROLE
-  REPLICATION;
+--CREATE ROLE admin_rugina WITH
+--  NOLOGIN
+--  NOSUPERUSER
+--  INHERIT
+--  NOCREATEDB
+--  NOCREATEROLE
+--  REPLICATION;
 
-COMMENT ON ROLE admin_rugina IS 'Main medical user - password 123456';
+-- COMMENT ON ROLE admin_rugina IS 'Main medical user - password 123456';
 
 CREATE DATABASE "CabinetRugina"
     WITH 
@@ -35,6 +35,8 @@ CREATE DATABASE "CabinetRugina"
 COMMENT ON DATABASE "CabinetRugina"
     IS 'Baza de date cabinet Rugina Cosmin';
 	
+\connect "CabinetRugina"
+
 -- SEQUENCE: public.patient_sequence
 
 -- DROP SEQUENCE public.patient_sequence;
@@ -98,7 +100,7 @@ CREATE TABLE public.paciente
     cezariene numeric,
     avorturi_cerere numeric,
     avorturi_spontane numeric,
-    CONSTRAINT "Paciente_pkey" PRIMARY KEY (id)
+    CONSTRAINT "paciente_pkey" PRIMARY KEY (id)
 )
 WITH (
     OIDS = FALSE
@@ -191,6 +193,15 @@ TABLESPACE pg_default;
 ALTER TABLE public.atasamente
     OWNER to postgres;
 	
+-- SEQUENCE: public.dbversion_id_seq
+
+-- DROP SEQUENCE public.dbversion_id_seq;
+
+CREATE SEQUENCE public.dbversion_id_seq;
+
+ALTER SEQUENCE public.dbversion_id_seq
+    OWNER TO postgres;
+	
 -- Table: public.dbversion
 
 -- DROP TABLE public.dbversion;
@@ -215,7 +226,15 @@ INSERT INTO public.dbversion(
 	versiune, data_rulare, observatii)
 	VALUES ('1.0', NOW(), 'Script initial pentru structura bazei de date');
 	
--- Table: public.cabinet
+
+-- SEQUENCE: public.cabinet_id_seq
+
+-- DROP SEQUENCE public.cabinet_id_seq;
+
+CREATE SEQUENCE public.cabinet_id_seq;
+
+ALTER SEQUENCE public.cabinet_id_seq
+    OWNER TO postgres;
 
 -- Table: public.cabinet
 
