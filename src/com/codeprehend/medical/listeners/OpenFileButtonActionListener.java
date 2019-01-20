@@ -40,6 +40,7 @@ public class OpenFileButtonActionListener {
 			fileStream.read(buffer);
 			
 		    File targetFile = new File(DEST);
+		    targetFile.getParentFile().mkdirs();
 		    OutputStream outStream = new FileOutputStream(targetFile);
 		    outStream.write(buffer);
 		    outStream.close();

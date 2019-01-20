@@ -1,15 +1,15 @@
 x#PostgreS#PostgreS DB script
 
-CREATE USER admin WITH
-	LOGIN
-	SUPERUSER
-	CREATEDB
-	CREATEROLE
-	INHERIT
-	REPLICATION
-	CONNECTION LIMIT -1
-	PASSWORD 'root';
-GRANT postgres TO admin WITH ADMIN OPTION;
+--CREATE USER admin WITH
+--	LOGIN
+--	SUPERUSER
+--	CREATEDB
+--	CREATEROLE
+--	INHERIT
+--	REPLICATION
+--	CONNECTION LIMIT -1
+--	PASSWORD 'root';
+--GRANT postgres TO admin WITH ADMIN OPTION;
 
 
 
@@ -28,7 +28,7 @@ COMMENT ON ROLE admin_rugina IS 'Main medical user - password 123456';
 
 CREATE DATABASE "CabinetRugina"
     WITH 
-    OWNER = admin
+    OWNER = postgres
     ENCODING = 'UTF8'
     CONNECTION LIMIT = -1;
 
@@ -42,7 +42,7 @@ COMMENT ON DATABASE "CabinetRugina"
 CREATE SEQUENCE public.patient_sequence;
 
 ALTER SEQUENCE public.patient_sequence
-    OWNER TO admin;
+    OWNER TO postgres;
 	
 -- SEQUENCE: public.dosare_sequence
 
@@ -51,7 +51,7 @@ ALTER SEQUENCE public.patient_sequence
 CREATE SEQUENCE public.dosare_sequence;
 
 ALTER SEQUENCE public.dosare_sequence
-    OWNER TO admin;
+    OWNER TO postgres;
 	
 -- SEQUENCE: public.consultatii_id_seq
 
@@ -69,7 +69,7 @@ ALTER SEQUENCE public.consultatii_id_seq
 CREATE SEQUENCE public.antecedente_id_seq;
 
 ALTER SEQUENCE public.antecedente_id_seq
-    OWNER TO admin_rugina;
+    OWNER TO postgres;
 	
 -- SEQUENCE: public.atasamente_id_seq
 
@@ -106,7 +106,7 @@ WITH (
 TABLESPACE pg_default;
 
 ALTER TABLE public.paciente
-    OWNER to admin;
+    OWNER to postgres;
 COMMENT ON TABLE public.paciente
     IS 'Tabel Paciente';
 
@@ -162,7 +162,7 @@ WITH (
 TABLESPACE pg_default;
 
 ALTER TABLE public.antecedente
-    OWNER to admin_rugina;
+    OWNER to postgres;
 	
 	-- Table: public.atasamente
 

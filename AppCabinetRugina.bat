@@ -1,0 +1,1 @@
+"C:\Program Files\Java\jre1.8.0_202\bin\java.exe" -Xmx100m -classpath ./lib/MedicalRecord.jar;./lib/itext-4.2.0-com.itextpdf.jar;./lib/postgresql-42.2.5.jar com.codeprehend.medical.MedicalRecordLauncher

@@ -1,0 +1,93 @@
+Am facut timpul de lucru in doua moduri, am reestimat actiunile si in paralele am verificat logurile de lucru pe server (56 commits - salvari pe server cu medie de 5 ore de lucru) + conversatiile skype cu Gabi (12h in total x 2)
+Lucru pana la 20.01.2019: 
+
+Investigare alegere baza de date, s-au atins ambele etape
+Proiect GitHub
+Dezvoltare cadru aplicatie: structura aplicatie, interactiuni (DAO, Db, Swing, jdbc)
+
+Ecran cautare x 3 versiuni (cea progamabila absoluta, apoi cea absoluta cu Windows Builder si apoi cea relativa la size) - 3h x 3= 9h
+Ecran Pacient Nou x 3 - 5h x 3 = 15h
+Ecran Lista paciente x 3 versiuni = 2h x 3 = 6h
+Ecran Consultatie x 3 = 4h x 3 = 12h (fara generare de pdf)
+Ecran Atasamente x 2 (fara cea initiala programabila)
+Ecran Modificare Pacient x 2 1h x 3 = 3h (pentru ca este similar cu Pacient nou)
+Ecran Fisiere x 2 versiuni 4h x 2= 12h (fara upload si deschidere fisier)
+
+Salvare locala x 2 versiuni - 1h x 2 = 2h
+Generare PDF finala cu iTExt = 6h
+Upload - 3h
+Investigare librarie ok pentru pdf (XHTML vs itext) - 10h
+Fisier configurare proprietati  - 1h 
+Personalizare Date Cabinet in Aplicatie - 1h 
+Adaugare loguri - 2h
+Validari - 6h
+Teste - 6h
+Bugfix - 5h
+Schita ecrane - 5h
+Documentatie - 6h
+
+Listeneri - 5h
+Instalare DB x 3 postscript - 3h
+Navigations - 10h
+DB scripts x 2:
+paciente - 2h x 2 = 4
+atasamente - 1h x 2 = 2
+consultatii - 2h x 2 = 2
+antecedente - 2h x 2 = 4
+cabinet - 2h
+dbversion - 1h
+Investigare Instalare Java (schimbari drastice dupa versiunea 1.8) - 
+Remigrare la versiunea anterioara de java
+Dependinte jar
+Pachet de livrare
+Investgare schimbari platforme 
+
+Colaborare Skype si Git cu Gabi pe proiect 12h x 2 persoane = 24h
+
+Db Back-up command
+Automatic DB Backup Task
+
+Minor changes
+icon 
+altele(estimari, discutii)
+
+Pasi Instalare completa
+Testare instalare
+instalare finala
+
+branches
+
+Analiza initiala schiimbare sistem de operare: raspuns se poate, nu s-au facut investigari de timp, trebuie reluat- 2h
+
+
+
+
+Estimari initiale dupa discutia cu Cosmin din 04.12.2018
+---------------------------------------------------------
+
+ecran cauta pacient - 10h 
+ecran pacient nou si antecedente - 8h
+ecran modificare date pacient si antecedente - 6h
+ecran lista pacienti - 6h
+ecran prima consultatie - 6h 
+ecran lista consultatii vechi + butoane modificare(atasamente, date personale, consultatie noua) - 8 ore
+
+generare pdf - 10h 
+salvare locala - 2h
+solutie backup db si export db - 4h 
+
+alte modificari dupa discutii: 60h + 60*20% = 72h
+--------------------------------------
+72h - etapa I functionalitati principale
+
+
+ecran prima consultatie - 20h(daca e cu antet)
+ecran atasamente - 12h (low priority)
+baza de date nemodificabila - 10h (low priority, dupa salvarea locala)
+salvare pdf in DB - 8h (o parte din functionalitate se ia din ecran atasamente) (low priority)
+-----------------------------------------------
+50h - etapa II
+
+TOTAL: 132h
+
+
