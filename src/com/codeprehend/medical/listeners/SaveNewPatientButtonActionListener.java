@@ -91,24 +91,29 @@ public class SaveNewPatientButtonActionListener implements ActionListener {
 			return;
 		}
 		newPatient.setId(patientId);
-		Antecedent antecedent = new Antecedent(patientId, antecedents, LocalDate.now());
-		Long antecedentId = AntecedentsDAO.saveAntecedente(antecedent);
-		
-		if (antecedentId > 0) {
-			JOptionPane.showMessageDialog(mainWindow, "Patient inregistrat " + name + " " + firstName + " cu succes", 
-					"Confirmare inregistrare", JOptionPane.INFORMATION_MESSAGE);
-			List<Antecedent> antecedentsList = new ArrayList<Antecedent>();
-			antecedentsList.add(antecedent);
-			List<Examination> examinationsList = new ArrayList<Examination>();
+		if (antecedents != null && antecedents.length() > 0) {
+			Antecedent antecedent = new Antecedent(patientId, antecedents, LocalDate.now());
+			Long antecedentId = AntecedentsDAO.saveAntecedente(antecedent);
 			
-			List <Patient> listOfPatients =  new ArrayList<Patient>();
-			listOfPatients.add(newPatient);
-			mainWindow.showPanelListOfPatients(listOfPatients);
-			mainWindow.showExaminationPatientPanel(newPatient, antecedentsList, examinationsList);
-		} else {
-			JOptionPane.showMessageDialog(mainWindow, "Antecedentele pacientului " + name + " " + firstName + " nu au fost inregistrate ", 
-					"Erroare", JOptionPane.ERROR_MESSAGE);
-			return;
+			if (antecedentId > 0) {
+				JOptionPane.showMessageDialog(mainWindow, "Patient inregistrat " + name + " " + firstName + " cu succes", 
+						"Confirmare inregistrare", JOptionPane.INFORMATION_MESSAGE);
+				List<Antecedent> antecedentsList = new ArrayList<Antecedent>();
+				antecedentsList.add(antecedent);
+				List<Examination> examinationsList = new ArrayList<Examination>();
+				
+				List <Patient> listOfPatients =  new ArrayList<Patient>();
+				listOfPatients.add(newPatient);
+				mainWindow.showPanelListOfPatients(listOfPatients);
+				mainWindow.showExaminationPatientPanel(newPatient, antecedentsList, examinationsList);
+			} else {
+				JOptionPane.showMessageDialog(mainWindow, "Antecedentele pacientului " + name + " " + firstName + " nu au fost inregistrate ", 
+						"Erroare", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 		}
+		
+		JOptionPane.showMessageDialog(mainWindow, "Patient inregistrat " + name + " " + firstName + " cu succes", 
+				"Confirmare inregistrare", JOptionPane.INFORMATION_MESSAGE);
 	}
 }
