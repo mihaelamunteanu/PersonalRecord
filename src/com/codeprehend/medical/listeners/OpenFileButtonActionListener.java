@@ -7,16 +7,21 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.AtachementsDAO;
 import com.codeprehend.medical.dao.CabinetDataDAO;
 import com.codeprehend.medical.resources.Attachement;
 import com.codeprehend.medical.resources.CabinetData;
+import com.codeprehend.medical.util.Constants;
 
 public class OpenFileButtonActionListener {
 //	private MedicalRecordGUI mainWindow;
 	private Attachement attachement;
+	
+	private static final Logger LOGGER = Logger.getLogger(Constants.LOGGER_NAME);
 	
 	public OpenFileButtonActionListener(MedicalRecordGUI mainWindow, Attachement attachement){
 //		this.mainWindow = mainWindow;
@@ -52,6 +57,9 @@ public class OpenFileButtonActionListener {
     	
         File file = new File(DEST);
         file.getParentFile().mkdirs();
+        
+        LOGGER.log(Level.INFO, "Fisier salvat din baza de date: " + DEST);	
+        
         if (Desktop.isDesktopSupported()) {
             try {
                 File myFile = new File(DEST);

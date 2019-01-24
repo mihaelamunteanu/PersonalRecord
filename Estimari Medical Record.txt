@@ -1,15 +1,20 @@
-Estimare dupa commits: Am facut timpul de lucru in doua moduri, am reestimat actiunile si in paralele am verificat logurile de lucru pe server (60 commits - salvari pe server cu medie de 3.5 ore de lucru) + conversatiile skype cu Gabi (14h in total x 2) = 60*3.5 + 28 = 210 + 28 = 238
+Raspunsuri:
+1. Se va putea modifica astfel incat sa poata fi folosite si pe sisteme noi. R:  Cel mai probabil da, posibil sa se ajunga la efort de peste 40 de ore.
+2. Se poate instala pe Mac: versiunile curente de Mac, da, voi incerca o instalare
 
-Estimari dupa tracking (acolo unde am tinut)
+
+Estimarile initiale au fost facut exclusiv pe ecrane, fara: pachetul de livrare, teste, validari, marja de probleme intalnite, discutii, instalare, documentatie, investigatii,modificari, draft-uri, customizare dupa detalii cabinet(nume, adresa, tel), loguri, automatic task for db back-up, GUI relativ la size-ul frame-ului, tabele in plus, estimari).
+
+Am calculat timpul de lucru in trei  moduri, am reestimat task-urile (adaugandu-le si pe cele ce nu au fost estimate initial), am facut o medie din trackingul tinut pe cateva zile si in paralel am verificat logurile de lucru pe server (60 commits - salvari pe server cu medie minima de 3.5 ore de lucru) + conversatiile skype cu Gabi (14h in total x 2) = 60*3.5 + 28 = 210 + 28 = 238 h
+
+Estimari dupa cateva zile de tracking 
 Ex: 20.01.2019 + 19.01.2019 - Gabi test, rezolvare probleme postgres: 8h
     17.01.2019 + 18.01.2019 - Mihaela documentatie, bat, fixes - 16h
-	21.01.2019 - Miha + Gabi Tesatare si fixing comun Skype: 2h
-	
+	21.01.2019 - Miha + Gabi Tesatare si fixing comun Skype: 4h Miha + 2h Gabi + 2h screen sharing = 8h
 	17.01.2019 - mers la Cosmin 1h, lucru acasa 2h
 	---------
-	29h pe 3 zile -> 48/3 = 16/3= 5,3 * 29 = 153
-	                 48/2 = 24/3= 8   * 29 = 232
-					 Medie de 192.5
+	34h pe 4 zile (17-21) -> media 8,5h/zi * 35 = 297h
+
 					 
 Estimari dupa ecrane: Lucru pana la 21.01.2019: 
 
@@ -65,15 +70,16 @@ altele(estimari, discutii) - 5h
 
 Pasi Instalare completa - 6h
 Testare instalare - 16h
-instalare finala - 
 
 branches - 2h
 
+instalare finala - 
+Reimpachetare 
 Analiza initiala schiimbare sistem de operare: raspuns se poate, nu s-au facut investigari de timp, trebuie reluat- 2h
+------------------------------------------------------------------
+242 ore fara instalarea finala si fara mentenanta, fara schimbari dupa instalarea initiala si fara instalare pe Mac (minim 30h)
 
 
------------
-242 ore fara instalarea finala si fara testare si instalare pe Mac (minim 30h)
 
 Estimari initiale dupa discutia cu Cosmin din 04.12.2018
 ---------------------------------------------------------

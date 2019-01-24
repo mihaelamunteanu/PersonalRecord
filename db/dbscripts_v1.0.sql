@@ -1,31 +1,5 @@
 -- x#PostgreS#PostgreS DB script
 
---CREATE USER admin WITH
---	LOGIN
---	SUPERUSER
---	CREATEDB
---	CREATEROLE
---	INHERIT
---	REPLICATION
---	CONNECTION LIMIT -1
---	PASSWORD 'root';
---GRANT postgres TO admin WITH ADMIN OPTION;
-
-
-
--- Role: admin_rugina
--- DROP ROLE admin_rugina;
-
---CREATE ROLE admin_rugina WITH
---  NOLOGIN
---  NOSUPERUSER
---  INHERIT
---  NOCREATEDB
---  NOCREATEROLE
---  REPLICATION;
-
--- COMMENT ON ROLE admin_rugina IS 'Main medical user - password 123456';
-
 CREATE DATABASE "CabinetRugina"
     WITH 
     OWNER = postgres
@@ -35,7 +9,7 @@ CREATE DATABASE "CabinetRugina"
 COMMENT ON DATABASE "CabinetRugina"
     IS 'Baza de date cabinet Rugina Cosmin';
 	
-\connect "CabinetRugina"
+\connect "CabinetRugina";
 
 -- SEQUENCE: public.patient_sequence
 
@@ -222,8 +196,7 @@ TABLESPACE pg_default;
 ALTER TABLE public.dbversion
     OWNER to postgres;
 	
-INSERT INTO public.dbversion(
-	versiune, data_rulare, observatii)
+INSERT INTO public.dbversion(versiune, data_rulare, observatii)
 	VALUES ('1.0', NOW(), 'Script initial pentru structura bazei de date');
 	
 

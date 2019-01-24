@@ -334,7 +334,8 @@ public class FilesPatientPanel extends JPanel {
 		
 		openFileButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new OpenFileButtonActionListener(parentPanel, attachements.get(fileList.getSelectedIndex()));
+				if (fileList.getSelectedIndex() >= 0) 
+					new OpenFileButtonActionListener(parentPanel, attachements.get(fileList.getSelectedIndex()));
 			}
 		});
 		

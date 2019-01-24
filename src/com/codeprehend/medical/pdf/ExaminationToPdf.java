@@ -9,9 +9,12 @@ import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.codeprehend.medical.resources.Attachement;
 import com.codeprehend.medical.resources.CabinetData;
+import com.codeprehend.medical.util.Constants;
 import com.codeprehend.medical.util.Utils;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -22,7 +25,6 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.FontSelector;
-import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -36,7 +38,9 @@ import com.itextpdf.text.pdf.PdfWriter;
  */
 
 public class ExaminationToPdf {
-	    
+		
+		private static final Logger LOGGER = Logger.getLogger(Constants.LOGGER_NAME);
+	
 	    public static Attachement createAndOpenPdf(CabinetData cabinetData, Long id, String nume, String prenume, String cnp, String telefon, 
 	    		String examinationDate, String examinationText) throws IOException, DocumentException {
 	    	
@@ -49,6 +53,9 @@ public class ExaminationToPdf {
 	        File file = new File(DEST);
 	        file.getParentFile().mkdirs();
 	        ExaminationToPdf.createPdf(cabinetData, DEST, nume, prenume, cnp, telefon, examinationDate, examinationText);
+	        
+	        LOGGER.log(Level.INFO, "PDF generated to: " + DEST);
+	        
 	        if (Desktop.isDesktopSupported()) {
 	            try {
 	                File myFile = new File(DEST);
@@ -215,8 +222,8 @@ public class ExaminationToPdf {
 			f7.setColor(Color.BLACK);
 			selector7.addFont(f7);
 			Paragraph examinationParagraph = new Paragraph("\n");
-			Phrase ph7 = selector7.process("  " + examinationText);
-			examinationParagraph.add(new Paragraph(ph7));
+			Phrase ph7 = selector7.process(examinationText.replaceAll("\t", "      "));
+			examinationParagraph.add(ph7);
 			examinationParagraph.add(new Paragraph("\n"));
 			cell = new PdfPCell(examinationParagraph);
 	        cell.setHorizontalAlignment(PdfPCell.ALIGN_LEFT);

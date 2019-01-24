@@ -384,7 +384,7 @@ public class ModifyPatientPanel extends JPanel {
 		});
 		
 		
-		JButton btnSalveaza = new JButton("SALVEAZA CONSULTATIE");
+		JButton btnSalveaza = new JButton("SALVEAZA MODIFICARI");
 		btnSalveaza.setVerticalAlignment(SwingConstants.TOP);
 		btnSalveaza.setFont(new Font("Tahoma", Font.BOLD, 13));
 		GridBagConstraints gbc_btnSalveaza = new GridBagConstraints();

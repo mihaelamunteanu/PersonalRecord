@@ -1,0 +1,11 @@
+1830708a
+
+- update doc cu rulare update db din fisier (pentru   insert cabinet)
+ - dispare tabul in generarea de pdf
+
+- log generare pdf
+
+11 db, \ vs >
+fix insert statement
+
+schimb eticheta cu salveaza consultatie cu salveaza pacient

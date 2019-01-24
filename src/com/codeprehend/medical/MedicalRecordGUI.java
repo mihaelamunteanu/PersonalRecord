@@ -35,7 +35,8 @@ public class MedicalRecordGUI extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static String numeFereastraPrincipala = "Dosare medicale medic Rugina Cosmin @codeprehend.com";
+	public static String numeFereastraPrincipala = 
+			"Dosare medicale medic Rugina Cosmin " + MedicalRecordLauncher.versiune + " @codeprehend.com ";
 
 	public static String searchPacient = "Cautati Pacienta dupa data nasterii";
 	
