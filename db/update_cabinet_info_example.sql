@@ -1,7 +1,5 @@
--- GO TO Postgres Location e.g 
---   cd C:\Program Files\PostgreSQL\11\bin 
--- and run: 
---   C:\Program Files\PostgreSQL\11\bin\psql -U postgres -a -f "C:\Mihaela\Other projects\Github website\MedicalRecord\db\update_cabinet_info_example.sql"
+--   run: 
+--   "C:\Program Files\PostgreSQL\11\bin\psql" -U postgres -a -f "C:\Mihaela\Other projects\Github website\MedicalRecord\db\update_cabinet_info_example.sql"
 
 \connect "CabinetRugina";
 

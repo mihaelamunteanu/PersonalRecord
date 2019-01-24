@@ -10,12 +10,10 @@ import javax.swing.JOptionPane;
 
 import com.codeprehend.medical.MedicalRecordGUI;
 import com.codeprehend.medical.dao.AtachementsDAO;
-import com.codeprehend.medical.dao.CabinetDataDAO;
 import com.codeprehend.medical.dao.ExaminationDAO;
 import com.codeprehend.medical.pdf.ExaminationToPdf;
 import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Attachement;
-import com.codeprehend.medical.resources.CabinetData;
 import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
 import com.codeprehend.medical.util.Utils;
@@ -59,8 +57,7 @@ public class SaveExaminationButtonActionListener implements ActionListener {
 		
 		mainWindow.getExaminationPatientPanel().getExaminationDiagnosis().setEditable(false);
 		try {
-			CabinetData cabinetData = CabinetDataDAO.getCabinetData();
-			Attachement attachment = ExaminationToPdf.createAndOpenPdf(cabinetData, patient.getId(), patient.getNume(), patient.getPrenume(), 
+			Attachement attachment = ExaminationToPdf.createAndOpenPdf(patient.getId(), patient.getNume(), patient.getPrenume(), 
 					patient.getCnp(), patient.getNumarTelefon(), Utils.fromDateToString(LocalDate.now()), 
 					mainWindow.getExaminationPatientPanel().getExaminationDiagnosis().getText());
 			AtachementsDAO.saveAttachment(attachment);

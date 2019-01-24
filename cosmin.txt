@@ -1,11 +1,11 @@
 1830708a
 
-- update doc cu rulare update db din fisier (pentru   insert cabinet)
- - dispare tabul in generarea de pdf
+- update doc cu rulare update db din fisier (pentru   insert cabinet) - 
+ - dispare tabul in generarea de pdf - ok 
 
-- log generare pdf
+- log generare pdf - ok 
 
-11 db, \ vs >
-fix insert statement
+11 db, \ vs >  - ok 
+fix insert statement - ok 
 
-schimb eticheta cu salveaza consultatie cu salveaza pacient
+schimb eticheta cu salveaza consultatie cu salveaza pacient - ok

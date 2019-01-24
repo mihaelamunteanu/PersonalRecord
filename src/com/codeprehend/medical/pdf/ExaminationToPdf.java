@@ -41,18 +41,18 @@ public class ExaminationToPdf {
 		
 		private static final Logger LOGGER = Logger.getLogger(Constants.LOGGER_NAME);
 	
-	    public static Attachement createAndOpenPdf(CabinetData cabinetData, Long id, String nume, String prenume, String cnp, String telefon, 
+	    public static Attachement createAndOpenPdf(Long id, String nume, String prenume, String cnp, String telefon, 
 	    		String examinationDate, String examinationText) throws IOException, DocumentException {
 	    	
 	    	String addTimeToExaminationDate = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 	    	addTimeToExaminationDate = addTimeToExaminationDate.substring(0, addTimeToExaminationDate.lastIndexOf('.')).replaceAll(":", "_");
 	    	String fileName = nume + "_" + prenume + "_" + addTimeToExaminationDate;
 	    	String fileType = "pdf";
-	    	String DEST = cabinetData.getFolderLocation() + "\\" + fileName + "." + fileType;
+	    	String DEST = CabinetData.getFolderLocation() + "\\" + fileName + "." + fileType;
 	    	
 	        File file = new File(DEST);
 	        file.getParentFile().mkdirs();
-	        ExaminationToPdf.createPdf(cabinetData, DEST, nume, prenume, cnp, telefon, examinationDate, examinationText);
+	        ExaminationToPdf.createPdf(DEST, nume, prenume, cnp, telefon, examinationDate, examinationText);
 	        
 	        LOGGER.log(Level.INFO, "PDF generated to: " + DEST);
 	        
@@ -71,7 +71,7 @@ public class ExaminationToPdf {
 	        return attachement;
 	    }
 	    
-	    private static void createPdf(CabinetData cabinetData, String dest, String nume, String prenume, String cnp, 
+	    private static void createPdf(String dest, String nume, String prenume, String cnp, 
 	    		String telefon, String examinationDate, String examinationText) throws IOException, DocumentException {
 //	        Rectangle small = new Rectangle(540,220);
 	        Rectangle pdfRectangle = new Rectangle(PageSize.A4.getWidth() - 20, PageSize.A4.getHeight() - 20);
@@ -108,7 +108,7 @@ public class ExaminationToPdf {
 			f1.setColor(Color.BLACK);
 			f1.setStyle("BOLD");
 			selector.addFont(f1);
-			Phrase ph = selector.process("  " + cabinetData.getCabinetName());
+			Phrase ph = selector.process("  " + CabinetData.getCabinetName());
 	        cell = new PdfPCell(ph);
 	        cell.setHorizontalAlignment(PdfPCell.ALIGN_LEFT);
 	        cell.setBorder(PdfPCell.NO_BORDER);
@@ -123,7 +123,7 @@ public class ExaminationToPdf {
 			f2.setColor(Color.BLACK);
 			f2.setStyle("BOLD");
 			selector2.addFont(f2);
-			Phrase ph2 = selector2.process(" " + cabinetData.getCabinetAddress());
+			Phrase ph2 = selector2.process(" " + CabinetData.getCabinetAddress());
 	        cell = new PdfPCell(ph2);
 	        cell.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
 	        cell.setVerticalAlignment(PdfPCell.ALIGN_BOTTOM);
@@ -137,7 +137,7 @@ public class ExaminationToPdf {
 			f3.setColor(Color.BLACK);
 			f3.setStyle("BOLD");
 			selector3.addFont(f3);
-			Phrase ph3 = selector3.process(" Telefon: " + cabinetData.getCabinetTelNumber());
+			Phrase ph3 = selector3.process(" Telefon: " + CabinetData.getCabinetTelNumber());
 	        cell = new PdfPCell(ph3);
 	        cell.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
 	        cell.setVerticalAlignment(PdfPCell.ALIGN_BOTTOM);

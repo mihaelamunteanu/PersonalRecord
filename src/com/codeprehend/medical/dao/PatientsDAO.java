@@ -66,11 +66,12 @@ public class PatientsDAO {
 			stmt.setObject(8, patient.getAvorturiLaCerere());
 			stmt.setObject(9, patient.getAvorturiSpontane());
 			stmt.setObject(10, patient.getId());
+			
+			LOGGER.log(Level.INFO, stmt.toString());
 						
 			stmt.executeUpdate();
  		} 
 		
-		LOGGER.log(Level.INFO, SQL + patient.getNume() + patient.getPrenume() + patient.getDataNasterii());	 
 		return patient.getId();
 	}
 	
