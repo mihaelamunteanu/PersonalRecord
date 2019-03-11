@@ -40,6 +40,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class ExaminationToPdf {
 		
 		private static final Logger LOGGER = Logger.getLogger(Constants.LOGGER_NAME);
+		
+		private static final int noOfLinesPerTextAreaPdf = 30;
 	
 	    public static Attachement createAndOpenPdf(Long id, String nume, String prenume, String cnp, String telefon, 
 	    		String examinationDate, String examinationText) throws IOException, DocumentException {
@@ -115,7 +117,7 @@ public class ExaminationToPdf {
 	        cell.setBackgroundColor(Color.decode("#FFFFEA"));
 //	        cell.setFixedHeight(30);
 //	        cell.setBorder(Rectangle.NO_BORDER\);
-//	        cell.setColspan(2);
+	        cell.setColspan(2);
 	        table.addCell(cell);
 	        
 			FontSelector selector2 = new FontSelector();
@@ -129,6 +131,7 @@ public class ExaminationToPdf {
 	        cell.setVerticalAlignment(PdfPCell.ALIGN_BOTTOM);
 	        cell.setBackgroundColor(Color.decode("#FFFFEA"));
 	        cell.setBorder(PdfPCell.NO_BORDER);
+	        cell.setColspan(2);
 	        table.addCell(cell);
 	        
 	        //third row
@@ -155,12 +158,7 @@ public class ExaminationToPdf {
 	        table.addCell(cell);
 	        
 	        // third row - empty
-	        cell = new PdfPCell(new Phrase(" "));
-	        cell.setBorder(PdfPCell.NO_BORDER);
-	        cell.setBackgroundColor(Color.WHITE);
-	        cell.setFixedHeight(20);
-	        cell.setColspan(2);
-	        table.addCell(cell);
+	        createEmptyRow(cell, table, 20);
 	        
 	        
 	        // patient row
@@ -188,12 +186,7 @@ public class ExaminationToPdf {
 	        
 	        
 	        //empty row
-	        cell = new PdfPCell(new Phrase(" "));
-	        cell.setBorder(PdfPCell.NO_BORDER);
-	        cell.setBackgroundColor(Color.WHITE);
-	        cell.setFixedHeight(30);
-	        cell.setColspan(2);
-	        table.addCell(cell);
+	        createEmptyRow(cell, table, 30);
 	        
 	        //examination label row
 			FontSelector selector6 = new FontSelector();
@@ -209,37 +202,48 @@ public class ExaminationToPdf {
 	        table.addCell(cell);
 	        
 	        // third row - empty
-	        cell = new PdfPCell(new Phrase(" "));
-	        cell.setBorder(PdfPCell.NO_BORDER);
-	        cell.setBackgroundColor(Color.WHITE);
-	        cell.setFixedHeight(20);
-	        cell.setColspan(2);
-	        table.addCell(cell);
+	        createEmptyRow(cell, table, 20);
+	        
+			String text = examinationText;
+			
+			// Atentie la impartirea textului din examination text: 
+			// daca sunt multe randuri se impart pe mai multe pagini, urmariti algoritmul!
+			
+	        // examination row (s)
+	        int numberOfLines = Utils.countLines(examinationText);
+	        
+			if (numberOfLines > noOfLinesPerTextAreaPdf) {
+				text = examinationText.substring(0, Utils.nthLastIndexOf(examinationText, '\n', noOfLinesPerTextAreaPdf));
+				text = text + "\n\n" + "  Text 1 din " + (numberOfLines/noOfLinesPerTextAreaPdf+1);
+			}
 
-	        // examination row
-			FontSelector selector7 = new FontSelector();
-			Font f7 = FontFactory.getFont(FontFactory.TIMES_ITALIC, 12);
-			f7.setColor(Color.BLACK);
-			selector7.addFont(f7);
-			Paragraph examinationParagraph = new Paragraph("\n");
-			Phrase ph7 = selector7.process(examinationText.replaceAll("\t", "      "));
-			examinationParagraph.add(ph7);
-			examinationParagraph.add(new Paragraph("\n"));
-			cell = new PdfPCell(examinationParagraph);
-	        cell.setHorizontalAlignment(PdfPCell.ALIGN_LEFT);
-//	        cell.setBorder(PdfPCell.NO_BORDER);
-	        cell.setBackgroundColor(Color.WHITE);
-	        cell.setColspan(2);
-	        cell.setFixedHeight(420);
-	        table.addCell(cell);
+			createExaminationTextArea(cell, table, text);
+	        
+	        if (numberOfLines > noOfLinesPerTextAreaPdf) {
+	        	createEmptyRow(cell, table, 75);
+    	        
+	        	for (int i=1; i<=numberOfLines/noOfLinesPerTextAreaPdf+1; i++) {
+	        		if (i != numberOfLines/noOfLinesPerTextAreaPdf+1 && numberOfLines%noOfLinesPerTextAreaPdf != 0) {
+		               	document.newPage();
+		               	
+		    	        // row - empty before the bordered area - to center it
+		               	createEmptyRow(cell, table, 140);
+		    	        
+		               	text = examinationText.substring(Utils.nthLastIndexOf(examinationText, '\n', i * noOfLinesPerTextAreaPdf), 
+		               			Utils.nthLastIndexOf(examinationText, '\n', (i+1)*noOfLinesPerTextAreaPdf) > 0 ? 
+		               					Utils.nthLastIndexOf(examinationText, '\n', (i+1)*noOfLinesPerTextAreaPdf) : examinationText.length());
+		               	text = text + "\n\n" + "  Text " + (i+1) + " din " + (numberOfLines/noOfLinesPerTextAreaPdf+1);
+		               	
+		               	createExaminationTextArea(cell, table, text);
+		    	        
+		    	        // row - empty after the bordered area - to center it
+		    	        createEmptyRow(cell, table, 140);
+	        		}
+	        	}
+	        }
 	        
 	        // row - empty
-	        cell = new PdfPCell(new Phrase(" "));
-	        cell.setBorder(PdfPCell.NO_BORDER);
-	        cell.setBackgroundColor(Color.WHITE);
-	        cell.setFixedHeight(40);
-	        cell.setColspan(2);
-	        table.addCell(cell);
+	        createEmptyRow(cell, table, 30);
 	        
 	        // signature row
 			FontSelector selector8 = new FontSelector();
@@ -312,15 +316,36 @@ public class ExaminationToPdf {
 
 
 	        // row - empty
-	        cell = new PdfPCell(new Phrase(" "));
-	        cell.setBorder(PdfPCell.NO_BORDER);
-	        cell.setBackgroundColor(Color.WHITE);
-	        cell.setFixedHeight(40);
-	        cell.setColspan(2);
-	        table.addCell(cell);
+	        createEmptyRow(cell, table, 15);
 	        
 	        document.add(table);
 	        document.close();
 	    }
 
+	    
+	    private static void createEmptyRow(PdfPCell cell, PdfPTable table, int fixedHeight) {
+	        cell = new PdfPCell(new Phrase(" "));
+	        cell.setBorder(PdfPCell.NO_BORDER);
+	        cell.setBackgroundColor(Color.WHITE);
+	        cell.setFixedHeight(fixedHeight);
+	        cell.setColspan(2);
+	        table.addCell(cell);
+	    }
+	    
+	    private static void createExaminationTextArea(PdfPCell cell, PdfPTable table, String text) {
+			FontSelector selector7 = new FontSelector();
+			Font f7 = FontFactory.getFont(FontFactory.TIMES_ITALIC, 12);
+			f7.setColor(Color.BLACK);
+			selector7.addFont(f7);
+			Paragraph examinationParagraph = new Paragraph("\n");
+			Phrase ph7 = selector7.process(text.replaceAll("\t", "      "));
+			examinationParagraph.add(ph7);
+			examinationParagraph.add(new Paragraph("\n"));
+			cell = new PdfPCell(examinationParagraph);
+	        cell.setHorizontalAlignment(PdfPCell.ALIGN_LEFT);
+	        cell.setBackgroundColor(Color.WHITE);
+	        cell.setColspan(2);
+	        cell.setFixedHeight(420);
+	        table.addCell(cell);	
+	    }
 }

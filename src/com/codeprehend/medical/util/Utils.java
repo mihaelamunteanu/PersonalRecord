@@ -77,5 +77,47 @@ public class Utils {
 	public static void loadLoggingProperties( ) {
 		
 	}
+	
+	/**
+	 * Public static method to detect the number of lines in a text. 
+	 * 
+	 * @param text
+	 * @return number of lines in the given text
+	 */
+	public static int countLines(String text) {
+	    if(text == null || text.isEmpty())
+	    {
+	        return 0;
+	    }
+	    int lines = 1;
+	    int pos = 0;
+	    while ((pos = text.indexOf("\n", pos) + 1) != 0) {
+	        lines++;
+	    }
+	    return lines;
+	}
+	
+	/**
+	 * Method to get the index of the nth occurrence of a char. It will be used mainly for newline \n.
+	 * 
+	 * @param str
+	 * @param c
+	 * @param n
+	 * @return position of nth occurrence of char c in the given text
+	 */
+	public static int nthLastIndexOf(String text, char c, int n) {
+	    for (int i = 0; i < text.length(); i++)
+	    {
+	        if (text.charAt(i) == c)
+	        {
+	            n--;
+	            if (n == 0)
+	            {
+	                return i;
+	            }
+	        }
+	    }
+	    return -1;
+	}
 
 }

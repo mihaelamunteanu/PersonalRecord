@@ -1,3 +1,9 @@
+# Versiunea v2.0 a aplicatiei midificata in martie 2019: 
+	* informatiile despre cabinet si calea de salvare a fisierelor generate se completeaza in config.properties si nu in db
+	* daca sunt mai multe randuri in textul de diagnostic pentru consultatie, se taia doar cat sa incapa in text area, perzandu-se restul - fixat
+	* pentru pdf-ul generat pentru consultatie se genera o pagina blank - fixat
+# Versiunea v1.0 a aplicatiei livrata in ianuarie 2019
+
 ---- git commands ---
 git pull 
 git add fisier

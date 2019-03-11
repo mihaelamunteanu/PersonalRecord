@@ -20,7 +20,7 @@ public class MedicalRecordLauncher {
 	 *       App 1.3 -> 2.0
 	 */
 	 
-	public static String versiune = "v1.0";
+	public static String versiune = "v2.0";
 
 	public static void main(String[] args) {
 		Utils.loadProperties();
