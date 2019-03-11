@@ -12,11 +12,14 @@ public class CabinetData {
 	private static String cabinetAddress = "Str. Bd. 9Mai, nr. 1, Bl. A13, Ap.2";
 	private static String cabinetTelNumber = "0233-237969";
 	private static String folderLocation = "C:\\DosareMedicale\\";
+	private static String medicAplicatie = "Rugina Cosmin";
 	
-	public static void loadCabinetData(String cabinetName, String cabinetAddress, String cabinetTelNumber, String folderLocation) {
+	public static void loadCabinetData(String cabinetName, String cabinetAddress, 
+			String cabinetTelNumber, String medicAplicatie, String folderLocation) {
 		CabinetData.cabinetName = cabinetName;
 		CabinetData.cabinetAddress = cabinetAddress;
 		CabinetData.cabinetTelNumber = cabinetTelNumber;
+		CabinetData.medicAplicatie = medicAplicatie;
 		CabinetData.folderLocation = folderLocation;
 	}
 	
@@ -36,4 +39,7 @@ public class CabinetData {
 		return folderLocation;
 	}
 	
+	public static String getMedicAplicatie() {
+		return medicAplicatie;
+	}
 }

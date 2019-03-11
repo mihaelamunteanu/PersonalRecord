@@ -1,3 +1,6 @@
+11.03.2019 - 4h, 10.03.2019 - 3h livrare, update doc si fix bug cu multe randuri care se pierd daca depasesc aria textului consultatiei.
+
+
 Raspunsuri:
 1. Se va putea modifica astfel incat sa poata fi folosite si pe sisteme noi. R:  Cel mai probabil da, posibil sa se ajunga la efort de peste 40 de ore.
 2. Se poate instala pe Mac: versiunile curente de Mac, da, voi incerca o instalare

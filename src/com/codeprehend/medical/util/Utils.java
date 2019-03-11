@@ -49,7 +49,7 @@ public class Utils {
 					prop.getProperty("dbport"), prop.getProperty("dbuser"), prop.getProperty("dbpass"));
 			
 			CabinetData.loadCabinetData(prop.getProperty("numecabinet"), prop.getProperty("adresacabinet"), 
-					prop.getProperty("telefoncabinet"), prop.getProperty("pdf_location"));
+					prop.getProperty("telefoncabinet"), prop.getProperty("medicaplicatie"), prop.getProperty("pdf_location"));
 			
 			String loggerLocation = prop.getProperty("log_location");
 			String dateTime = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME);

@@ -16,6 +16,7 @@ import com.codeprehend.medical.panels.NewPatientPanel;
 import com.codeprehend.medical.panels.SearchPatientPanel;
 import com.codeprehend.medical.resources.Antecedent;
 import com.codeprehend.medical.resources.Attachement;
+import com.codeprehend.medical.resources.CabinetData;
 import com.codeprehend.medical.resources.Examination;
 import com.codeprehend.medical.resources.Patient;
 
@@ -36,7 +37,7 @@ public class MedicalRecordGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	public static String numeFereastraPrincipala = 
-			"Dosare medicale medic Rugina Cosmin " + MedicalRecordLauncher.versiune + " @codeprehend.com ";
+			"Dosare medicale medic " + CabinetData.getMedicAplicatie() + " " + MedicalRecordLauncher.versiune + " @codeprehend.com ";
 
 	public static String searchPacient = "Cautati Pacienta dupa data nasterii";
 	
